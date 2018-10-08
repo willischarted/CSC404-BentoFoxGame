@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -469,6 +469,8 @@ MonoBehaviour:
   traveller: {fileID: 670929176}
   onSoundEffect: {fileID: 8300000, guid: 7d5d6d13bb8854f889cb8ba95ac3415e, type: 3}
   offSoundEffect: {fileID: 8300000, guid: 2196ae319208e4a3882f980a821489c3, type: 3}
+  resourceBar: {fileID: 0}
+  resourceCount: {fileID: 0}
 --- !u!54 &188627248
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6446,12 +6448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c58355dee64744ed931e5712f8fa0da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 4
-  player: {fileID: 188627246}
-  yOffsetHorizontal: 0
-  zOffsetHorizontal: 2
-  yOffsetVertical: 0
-  zOffsetVertical: 0
+  target: {fileID: 188627246}
+  turnSpeedX: 50
+  turnSpeedY: 50
+  offset: {x: 0, y: 0, z: -50}
   cameraText: {fileID: 1535762157}
   speed: 8
   cameraSpeed: 5
