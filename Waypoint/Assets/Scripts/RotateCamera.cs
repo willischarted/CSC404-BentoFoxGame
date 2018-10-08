@@ -4,24 +4,32 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RotateCamera : MonoBehaviour {
-    
-    // Variables needed for player cenetered camera control 
-    ///////////////////////////////////////////////////////////////////////////////////////////////
-	public float turnSpeed = 4.0f;
-    public Transform player;
- 
-    private Vector3 offsetHorizontal;
 
-    private Vector3 offsetVertical;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+     // Minimum and Maximum to the camera rotation y value
+    private const float yAngleMin = 0.0f;
+    private const float yAngleMax = 50.0f; 
 
-    public float yOffsetHorizontal;
 
-    public float zOffsetHorizontal;
-    
-    public float yOffsetVertical;
+    // Transform of the gameobject we are following
+    public Transform target;
+    private playerController targetController;
 
-    public float zOffsetVertical;
-    ///////////////////////////////////////////////////////////////////////////////////////////////
+    // Current values for the camera rotation
+    private float currentX = 0.0f;
+    private float currentY = 25.0f;  //starting rotation value
+
+
+    // Sensitivity multiplier for panning camera
+    public float turnSpeedX;
+    public float turnSpeedY;
+
+    // Offset from the target's location
+    public Vector3 offset;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+  
 
 
 
@@ -40,6 +48,10 @@ public class RotateCamera : MonoBehaviour {
     public float speed;
     public float cameraSpeed;
 
+    Vector3 relativeForward;
+     Vector3 relativeRight;
+    
+
     // Used for camera transitions
     ///////////////////////////////////////////////////////////////////////////////////////////////
     private Vector3 tacticleDestination;
@@ -50,60 +62,50 @@ public class RotateCamera : MonoBehaviour {
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
     void Start () {
-         offsetHorizontal = new Vector3(player.position.x, player.position.y + yOffsetHorizontal, player.position.z + zOffsetHorizontal);
-         offsetVertical = new Vector3(player.position.x, player.position.y + yOffsetHorizontal, player.position.z + zOffsetHorizontal);
+       
          tacticalView = false;
          cameraMoving = false;
          cameraMovingBack = false;
+
+
+        targetController = target.GetComponent<playerController>();
+        if (targetController == null)
+            Debug.Log("Could not find targetcontroller!");
      }
     
 
     void Update() {
 
-        if (Input.GetKeyDown(KeyCode.R)) {
-            offsetHorizontal = new Vector3(player.position.x, player.position.y + yOffsetHorizontal, player.position.z + zOffsetHorizontal);
-            offsetVertical = new Vector3(player.position.x, player.position.y + yOffsetHorizontal, player.position.z + zOffsetHorizontal);
+        if (!tacticalView && !cameraMoving && !cameraMovingBack) {
+        currentX += Input.GetAxis("Mouse X") * turnSpeedX;
+        
+        // * -1f to make it  inverted/Notinverted
+        currentY += Input.GetAxis("Mouse Y") * turnSpeedY * -1f;
+        // Ensure it is within min and max y camera bounds
+        currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+
         }
+        
 
-
-    /* Previous Implementation of "tactical" cam
-        if (Input.GetKey(KeyCode.Space)){
-            tacticalView = true;
-            Camera cam = tacticalCamera.GetComponent<Camera>();
-            if (cam ==null)
-                Debug.Log("Couldnt find");
-            cam.enabled = true;
-            
-            GetComponent<Camera>().enabled = false;
-            cameraText.text = "Tactical View";
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space)){
-            tacticalView = false;
-            GetComponent<Camera>().enabled = true;
-             Camera cam = tacticalCamera.GetComponent<Camera>();
-            if (cam ==null)
-                Debug.Log("Couldnt find");
-            cam.enabled = false;
-            //GetComponentInChildren<Camera>().enabled = false;
-          //  
-             cameraText.text = "";
-        }
-        */
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("L2")) {
+            targetController.setRestrictMovement(true);
+            relativeForward = transform.forward;
+            relativeRight = transform.right;
             tacticleDestination = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
             tacticleRotation = new Quaternion(transform.rotation.x + 30f,transform.rotation.y,transform.rotation.z,transform.rotation.w);
             cameraMoving = true;
-            transform.LookAt(player.position);
+            transform.LookAt(target.position);
             tacticalView = true;
             defaultDestination = transform.position;
             defaultRotation = transform.rotation;
+            cameraText.text = "Tactical View";
         }
 
-        if (Input.GetKeyUp(KeyCode.Space)) {
+        if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("L2")) {
             cameraMoving = false;
             cameraMovingBack = true;
+
+            targetController.setRestrictMovement(true);
         }
 
         
@@ -111,6 +113,7 @@ public class RotateCamera : MonoBehaviour {
             moveCamera();
             if (Vector3.Distance(transform.position, tacticleDestination) < 1f) {
                 cameraMoving = false;
+                //targetController.setRestrictMovement(false);
             }
         }
  
@@ -119,38 +122,48 @@ public class RotateCamera : MonoBehaviour {
              if (Vector3.Distance(transform.position, defaultDestination) < 1f) {
                 cameraMovingBack = false;
                 tacticalView = false;
+                cameraText.text = "";
+                targetController.setRestrictMovement(false);
             }
 
         }
 
-        //TODO make sure camera panning is relative to current directionality
-        if (tacticalView) {
+        //ONLY CAMERA PAN WHEN IN TACTICAL AFTER CAMERA DONE MOVING
+        if (tacticalView && !cameraMoving && !cameraMovingBack) {
+
+            //camera pan direction should match players current direcionality
+          //  relativeForward = transform.forward;
+            //  relativeRight = transform.right;
+
+            relativeForward.y = 0f;
+            relativeRight.y = 0f;
+            relativeForward.Normalize();
+            relativeRight.Normalize();
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
-          //  var camera = Camera.main;
-           // Vector3 relativeForward = camera.transform.forward;
-           // Vector3 relativeRight = camera.transform.right;
-            
-           // relativeForward.y = 0f;
-           // relativeRight.y = 0f;
-           // relativeForward.Normalize();
-           // relativeRight.Normalize();
 
-           // Vector3 moveDirection = relativeForward * moveVertical + relativeRight * moveHorizontal;
-            Vector3 moveDirection = new Vector3(moveHorizontal, 0f,moveVertical );
+
+
+
+            Vector3 moveDirection = relativeForward * moveVertical + relativeRight * moveHorizontal;
             //transform.Translate(moveDirection * Time.deltaTime * cameraSpeed);
             transform.position = transform.position += moveDirection;
         }
 
     }
 
+
+
     void moveCamera() {
         float step = speed * Time.deltaTime;
         gameObject.transform.position = Vector3.MoveTowards(transform.position, tacticleDestination, step);
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, tacticleRotation, step);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, ground.transform.rotation, step);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(ground.transform.position - transform.position), step);
-    
+        //transform.rotation = Quaternion.RotateTowards(transform.rotation, ground.transform.rotation, step);
+       
+       
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(ground.transform.position - transform.position), step);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), step);
+
     }
 
      void resetCamera() {
@@ -162,17 +175,21 @@ public class RotateCamera : MonoBehaviour {
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, tacticleRotation, step);
       //  transform.rotation = Quaternion.RotateTowards(transform.rotation, ground.transform.rotation, step);
        // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(ground.transform.position - transform.position), step);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(player.transform.position - transform.position), step);
+        
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), step);
     }
      void LateUpdate()
-     {
-         if (!tacticalView && !tacticalView) {
+     {  
+         // camerarotation
+         if (!tacticalView && !cameraMoving && !cameraMovingBack) {
+             
+     
+            
+            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+            transform.position = target.position + rotation * offset;
+            transform.LookAt(target.position);
              
 
-            offsetHorizontal = Quaternion.AngleAxis (Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offsetHorizontal;
-            offsetVertical= Quaternion.AngleAxis (Input.GetAxis("Mouse Y") * turnSpeed, Vector3.up) * offsetHorizontal;
-            transform.position = player.position + offsetHorizontal; 
-            transform.LookAt(player.position);
          }
      }
 }
