@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using UnityEngine.SceneManagement;
-
 public class playerController : MonoBehaviour {
    
     public float speed;
@@ -15,38 +13,27 @@ public class playerController : MonoBehaviour {
     
     private CapsuleCollider cCollider;
 
-
     public GameObject traveller;
     private travellerScript tScript;
 
     public AudioClip onSoundEffect;
     public AudioClip offSoundEffect;
+
  	AudioSource audioSource;
-
-    private bool lightReady;
-
     private bool restrictMovement;
     
     private int equippedLight;
-
-    private int lightResource;
-
-    public Slider resourceBar;
-    public Text resourceCount;
-
     void Awake(){
         equippedLight = 0;
         restrictMovement = false;
         tScript = traveller.GetComponent<travellerScript>();
         if (tScript == null) {
-            Debug.Log("Cound not tScript");
+            Debug.Log("Cound not din");
         }
     }
-
 	// Use this for initialization
     void Start () {
-        lightReady = false;
-        lightResource = 100;
+        
         rb = GetComponent<Rigidbody>();
         count = 0;
         SetCountText();
@@ -56,113 +43,100 @@ public class playerController : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update() {
-   
-        // Toggle between 4 types of light magic
-        if (Input.GetKeyDown(KeyCode.V) || Input.GetButtonDown("X")){
+        if (Input.GetKey(KeyCode.Space)) {
+            restrictMovement = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            restrictMovement = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.V)){
             equippedLight = 0;
-            setFireFlyMaterial();
         }
-        if (Input.GetKeyDown(KeyCode.B) || Input.GetButtonDown("Square")){
+        if (Input.GetKeyDown(KeyCode.B)){
             equippedLight = 1;
-            setFireFlyMaterial();
         }
-        if (Input.GetKeyDown(KeyCode.N) || Input.GetButtonDown("Triangle")){
+        if (Input.GetKeyDown(KeyCode.N)){
             equippedLight = 2;
-            setFireFlyMaterial();
         }
-        if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Circle")){
+        if (Input.GetKeyDown(KeyCode.M)){
             equippedLight = 3;
-            setFireFlyMaterial();
-        }
-
-        // Restart button
-        if (Input.GetButtonDown("L1")) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-        }
-
-        // Heal/Stun only while button pressed
-        if (Input.GetButton("R1")) {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-            Debug.Log("Healing or stunning");
-        }
-
-        // Only interact while r2 is pulled, set tag otherwise release.
-        if (Input.GetButtonDown("R2")) {
-            lightReady = true;
-        }
-        if (Input.GetButtonUp("R2")) {
-            lightReady = false;
         }
     }
     
     void FixedUpdate()
     {
-        if (!restrictMovement){
-            float moveHorizontal = Input.GetAxis("Horizontal");
-            float moveVertical = Input.GetAxis("Vertical");
-            var camera = Camera.main;
-            Vector3 relativeForward = camera.transform.forward;
-            Vector3 relativeRight = camera.transform.right;
+         if (!restrictMovement){
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+        var camera = Camera.main;
+        Vector3 relativeForward = camera.transform.forward;
+        Vector3 relativeRight = camera.transform.right;
         
-            relativeForward.y = 0f;
-            relativeRight.y = 0f;
-            relativeForward.Normalize();
-            relativeRight.Normalize();
+        relativeForward.y = 0f;
+        relativeRight.y = 0f;
+        relativeForward.Normalize();
+        relativeRight.Normalize();
 
-            Vector3 moveDirection = relativeForward * moveVertical + relativeRight * moveHorizontal;
+        Vector3 moveDirection = relativeForward * moveVertical + relativeRight * moveHorizontal;
 
-            rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
+        rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Switch") && lightReady)
+        if (other.gameObject.CompareTag("Switch"))
         {
             count = count + 1;
             SetCountText();
             cCollider = other.GetComponentInParent<CapsuleCollider>();
             lampLight = other.gameObject.GetComponentInChildren<Light>();
             Material bulb = other.GetComponentInChildren<Renderer>().material;
-            //Behaviour halo =(Behaviour)other.GetComponent ("Halo");
+            Behaviour halo =(Behaviour)other.GetComponent ("Halo");
             
             Debug.Log(bulb.name);
             if (bulb == null)
                 Debug.Log("HHH");
-            
             if (lampLight.intensity > 0)
             {
                 lampLight.intensity = 0;
                 cCollider.enabled = false;
                 audioSource.clip = offSoundEffect;
                 audioSource.Play();
-                
+                tScript.setTarget(other.transform.parent.transform, lampLight.intensity);
+
                 bulb.DisableKeyword("_EMISSION");
                 
 
-                //halo.enabled = false;
-
-                addResource(20);
+                halo.enabled = false;
                 
             }
             else{
                 //setLightColor(lampLight, equippedLight);
-                if (lightResource >=20){
+                
                 setChildLight(other.GetComponentsInChildren<Light>());
                 
                 lampLight.intensity = 3;
                 cCollider.enabled = true;
                 audioSource.clip = onSoundEffect;
                 audioSource.Play();
-                tScript.setTarget(other.transform.parent.transform);
+                tScript.setTarget(other.transform.parent.transform, lampLight.intensity);
                 bulb.EnableKeyword("_EMISSION");
                 setMaterialColor(bulb, equippedLight);
+
                
                 // halo.enabled = true;
 
                 addResource(-20);
                 }
+
+                halo.enabled = true;
+
             }
+           // Debug.Log(other.transform.parent.transform.position);
+            //Debug.Log(tScript);
             
         }
     }
@@ -179,22 +153,18 @@ public class playerController : MonoBehaviour {
             //Color.TryParseHexString("#F00", out light.color);
             //material.color = Color.yellow;
             material.SetColor("_EmissionColor", Color.yellow);
-            setTrailRenderer();
         }
         else if (color == 1) {
             //material.color = Color.red;
             material.SetColor("_EmissionColor", Color.red);
-            setTrailRenderer();
         }
         else if (color == 2) {
             //material.color = Color.blue;
-            material.SetColor("_EmissionColor", Color.magenta);
-            setTrailRenderer();
+            material.SetColor("_EmissionColor", Color.blue);
         }
         else if (color == 3) {
             //material.color = Color.green;
             material.SetColor("_EmissionColor", Color.green);
-            setTrailRenderer();
         }
     }
     void setLightColor(Light light, int color) {
@@ -206,7 +176,7 @@ public class playerController : MonoBehaviour {
             light.color = Color.red;
         }
         else if (color == 2) {
-            light.color = Color.magenta;
+            light.color = Color.blue;
         }
         else if (color == 3) {
             light.color = Color.green;
@@ -283,11 +253,14 @@ public class playerController : MonoBehaviour {
 
     }
 
+
+
     void setChildLight(Light[] list) {
         foreach (Light l in list) {
             setLightColor(l,equippedLight);
         }
     }
+
     //===========================================================================================================
     public void setRestrictMovement(bool _restrictMovement) {
         restrictMovement = _restrictMovement;
@@ -301,4 +274,5 @@ public class playerController : MonoBehaviour {
         resourceBar.value = lightResource;
         resourceCount.text = lightResource.ToString();
     }
+
 }
