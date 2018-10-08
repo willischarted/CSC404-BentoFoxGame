@@ -86,10 +86,10 @@ public class playerController : MonoBehaviour {
         }
 
         // Only interact while r2 is pulled, set tag otherwise release.
-        if (Input.GetButtonDown("R2")) {
+        if (Input.GetButtonDown("R2") || Input.GetKeyDown(KeyCode.LeftShift)) {
             lightReady = true;
         }
-        if (Input.GetButtonUp("R2")) {
+        if (Input.GetButtonUp("R2") || Input.GetKeyUp(KeyCode.LeftShift)) {
             lightReady = false;
         }
 
