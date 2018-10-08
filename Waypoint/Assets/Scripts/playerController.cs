@@ -125,7 +125,15 @@ public class playerController : MonoBehaviour {
                 tScript.setTarget(other.transform.parent.transform, lampLight.intensity);
                 bulb.EnableKeyword("_EMISSION");
                 setMaterialColor(bulb, equippedLight);
+
+               
+                // halo.enabled = true;
+
+                addResource(-20);
+                }
+
                 halo.enabled = true;
+
             }
            // Debug.Log(other.transform.parent.transform.position);
             //Debug.Log(tScript);
@@ -138,7 +146,8 @@ public class playerController : MonoBehaviour {
         countText.text = "Count: " + count.ToString();
     }
 
-    //emisve
+    //Placeholder effects
+    //===========================================================================================================
     void setMaterialColor(Material material,int color) {
         if (color == 0) {
             //Color.TryParseHexString("#F00", out light.color);
@@ -174,9 +183,96 @@ public class playerController : MonoBehaviour {
         }
     }
 
+    void setFireFlyMaterial() {
+       MeshRenderer[] meshRenderers  = GetComponentsInChildren<MeshRenderer>();
+       foreach (MeshRenderer m in meshRenderers) {
+           if (m.gameObject.name == "Sphere")
+                setMaterialColor(m.material,equippedLight);
+       }
+
+    }
+    void setGradient(ref GradientColorKey[] colorKey, ref GradientAlphaKey[] alphaKey, ref Gradient gr) {
+        Color color1;
+        Color color2;
+
+        if (equippedLight == 0) {
+        //Color.TryParseHexString("#F00", out light.color);
+           color1 = Color.yellow;
+           color2 = Color.blue;
+
+        }
+        else if (equippedLight == 1) {
+            color1 = Color.red;
+            color2 = Color.blue;
+        }
+        else if (equippedLight == 2) {
+            color1 = Color.magenta;
+            color2 = Color.white;
+        }
+        else if (equippedLight == 3) {
+            color1 = Color.green;
+            color2 = Color.blue;
+           
+        }
+        else {
+            color1 = Color.yellow;
+            color2 = Color.blue;
+        }
+        colorKey[0].color = color1;
+        colorKey[0].time = 0.0f;
+        colorKey[1].color = color2;
+        colorKey[1].time = 1.0f;
+
+        // Populate the alpha  keys at relative time 0 and 1  (0 and 100%)
+        alphaKey = new GradientAlphaKey[2];
+        alphaKey[0].alpha = 1.0f;
+        alphaKey[0].time = 0.0f;
+        alphaKey[1].alpha = 0.0f;
+        alphaKey[1].time = 1.0f;
+
+       
+    }
+    void setTrailRenderer() {
+        TrailRenderer tr = GetComponent<TrailRenderer>();
+        if (tr == null) {
+            Debug.Log("Could not find trailrender");
+        }
+
+        Gradient gradient;
+        GradientColorKey[] colorKey;
+        GradientAlphaKey[] alphaKey;
+        gradient = new Gradient();
+        colorKey = new GradientColorKey[2];
+        alphaKey = new GradientAlphaKey[2];
+
+        
+
+        setGradient(ref colorKey, ref alphaKey, ref gradient);
+        gradient.SetKeys(colorKey, alphaKey);
+        tr.colorGradient= gradient;
+
+    }
+
+
+
     void setChildLight(Light[] list) {
         foreach (Light l in list) {
             setLightColor(l,equippedLight);
         }
     }
+
+    //===========================================================================================================
+    public void setRestrictMovement(bool _restrictMovement) {
+        restrictMovement = _restrictMovement;
+    }
+
+    public void addResource(int value) {
+        //Debug.Log(lightResource);
+        //Debug.Log(lightResource += value);
+        lightResource += value;
+        Debug.Log("Adding " + value);
+        resourceBar.value = lightResource;
+        resourceCount.text = lightResource.ToString();
+    }
+
 }
