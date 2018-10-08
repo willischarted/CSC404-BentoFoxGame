@@ -15,6 +15,9 @@ public class travellerScript : MonoBehaviour
 // If current light is cut, go to previous light DONE
 //
 //TODO: If Traveller is beside start area, go back to start area
+//TODO: Fully debug the go to nearest light mechanic. Current issue:
+//          if you do more than one light at a time and then turn off the 
+//          target light, it will go back to the original light. 
 
 {
 
@@ -140,7 +143,6 @@ public class travellerScript : MonoBehaviour
             hasTarget = false;
             lastVisited = currentLight;
             currentLight = findCurrentLamp();
-            Debug.Log("happened");
 
             if (currentLight != null)
             {
@@ -161,9 +163,7 @@ public class travellerScript : MonoBehaviour
                     target = checkLamps().transform.position;
                 }
             }
-
-            //Debug.Log("Reached");
-            //target = transform.position;
+            
         }
 
     }
@@ -185,9 +185,7 @@ public class travellerScript : MonoBehaviour
      */
     public void setTarget(Transform goal, float light) {
         started = true;
-        Debug.Log(light);
         this.goal = goal;
-        Debug.Log(goal.tag);
         if (light == 3)
         {
             if (Vector3.Distance(transform.position, goal.position) <= MAX_LD)
@@ -195,7 +193,6 @@ public class travellerScript : MonoBehaviour
 
                 target = goal.position;
                 hasTarget = true;
-                //Debug.Log(goal.position);
                 //agent.SetDestination(goal.position);
             }
         }
@@ -241,17 +238,14 @@ public class travellerScript : MonoBehaviour
                     if (!lamp.Equals(lastVisited) &&
                         !lamp.Equals(currentLight))
                     {
-                        Debug.Log(lastVisited == currentLight);
                         nextLamp = lamp;
                         litlamps++;
                     }
                 }
             }
         }
-        Debug.Log(litlamps);
         if (litlamps == 1)
         {
-            Debug.Log("???");
             return nextLamp;
         }
         return null;
@@ -274,10 +268,10 @@ public class travellerScript : MonoBehaviour
         }
         return litlamps;
     }
-
+/*
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("lampPost"))
+        if (other.gameObject.CompareTag("LampLight"))
         {
             lastVisited = currentLight;
             currentLight = other.gameObject;
@@ -286,9 +280,10 @@ public class travellerScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("lampPost"))
+        if (other.gameObject.CompareTag("LampLight"))
         {
+            Debug.Log("switch");
             lastVisited = other.gameObject;
         }
-    }
+    }*/
 }
