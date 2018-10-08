@@ -158,7 +158,7 @@ public class playerController : MonoBehaviour {
                 bulb.EnableKeyword("_EMISSION");
                 setMaterialColor(bulb, equippedLight);
                
-               // halo.enabled = true;
+                // halo.enabled = true;
 
                 addResource(-20);
                 }
@@ -172,7 +172,8 @@ public class playerController : MonoBehaviour {
         countText.text = "Count: " + count.ToString();
     }
 
-    //emisve
+    //Placeholder effects
+    //===========================================================================================================
     void setMaterialColor(Material material,int color) {
         if (color == 0) {
             //Color.TryParseHexString("#F00", out light.color);
@@ -220,105 +221,65 @@ public class playerController : MonoBehaviour {
        }
 
     }
+    void setGradient(ref GradientColorKey[] colorKey, ref GradientAlphaKey[] alphaKey, ref Gradient gr) {
+        Color color1;
+        Color color2;
 
+        if (equippedLight == 0) {
+        //Color.TryParseHexString("#F00", out light.color);
+           color1 = Color.yellow;
+           color2 = Color.blue;
+
+        }
+        else if (equippedLight == 1) {
+            color1 = Color.red;
+            color2 = Color.blue;
+        }
+        else if (equippedLight == 2) {
+            color1 = Color.magenta;
+            color2 = Color.white;
+        }
+        else if (equippedLight == 3) {
+            color1 = Color.green;
+            color2 = Color.blue;
+           
+        }
+        else {
+            color1 = Color.yellow;
+            color2 = Color.blue;
+        }
+        colorKey[0].color = color1;
+        colorKey[0].time = 0.0f;
+        colorKey[1].color = color2;
+        colorKey[1].time = 1.0f;
+
+        // Populate the alpha  keys at relative time 0 and 1  (0 and 100%)
+        alphaKey = new GradientAlphaKey[2];
+        alphaKey[0].alpha = 1.0f;
+        alphaKey[0].time = 0.0f;
+        alphaKey[1].alpha = 0.0f;
+        alphaKey[1].time = 1.0f;
+
+       
+    }
     void setTrailRenderer() {
         TrailRenderer tr = GetComponent<TrailRenderer>();
         if (tr == null) {
             Debug.Log("Could not find trailrender");
         }
 
-
         Gradient gradient;
         GradientColorKey[] colorKey;
         GradientAlphaKey[] alphaKey;
-        if (equippedLight == 0) {
-            //Color.TryParseHexString("#F00", out light.color);
-            gradient = new Gradient();
+        gradient = new Gradient();
+        colorKey = new GradientColorKey[2];
+        alphaKey = new GradientAlphaKey[2];
 
-            // Populate the color keys at the relative time 0 and 1 (0 and 100%)
-            colorKey = new GradientColorKey[2];
-            colorKey[0].color = Color.yellow;
-            colorKey[0].time = 0.0f;
-            colorKey[1].color = Color.blue;
-            colorKey[1].time = 1.0f;
-
-            // Populate the alpha  keys at relative time 0 and 1  (0 and 100%)
-            alphaKey = new GradientAlphaKey[2];
-            alphaKey[0].alpha = 1.0f;
-            alphaKey[0].time = 0.0f;
-            alphaKey[1].alpha = 0.0f;
-            alphaKey[1].time = 1.0f;
-
-            gradient.SetKeys(colorKey, alphaKey);
-            tr.colorGradient= gradient;
-        }
-        else if (equippedLight == 1) {
-            //light.color = Color.red;
-               //Color.TryParseHexString("#F00", out light.color);
-            gradient = new Gradient();
-
-            // Populate the color keys at the relative time 0 and 1 (0 and 100%)
-            colorKey = new GradientColorKey[2];
-            colorKey[0].color = Color.red;
-            colorKey[0].time = 0.0f;
-            colorKey[1].color = Color.blue;
-            colorKey[1].time = 1.0f;
-
-            // Populate the alpha  keys at relative time 0 and 1  (0 and 100%)
-            alphaKey = new GradientAlphaKey[2];
-            alphaKey[0].alpha = 1.0f;
-            alphaKey[0].time = 0.0f;
-            alphaKey[1].alpha = 0.0f;
-            alphaKey[1].time = 1.0f;
-
-            gradient.SetKeys(colorKey, alphaKey);
-            tr.colorGradient= gradient;
-        }
-        else if (equippedLight == 2) {
-           // light.color = Color.blue;
-              //Color.TryParseHexString("#F00", out light.color);
-            gradient = new Gradient();
-
-            // Populate the color keys at the relative time 0 and 1 (0 and 100%)
-            colorKey = new GradientColorKey[2];
-            colorKey[0].color = Color.magenta;
-            colorKey[0].time = 0.0f;
-            colorKey[1].color = Color.white;
-            colorKey[1].time = 1.0f;
-
-            // Populate the alpha  keys at relative time 0 and 1  (0 and 100%)
-            alphaKey = new GradientAlphaKey[2];
-            alphaKey[0].alpha = 1.0f;
-            alphaKey[0].time = 0.0f;
-            alphaKey[1].alpha = 0.0f;
-            alphaKey[1].time = 1.0f;
-
-            gradient.SetKeys(colorKey, alphaKey);
-            tr.colorGradient= gradient;
-        }
-        else if (equippedLight == 3) {
-            //light.color = Color.green;
-               //Color.TryParseHexString("#F00", out light.color);
-            gradient = new Gradient();
-
-            // Populate the color keys at the relative time 0 and 1 (0 and 100%)
-            colorKey = new GradientColorKey[2];
-            colorKey[0].color = Color.green;
-            colorKey[0].time = 0.0f;
-            colorKey[1].color = Color.blue;
-            colorKey[1].time = 1.0f;
-
-            // Populate the alpha  keys at relative time 0 and 1  (0 and 100%)
-            alphaKey = new GradientAlphaKey[2];
-            alphaKey[0].alpha = 1.0f;
-            alphaKey[0].time = 0.0f;
-            alphaKey[1].alpha = 0.0f;
-            alphaKey[1].time = 1.0f;
-
-            gradient.SetKeys(colorKey, alphaKey);
-            tr.colorGradient= gradient;
-        }
         
+
+        setGradient(ref colorKey, ref alphaKey, ref gradient);
+        gradient.SetKeys(colorKey, alphaKey);
+        tr.colorGradient= gradient;
 
     }
 
@@ -327,7 +288,7 @@ public class playerController : MonoBehaviour {
             setLightColor(l,equippedLight);
         }
     }
-
+    //===========================================================================================================
     public void setRestrictMovement(bool _restrictMovement) {
         restrictMovement = _restrictMovement;
     }
