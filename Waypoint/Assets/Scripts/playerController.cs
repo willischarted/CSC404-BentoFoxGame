@@ -28,7 +28,7 @@ public class playerController : MonoBehaviour {
     
     // Used to determine what light/ability firefly has equipped
     private int equippedLight;
-    private int lightResource;
+    private float lightResource;
 
     // Link to firefly Resource UI
     public Slider resourceBar;
@@ -79,11 +79,6 @@ public class playerController : MonoBehaviour {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         }
 
-        // Heal/Stun only while button pressed
-        if (Input.GetButton("R1")) {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-            Debug.Log("Healing or stunning");
-        }
 
         // Only interact while r2 is pulled, set tag otherwise release.
         if (Input.GetButtonDown("R2") || Input.GetKeyDown(KeyCode.LeftShift)) {
@@ -304,13 +299,18 @@ public class playerController : MonoBehaviour {
         restrictMovement = _restrictMovement;
     }
 
-    public void addResource(int value) {
+    public void addResource(float value) {
         //Debug.Log(lightResource);
         //Debug.Log(lightResource += value);
         lightResource += value;
         Debug.Log("Adding " + value);
         resourceBar.value = lightResource;
-        resourceCount.text = lightResource.ToString();
+        int resourceValue = (int)lightResource;
+        resourceCount.text = resourceValue.ToString();
+    }
+
+    public float getResource() {
+        return lightResource;
     }
 
 }
