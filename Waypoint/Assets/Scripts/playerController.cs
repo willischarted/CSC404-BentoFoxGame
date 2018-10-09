@@ -143,7 +143,7 @@ public class playerController : MonoBehaviour {
             }
             else{
                 //setLightColor(lampLight, equippedLight);
-                if (lightResource >=20){
+                if (lightResource >=tempLightCost){
  
                 setChildLight(other.GetComponentsInChildren<Light>());
                 
