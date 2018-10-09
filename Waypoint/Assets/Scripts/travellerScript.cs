@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
- using UnityEngine.AI;
+using UnityEngine.AI;
 
 public class travellerScript : MonoBehaviour
 
 
 // Updates:
-// Trvaeller goes back to previous light if light is turned out before it gets there DONE
-// Update previous light position DONE
-// Traveller loses health if there is no target DONE
-// Traveller goes to next light if it is already lit DONE
-// If current light is cut, go to previous light DONE
+// Added public function for cape brightness increase; took away user ability to do that from
+// travellerScript.
 //
 //TODO: If Traveller is beside start area, go back to start area
 //TODO: Fully debug the go to nearest light mechanic. Current issue:
 //          if you do more than one light at a time and then turn off the 
-//          target light, it will go back to the original light. 
+//          target light, it will go back to the original light.
+//        On a related note, the first round messes up if you wait for it to pause.
 
 {
 
@@ -112,9 +110,6 @@ public class travellerScript : MonoBehaviour
         if (litLamps() == 0 && started) {
             lightValue -= 0.0001f;
         }
-        if (Input.GetKey(KeyCode.K)) {
-            lightValue += 0.0002f;
-        }
         lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         hat.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
@@ -127,7 +122,7 @@ public class travellerScript : MonoBehaviour
 
     {
 
-
+        //Goes towards a lamp
         if (hasTarget && Vector3.Distance(transform.position, target) > MIN_LD) {
             //Debug.Log(Vector3.Distance(transform.position, target));
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), speed * Time.deltaTime);
@@ -137,7 +132,7 @@ public class travellerScript : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
 
-
+        //Has reached the lamp
         else {
 
             hasTarget = false;
@@ -146,21 +141,28 @@ public class travellerScript : MonoBehaviour
 
             if (currentLight != null)
             {
+                //Makes it go to the next lamp in sequence
                 if (!currentLight.Equals(lastVisited))
                 {
                     GameObject nextLamp = checkLamps();
                     if (nextLamp != null)
                     {
+                        Debug.Log(nextLamp.Equals(lastVisited));
+                        Debug.Log("last");
                         hasTarget = true;
                         target = nextLamp.transform.position;
                     }
                 }
-
+                //If the light is turned off, it looks for another light
                 if (currentLight.transform.GetChild(0).
                     GetComponentInChildren<Light>().intensity == 0)
                 {
-                    hasTarget = true;
-                    target = checkLamps().transform.position;
+                    GameObject potential_target = checkLamps();
+                    if (potential_target != null)
+                    {
+                        hasTarget = true;
+                        target = potential_target.transform.position;
+                    }
                 }
             }
             
@@ -174,8 +176,36 @@ public class travellerScript : MonoBehaviour
         {
             winText.text = "WIN!";
         }
+        /*
+         * 
+        if (collision.gameObject.CompareTag("LampLight"))
+        {
+            lastVisited = currentLight;
+            currentLight = findCurrentLamp();
 
+            if (currentLight != null)
+            {
+                //Makes it go to the next lamp in sequence
+                if (!currentLight.Equals(lastVisited))
+                {
+                    GameObject nextLamp = checkLamps();
+                    if (nextLamp != null)
+                    {
+                        Debug.Log(nextLamp.Equals(lastVisited));
+                        Debug.Log("last");
+                        hasTarget = true;
+                    }
+                }
+            }
+        }*/
+    }
 
+    /*
+     * Increases the cape's brightness
+     * */
+    public void increaseCape()
+    {
+        lightValue += 0.0002f;
     }
 
     /*
@@ -193,6 +223,7 @@ public class travellerScript : MonoBehaviour
 
                 target = goal.position;
                 hasTarget = true;
+                lastVisited = currentLight;
                 //agent.SetDestination(goal.position);
             }
         }
@@ -268,16 +299,9 @@ public class travellerScript : MonoBehaviour
         }
         return litlamps;
     }
-/*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("LampLight"))
-        {
-            lastVisited = currentLight;
-            currentLight = other.gameObject;
-        }
-    }
 
+
+    /*
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("LampLight"))
