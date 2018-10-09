@@ -34,6 +34,8 @@ public class playerController : MonoBehaviour {
     public Slider resourceBar;
     public Text resourceCount;
 
+    public float tempLightCost;
+
     void Awake(){
         equippedLight = 0;
         restrictMovement = false;
@@ -58,33 +60,33 @@ public class playerController : MonoBehaviour {
 
       
          // Toggle between 4 types of light magic
-        if (Input.GetKeyDown(KeyCode.V) || Input.GetButtonDown("X")){
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetButtonDown("X")){
             equippedLight = 0;
             setFireFlyMaterial();
         }
-        if (Input.GetKeyDown(KeyCode.B) || Input.GetButtonDown("Square")){
+        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetButtonDown("Square")){
             equippedLight = 1;
             setFireFlyMaterial();
         }
-        if (Input.GetKeyDown(KeyCode.N) || Input.GetButtonDown("Triangle")){
+        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetButtonDown("Triangle")){
             equippedLight = 2;
             setFireFlyMaterial();
         }
-        if (Input.GetKeyDown(KeyCode.M) || Input.GetButtonDown("Circle")){
+        if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetButtonDown("Circle")){
             equippedLight = 3;
             setFireFlyMaterial();
         }
             // Restart button
-        if (Input.GetButtonDown("L1")) {
+        if (Input.GetButtonDown("L1") || Input.GetKeyDown(KeyCode.R)) {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         }
 
 
         // Only interact while r2 is pulled, set tag otherwise release.
-        if (Input.GetButtonDown("R2") || Input.GetKeyDown(KeyCode.LeftShift)) {
+        if (Input.GetButtonDown("R2") || Input.GetMouseButtonDown(0)) {
             lightReady = true;
         }
-        if (Input.GetButtonUp("R2") || Input.GetKeyUp(KeyCode.LeftShift)) {
+        if (Input.GetButtonUp("R2") || Input.GetMouseButtonUp(0)) {
             lightReady = false;
         }
 
@@ -134,7 +136,7 @@ public class playerController : MonoBehaviour {
 
                 bulb.DisableKeyword("_EMISSION");
                 
-                addResource(20);
+                addResource(tempLightCost);
 
                 //halo.enabled = false;
                 
@@ -155,7 +157,7 @@ public class playerController : MonoBehaviour {
 
                 // halo.enabled = true;
 
-                addResource(-20);
+                addResource(-tempLightCost);
                 }
                 //halo.enabled = true;
             }

@@ -33,7 +33,7 @@ public class InteractionController : MonoBehaviour {
         
 
 
-		if (Input.GetButton("R1")) {
+		if (Input.GetButton("R1") || Input.GetMouseButton(1)) {
 			heldDuration += Time.deltaTime;
 			if (heldDuration > 0.2f && !setHealing) {
 				//start healing
@@ -41,7 +41,7 @@ public class InteractionController : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetButtonUp("R1")) {
+		if (Input.GetButtonUp("R1") || Input.GetMouseButtonUp(1)) {
 			Debug.Log(heldDuration);
 			heldDuration = 0f;
 
