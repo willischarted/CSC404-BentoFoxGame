@@ -10,6 +10,8 @@ public class InteractionController : MonoBehaviour {
 
 	bool setHealing;
 
+	private playerController pController;
+
 	//private monsterscript[];
 
 	// Use this for initialization
@@ -17,6 +19,10 @@ public class InteractionController : MonoBehaviour {
 		//impulseCooldown = 5.0f;
 		//setImpulse = false;
 		setHealing = false;
+		pController = GetComponentInParent<playerController>();
+		if (pController == null) {
+			Debug.Log("Could not find pController");
+		}
 	}
 	
 	// Update is called once per frame
@@ -61,7 +67,11 @@ public class InteractionController : MonoBehaviour {
 
 		if (other.tag == "Traveller" && setHealing) {
 			//call healing function in traveller's script
-
+			travellerScript tScript = other.GetComponent<travellerScript>();
+			if (pController.getResource() > 0) {
+				tScript.increaseCape();
+				pController.addResource(-0.1f);
+			}
 
 			
 		}
