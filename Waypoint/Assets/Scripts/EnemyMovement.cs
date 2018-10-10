@@ -31,6 +31,7 @@ public class EnemyMovement : MonoBehaviour {
     {
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
+            Debug.Log("inhere");
             return;
         }
         else
