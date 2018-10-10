@@ -245,7 +245,7 @@ public class travellerScript : MonoBehaviour
         else
         {
             hasTarget = true;
-            if (target != null)
+            if (lastVisited != null)
                 target = lastVisited.transform.position;
         }
     }
