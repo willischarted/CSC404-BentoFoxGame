@@ -81,7 +81,7 @@ public class travellerScript : MonoBehaviour
             Debug.Log("Could not find meshrenderer traveller");
 
         }
-        Debug.Log(meshRendererTraveller.materials.Length);
+       // Debug.Log(meshRendererTraveller.materials.Length);
 
         //Debug.Log(meshRendererTraveller.materials.Length);
 
@@ -132,12 +132,12 @@ public class travellerScript : MonoBehaviour
             //transform.LookAt(target);
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
-            Debug.Log("Moving towards" + target);
+           // Debug.Log("Moving towards" + target);
         }
 
         //Has reached the lamp
         else {
-            Debug.Log("Reached");
+            //Debug.Log("Reached");
             hasTarget = false;
             
 
@@ -157,8 +157,8 @@ public class travellerScript : MonoBehaviour
                     GameObject nextLamp = checkLamps();
                     if (nextLamp != null)
                     {
-                        Debug.Log(nextLamp.Equals(lastVisited));
-                        Debug.Log("last");
+                        //Debug.Log(nextLamp.Equals(lastVisited));
+                        //Debug.Log("last");
                         hasTarget = true;
                         target = nextLamp.transform.position;
                     }

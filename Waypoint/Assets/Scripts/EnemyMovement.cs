@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour {
     Vector3 direction;
 
     public float MAX_LD;
-    GameObject lastVisited;
+    public GameObject lastVisited;
     private bool moving;
 
     private void Awake()
@@ -110,12 +110,20 @@ public class EnemyMovement : MonoBehaviour {
         else
         {
             //nav.SetDestination(currentTarget);
-            Debug.Log("in the else");
+           // Debug.Log("in the else");
             //
             if (!moving) // not currently moving, find new place to move to
                 moveToLamp();
-            else if (Vector3.Distance(transform.position,currentTarget) < 1.0f) { //reached destination
+            else if (Vector3.Distance(transform.position,currentTarget) < 2.0f) { //reached destination
                 moving = false;
+                
+                nav.SetDestination(transform.position);
+             //   Debug.Log("Setback to false");
+                
+                if (lastVisited == null){
+                   // Debug.Log("setting from null");
+                    lastVisited = findCurrentLamp();
+                }
             }
             //currently moving do nothing.
             
@@ -126,8 +134,9 @@ public class EnemyMovement : MonoBehaviour {
     }
     
     public void moveToLamp() {
-        Debug.Log("in move");
+       // Debug.Log("in move");
         GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
+       // Debug.Log(lamps.Length);
         foreach (GameObject lamp in lamps)
         {   
             // within lamp distance
@@ -135,10 +144,18 @@ public class EnemyMovement : MonoBehaviour {
             {
                 if (lamp.transform.GetChild(0).
                     GetComponentInChildren<Light>().intensity == 3) { // lamp is lit
-                    if (!lamp.Equals(lastVisited))
+                   
+                    Debug.Log(lamp.Equals(lastVisited));
+                  
+                    if (!lamp.Equals(lastVisited) && lamp.transform.position != currentTarget)
                     {
-                        Debug.Log("setting target");
-                        lastVisited = lamp;
+                       // Debug.Log("setting target");
+                       // lastVisited = findCurrentLamp();
+                        if (lastVisited != null){
+                          //  Debug.Log("setting in move to");
+                          //  Debug.Log(findCurrentLamp());
+                           lastVisited = findCurrentLamp();
+                        }
                         currentTarget = lamp.transform.position;
                         nav.SetDestination(lamp.transform.position);
                         moving = true;
@@ -148,6 +165,49 @@ public class EnemyMovement : MonoBehaviour {
             }
         }
 
+         foreach (GameObject lamp in lamps)
 
+
+        {
+            int ran = Random.Range(0,2);   
+            // within lamp distance
+            if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD)
+            {
+
+                  
+                    if (!lamp.Equals(lastVisited) && lamp.transform.position != currentTarget && ran ==0)
+                    {
+                       // Debug.Log("setting target");
+                       // lastVisited = findCurrentLamp();
+                        if (lastVisited != null){
+                          //  Debug.Log("setting in move to");
+                          //  Debug.Log(findCurrentLamp());
+                           lastVisited = findCurrentLamp();
+                        }
+                        currentTarget = lamp.transform.position;
+                        nav.SetDestination(lamp.transform.position);
+                        moving = true;
+                        return; //should choose a random one
+                    }
+                
+            }
+        }
+
+
+
+
+    }
+
+      public GameObject findCurrentLamp()
+    {
+        GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
+        foreach (GameObject lamp in lamps)
+        {
+            if (Vector3.Distance(transform.position, lamp.transform.position) <= 2.0f)
+            {
+                return lamp;
+            }
+        }
+        return null;
     }
 }

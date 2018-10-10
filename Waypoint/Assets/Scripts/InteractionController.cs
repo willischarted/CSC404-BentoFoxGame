@@ -12,7 +12,7 @@ public class InteractionController : MonoBehaviour {
 
 	private playerController pController;
 
-	//private monsterscript[];
+	private List<GameObject> monsters;
 
 	// Use this for initialization
 	void Start () {
@@ -81,18 +81,29 @@ public class InteractionController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Monster") {
 			//add to array
+			monsters.Add(other.gameObject);
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
 
 		//remove from array
+		if (other.tag == "Monster") {
+			//monsters[monsters.Length] = other.gameObject;
+			monsters.Remove(other.gameObject);
+		}
 		
 	}
 
 	void setStun() {
 		//for each monster in array
-
+		foreach (GameObject m in monsters) {
+			Animator anim = m.GetComponent<Animator>();
+			if (anim == null) {
+				Debug.Log("Could not find anim");
+			}
+			anim.SetTrigger("isStunned");
+		}
 		// get animator contoller and set stun
 	}
 
