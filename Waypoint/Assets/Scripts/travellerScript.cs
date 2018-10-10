@@ -44,7 +44,8 @@ public class travellerScript : MonoBehaviour
     private Material cloak;
     private Material hat;
     private bool started = false;
-    private readonly float MAX_LD = 6f; //LD = lamp distance 
+    //private readonly float MAX_LD = 6f; //LD = lamp distance 
+    public float MAX_LD;
     private readonly float MIN_LD = 1f;
     private GameObject startArea;
 
