@@ -123,7 +123,7 @@ public class playerController : MonoBehaviour {
             Material bulb = other.GetComponentInChildren<Renderer>().material;
             //Behaviour halo =(Behaviour)other.GetComponent ("Halo");
             
-            Debug.Log(bulb.name);
+            //.Log(bulb.name);
             if (bulb == null)
                 Debug.Log("HHH");
             if (lampLight.intensity > 0)
@@ -305,7 +305,7 @@ public class playerController : MonoBehaviour {
         //Debug.Log(lightResource);
         //Debug.Log(lightResource += value);
         lightResource += value;
-        Debug.Log("Adding " + value);
+        //Debug.Log("Adding " + value);
         resourceBar.value = lightResource;
         int resourceValue = (int)lightResource;
         resourceCount.text = resourceValue.ToString();
