@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using UnityEngine.AI;
 using UnityEngine;
 
@@ -16,6 +16,9 @@ public class EnemyMovement : MonoBehaviour {
     float timer = 0f;
     Vector3 direction;
 
+    public float MAX_LD;
+    GameObject lastVisited;
+    private bool moving;
 
     private void Awake()
     {
@@ -45,10 +48,7 @@ public class EnemyMovement : MonoBehaviour {
                 }
             }
 
-            else if (other.gameObject.transform.tag == "LampLight")
-            {
-                currentTarget = other.gameObject.transform.position;// need to work on this as per traveller script + new methods of movement
-            }
+         
         }
         
     }
@@ -107,9 +107,40 @@ public class EnemyMovement : MonoBehaviour {
         }
         else
         {
-            nav.SetDestination(currentTarget);
+            //nav.SetDestination(currentTarget);
+
+            //
+            if (!moving)
+                moveToLamp();
+            else if (Vector3.Distance(transform.position,currentTarget) < 1.0f) {
+                moving = false;
+            }
+            
         }
     
+
+    }
+    
+    public void moveToLamp() {
+        GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
+        foreach (GameObject lamp in lamps)
+        {   
+            // within lamp distance
+            if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD)
+            {
+                if (lamp.transform.GetChild(0).
+                    GetComponentInChildren<Light>().intensity == 3) { // lamp is lit
+                    if (!lamp.Equals(lastVisited))
+                    {
+                        lastVisited = lamp;
+                        currentTarget = lamp.transform.position;
+                        nav.SetDestination(lamp.transform.position);
+                        moving = true;
+                        
+                    }
+                }
+            }
+        }
 
     }
 }
