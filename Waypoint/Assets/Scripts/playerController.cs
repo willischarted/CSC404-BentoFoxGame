@@ -135,7 +135,7 @@ public class playerController : MonoBehaviour {
                 tScript.setTarget(other.transform.parent.transform, lampLight.intensity);
 
                 bulb.DisableKeyword("_EMISSION");
-                
+                Debug.Log("adding back scost");
                 addResource(tempLightCost);
 
                 //halo.enabled = false;
