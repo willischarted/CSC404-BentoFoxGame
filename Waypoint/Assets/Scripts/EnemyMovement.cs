@@ -22,6 +22,7 @@ public class EnemyMovement : MonoBehaviour {
 
     private void Awake()
     {
+        moving = false;
         traveller = GameObject.FindGameObjectsWithTag("Traveller")[0].transform;
         nav = GetComponent<NavMeshAgent>();
         monsterAnim = GetComponent<Animator>();
@@ -109,13 +110,15 @@ public class EnemyMovement : MonoBehaviour {
         else
         {
             //nav.SetDestination(currentTarget);
-
+            Debug.Log("in the else");
             //
-            if (!moving)
+            if (!moving) // not currently moving, find new place to move to
                 moveToLamp();
-            else if (Vector3.Distance(transform.position,currentTarget) < 1.0f) {
+            else if (Vector3.Distance(transform.position,currentTarget) < 1.0f) { //reached destination
                 moving = false;
             }
+            //currently moving do nothing.
+            
             
         }
     
@@ -123,6 +126,7 @@ public class EnemyMovement : MonoBehaviour {
     }
     
     public void moveToLamp() {
+        Debug.Log("in move");
         GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
         foreach (GameObject lamp in lamps)
         {   
@@ -133,15 +137,17 @@ public class EnemyMovement : MonoBehaviour {
                     GetComponentInChildren<Light>().intensity == 3) { // lamp is lit
                     if (!lamp.Equals(lastVisited))
                     {
+                        Debug.Log("setting target");
                         lastVisited = lamp;
                         currentTarget = lamp.transform.position;
                         nav.SetDestination(lamp.transform.position);
                         moving = true;
-                        
+                        return; //should choose a random one
                     }
                 }
             }
         }
+
 
     }
 }
