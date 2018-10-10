@@ -145,7 +145,7 @@ public class EnemyMovement : MonoBehaviour {
                 if (lamp.transform.GetChild(0).
                     GetComponentInChildren<Light>().intensity == 3) { // lamp is lit
                    
-                    Debug.Log(lamp.Equals(lastVisited));
+                   // Debug.Log(lamp.Equals(lastVisited));
                   
                     if (!lamp.Equals(lastVisited) && lamp.transform.position != currentTarget)
                     {

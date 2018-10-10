@@ -81,7 +81,7 @@ public class InteractionController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Monster") {
 			//add to array
-			monsters.Add(other.gameObject);
+			//monsters.Add(other.gameObject);
 		}
 	}
 
@@ -90,7 +90,7 @@ public class InteractionController : MonoBehaviour {
 		//remove from array
 		if (other.tag == "Monster") {
 			//monsters[monsters.Length] = other.gameObject;
-			monsters.Remove(other.gameObject);
+			//monsters.Remove(other.gameObject);
 		}
 		
 	}
