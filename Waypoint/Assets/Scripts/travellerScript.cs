@@ -46,7 +46,8 @@ public class travellerScript : MonoBehaviour
     private bool started = false;
     //private readonly float MAX_LD = 6f; //LD = lamp distance 
     public float MAX_LD;
-    private readonly float MIN_LD = 1f;
+    //private readonly float MIN_LD = 1f;
+    public float MIN_LD;
     private GameObject startArea;
 
 
