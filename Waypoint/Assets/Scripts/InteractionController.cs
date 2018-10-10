@@ -42,7 +42,7 @@ public class InteractionController : MonoBehaviour {
 		}
 
 		if (Input.GetButtonUp("R1") || Input.GetMouseButtonUp(1)) {
-			Debug.Log(heldDuration);
+			//Debug.Log(heldDuration);
 			heldDuration = 0f;
 
 			//0.2f is general approximation of a tap

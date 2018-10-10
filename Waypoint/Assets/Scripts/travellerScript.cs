@@ -130,14 +130,23 @@ public class travellerScript : MonoBehaviour
             //  rb.mov
             //transform.LookAt(target);
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+
+            Debug.Log("Moving towards" + target);
         }
 
         //Has reached the lamp
         else {
-
+            Debug.Log("Reached");
             hasTarget = false;
-            lastVisited = currentLight;
+            
+
+            // These two lines
             currentLight = findCurrentLamp();
+            lastVisited = currentLight;
+            
+            
+
+
 
             if (currentLight != null)
             {
@@ -221,9 +230,13 @@ public class travellerScript : MonoBehaviour
             if (Vector3.Distance(transform.position, goal.position) <= MAX_LD)
             {
 
+                
+                 
                 target = goal.position;
                 hasTarget = true;
                 lastVisited = currentLight;
+
+                
                 //agent.SetDestination(goal.position);
             }
         }
