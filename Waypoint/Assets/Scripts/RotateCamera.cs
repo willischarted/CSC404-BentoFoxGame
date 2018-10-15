@@ -102,7 +102,8 @@ public class RotateCamera : MonoBehaviour {
             
             defaultDestination = transform.position;
             defaultRotation = transform.rotation;
-            cameraText.text = "Tactical View";
+            //cameraText.text = "Tactical View";
+            cameraText.enabled = false;
             }
             else {
                 cameraMoving = false;
@@ -134,7 +135,8 @@ public class RotateCamera : MonoBehaviour {
              if (Vector3.Distance(transform.position, defaultDestination) < 1f) {
                 cameraMovingBack = false;
                 tacticalView = false;
-                cameraText.text = "";
+                //cameraText.text = "";
+                cameraText.enabled = true;
                 targetController.setRestrictMovement(false);
             }
 

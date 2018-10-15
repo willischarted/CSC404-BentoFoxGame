@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour {
-   
+    //enum lightType {Default, Traveller, Monster};
+
     public float speed;
     public Text countText;
     private Rigidbody rb;
@@ -42,8 +43,12 @@ public class playerController : MonoBehaviour {
     public Sprite icon2;
     public Sprite icon3;
 
+    public int light1Value;
+    public int light2Value;
+    public int light3Value;
+
     void Awake(){
-        equippedLight = 0;
+        equippedLight = 1;
         restrictMovement = false;
         tScript = traveller.GetComponent<travellerScript>();
         if (tScript == null) {
@@ -81,8 +86,8 @@ public class playerController : MonoBehaviour {
             //equippedLight = 2;
             //setFireFlyMaterial();
             abilityBackground.color = Color.yellow;
-            if (equippedLight == 2) {
-                equippedLight = 0;
+            if (equippedLight == 3) {
+                equippedLight = 1;
             }
             else 
                 equippedLight++;
@@ -160,7 +165,7 @@ public class playerController : MonoBehaviour {
 
                 bulb.DisableKeyword("_EMISSION");
                 Debug.Log("adding back scost");
-                addResource(tempLightCost);
+                //addResource(tempLightCost);
 
                 //halo.enabled = false;
                 
@@ -181,7 +186,8 @@ public class playerController : MonoBehaviour {
 
                 // halo.enabled = true;
 
-                addResource(-tempLightCost);
+                //addResource(-tempLightCost);
+                subtractResource();
                 }
                 //halo.enabled = true;
             }
@@ -217,6 +223,9 @@ public class playerController : MonoBehaviour {
                 //addResource(tempLightCost);
 
                 //halo.enabled = false;
+                lightSourceController lController = lightSource.GetComponentInParent<lightSourceController>();
+                if (lController != null)
+                    lController.setCurrentLightType(0);
                 
             }
             else{
@@ -235,7 +244,12 @@ public class playerController : MonoBehaviour {
 
                 // halo.enabled = true;
 
-                addResource(-tempLightCost);
+                //addResource(-tempLightCost);
+                subtractResource();
+                lightSourceController lController = lightSource.GetComponentInParent<lightSourceController>();
+                if (lController != null)
+                    lController.setCurrentLightType(equippedLight);
+
                 }
                 //halo.enabled = true;
             }
@@ -251,7 +265,7 @@ public class playerController : MonoBehaviour {
     //Placeholder effects
     //===========================================================================================================
       void setMaterialColor(Material material,int color) {
-        if (color == 0) {
+        if (color == 1) {
             //Color.TryParseHexString("#F00", out light.color);
             //material.color = Color.yellow;
            // material.SetColor("_EmissionColor", Color.yellow);
@@ -261,12 +275,12 @@ public class playerController : MonoBehaviour {
             material.SetColor("_EmissionColor", Color.yellow);
             setTrailRenderer();
         }
-        else if (color == 1) {
+        else if (color == 2) {
           //material.color = Color.green;
             material.SetColor("_EmissionColor", Color.green);
             setTrailRenderer();
         }
-        else if (color == 2) {
+        else if (color == 3) {
            
 
             //material.color = Color.red;
@@ -282,15 +296,15 @@ public class playerController : MonoBehaviour {
         */
     }
     void setLightColor(Light light, int color) {
-        if (color == 0) {
+        if (color == 1) {
             //Color.TryParseHexString("#F00", out light.color);
             light.color = Color.yellow;//Color.yellow;
         }
-        else if (color == 1) {
+        else if (color == 2) {
             //light.color = Color.red;
             light.color = Color.green;
         }
-        else if (color == 2) {
+        else if (color == 3) {
             light.color = Color.red;
         }
       //  else if (color == 3) {
@@ -310,7 +324,7 @@ public class playerController : MonoBehaviour {
         Color color1;
         Color color2;
 
-        if (equippedLight == 0) {
+        if (equippedLight == 1) {
         //Color.TryParseHexString("#F00", out light.color);
            //color1 = Color.yellow;
            //color2 = Color.blue;
@@ -318,11 +332,11 @@ public class playerController : MonoBehaviour {
             color2 = Color.blue;
 
         }
-        else if (equippedLight == 1) {
+        else if (equippedLight == 2) {
             color1 = Color.green;
             color2 = Color.blue;
         }
-        else if (equippedLight == 2) {
+        else if (equippedLight == 3) {
           //  color1 = Color.magenta;
            // color2 = Color.white;
             color1 = Color.red;
@@ -402,18 +416,40 @@ public class playerController : MonoBehaviour {
         resourceCount.text = resourceValue.ToString();
     }
 
+    public void subtractResource() {
+        int value = 0;
+        if (equippedLight ==1) {
+            value = light1Value;
+        }
+        else if (equippedLight ==2) {
+            value = light2Value;
+        }
+        else if (equippedLight == 3) {
+            value = light3Value;
+        }
+        //Debug.Log(lightResource);
+        //Debug.Log(lightResource += value);
+        lightResource -= value;
+        //Debug.Log("Adding " + value);
+        resourceBar.value = lightResource;
+        int resourceValue = (int)lightResource;
+        resourceCount.text = resourceValue.ToString();
+    }
+
+
+
     public float getResource() {
         return lightResource;
     }
 
     public void updateAbilityUI() {
-        if (equippedLight == 0) {
+        if (equippedLight == 1) {
             abilityIcon.sprite = icon1;
         }
-        if (equippedLight == 1) {
+        if (equippedLight == 2) {
             abilityIcon.sprite = icon2;
         }
-        if (equippedLight == 2) {
+        if (equippedLight == 3) {
             abilityIcon.sprite = icon3;
         }
 

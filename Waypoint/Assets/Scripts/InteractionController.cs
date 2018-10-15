@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InteractionController : MonoBehaviour {
 
+	
 	public Text interactionText;
 	float heldDuration = 0f;
 
@@ -91,21 +92,27 @@ public class InteractionController : MonoBehaviour {
 		
 	}
 
+	//check performace later
 	void OnTriggerStay(Collider other)
     {
 
-		
+		if (other.tag == "Traveller") {
+			currentTarget = other.gameObject;
+			interactionText.text = "Hold X to transfer light to Traveller";
+			return;
+		}
 
-		if (other.tag == "Traveller" && setHealing) {
-			//call healing function in traveller's script
-			Debug.Log("Healing");
-			travellerScript tScript = other.GetComponent<travellerScript>();
-			if (pController.getResource() > 0) {
-				tScript.increaseCape();
-				pController.addResource(-0.1f);
-			}
+		if (other.tag == "Monster") {
+			currentTarget = other.gameObject;
+			interactionText.text = "Press X to stun Monster";
+			return;
+		}
 
-			
+
+		if (other.tag == "Switch") {
+			currentTarget = other.gameObject;
+			interactionText.text = "Press X to interact with Light Source";
+			return;
 		}
 
 
