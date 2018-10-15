@@ -216,7 +216,9 @@ public class playerController : MonoBehaviour {
                 cCollider.enabled = false;
                 audioSource.clip = offSoundEffect;
                 audioSource.Play();
-                tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
+
+                if (equippedLight == 1 || equippedLight == 2)
+                    tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
 
                 bulb.DisableKeyword("_EMISSION");
                 //Debug.Log("adding back scost");
@@ -238,7 +240,8 @@ public class playerController : MonoBehaviour {
                 cCollider.enabled = true;
                 audioSource.clip = onSoundEffect;
                 audioSource.Play();
-                tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
+                if (equippedLight == 1 || equippedLight == 2)
+                    tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
                 bulb.EnableKeyword("_EMISSION");
                 setMaterialColor(bulb, equippedLight);
 
