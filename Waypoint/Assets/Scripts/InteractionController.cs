@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractionController : MonoBehaviour {
 
+	public Text interactionText;
 	float heldDuration = 0f;
 
 	bool setImpulse;
@@ -13,6 +15,12 @@ public class InteractionController : MonoBehaviour {
 	private playerController pController;
 
 	private List<GameObject> monsters;
+
+	public GameObject currentTarget;
+
+	public float stunCost;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -31,29 +39,52 @@ public class InteractionController : MonoBehaviour {
 		// Heal when held in vicinity of monster
 		// impulse stun when tapped
         
+		//Debug.Log(currentTarget);
 
-
-		if (Input.GetButton("R1") || Input.GetMouseButton(1)) {
+		if (Input.GetMouseButton(0) || Input.GetButton("X")) {
 			heldDuration += Time.deltaTime;
-			if (heldDuration > 0.2f && !setHealing) {
+			if (heldDuration > 0.25f) { //&& !setHealing) {
 				//start healing
-				setHealing = true;
+				//setHealing = true;
+				if (currentTarget != null && currentTarget.tag=="Traveller") {
+					travellerScript tScript = currentTarget.GetComponent<travellerScript>();
+					if (pController.getResource() > 0) {
+					tScript.increaseCape();
+					pController.addResource(-0.1f);
+					}
+					return;
+				}
+
+			
+					
 			}
+			
 		}
 
-		if (Input.GetButtonUp("R1") || Input.GetMouseButtonUp(1)) {
-			//Debug.Log(heldDuration);
-			heldDuration = 0f;
+		if (Input.GetMouseButtonUp(0) ||  Input.GetButtonUp("X")) {
+			Debug.Log(heldDuration);
+			
 
 			//0.2f is general approximation of a tap
 			if (heldDuration <= 0.2f) {
 				//start impulse
 				
 				//call stun enemy function
+				if (currentTarget != null && currentTarget.tag == "Switch") {
+						pController.setTargetLight(currentTarget);
+					
+					
+				}
+
+				if (currentTarget != null && currentTarget.tag=="Monster") {
+					setStun();
+					return;
+				}
 				
 			}
-			if (setHealing)
-				setHealing = false;
+			heldDuration = 0f;
+			//if (setHealing)
+			//	setHealing = false;
 		}
 
 
@@ -67,6 +98,7 @@ public class InteractionController : MonoBehaviour {
 
 		if (other.tag == "Traveller" && setHealing) {
 			//call healing function in traveller's script
+			Debug.Log("Healing");
 			travellerScript tScript = other.GetComponent<travellerScript>();
 			if (pController.getResource() > 0) {
 				tScript.increaseCape();
@@ -79,31 +111,63 @@ public class InteractionController : MonoBehaviour {
 
 	}
 	void OnTriggerEnter(Collider other) {
-		if (other.tag == "Monster") {
+	//	Debug.Log(other.name);
+	//	if (other.tag == "Monster") {
 			//add to array
 			//monsters.Add(other.gameObject);
+	//	}
+
+		if (other.tag == "Traveller") {
+			currentTarget = other.gameObject;
+			interactionText.text = "Hold X to transfer light to Traveller";
+			return;
 		}
+
+		if (other.tag == "Monster") {
+			currentTarget = other.gameObject;
+			interactionText.text = "Press X to stun Monster";
+			return;
+		}
+
+
+		if (other.tag == "Switch") {
+			currentTarget = other.gameObject;
+			interactionText.text = "Press X to interact with Light Source";
+			return;
+		}
+
 	}
 
 	void OnTriggerExit(Collider other) {
 
-		//remove from array
-		if (other.tag == "Monster") {
-			//monsters[monsters.Length] = other.gameObject;
-			//monsters.Remove(other.gameObject);
+		if (other.tag == "Traveller" && other.gameObject == currentTarget) {
+			currentTarget = null;
+			interactionText.text  = "";
+			return;
 		}
+		if (other.tag == "Switch" && other.gameObject == currentTarget) {
+			currentTarget = null;
+			interactionText.text  = "";
+			return;
+		}
+		if (other.tag == "Monster" && other.gameObject == currentTarget) {
+			currentTarget = null;
+			interactionText.text  = "";
+			return;
+		}
+
 		
 	}
 
 	void setStun() {
 		//for each monster in array
-		foreach (GameObject m in monsters) {
-			Animator anim = m.GetComponent<Animator>();
+		Animator anim = currentTarget.GetComponent<Animator>();
 			if (anim == null) {
 				Debug.Log("Could not find anim");
 			}
 			anim.SetTrigger("isStunned");
-		}
+			pController.addResource(-stunCost);
+		
 		// get animator contoller and set stun
 	}
 

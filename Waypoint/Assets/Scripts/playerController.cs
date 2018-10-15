@@ -36,6 +36,12 @@ public class playerController : MonoBehaviour {
 
     public float tempLightCost;
 
+    public Image abilityBackground;
+    public Image abilityIcon;
+    public Sprite icon1;
+    public Sprite icon2;
+    public Sprite icon3;
+
     void Awake(){
         equippedLight = 0;
         restrictMovement = false;
@@ -60,36 +66,54 @@ public class playerController : MonoBehaviour {
 
       
          // Toggle between 4 types of light magic
-        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetButtonDown("X")){
-            equippedLight = 0;
-            setFireFlyMaterial();
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("X")){
+            //equippedLight = 0;
+            //setFireFlyMaterial();
+
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetButtonDown("Square")){
-            equippedLight = 1;
+
+        //if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetButtonDown("Square")){
+            //equippedLight = 1;
+            //setFireFlyMaterial();
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+       // }
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")){
+            //equippedLight = 2;
+            //setFireFlyMaterial();
+            abilityBackground.color = Color.yellow;
+            if (equippedLight == 2) {
+                equippedLight = 0;
+            }
+            else 
+                equippedLight++;
+            
             setFireFlyMaterial();
+            updateAbilityUI(); 
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetButtonDown("Triangle")){
-            equippedLight = 2;
-            setFireFlyMaterial();
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) {
+           Invoke ("setBackgroundWhite", .5f);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4) || Input.GetButtonDown("Circle")){
-            equippedLight = 3;
-            setFireFlyMaterial();
-        }
-            // Restart button
-        if (Input.GetButtonDown("L1") || Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Circle")){
+            //equippedLight = 3;
+            //setFireFlyMaterial();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         }
+            // Restart button
+      //  if (Input.GetButtonDown("L1") || Input.GetKeyDown(KeyCode.R)) {
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+       // }
 
 
         // Only interact while r2 is pulled, set tag otherwise release.
+        /* 
         if (Input.GetButtonDown("R2") || Input.GetMouseButtonDown(0)) {
             lightReady = true;
         }
         if (Input.GetButtonUp("R2") || Input.GetMouseButtonUp(0)) {
             lightReady = false;
         }
-
+        */
     }
     
     void FixedUpdate()
@@ -165,6 +189,58 @@ public class playerController : MonoBehaviour {
 
             
     }
+
+    public void setTargetLight(GameObject lightSource) {
+        Debug.Log("called set light");
+        if (lightSource.CompareTag("Switch"))
+        {
+            count = count + 1;
+            SetCountText();
+            cCollider = lightSource.GetComponentInParent<CapsuleCollider>();
+            lampLight = lightSource.gameObject.GetComponentInChildren<Light>();
+            Material bulb = lightSource.GetComponentInChildren<Renderer>().material;
+            //Behaviour halo =(Behaviour)other.GetComponent ("Halo");
+            
+            //.Log(bulb.name);
+            if (bulb == null)
+                Debug.Log("HHH");
+            if (lampLight.intensity > 0)
+            {
+                lampLight.intensity = 0;
+                cCollider.enabled = false;
+                audioSource.clip = offSoundEffect;
+                audioSource.Play();
+                tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
+
+                bulb.DisableKeyword("_EMISSION");
+                //Debug.Log("adding back scost");
+                //addResource(tempLightCost);
+
+                //halo.enabled = false;
+                
+            }
+            else{
+                //setLightColor(lampLight, equippedLight);
+                if (lightResource >=tempLightCost){
+ 
+                setChildLight(lightSource.GetComponentsInChildren<Light>());
+                
+                lampLight.intensity = 3;
+                cCollider.enabled = true;
+                audioSource.clip = onSoundEffect;
+                audioSource.Play();
+                tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
+                bulb.EnableKeyword("_EMISSION");
+                setMaterialColor(bulb, equippedLight);
+
+                // halo.enabled = true;
+
+                addResource(-tempLightCost);
+                }
+                //halo.enabled = true;
+            }
+        }
+    }
     
 
     void SetCountText()
@@ -178,39 +254,48 @@ public class playerController : MonoBehaviour {
         if (color == 0) {
             //Color.TryParseHexString("#F00", out light.color);
             //material.color = Color.yellow;
+           // material.SetColor("_EmissionColor", Color.yellow);
+           // setTrailRenderer();
+
+             //material.color = Color.blue;
             material.SetColor("_EmissionColor", Color.yellow);
             setTrailRenderer();
         }
         else if (color == 1) {
+          //material.color = Color.green;
+            material.SetColor("_EmissionColor", Color.green);
+            setTrailRenderer();
+        }
+        else if (color == 2) {
+           
+
             //material.color = Color.red;
             material.SetColor("_EmissionColor", Color.red);
             setTrailRenderer();
         }
-        else if (color == 2) {
-            //material.color = Color.blue;
-            material.SetColor("_EmissionColor", Color.magenta);
-            setTrailRenderer();
-        }
+        /* 
         else if (color == 3) {
             //material.color = Color.green;
             material.SetColor("_EmissionColor", Color.green);
             setTrailRenderer();
         }
+        */
     }
     void setLightColor(Light light, int color) {
         if (color == 0) {
             //Color.TryParseHexString("#F00", out light.color);
-            light.color = Color.yellow;
+            light.color = Color.yellow;//Color.yellow;
         }
         else if (color == 1) {
-            light.color = Color.red;
-        }
-        else if (color == 2) {
-            light.color = Color.magenta;
-        }
-        else if (color == 3) {
+            //light.color = Color.red;
             light.color = Color.green;
         }
+        else if (color == 2) {
+            light.color = Color.red;
+        }
+      //  else if (color == 3) {
+      //      light.color = Color.green;
+       // }
     }
 
     void setFireFlyMaterial() {
@@ -227,26 +312,32 @@ public class playerController : MonoBehaviour {
 
         if (equippedLight == 0) {
         //Color.TryParseHexString("#F00", out light.color);
-           color1 = Color.yellow;
-           color2 = Color.blue;
+           //color1 = Color.yellow;
+           //color2 = Color.blue;
+            color1 = Color.yellow;
+            color2 = Color.blue;
 
         }
         else if (equippedLight == 1) {
-            color1 = Color.red;
+            color1 = Color.green;
             color2 = Color.blue;
         }
         else if (equippedLight == 2) {
-            color1 = Color.magenta;
-            color2 = Color.white;
-        }
-        else if (equippedLight == 3) {
-            color1 = Color.green;
+          //  color1 = Color.magenta;
+           // color2 = Color.white;
+            color1 = Color.red;
             color2 = Color.blue;
+        }
+      //  else if (equippedLight == 3) {
+       //     color1 = Color.green;
+        //    color2 = Color.blue;
            
-        }
+       // }
         else {
-            color1 = Color.yellow;
-            color2 = Color.blue;
+       //     color1 = Color.yellow;
+        //    color2 = Color.blue;
+          color1 = Color.magenta;
+            color2 = Color.white;
         }
         colorKey[0].color = color1;
         colorKey[0].time = 0.0f;
@@ -313,6 +404,24 @@ public class playerController : MonoBehaviour {
 
     public float getResource() {
         return lightResource;
+    }
+
+    public void updateAbilityUI() {
+        if (equippedLight == 0) {
+            abilityIcon.sprite = icon1;
+        }
+        if (equippedLight == 1) {
+            abilityIcon.sprite = icon2;
+        }
+        if (equippedLight == 2) {
+            abilityIcon.sprite = icon3;
+        }
+
+        
+    }
+
+    public void setBackgroundWhite() {
+        abilityBackground.color = Color.white;
     }
 
 }
