@@ -87,7 +87,11 @@ public class RotateCamera : MonoBehaviour {
         }
         
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("L2")) {
+       // if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("L2")) {
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Square")){
+            tacticalView = !tacticalView;
+            
+            if (tacticalView) {
             targetController.setRestrictMovement(true);
             relativeForward = transform.forward;
             relativeRight = transform.right;
@@ -95,19 +99,28 @@ public class RotateCamera : MonoBehaviour {
             tacticleRotation = new Quaternion(transform.rotation.x + 30f,transform.rotation.y,transform.rotation.z,transform.rotation.w);
             cameraMoving = true;
             transform.LookAt(target.position);
-            tacticalView = true;
+            
             defaultDestination = transform.position;
             defaultRotation = transform.rotation;
-            cameraText.text = "Tactical View";
+            //cameraText.text = "Tactical View";
+            cameraText.enabled = false;
+            }
+            else {
+                cameraMoving = false;
+                cameraMovingBack = true;
+
+                targetController.setRestrictMovement(true);
+            }
         }
 
+/* 
         if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("L2")) {
             cameraMoving = false;
             cameraMovingBack = true;
 
             targetController.setRestrictMovement(true);
         }
-
+*/
         
         if (cameraMoving) {
             moveCamera();
@@ -122,7 +135,8 @@ public class RotateCamera : MonoBehaviour {
              if (Vector3.Distance(transform.position, defaultDestination) < 1f) {
                 cameraMovingBack = false;
                 tacticalView = false;
-                cameraText.text = "";
+                //cameraText.text = "";
+                cameraText.enabled = true;
                 targetController.setRestrictMovement(false);
             }
 
