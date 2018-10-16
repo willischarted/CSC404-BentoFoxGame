@@ -184,13 +184,14 @@ public class RotateCamera : MonoBehaviour {
        
         float step = speed * Time.deltaTime;
         //transform.rotation = defaultRotation;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), step);
         
         gameObject.transform.position = Vector3.MoveTowards(transform.position, defaultDestination, step);
         //transform.rotation = Quaternion.RotateTowards(transform.rotation, tacticleRotation, step);
       //  transform.rotation = Quaternion.RotateTowards(transform.rotation, ground.transform.rotation, step);
        // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(ground.transform.position - transform.position), step);
         
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), step);
+       
     }
      void LateUpdate()
      {  
