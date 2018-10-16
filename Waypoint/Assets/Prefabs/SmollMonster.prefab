@@ -151,7 +151,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1584523387928166}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.018088236, y: -0.005392022, z: -0.0006594074}
+  m_LocalPosition: {x: 0.0118, y: -0.0023, z: -0.0007}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4105744790784390}
@@ -177,8 +177,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512879496904568}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31.11936, y: -0.05, z: -21.363853}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.106100485, y: 1.09643564e-16, z: -74.06862}
+  m_LocalScale: {x: 0.27, y: 0.27, z: 0.27}
   m_Children:
   - {fileID: 4081889705318372}
   m_Father: {fileID: 0}
@@ -382,8 +382,10 @@ MonoBehaviour:
   col: {fileID: 135693970315765588}
   speed: 0.2
   maxRotation: 120
-  MAX_LD: 20
+  MAX_LD: 50
   lastVisited: {fileID: 0}
+  roamCenterPoint: {x: 0, y: 0, z: 0}
+  maxRoamDistance: Infinity
 --- !u!135 &135693970315765588
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -418,7 +420,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
