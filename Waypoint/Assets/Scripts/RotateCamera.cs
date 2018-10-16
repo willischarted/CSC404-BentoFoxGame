@@ -58,7 +58,7 @@ public class RotateCamera : MonoBehaviour {
     private Vector3 defaultDestination;
     Quaternion tacticleRotation;
     private Quaternion defaultRotation;
-    public GameObject ground;
+   // public GameObject ground;
     ///////////////////////////////////////////////////////////////////////////////////////////////
     
     void Start () {
@@ -182,7 +182,7 @@ public class RotateCamera : MonoBehaviour {
 
      void resetCamera() {
        
-        float step = speed * Time.deltaTime;
+        float step = speed * 3 * Time.deltaTime; //moving back should be quicker
         //transform.rotation = defaultRotation;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target.transform.position - transform.position), step);
         

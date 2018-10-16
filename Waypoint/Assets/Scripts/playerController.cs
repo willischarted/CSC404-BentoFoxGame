@@ -164,7 +164,7 @@ public class playerController : MonoBehaviour {
                 tScript.setTarget(other.transform.parent.transform, lampLight.intensity);
 
                 bulb.DisableKeyword("_EMISSION");
-                Debug.Log("adding back scost");
+               // Debug.Log("adding back scost");
                 //addResource(tempLightCost);
 
                 //halo.enabled = false;
@@ -197,7 +197,7 @@ public class playerController : MonoBehaviour {
     }
 
     public void setTargetLight(GameObject lightSource) {
-        Debug.Log("called set light");
+        //Debug.Log("called set light");
         if (lightSource.CompareTag("Switch"))
         {
             count = count + 1;

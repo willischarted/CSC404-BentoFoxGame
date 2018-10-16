@@ -23,6 +23,8 @@ public class InteractionController : MonoBehaviour {
 
 
 
+
+
 	// Use this for initialization
 	void Start () {
 		//impulseCooldown = 5.0f;
@@ -63,7 +65,7 @@ public class InteractionController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonUp(0) ||  Input.GetButtonUp("X")) {
-			Debug.Log(heldDuration);
+			//Debug.Log(heldDuration);
 			
 
 			//0.2f is general approximation of a tap
@@ -95,7 +97,7 @@ public class InteractionController : MonoBehaviour {
 	//check performace later
 	void OnTriggerStay(Collider other)
     {
-
+		
 		if (other.tag == "Traveller") {
 			currentTarget = other.gameObject;
 			interactionText.text = "Hold X to transfer light to Traveller";
