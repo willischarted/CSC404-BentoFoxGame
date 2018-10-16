@@ -23,4 +23,8 @@ public class lightSourceController : MonoBehaviour {
 	public void setCurrentLightType(int type) {
 		currentLightType = type;
 	}
+
+	public int getCurrentLightType() {
+		return currentLightType;
+	}
 }

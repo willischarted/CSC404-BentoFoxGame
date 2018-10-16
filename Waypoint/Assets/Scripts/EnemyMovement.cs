@@ -141,7 +141,14 @@ public class EnemyMovement : MonoBehaviour {
         {   
             if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD && Vector3.Distance(roamCenterPoint, lamp.transform.position) <= maxRoamDistance)
             {
-                if (lamp.transform.GetChild(0).GetComponentInChildren<Light>().intensity == 3)
+                lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
+                
+                if (lController == null) {
+                    Debug.Log("Could not find lightsourcontroller");
+                }
+                int lightType = lController.getCurrentLightType();
+               // lamp.transform.GetChild(0).GetComponentInChildren<Light>().intensity == 3 && 
+                if (lightType ==1  || lightType == 3 ) //1 is trav, 3 is monster
                 { // lamp is lit
 
                     if (!lamp.Equals(lastVisited) && lamp.transform.position != currentTarget)
