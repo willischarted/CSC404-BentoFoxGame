@@ -58,7 +58,7 @@ public class playerController : MonoBehaviour {
 	// Use this for initialization
     void Start () {
         lightReady = false;
-        lightResource = 200;
+        lightResource = 1000;
         rb = GetComponent<Rigidbody>();
         count = 0;
         SetCountText();
