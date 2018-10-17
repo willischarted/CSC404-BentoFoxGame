@@ -58,7 +58,7 @@ public class playerController : MonoBehaviour {
 	// Use this for initialization
     void Start () {
         lightReady = false;
-        lightResource = 100;
+        lightResource = 200;
         rb = GetComponent<Rigidbody>();
         count = 0;
         SetCountText();
@@ -217,7 +217,7 @@ public class playerController : MonoBehaviour {
                 audioSource.clip = offSoundEffect;
                 audioSource.Play();
 
-                if (equippedLight == 1 || equippedLight == 2)
+                if (equippedLight == 1 || equippedLight == 2) 
                     tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
 
                 bulb.DisableKeyword("_EMISSION");
