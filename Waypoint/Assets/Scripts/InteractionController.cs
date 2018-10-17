@@ -50,7 +50,7 @@ public class InteractionController : MonoBehaviour {
 
 		if (Input.GetMouseButton(0) || Input.GetButton("X")) {
 			heldDuration += Time.deltaTime;
-			if (heldDuration > 0.25f) { //&& !setHealing) {
+			if (heldDuration > 0.5f) { //&& !setHealing) {
 				//start healing
 				//setHealing = true;
 				if (targetTraveller != null && targetTraveller.tag=="Traveller") {
@@ -73,7 +73,7 @@ public class InteractionController : MonoBehaviour {
 			
 
 			//0.2f is general approximation of a tap
-			if (heldDuration <= 0.2f) {
+			if (heldDuration <= 0.5f) {
 				//start impulse
 				
 				//call stun enemy function

@@ -59,9 +59,9 @@ GameObject:
   - component: {fileID: 4428346336423472}
   - component: {fileID: 33543753952056806}
   - component: {fileID: 23816288974531314}
-  - component: {fileID: 136605893206799696}
   - component: {fileID: 108071602895614874}
   - component: {fileID: 114400731879858626}
+  - component: {fileID: 136530989364166794}
   m_Layer: 0
   m_Name: lampPost
   m_TagString: LampLight
@@ -212,8 +212,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0.00327166, z: 0}
 --- !u!108 &108071602895614874
 Light:
   m_ObjectHideFlags: 1
@@ -348,20 +348,7 @@ Halo:
     serializedVersion: 2
     rgba: 4292141793
   m_Size: 4
---- !u!136 &136590719030099826
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1477137641065894}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &136605893206799696
+--- !u!136 &136530989364166794
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -373,4 +360,17 @@ CapsuleCollider:
   m_Radius: 0.06
   m_Height: 0
   m_Direction: 1
-  m_Center: {x: 0, y: 0.0032716598, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136590719030099826
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477137641065894}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
