@@ -11,7 +11,7 @@ public class travellerScript : MonoBehaviour
 // Added public function for cape brightness increase; took away user ability to do that from
 // travellerScript.
 //
-//TODO: If Traveller is beside start area, go back to start area
+//TODO: Implement line of sight 
 //TODO: Fully debug the go to nearest light mechanic. Current issue:
 //          if you do more than one light at a time and then turn off the 
 //          target light, it will go back to the original light.
@@ -23,6 +23,7 @@ public class travellerScript : MonoBehaviour
     public Text winText;
     public float speed = 200f;
     bool hasTarget;
+    Animator anim;
     Vector3 target;
     GameObject lastVisited;
     GameObject currentLight;
@@ -50,15 +51,20 @@ public class travellerScript : MonoBehaviour
     public float MIN_LD;
     private GameObject startArea;
 
+    private float MAX_INTENSITY = 1f;
+    private float MIN_INTENSITY = -3f;
+    NavMeshAgent nav;
+        
 
     // Use this for initialization
     void Start()
     {
-
+        anim = transform.parent.GetComponent<Animator>();
         hasTarget = false;
         winText.text = "";
         startArea = GameObject.FindGameObjectWithTag("StartArea");
         lastVisited = startArea;
+        nav = GetComponent<NavMeshAgent>();
         //rb  = GetComponent<Rigidbody>();
         // if (rb == null)
         //Debug.Log("Could not find traveller rb");
@@ -106,28 +112,38 @@ public class travellerScript : MonoBehaviour
 
     }
     void Update() {
-
         //Testing emmisive cloak material
         //DynamicGI.SetEmissive(cloak, new Color(255f, 255f, 255f, 1.0f) * lightValue);
         if (litLamps() == 0 && started) {
             lightValue -= 0.0001f;
         }
-        lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
-        cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
-        hat.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        if (lightValue < MAX_INTENSITY && lightValue > MIN_INTENSITY)
+        {
+            lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
+            cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+            hat.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        } else if (lightValue == MIN_INTENSITY)
+        {
+            //GameOver
+        }
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
-
+        
 
     {
-
+        
+       // Debug.Log(anim.enabled);
         //Goes towards a lamp
         if (hasTarget && Vector3.Distance(transform.position, target) > MIN_LD) {
-            //Debug.Log(Vector3.Distance(transform.position, target));
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), speed * Time.deltaTime);
+            anim.enabled = false;
+            
+            //Debug.Log(Vector3.Distance(transform.position, target;));
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), speed * Time.deltaTime);     
+            transform.GetChild(0).transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(target - transform.position), speed * Time.deltaTime);
+
             //transform.position += transform.forward * speed * Time.deltaTime;
             //  rb.mov
             //transform.LookAt(target);
@@ -140,7 +156,7 @@ public class travellerScript : MonoBehaviour
         else {
             //Debug.Log("Reached");
             hasTarget = false;
-            
+            anim.enabled = true;
 
             // These two lines
             currentLight = findCurrentLamp();
@@ -160,9 +176,11 @@ public class travellerScript : MonoBehaviour
                     {
                         //Debug.Log(nextLamp.Equals(lastVisited));
                         //Debug.Log("last");
+                        anim.enabled = false;
                         hasTarget = true;
+                        transform.LookAt(nextLamp.transform);
                         target = nextLamp.transform.position;
-                    }
+                    } 
                 }
                 //If the light is turned off, it looks for another light
                 if (currentLight.transform.GetChild(0).
@@ -171,8 +189,14 @@ public class travellerScript : MonoBehaviour
                     GameObject potential_target = checkLamps();
                     if (potential_target != null)
                     {
-                        hasTarget = true;
-                        target = potential_target.transform.position;
+                        if (lineOfSight(potential_target.transform.position,
+                            (int)MAX_LD, potential_target.transform))
+                        {
+                            anim.enabled = false;
+                            hasTarget = true;
+                            transform.LookAt(potential_target.transform);
+                            target = potential_target.transform.position;
+                        }
                     }
                 }
             }
@@ -219,6 +243,8 @@ public class travellerScript : MonoBehaviour
         lightValue += 0.0002f;
     }
 
+
+
     /*
      * Is called by the Player controller when the firefly hits a switch
      * Updates the target accordingly
@@ -227,13 +253,15 @@ public class travellerScript : MonoBehaviour
     public void setTarget(Transform goal, float light) {
         started = true;
         this.goal = goal;
-        if (light == 3)
-        {
-            if (Vector3.Distance(transform.position, goal.position) <= MAX_LD)
+        if (light > 0)
+        {            
+            if (Vector3.Distance(transform.position, goal.position) <= MAX_LD &&
+                lineOfSight(goal.position, (int)MAX_LD, goal))
             {
-
-                
-                 
+               anim.enabled = false;
+                Debug.Log("stop!");
+        
+                Debug.DrawRay(transform.position, goal.position, Color.blue);                
                 target = goal.position;
                 hasTarget = true;
                 lastVisited = currentLight;
@@ -242,11 +270,38 @@ public class travellerScript : MonoBehaviour
                 //agent.SetDestination(goal.position);
             }
         }
+        //if you turn a light off while traveler is travelling, or in general
         else
         {
-            hasTarget = true;
-            if (lastVisited != null)
-                target = lastVisited.transform.position;
+
+            if (goal == findCurrentLamp() || goal.position == target)
+            {
+                GameObject potentialTarget;
+                //If you turn off the lamp it is at currently
+                //it will see if there is another lit lamp around, not necessarily 
+                //the last visited
+                if ((potentialTarget = checkLamps()) != null)
+                {
+                    if (lineOfSight(potentialTarget.transform.position,
+                        (int)MAX_LD, potentialTarget.transform))
+                    {
+                        anim.enabled = false;
+                        Debug.Log("find a lamp");
+                        target = potentialTarget.transform.position;
+                        hasTarget = true;
+                    }
+                }
+            }
+            else if (goal.position != target && hasTarget)
+            {
+                hasTarget = true;
+            }
+            else
+            {
+                anim.enabled = true;
+                hasTarget = false;
+            }
+            
         }
     }
 
@@ -316,14 +371,46 @@ public class travellerScript : MonoBehaviour
         return litlamps;
     }
 
-
     /*
-    private void OnTriggerExit(Collider other)
+     * The monster uses this to decrease the traveler's health.
+     * */
+    public void decreaseCape (int damage)
     {
-        if (other.gameObject.CompareTag("LampLight"))
+        lightValue -= damage / 1000;
+    }
+
+
+    private bool lineOfSight(Vector3 lampPosition, int lampRange, Transform lamp)
+    {
+        //Raycast to see if there is an obstructing object
+        bool unobstructed = false;
+        bool inSightLine = false;
+        RaycastHit hitInfo;
+        Vector3 currPos = transform.position;
+    //    Debug.Log(lamp.tag);
+
+        bool hitSomething = Physics.Raycast(currPos, (lampPosition - currPos), out hitInfo, lampRange);
+    //    Debug.Log(hitSomething);
+    //    Debug.Log(hitInfo.transform.position + " " + lampPosition);
+        Debug.DrawRay(currPos, (lampPosition - currPos).normalized * lampRange, Color.yellow, 5.0f, true);
+        if (hitSomething)
         {
-            Debug.Log("switch");
-            lastVisited = other.gameObject;
+           
+            Debug.Log(hitInfo.collider.tag);
+            if (hitInfo.transform.position == lampPosition)
+            {
+                Debug.Log("twas THE lamp");
+                unobstructed = true;
+            }
         }
-    }*/
+
+        //Check if it is within 60 degrees on either side of the direction the traveler is facing
+        if (Vector3.Angle((lampPosition - currPos), transform.forward) < 60f)
+        {
+            inSightLine = true;
+        }
+
+        return unobstructed;
+        //return (unobstructed && inSightLine);
+    }
 }
