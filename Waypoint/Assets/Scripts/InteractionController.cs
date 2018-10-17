@@ -19,6 +19,10 @@ public class InteractionController : MonoBehaviour {
 
 	public GameObject currentTarget;
 
+	public GameObject targetMonster;
+
+	public GameObject targetTraveller;
+
 	public float stunCost;
 
 
@@ -49,8 +53,8 @@ public class InteractionController : MonoBehaviour {
 			if (heldDuration > 0.25f) { //&& !setHealing) {
 				//start healing
 				//setHealing = true;
-				if (currentTarget != null && currentTarget.tag=="Traveller") {
-					travellerScript tScript = currentTarget.GetComponent<travellerScript>();
+				if (targetTraveller != null && targetTraveller.tag=="Traveller") {
+					travellerScript tScript = targetTraveller.GetComponent<travellerScript>();
 					if (pController.getResource() > 0) {
 					tScript.increaseCape();
 					pController.addResource(-0.1f);
@@ -79,7 +83,7 @@ public class InteractionController : MonoBehaviour {
 					
 				}
 
-				if (currentTarget != null && currentTarget.tag=="Monster") {
+				if (targetMonster != null && targetMonster.tag=="Monster") {
 					setStun();
 					return;
 				}
@@ -90,10 +94,34 @@ public class InteractionController : MonoBehaviour {
 			//	setHealing = false;
 		}
 
+		if (currentTarget) {
+			interactionText.text = "Press X to interact with Light Source";
+			return;
+		}
 
+		if (targetMonster && currentTarget) {
+			interactionText.text = "Press X to stun Monster \n Hold X to transfer light to Traveller";
+			return;
+		}
+
+
+		if (targetMonster) {
+			interactionText.text = "Press X to stun Monster";
+			return;
+		}
+		if (targetTraveller) {
+			interactionText.text = "Hold X to transfer light to Traveller";
+			return;
+		}
+		
+		else {
+			interactionText.text = "";
+			return;
+		}
 		
 	}
 
+	/*
 	//check performace later
 	void OnTriggerStay(Collider other)
     {
@@ -119,6 +147,7 @@ public class InteractionController : MonoBehaviour {
 
 
 	}
+	*/
 	void OnTriggerEnter(Collider other) {
 	//	Debug.Log(other.name);
 	//	if (other.tag == "Monster") {
@@ -127,21 +156,22 @@ public class InteractionController : MonoBehaviour {
 	//	}
 
 		if (other.tag == "Traveller") {
-			currentTarget = other.gameObject;
-			interactionText.text = "Hold X to transfer light to Traveller";
+			targetTraveller = other.gameObject;
+			//interactionText.text = "Hold X to transfer light to Traveller";
 			return;
 		}
 
 		if (other.tag == "Monster") {
-			currentTarget = other.gameObject;
-			interactionText.text = "Press X to stun Monster";
+			//currentTarget = other.gameObject;
+			targetMonster = other.gameObject;
+			//interactionText.text = "Press X to stun Monster";
 			return;
 		}
 
 
 		if (other.tag == "Switch") {
 			currentTarget = other.gameObject;
-			interactionText.text = "Press X to interact with Light Source";
+			//interactionText.text = "Press X to interact with Light Source";
 			return;
 		}
 
@@ -149,19 +179,21 @@ public class InteractionController : MonoBehaviour {
 
 	void OnTriggerExit(Collider other) {
 
-		if (other.tag == "Traveller" && other.gameObject == currentTarget) {
-			currentTarget = null;
-			interactionText.text  = "";
+		if (other.tag == "Traveller" && other.gameObject == targetTraveller) {
+			//currentTarget = null;
+			targetTraveller = null;
+			//interactionText.text  = "";
 			return;
 		}
 		if (other.tag == "Switch" && other.gameObject == currentTarget) {
 			currentTarget = null;
-			interactionText.text  = "";
+			//interactionText.text  = "";
 			return;
 		}
-		if (other.tag == "Monster" && other.gameObject == currentTarget) {
-			currentTarget = null;
-			interactionText.text  = "";
+		if (other.tag == "Monster" && other.gameObject == targetMonster) {
+			//currentTarget = null;
+			targetMonster = null;
+			//interactionText.text  = "";
 			return;
 		}
 
@@ -170,7 +202,7 @@ public class InteractionController : MonoBehaviour {
 
 	void setStun() {
 		//for each monster in array
-		Animator anim = currentTarget.GetComponent<Animator>();
+		Animator anim = targetMonster.GetComponent<Animator>();
 			if (anim == null) {
 				Debug.Log("Could not find anim");
 			}
