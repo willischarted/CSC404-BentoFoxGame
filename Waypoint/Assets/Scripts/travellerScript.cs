@@ -377,8 +377,10 @@ public class travellerScript : MonoBehaviour
     public void decreaseCape (int damage)
     {
         lightValue -= damage / 1000;
+        cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        hat.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
     }
-
+ 
 
     private bool lineOfSight(Vector3 lampPosition, int lampRange, Transform lamp)
     {
@@ -412,5 +414,10 @@ public class travellerScript : MonoBehaviour
 
         return unobstructed;
         //return (unobstructed && inSightLine);
+    }
+
+
+    public void takeDamage() {
+
     }
 }
