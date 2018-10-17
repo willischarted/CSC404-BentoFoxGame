@@ -48,6 +48,7 @@ public class EnemyMovementReduced : MonoBehaviour
             {
                 monsterAnim.SetTrigger("recovered");
                 timer = 0f;
+                moving = false;
             }
         }
 
@@ -59,7 +60,7 @@ public class EnemyMovementReduced : MonoBehaviour
                 Debug.Log("not moving");
                 moveToLamp();
             }
-            else if (Vector3.Distance(transform.position, currentTarget) < 3.0f)
+            else if (Vector3.Distance(transform.position, currentTarget) < 2.5f)
             { //reached destination
                 moving = false;
                 Debug.Log("in the elseif");
@@ -69,6 +70,10 @@ public class EnemyMovementReduced : MonoBehaviour
                 {
                     lastVisited = findCurrentLamp();
                 }
+            }
+            else
+            {
+                isLampLit();
             }
         }
     }
@@ -82,11 +87,20 @@ public class EnemyMovementReduced : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD && Vector3.Distance(roamCenterPoint, lamp.transform.position) <= maxRoamDistance)
             {
-                if (lamp.transform.GetChild(0).GetComponentInChildren<Light>().intensity == 3)
+                lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
+
+                if (lController == null)
+                {
+                    Debug.Log("Could not find lightsourcontroller");
+                }
+                int lightType = lController.getCurrentLightType();
+                // lamp.transform.GetChild(0).GetComponentInChildren<Light>().intensity == 3 && 
+                if (lightType == 1 || lightType == 3) //1 is trav, 3 is monster
                 { // lamp is lit
 
                     if (!lamp.Equals(lastVisited) && lamp.transform.position != currentTarget)
                     {
+                        Debug.Log("LAMP IS HERE");
 
                         if (lastVisited != null)
                         {
@@ -96,6 +110,7 @@ public class EnemyMovementReduced : MonoBehaviour
                         currentTarget = lamp.transform.position;
                         nav.SetDestination(lamp.transform.position);
                         moving = true;
+                        Debug.Log("WATTTTTTT");
                         return; //should choose a random one
                     }
                 }
@@ -129,11 +144,35 @@ public class EnemyMovementReduced : MonoBehaviour
         GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
         foreach (GameObject lamp in lamps)
         {
-            if (Vector3.Distance(transform.position, lamp.transform.position) <= 3.0f)
+            if (Vector3.Distance(transform.position, lamp.transform.position) <= 2.5f)
             {
                 return lamp;
             }
         }
         return null;
+    }
+
+    public void isLampLit()
+    {
+        Debug.Log("checking if lamp is lit");
+        GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
+        List<GameObject> validLamps = new List<GameObject>();
+        foreach (GameObject lamp in lamps)
+        {
+            if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD && Vector3.Distance(roamCenterPoint, lamp.transform.position) <= maxRoamDistance)
+            {
+                lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
+
+                if (lController == null)
+                {
+                    Debug.Log("Could not find lightsourcontroller");
+                }
+                int lightType = lController.getCurrentLightType();
+                if (lightType == 1 || lightType == 3)
+                {
+                    moving = false;
+                }
+            }
+        }
     }
 }
