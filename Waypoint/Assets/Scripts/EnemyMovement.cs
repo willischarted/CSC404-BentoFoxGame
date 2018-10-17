@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour {
     public float MAX_LD;
     public GameObject lastVisited;
     private bool moving;
+    private bool movingToLamp;
     public Vector3 roamCenterPoint;
     public float maxRoamDistance;
 
@@ -70,6 +71,7 @@ public class EnemyMovement : MonoBehaviour {
             {
                 monsterAnim.SetTrigger("recovered");
                 timer = 0f;
+                moving = false;
             }
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Chase"))
@@ -121,7 +123,7 @@ public class EnemyMovement : MonoBehaviour {
                 Debug.Log("not moving");
                 moveToLamp();
                 }
-            else if (Vector3.Distance(transform.position,currentTarget) < 3.0f) { //reached destination
+            else if (Vector3.Distance(transform.position,currentTarget) < 2.5f) { //reached destination
                 moving = false;
                 Debug.Log("in the elseif");
                 nav.SetDestination(transform.position);
@@ -130,11 +132,18 @@ public class EnemyMovement : MonoBehaviour {
                     lastVisited = findCurrentLamp();
                 }
             }
+            else
+            {
+                if (!movingToLamp)
+                {
+                    isLampLit();
+                }
+                
+            }
         }
     }
     
     public void moveToLamp() {
-        Debug.Log("in here");
         GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
         List<GameObject> validLamps = new List<GameObject>();
         foreach (GameObject lamp in lamps)
@@ -162,6 +171,7 @@ public class EnemyMovement : MonoBehaviour {
                         currentTarget = lamp.transform.position;
                         nav.SetDestination(lamp.transform.position);
                         moving = true;
+                        movingToLamp = true;
                         return; //should choose a random one
                     }
                 }
@@ -186,6 +196,7 @@ public class EnemyMovement : MonoBehaviour {
             currentTarget = lamp.transform.position;
             nav.SetDestination(lamp.transform.position);
             moving = true;
+            movingToLamp = false;
             return;
         }
     }
@@ -195,11 +206,36 @@ public class EnemyMovement : MonoBehaviour {
         GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
         foreach (GameObject lamp in lamps)
         {
-            if (Vector3.Distance(transform.position, lamp.transform.position) <= 3.0f)
+            if (Vector3.Distance(transform.position, lamp.transform.position) <= 2.5f)
             {
                 return lamp;
             }
         }
         return null;
     }
+
+    public void isLampLit()
+    {
+        Debug.Log("checking if lamp is lit");
+        GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
+        List<GameObject> validLamps = new List<GameObject>();
+        foreach (GameObject lamp in lamps)
+        {
+            if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD && Vector3.Distance(roamCenterPoint, lamp.transform.position) <= maxRoamDistance)
+            {
+                lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
+
+                if (lController == null)
+                {
+                    Debug.Log("Could not find lightsourcontroller");
+                }
+                int lightType = lController.getCurrentLightType();
+                if (lightType == 1 || lightType == 3)
+                {
+                    moving = false;
+                }
+            }
+        }
+    }
 }
+
