@@ -6,6 +6,8 @@ public class MiniMapController : MonoBehaviour {
 
 	public Transform player;
 
+	public Transform playerCamera;
+
 
 	
 	// Update is called once per frame
@@ -16,7 +18,7 @@ public class MiniMapController : MonoBehaviour {
 		transform.position = newPosition;
 
 		//want to roate according to maincamera...
-		transform.rotation = Quaternion.Euler(90f, player.eulerAngles.y,0f);
+		transform.rotation = Quaternion.Euler(90f, playerCamera.eulerAngles.y,0f);
 		
 	}
 }
