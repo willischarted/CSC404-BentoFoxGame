@@ -10,6 +10,11 @@ public class lightSourceController : MonoBehaviour {
 	 */
 	[SerializeField]
 	private int currentLightType = 0;
+
+
+	public GameObject[] adjacentSources;
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -26,5 +31,9 @@ public class lightSourceController : MonoBehaviour {
 
 	public int getCurrentLightType() {
 		return currentLightType;
+	}
+
+	public GameObject[] getAdjacentSources() {
+		return adjacentSources;
 	}
 }
