@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class lightSourceController : MonoBehaviour {
 	/*
+		0 = turned off
 		1 = default -> attracts both
 		2 = traveller -> attracts traveller only
 		3 = monster	-> attracts monster
