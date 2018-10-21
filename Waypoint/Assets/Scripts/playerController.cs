@@ -135,9 +135,16 @@ public class playerController : MonoBehaviour {
             relativeForward.Normalize();
             relativeRight.Normalize();
 
+            
+
             Vector3 moveDirection = relativeForward * moveVertical + relativeRight * moveHorizontal;
 
+            if (moveDirection == Vector3.zero)
+                return;
+            transform.rotation = Quaternion.LookRotation(moveDirection);
             rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
+
+
         }
     }
 
