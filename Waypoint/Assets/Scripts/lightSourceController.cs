@@ -12,6 +12,11 @@ public class lightSourceController : MonoBehaviour {
 	[SerializeField]
 	private int currentLightType = 0;
 
+	public float lightDuration;
+
+	[SerializeField]
+	private float timeRemaining;
+
 
 	public GameObject[] adjacentSources;
 
@@ -20,18 +25,70 @@ public class lightSourceController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		setMiniMapPaths();
+		//setMiniMapPaths();
+	
 
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (getCurrentLightType() > 0) {
+			if(timeRemaining <= 0f) 
+			{
+				setLightOff();
+				timeRemaining = lightDuration;
+			}
+			else 
+			{
+				timeRemaining -= Time.deltaTime;
+
+			}
+		}
 		
+	}
+
+	public void setLightOff() {
+		Debug.Log("Turn off light here");
+		Light lampLight = GetComponentInChildren<Light>();
+		Renderer[] bulbs = GetComponentsInChildren<Renderer>();
+		if (bulbs == null)
+            Debug.Log("HHH");
+
+		
+        lampLight.intensity = 0;
+	
+		//Sound fx should play in here
+        //audioSource.clip = offSoundEffect;
+        //audioSource.Play();
+
+		/* 
+        if (currentLightType == 1 || currentLightType == 2){
+            //tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
+			GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
+			if (trav == null)
+				Debug.Log("Could not find the traveller");
+
+			travellerScript tScript= trav.GetComponent<travellerScript>();
+			tScript.setTarget(transform.parent.transform, lampLight.intensity);
+
+		}
+		*/
+
+		foreach (Renderer r in bulbs) {
+			Debug.Log(r.gameObject.name);//r.gameObject.name == "Bulb"
+			if (string.Equals(r.gameObject.name, "Bulb")) {
+				Material bulb = r.material;
+        		bulb.DisableKeyword("_EMISSION");
+			}
+		}
+		setCurrentLightType(0);
+
 	}
 
 	public void setCurrentLightType(int type) {
 		currentLightType = type;
+		timeRemaining = lightDuration;
 	}
 
 	public int getCurrentLightType() {
