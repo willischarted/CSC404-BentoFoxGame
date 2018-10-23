@@ -25,7 +25,7 @@ public class lightSourceController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//setMiniMapPaths();
+		setMiniMapPaths();
 	
 
 		
