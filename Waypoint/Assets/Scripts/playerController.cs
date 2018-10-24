@@ -47,6 +47,8 @@ public class playerController : MonoBehaviour {
     public int light2Value;
     public int light3Value;
 
+    public float lightValueOn;
+
     void Awake(){
         equippedLight = 1;
         restrictMovement = false;
@@ -148,9 +150,10 @@ public class playerController : MonoBehaviour {
         }
     }
 
+    /*
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Switch")  && lightReady)
+        if (other.gameObject.CompareTag("LampLight")  && lightReady)
         {
             count = count + 1;
             SetCountText();
@@ -203,13 +206,15 @@ public class playerController : MonoBehaviour {
             
     }
 
+    */
+
     public void setTargetLight(GameObject lightSource) {
         //Debug.Log("called set light");
-        if (lightSource.CompareTag("Switch"))
+        if (lightSource.CompareTag("LampLight"))
         {
             count = count + 1;
             SetCountText();
-            cCollider = lightSource.GetComponentInParent<CapsuleCollider>();
+           // cCollider = lightSource.GetComponentInParent<CapsuleCollider>();
             lampLight = lightSource.gameObject.GetComponentInChildren<Light>();
             Material bulb = lightSource.GetComponentInChildren<Renderer>().material;
             //Behaviour halo =(Behaviour)other.GetComponent ("Halo");
@@ -220,12 +225,12 @@ public class playerController : MonoBehaviour {
             if (lampLight.intensity > 0)
             {
                 lampLight.intensity = 0;
-                cCollider.enabled = false;
+             //   cCollider.enabled = false;
                 audioSource.clip = offSoundEffect;
                 audioSource.Play();
 
                 if (equippedLight == 1 || equippedLight == 2) 
-                    tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
+                    tScript.setTarget(lightSource.transform, lampLight.intensity);
 
                 bulb.DisableKeyword("_EMISSION");
                 //Debug.Log("adding back scost");
@@ -242,13 +247,12 @@ public class playerController : MonoBehaviour {
                 if (lightResource >=tempLightCost){
  
                 setChildLight(lightSource.GetComponentsInChildren<Light>());
-                
-                lampLight.intensity = 3;
-                cCollider.enabled = true;
+                lampLight.intensity = lightValueOn;
+               // cCollider.enabled = true;
                 audioSource.clip = onSoundEffect;
                 audioSource.Play();
                 if (equippedLight == 1 || equippedLight == 2)
-                    tScript.setTarget(lightSource.transform.parent.transform, lampLight.intensity);
+                    tScript.setTarget(lightSource.transform, lampLight.intensity);
                 bulb.EnableKeyword("_EMISSION");
                 setMaterialColor(bulb, equippedLight);
 
