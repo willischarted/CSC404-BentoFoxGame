@@ -22,6 +22,9 @@ public class EnemyMovement : MonoBehaviour {
     private bool movingToLamp;
     public Vector3 roamCenterPoint;
     public float maxRoamDistance;
+    public float lampDistance = 5f;
+    GameObject currentLamp;
+    GameObject[] lamps;
 
     private void Awake()
     {
@@ -32,6 +35,17 @@ public class EnemyMovement : MonoBehaviour {
         col = GetComponent<SphereCollider>();
         currentTarget = transform.position;
         timer = 0f;
+        currentLamp = null;
+        lamps = GameObject.FindGameObjectsWithTag("LampLight");
+        List<GameObject> validLamps = new List<GameObject>();
+        foreach (GameObject lamp in lamps)
+        {
+            if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD && Vector3.Distance(roamCenterPoint, lamp.transform.position) <= maxRoamDistance)
+            {
+                validLamps.Add(lamp);
+            }
+        }
+        lamps = validLamps.ToArray();
     }
 
     void OnTriggerStay(Collider other)
@@ -60,8 +74,6 @@ public class EnemyMovement : MonoBehaviour {
 
 
     void Update() {
-
-
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
             Debug.Log("Stunned");
@@ -71,16 +83,19 @@ public class EnemyMovement : MonoBehaviour {
             {
                 monsterAnim.SetTrigger("recovered");
                 timer = 0f;
-                moving = false;
+                movingToLamp = false;
             }
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Chase"))
         {
             Debug.Log("Chase");
-            nav.SetDestination(traveller.position);
-            if (Vector3.Distance(roamCenterPoint, traveller.position) <= maxRoamDistance)
+            currentTarget = traveller.position;
+            nav.SetDestination(currentTarget);
+            if (Vector3.Distance(roamCenterPoint, traveller.position) >= maxRoamDistance)
             {
                 monsterAnim.SetTrigger("travellerLost");
+                currentLamp = null;
+                movingToLamp = false;
             }
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
@@ -111,102 +126,90 @@ public class EnemyMovement : MonoBehaviour {
             if (Vector3.Distance(transform.position, currentTarget) < 1 || Vector3.Distance(roamCenterPoint, currentTarget) <= maxRoamDistance)
             {
                 monsterAnim.SetTrigger("nothingFound");
+                movingToLamp = false;
                 currentTarget = transform.position;
                 Debug.Log("Reset");
             }
         }
         else
         {
-
-            if (!moving)
+            if (!movingToLamp)
                 { // not currently moving, find new place to move to
                 Debug.Log("not moving");
                 moveToLamp();
                 }
-            else if (Vector3.Distance(transform.position,currentTarget) < 2.5f) { //reached destination
-                moving = false;
+            else if (Vector3.Distance(transform.position,currentTarget) < lampDistance)
+            { //reached destination, should make this variable public for testing
+                movingToLamp = false;
                 Debug.Log("in the elseif");
                 nav.SetDestination(transform.position);
-                
-                if (lastVisited == null){
-                    lastVisited = findCurrentLamp();
-                }
+                currentLamp = findCurrentLamp();
             }
             else
             {
-                if (!movingToLamp)
-                {
-                    isLampLit();
-                }
-                
+                Debug.Log("in the else");
             }
         }
     }
     
     public void moveToLamp() {
-        GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
-        List<GameObject> validLamps = new List<GameObject>();
-        foreach (GameObject lamp in lamps)
-        {   
-            if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD && Vector3.Distance(roamCenterPoint, lamp.transform.position) <= maxRoamDistance)
+        Debug.Log("in the move to lamp");
+        if (currentLamp == null) // initial gamestate when monster is first placed
+        {
+            float distance = Mathf.Infinity;
+            foreach (GameObject lamp in lamps) //this part is also not quite working
             {
-                lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
-                
-                if (lController == null) {
-                    Debug.Log("Could not find lightsourcontroller");
-                }
-                int lightType = lController.getCurrentLightType();
-               // lamp.transform.GetChild(0).GetComponentInChildren<Light>().intensity == 3 && 
-                if (lightType ==1  || lightType == 3 ) //1 is trav, 3 is monster
-                { // lamp is lit
-
-                    if (!lamp.Equals(lastVisited) && lamp.transform.position != currentTarget)
-                    {
-
-                        if (lastVisited != null)
-                        {
-
-                            lastVisited = findCurrentLamp();
-                        }
-                        currentTarget = lamp.transform.position;
-                        nav.SetDestination(lamp.transform.position);
-                        moving = true;
-                        movingToLamp = true;
-                        return; //should choose a random one
-                    }
-                }
-                else
+                if (Vector3.Distance(transform.position, lamp.transform.position) < distance) // edge case, does not take into account lit lamp
                 {
-                    if (!lamp.Equals(lastVisited) && lamp.transform.position != currentTarget)
-                    {
-                        if (lastVisited != null)
-                        {
-                            lastVisited = findCurrentLamp();
-                        }
-                        validLamps.Add(lamp);
-                    }
+                    distance = Vector3.Distance(transform.position, lamp.transform.position);
+                    currentLamp = lamp;
                 }
             }
         }
-        lamps = validLamps.ToArray();
-        if (lamps.Length!=0)
+        else //general case of finding lamps
         {
-            int ran = Random.Range(0, lamps.Length - 1);
-            GameObject lamp = lamps[ran];
-            currentTarget = lamp.transform.position;
-            nav.SetDestination(lamp.transform.position);
-            moving = true;
-            movingToLamp = false;
-            return;
+            lightSourceController lController = currentLamp.GetComponentInParent<lightSourceController>();
+            if (lController == null)
+            {
+                Debug.Log("Could not find lightsourcontroller");
+            }
+            GameObject[] adjacentLamps = lController.getAdjacentSources();
+            List<GameObject> possibleTargets = new List<GameObject>();
+            foreach (GameObject adjacentlamp in adjacentLamps)
+            {
+                lightSourceController adjLController = adjacentlamp.GetComponentInParent<lightSourceController>();
+                int lightType = adjLController.getCurrentLightType();
+                if (lightType == 1 || lightType == 3)
+                {
+                    possibleTargets.Add(adjacentlamp);
+                }
+            }
+            if (lController.getCurrentLightType() == 1 || lController.getCurrentLightType() ==3)
+            {
+                currentTarget = transform.position;
+                nav.SetDestination(currentTarget);
+                movingToLamp = false;
+                return;
+            }
+            GameObject[] targetLamps = possibleTargets.ToArray();
+            if (targetLamps.Length == 0)
+            {
+                targetLamps = adjacentLamps; //WILL NEED TO DEBUGGGGGGG
+                Debug.Log("PLEASE PLACE BREAKPOINT HERE unsure if this will behave correctly");
+            }
+            int ran = Random.Range(0, targetLamps.Length); //unsure doesnt work with length - 1, tried the remove 1 now it works???!!!
+            GameObject targetLamp = targetLamps[ran];
+            currentTarget = targetLamp.transform.position;
+            nav.SetDestination(currentTarget);
+            movingToLamp = true;
         }
     }
 
     public GameObject findCurrentLamp()
     {
-        GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
         foreach (GameObject lamp in lamps)
         {
-            if (Vector3.Distance(transform.position, lamp.transform.position) <= 2.5f)
+            if (Vector3.Distance(transform.position, lamp.transform.position) < lampDistance)
             {
                 return lamp;
             }
@@ -214,26 +217,23 @@ public class EnemyMovement : MonoBehaviour {
         return null;
     }
 
-    public void isLampLit()
+    public void monsterLampLit(GameObject litLamp)
     {
-        Debug.Log("checking if lamp is lit");
-        GameObject[] lamps = GameObject.FindGameObjectsWithTag("LampLight");
-        List<GameObject> validLamps = new List<GameObject>();
-        foreach (GameObject lamp in lamps)
-        {
-            if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD && Vector3.Distance(roamCenterPoint, lamp.transform.position) <= maxRoamDistance)
-            {
-                lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
+        Debug.Log("MonsterLampLit");
 
-                if (lController == null)
-                {
-                    Debug.Log("Could not find lightsourcontroller");
-                }
-                int lightType = lController.getCurrentLightType();
-                if (lightType == 1 || lightType == 3)
-                {
-                    moving = false;
-                }
+        lightSourceController lController = currentLamp.GetComponentInParent<lightSourceController>();
+        if (lController == null)
+        {
+            Debug.Log("Could not find lightsourcontroller");
+        }
+        GameObject[] adjacentLamps = lController.getAdjacentSources();
+        foreach (GameObject adjacentlamp in adjacentLamps)
+        {
+            if (litLamp == adjacentlamp)
+            {
+                currentTarget = litLamp.transform.position;
+                nav.SetDestination(currentTarget);
+                movingToLamp = true;
             }
         }
     }

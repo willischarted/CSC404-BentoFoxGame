@@ -77,7 +77,7 @@ public class InteractionController : MonoBehaviour {
 				//start impulse
 				
 				//call stun enemy function
-				if (currentTarget != null && currentTarget.tag == "Switch") {
+				if (currentTarget != null && currentTarget.tag == "LampLight") {
 						pController.setTargetLight(currentTarget);
 					
 					
@@ -169,7 +169,7 @@ public class InteractionController : MonoBehaviour {
 		}
 
 
-		if (other.tag == "Switch") {
+		if (other.tag == "LampLight") {
 			currentTarget = other.gameObject;
 			//interactionText.text = "Press X to interact with Light Source";
 			return;
@@ -185,7 +185,7 @@ public class InteractionController : MonoBehaviour {
 			//interactionText.text  = "";
 			return;
 		}
-		if (other.tag == "Switch" && other.gameObject == currentTarget) {
+		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
 			currentTarget = null;
 			//interactionText.text  = "";
 			return;
