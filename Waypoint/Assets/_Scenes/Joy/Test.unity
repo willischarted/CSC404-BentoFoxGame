@@ -1394,6 +1394,8 @@ GameObject:
   - component: {fileID: 620013063}
   - component: {fileID: 620013062}
   - component: {fileID: 620013066}
+  - component: {fileID: 620013068}
+  - component: {fileID: 620013067}
   m_Layer: 0
   m_Name: Traveller
   m_TagString: Traveller
@@ -1487,6 +1489,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &620013067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 620013061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66846cfd479046589536fdb75018a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  currentHealth: 0
+  healthSlider: {fileID: 0}
+--- !u!114 &620013068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 620013061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5397a0d66a80f4b1bbe7c59e2decd82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &663080395
 Mesh:
   m_ObjectHideFlags: 0
@@ -1755,7 +1782,7 @@ Prefab:
     - target: {fileID: 114264031600815190, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114264031600815190, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
