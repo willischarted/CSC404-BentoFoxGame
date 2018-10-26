@@ -33,6 +33,12 @@ public class InteractionController : MonoBehaviour {
 
 
 
+	public Sprite travellerLureIcon;
+	public Sprite monsterLureIcon;
+	public Image lureImage; 
+
+
+
 
 
 	// Use this for initialization
@@ -243,6 +249,14 @@ public class InteractionController : MonoBehaviour {
 			pController.addResource(-stunCost);
 		
 		// get animator contoller and set stun
+	}
+
+	void controlLureImage() {
+		//check if light is in traveller radius
+		//lureImage.sprite = travellerLureIcon;
+
+		//check if monster is in monster radius
+		//lureImage.sprite = monsterLureIcon;
 	}
 
 
