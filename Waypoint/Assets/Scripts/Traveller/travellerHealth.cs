@@ -31,7 +31,7 @@ public class travellerHealth : MonoBehaviour {
     public void TakeBasicDamage (int amount){
         currentHealth -= amount;
         healthSlider.value = currentHealth;
-
+        //TODO: clothe material change
         if (currentHealth <= 0 && !isDead)
         {
             Death();
@@ -41,7 +41,7 @@ public class travellerHealth : MonoBehaviour {
     public void TakeStationaryDamage (){
         currentHealth = currentHealth / 2;
         healthSlider.value = currentHealth;
-
+        //TODO: clothe material change
         if (currentHealth <= 3 && !isDead)
         {
             Death();
@@ -51,11 +51,12 @@ public class travellerHealth : MonoBehaviour {
 
     void Death (){
         isDead = true;
+        anim.SetTrigger("isDead");
         travellerMovement.enabled = false;
         restart();
     }
 
     public void restart(){
-        
+        //TODO: Restart
     }
 }
