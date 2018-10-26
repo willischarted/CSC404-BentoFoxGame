@@ -22,12 +22,19 @@ public class lightSourceController : MonoBehaviour {
 
 	public GameObject mapPath;
 
+	Light lampLight;
+
+	float startIntensity;
+
 
 	// Use this for initialization
 	void Start () {
-		setMiniMapPaths();
-	
+		//setMiniMapPaths();
+		lampLight = GetComponentInChildren<Light>();
+		if (lampLight == null)
+			Debug.Log("Could not find light in child!");
 
+		//startIntensity = lampLight.intensity;
 		
 	}
 	
@@ -43,14 +50,21 @@ public class lightSourceController : MonoBehaviour {
 			{
 				timeRemaining -= Time.deltaTime;
 
+				//reduce the visual visibility (not gameplay visibilty) of light 
+				float lightRatio = timeRemaining / lightDuration;
+				Debug.Log(lightRatio);
+				lampLight.intensity = startIntensity * lightRatio;
+
 			}
+
 		}
 		
 	}
 
+	//function to immediately turn light off
 	public void setLightOff() {
 		Debug.Log("Turn off light here");
-		Light lampLight = GetComponentInChildren<Light>();
+		//Light lampLight = GetComponentInChildren<Light>();
 		Renderer[] bulbs = GetComponentsInChildren<Renderer>();
 		if (bulbs == null)
             Debug.Log("HHH");
@@ -89,6 +103,7 @@ public class lightSourceController : MonoBehaviour {
 	public void setCurrentLightType(int type) {
 		currentLightType = type;
 		timeRemaining = lightDuration;
+		startIntensity = lampLight.intensity;
 	}
 
 	public int getCurrentLightType() {
