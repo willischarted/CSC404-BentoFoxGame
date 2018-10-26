@@ -6,6 +6,7 @@ public class WorldSpaceObjectController : MonoBehaviour {
 
 	private GameObject player;
 
+
 	// Use this for initialization
 	void Start () {
 
@@ -21,7 +22,15 @@ public class WorldSpaceObjectController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		transform.rotation = Quaternion.LookRotation(player.transform.position);
+		//transform.rotation = Quaternion.LookRotation(player.transform.position);
+		transform.rotation = Quaternion.LookRotation(Camera.main.transform.position);
 		
+	}
+
+
+	// want to update the world text to whatever object we are currently near
+	public void updateWorldObjectTransform(Vector3 newPosition) {
+		transform.position = newPosition;
+
 	}
 }
