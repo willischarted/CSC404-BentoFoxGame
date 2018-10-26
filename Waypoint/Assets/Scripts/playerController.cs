@@ -16,7 +16,7 @@ public class playerController : MonoBehaviour {
     
     private CapsuleCollider cCollider;
     public GameObject traveller;
-    private travellerScript tScript;
+    private TravellerV2 tScript;
 
     // Audio effects
     public AudioClip onSoundEffect;
@@ -52,7 +52,7 @@ public class playerController : MonoBehaviour {
     void Awake(){
         equippedLight = 1;
         restrictMovement = false;
-        tScript = traveller.GetComponent<travellerScript>();
+        tScript = traveller.GetComponent<TravellerV2>();
         if (tScript == null) {
             Debug.Log("Could not find tscript");
         }
@@ -231,7 +231,7 @@ public class playerController : MonoBehaviour {
                 audioSource.Play();
 
                 if (equippedLight == 1 || equippedLight == 2) 
-                    tScript.setTarget(lightSource.transform, lampLight.intensity);
+                    tScript.setTarget(lightSource);
 
                 bulb.DisableKeyword("_EMISSION");
                 //addResource(tempLightCost);
@@ -252,7 +252,7 @@ public class playerController : MonoBehaviour {
                 audioSource.clip = onSoundEffect;
                 audioSource.Play();
                 if (equippedLight == 1 || equippedLight == 2)
-                    tScript.setTarget(lightSource.transform, lampLight.intensity);
+                    tScript.setTarget(lightSource);
                 bulb.EnableKeyword("_EMISSION");
                 setMaterialColor(bulb, equippedLight);
 
