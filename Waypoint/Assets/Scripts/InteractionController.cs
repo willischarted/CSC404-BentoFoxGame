@@ -25,6 +25,12 @@ public class InteractionController : MonoBehaviour {
 
 	public float stunCost;
 
+	public GameObject interactionPopUp;
+	private WorldSpaceObjectController popUpController;
+	public Text popUpText;
+
+	public int textVerticalOffset;
+
 
 
 
@@ -38,6 +44,12 @@ public class InteractionController : MonoBehaviour {
 		if (pController == null) {
 			Debug.Log("Could not find pController");
 		}
+
+		popUpController = interactionPopUp.GetComponent<WorldSpaceObjectController>();
+		if (popUpController == null)
+			Debug.Log("Could not find worldspacecontroller");
+
+		
 	}
 	
 	// Update is called once per frame
@@ -95,7 +107,9 @@ public class InteractionController : MonoBehaviour {
 		}
 
 		if (currentTarget) {
-			interactionText.text = "Press X to interact with Light Source";
+			//interactionText.text = "Light";
+			popUpText.fontSize = 150;
+			popUpText.text =   "Light";
 			return;
 		}
 
@@ -106,11 +120,15 @@ public class InteractionController : MonoBehaviour {
 
 
 		if (targetMonster) {
-			interactionText.text = "Press X to stun Monster";
+			//interactionText.text = "Stun";
+			popUpText.fontSize = 150;
+			popUpText.text =   "Stun";
 			return;
 		}
 		if (targetTraveller) {
-			interactionText.text = "Hold X to transfer light to Traveller";
+			//interactionText.text = "(Hold) Heal";
+			popUpText.fontSize = 90;
+			popUpText.text = "Hold to Heal";
 			return;
 		}
 		
@@ -158,6 +176,10 @@ public class InteractionController : MonoBehaviour {
 		if (other.tag == "Traveller") {
 			targetTraveller = other.gameObject;
 			//interactionText.text = "Hold X to transfer light to Traveller";
+			interactionPopUp.SetActive(true);
+			Vector3 popUpLocation = other.gameObject.transform.position;
+			popUpLocation.y = popUpLocation.y +textVerticalOffset;
+			popUpController.updateWorldObjectTransform(popUpLocation);
 			return;
 		}
 
@@ -165,6 +187,10 @@ public class InteractionController : MonoBehaviour {
 			//currentTarget = other.gameObject;
 			targetMonster = other.gameObject;
 			//interactionText.text = "Press X to stun Monster";
+			interactionPopUp.SetActive(true);
+			Vector3 popUpLocation = other.gameObject.transform.position;
+			popUpLocation.y = popUpLocation.y +textVerticalOffset;
+			popUpController.updateWorldObjectTransform(popUpLocation);
 			return;
 		}
 
@@ -172,6 +198,10 @@ public class InteractionController : MonoBehaviour {
 		if (other.tag == "LampLight") {
 			currentTarget = other.gameObject;
 			//interactionText.text = "Press X to interact with Light Source";
+			interactionPopUp.SetActive(true);
+			Vector3 popUpLocation = other.gameObject.transform.position;
+			popUpLocation.y = popUpLocation.y + textVerticalOffset;
+			popUpController.updateWorldObjectTransform(popUpLocation);
 			return;
 		}
 
@@ -181,16 +211,19 @@ public class InteractionController : MonoBehaviour {
 
 		if (other.tag == "Traveller" && other.gameObject == targetTraveller) {
 			//currentTarget = null;
+			interactionPopUp.SetActive(false);
 			targetTraveller = null;
 			//interactionText.text  = "";
 			return;
 		}
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
+			interactionPopUp.SetActive(false);
 			currentTarget = null;
 			//interactionText.text  = "";
 			return;
 		}
 		if (other.tag == "Monster" && other.gameObject == targetMonster) {
+			interactionPopUp.SetActive(false);
 			//currentTarget = null;
 			targetMonster = null;
 			//interactionText.text  = "";
