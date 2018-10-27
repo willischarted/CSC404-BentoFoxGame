@@ -10,6 +10,7 @@ public class travellerMovement : MonoBehaviour
 
     public GameObject[] startAdjacent;
     public Vector3 offset;
+    public float lampDistance = 0.1f;
 
     //Transform startPoint;
     GameObject currentLight;
@@ -18,6 +19,8 @@ public class travellerMovement : MonoBehaviour
     Animator anim;
     NavMeshAgent nav;
     travellerHealth travellerHealth;
+    GameObject[] lamps;
+
 
 
     // Use this for initialization
@@ -30,46 +33,47 @@ public class travellerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         travellerHealth = GetComponent<travellerHealth>();
+        lamps = GameObject.FindGameObjectsWithTag("LampLight");
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject[] targetLamps = findPossible();
-        if (targetLamps.Length > 0){
-            moveToTarget(targetLamps);
-        }
+        findCurrent();
+        MoveToTarget();
         Animating();
 
     }
-      
-    GameObject[] findPossible(){
+    void MoveToTarget(){
         GameObject[] adjacent;
         List<GameObject> possibleTargets = new List<GameObject>();
-        if (currentLight == null){//Initial State
+        if (currentLight == null){
             adjacent = startAdjacent;
         }else{
             adjacent = currentLight.GetComponentInParent<lightSourceController>().adjacentSources;
         }
+
         foreach (GameObject lamp in adjacent){
             int lightType = lamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
-            if (lightType == 1 || lightType == 2)
-            {
+            if (lightType == 1 || lightType == 2){
                 possibleTargets.Add(lamp);
             }
         }
         GameObject[] targetLamps = possibleTargets.ToArray();
-        return targetLamps;
-    }
-
-    void moveToTarget(GameObject[] targetLamps){
-        if (currentLight == null){
+        if (targetLamps.Length > 0){
             int ran = Random.Range(0, targetLamps.Length);
             targetLight = targetLamps[ran];
-            nav.SetDestination(targetLight.transform.position);
+            nav.SetDestination(targetLight.transform.position - offset);
         }
     }
 
+    void findCurrent(){
+        foreach (GameObject lamp in lamps){
+            if (Vector3.Distance(transform.position, lamp.transform.position) < lampDistance){
+                currentLight = lamp;
+            }
+        }
+    }
     void Animating(){
         
     }
