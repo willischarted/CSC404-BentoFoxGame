@@ -13,6 +13,8 @@ public class travellerHealth : MonoBehaviour {
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
     public float flashSpeed = 50f; 
 
+    Material cloak;
+    float lightValue;
     Animator anim;
     travellerMovement travellerMovement;
     bool isDead;
@@ -23,6 +25,10 @@ public class travellerHealth : MonoBehaviour {
         anim = GetComponent<Animator>();
         travellerMovement = GetComponent<travellerMovement>();
         currentHealth = startingHealth;
+
+        cloak = GetComponentInChildren<Renderer>().material;
+        lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
+        cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
 	}
 	
 	void Update () {
@@ -35,12 +41,16 @@ public class travellerHealth : MonoBehaviour {
         damaged = false;
         //When low health, the screen shows a warning image
 	}
-
+    //TODO: getHeal
+    //TODO: warningLowHealth
     public void TakeBasicDamage (int amount){
         damaged = true;
         currentHealth -= amount;
         healthSlider.value = currentHealth;
-        //TODO: clothe material change
+
+        //TODO: clothe material change, not function now
+        lightValue = lightValue * (currentHealth / startingHealth);
+        cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         if (currentHealth <= 0 && !isDead)
         {
             Death();
@@ -51,7 +61,11 @@ public class travellerHealth : MonoBehaviour {
         damaged = true;
         currentHealth = currentHealth / 2;
         healthSlider.value = currentHealth;
+
         //TODO: clothe material change
+        lightValue = lightValue * (currentHealth / startingHealth);
+        cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+
         if (currentHealth <= 3 && !isDead)
         {
             Death();
