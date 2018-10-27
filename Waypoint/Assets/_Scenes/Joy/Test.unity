@@ -1630,7 +1630,7 @@ Prefab:
     - target: {fileID: 114902820345410406, guid: 5decfff95349047b5a24c56c5b95b7f6,
         type: 2}
       propertyPath: adjacentSources.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4213464229088834, guid: 5decfff95349047b5a24c56c5b95b7f6, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1692,12 +1692,12 @@ Prefab:
         type: 2}
       propertyPath: adjacentSources.Array.data[0]
       value: 
-      objectReference: {fileID: 991089101}
+      objectReference: {fileID: 1639447507}
     - target: {fileID: 114902820345410406, guid: 5decfff95349047b5a24c56c5b95b7f6,
         type: 2}
       propertyPath: adjacentSources.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 991089101}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5decfff95349047b5a24c56c5b95b7f6, type: 2}
   m_IsPrefabAsset: 0
@@ -2154,11 +2154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5397a0d66a80f4b1bbe7c59e2decd82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
   startAdjacent:
   - {fileID: 781461796}
   - {fileID: 1904258414}
   offset: {x: 0.3, y: 0, z: 0.3}
+  lampDistance: 2
 --- !u!195 &620013069
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5417,7 +5417,7 @@ Prefab:
     - target: {fileID: 114902820345410406, guid: 5decfff95349047b5a24c56c5b95b7f6,
         type: 2}
       propertyPath: adjacentSources.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4213464229088834, guid: 5decfff95349047b5a24c56c5b95b7f6, type: 2}
       propertyPath: m_LocalPosition.x
@@ -5466,6 +5466,11 @@ Prefab:
     - target: {fileID: 114902820345410406, guid: 5decfff95349047b5a24c56c5b95b7f6,
         type: 2}
       propertyPath: adjacentSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 1569720865}
+    - target: {fileID: 114902820345410406, guid: 5decfff95349047b5a24c56c5b95b7f6,
+        type: 2}
+      propertyPath: adjacentSources.Array.data[1]
       value: 
       objectReference: {fileID: 1904258414}
     m_RemovedComponents: []

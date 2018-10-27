@@ -61,8 +61,8 @@ public class travellerMovement : MonoBehaviour
         }
         GameObject[] targetLamps = possibleTargets.ToArray();
         if (targetLamps.Length > 0){
-            int ran = Random.Range(0, targetLamps.Length);
-            targetLight = targetLamps[ran];
+            //unless the latest is light up in the array, otherwise always go to the default one
+            targetLight = targetLamps[0];
             nav.SetDestination(targetLight.transform.position - offset);
         }
     }
@@ -74,7 +74,10 @@ public class travellerMovement : MonoBehaviour
             }
         }
     }
-    void Animating(){
-        
+    void Animating()
+    {
+
     }
+
+
 }
