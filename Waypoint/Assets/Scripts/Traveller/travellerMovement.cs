@@ -12,7 +12,6 @@ public class travellerMovement : MonoBehaviour
     public Vector3 offset;
     public float lampDistance = 1f;
 
-    //Transform startPoint;
     GameObject currentLight;
     GameObject latestLight;
     GameObject justVisited;
@@ -27,7 +26,6 @@ public class travellerMovement : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        //startPoint = GameObject.FindGameObjectWithTag("StartArea").transform;
         currentLight = null;
         latestLight = null;
         justVisited = null;
@@ -62,6 +60,7 @@ public class travellerMovement : MonoBehaviour
             }
         }
         GameObject[] targetLamps = possibleTargets.ToArray();
+
         if (targetLamps.Length > 0){
             //unless the latest is light up in the array, otherwise always go to the default one
             if (latestLight != null && ArrayUtility.Contains(targetLamps, latestLight)){
@@ -85,6 +84,7 @@ public class travellerMovement : MonoBehaviour
     public void findLatest(GameObject lightSource){
         latestLight = lightSource.gameObject;
     }
+
     void Animating()
     {
 
