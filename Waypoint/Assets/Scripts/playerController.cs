@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 using UnityEngine.SceneManagement;
 
-public class playerController : MonoBehaviour
-{
+public class playerController : MonoBehaviour{
     //enum lightType {Default, Traveller, Monster};
 
     public float speed;
