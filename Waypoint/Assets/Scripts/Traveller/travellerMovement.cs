@@ -10,11 +10,12 @@ public class travellerMovement : MonoBehaviour
 
     public GameObject[] startAdjacent;
     public Vector3 offset;
-    public float lampDistance = 0.1f;
+    public float lampDistance = 1f;
 
     //Transform startPoint;
     GameObject currentLight;
     GameObject latestLight;
+    GameObject justVisited;
     GameObject targetLight;
     Animator anim;
     NavMeshAgent nav;
@@ -29,6 +30,7 @@ public class travellerMovement : MonoBehaviour
         //startPoint = GameObject.FindGameObjectWithTag("StartArea").transform;
         currentLight = null;
         latestLight = null;
+        justVisited = null;
         targetLight = null;
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
@@ -62,7 +64,12 @@ public class travellerMovement : MonoBehaviour
         GameObject[] targetLamps = possibleTargets.ToArray();
         if (targetLamps.Length > 0){
             //unless the latest is light up in the array, otherwise always go to the default one
-            targetLight = targetLamps[0];
+            if (latestLight != null && ArrayUtility.Contains(targetLamps, latestLight)){
+                targetLight = latestLight;
+            }else{
+                targetLight = targetLamps[0]; 
+            }
+
             nav.SetDestination(targetLight.transform.position - offset);
         }
     }
@@ -73,6 +80,10 @@ public class travellerMovement : MonoBehaviour
                 currentLight = lamp;
             }
         }
+    }
+
+    public void findLatest(GameObject lightSource){
+        latestLight = lightSource.gameObject;
     }
     void Animating()
     {
