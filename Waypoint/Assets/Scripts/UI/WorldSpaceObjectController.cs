@@ -24,10 +24,11 @@ public class WorldSpaceObjectController : MonoBehaviour {
 
 		//transform.rotation = Quaternion.LookRotation(player.transform.position);
 		//transform.rotation = Quaternion.LookRotation(Camera.main.transform.position);
-		Quaternion lookRotation = Quaternion.LookRotation(Camera.main.transform.position);
+		//Quaternion lookRotation = Quaternion.LookRotation(Camera.main.transform.position);
 		//Quaternion newRotation = new Quaternion(0f,lookRotation.eulerAngles.y,0f,0f);
 		//transform.rotation = newRotation;
-		transform.rotation = lookRotation;
+		//transform.rotation = lookRotation;
+		transform.LookAt(Camera.main.transform.position);
 
 		
 	}
