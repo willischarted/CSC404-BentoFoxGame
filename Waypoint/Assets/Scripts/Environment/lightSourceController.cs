@@ -29,7 +29,7 @@ public class lightSourceController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//setMiniMapPaths();
+		setMiniMapPaths();
 		lampLight = GetComponentInChildren<Light>();
 		if (lampLight == null)
 			Debug.Log("Could not find light in child!");
