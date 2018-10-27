@@ -11,8 +11,8 @@ public class travellerMovement : MonoBehaviour
     public GameObject[] startAdjacent;
     public Vector3 offset;
     public float lampDistance = 1f;
+    public GameObject currentLight;
 
-    GameObject currentLight;
     GameObject latestLight;
     GameObject justVisited;
     GameObject targetLight;
@@ -41,7 +41,7 @@ public class travellerMovement : MonoBehaviour
     void Update()
     {
         if (!finishLevel){
-            findCurrent();
+            FindCurrent();
             MoveToTarget();
             Animating();
         }
@@ -61,7 +61,7 @@ public class travellerMovement : MonoBehaviour
         //SceneManager.LoadScene(0);
     }
 
-    void MoveToTarget(){
+    private void MoveToTarget(){
         GameObject[] adjacent;
         List<GameObject> possibleTargets = new List<GameObject>();
         if (currentLight == null){
@@ -90,7 +90,7 @@ public class travellerMovement : MonoBehaviour
         }
     }
 
-    void findCurrent(){
+    private void FindCurrent(){
         foreach (GameObject lamp in lamps){
             if (Vector3.Distance(transform.position, lamp.transform.position) < lampDistance){
                 currentLight = lamp;
