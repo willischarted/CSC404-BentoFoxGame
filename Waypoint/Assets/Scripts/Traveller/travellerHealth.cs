@@ -9,6 +9,9 @@ public class travellerHealth : MonoBehaviour {
     public float currentHealth;
     public Slider healthSlider;
     //public Image lowHealthImage;
+    public Image damageImage;
+    public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+    public float flashSpeed = 50f; 
 
     Animator anim;
     travellerMovement travellerMovement;
@@ -24,11 +27,17 @@ public class travellerHealth : MonoBehaviour {
 	
 	void Update () {
         //When take damege, flash color
-
+        if(damaged){
+            damageImage.color = flashColour;
+        }else{
+            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+        }
+        damaged = false;
         //When low health, the screen shows a warning image
 	}
 
     public void TakeBasicDamage (int amount){
+        damaged = true;
         currentHealth -= amount;
         healthSlider.value = currentHealth;
         //TODO: clothe material change
@@ -39,6 +48,7 @@ public class travellerHealth : MonoBehaviour {
     }
 
     public void TakeStationaryDamage (){
+        damaged = true;
         currentHealth = currentHealth / 2;
         healthSlider.value = currentHealth;
         //TODO: clothe material change
