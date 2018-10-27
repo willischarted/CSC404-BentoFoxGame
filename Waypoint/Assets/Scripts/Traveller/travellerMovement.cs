@@ -35,7 +35,6 @@ public class travellerMovement : MonoBehaviour
         travellerHealth = GetComponent<travellerHealth>();
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -44,6 +43,15 @@ public class travellerMovement : MonoBehaviour
         Animating();
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Exit"))
+        {
+            
+        }
+    }
+
     void MoveToTarget(){
         GameObject[] adjacent;
         List<GameObject> possibleTargets = new List<GameObject>();
