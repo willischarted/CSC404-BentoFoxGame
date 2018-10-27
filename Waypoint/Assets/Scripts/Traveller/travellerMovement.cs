@@ -12,7 +12,7 @@ public class travellerMovement : MonoBehaviour
     NavMeshAgent nav;
     Transform startPoint;
     Transform target;
-
+    public GameObject[] startAdjacent;
     travellerHealth travellerHealth;
 
 
@@ -29,13 +29,16 @@ public class travellerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FindTarget();
+        moveToLamp();
         nav.SetDestination(target.position);
         Animating();
     }
       
-    void FindTarget(){
-        
+    void moveToLamp(){
+        if (target == startPoint){
+            //At the startPoint
+
+        }
     }
 
     void Animating(){
