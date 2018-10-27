@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractionController : MonoBehaviour {
+public class InteractionControllerCopy : MonoBehaviour {
 
 	
 	public Text interactionText;
 	float heldDuration = 0f;
 
 	bool setImpulse;
-    
+
 	bool setHealing;
 
-	private playerController pController;
+	private playerControllerCopy pController;
 
 	private List<GameObject> monsters;
 
@@ -47,7 +47,7 @@ public class InteractionController : MonoBehaviour {
 		//impulseCooldown = 5.0f;
 		//setImpulse = false;
 		setHealing = false;
-		pController = GetComponentInParent<playerController>();
+		pController = GetComponentInParent<playerControllerCopy>();
 		if (pController == null) {
 			Debug.Log("Could not find pController");
 		}

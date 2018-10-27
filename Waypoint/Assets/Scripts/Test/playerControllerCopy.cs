@@ -174,7 +174,7 @@ public class playerControllerCopy: MonoBehaviour {
                 audioSource.Play();
 
                 if (equippedLight == 1 || equippedLight == 2) 
-                    tMovement.setTarget(lightSource.transform, lampLight.intensity);
+                    //tMovement.setTarget(lightSource.transform, lampLight.intensity);
 
                 bulb.DisableKeyword("_EMISSION");
                 //addResource(tempLightCost);
@@ -195,7 +195,7 @@ public class playerControllerCopy: MonoBehaviour {
                 audioSource.clip = onSoundEffect;
                 audioSource.Play();
                 if (equippedLight == 1 || equippedLight == 2)
-                    tMovement.setTarget(lightSource.transform, lampLight.intensity);
+                    //tMovement.setTarget(lightSource.transform, lampLight.intensity);
                 bulb.EnableKeyword("_EMISSION");
                 setMaterialColor(bulb, equippedLight);
 

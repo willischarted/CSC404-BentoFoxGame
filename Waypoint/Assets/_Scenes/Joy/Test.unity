@@ -1107,6 +1107,33 @@ Transform:
   m_Father: {fileID: 1714471185}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &136708280 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1798128601573740, guid: 7951c7f06bccf4622b7f6c79a4964954,
+    type: 2}
+  m_PrefabInternal: {fileID: 678575530}
+--- !u!114 &136708284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 136708280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7704f6fd1101246a6ab9bc51df2b2931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionText: {fileID: 2070748024}
+  currentTarget: {fileID: 0}
+  targetMonster: {fileID: 0}
+  targetTraveller: {fileID: 0}
+  stunCost: 20
+  interactionPopUp: {fileID: 2070748023}
+  popUpText: {fileID: 2070748022}
+  textVerticalOffset: 2
+  travellerLureIcon: {fileID: 21300000, guid: fa5817997a0554cc7a318287ce785b07, type: 3}
+  monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
+  lureImage: {fileID: 2070748021}
 --- !u!1 &210428095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,6 +2369,7 @@ Prefab:
       objectReference: {fileID: 2070748021}
     m_RemovedComponents:
     - {fileID: 114273362359865910, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
+    - {fileID: 114264031600815190, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &724082147
