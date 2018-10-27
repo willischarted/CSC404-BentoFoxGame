@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEditor;
 
 public class travellerMovement : MonoBehaviour
 {
 
-    public float speed = 200f;
+    public GameObject[] startAdjacent;
+    public Vector3 offset;
+
+    //Transform startPoint;
+    GameObject currentLight;
+    GameObject latestLight;
+    GameObject targetLight;
     Animator anim;
     NavMeshAgent nav;
-    Transform startPoint;
-    Transform target;
-    public GameObject[] startAdjacent;
     travellerHealth travellerHealth;
 
 
     // Use this for initialization
     void Awake()
     {
-        startPoint = GameObject.FindGameObjectWithTag("StartArea").transform;
-        target = startPoint;
+        //startPoint = GameObject.FindGameObjectWithTag("StartArea").transform;
+        currentLight = null;
+        latestLight = null;
+        targetLight = null;
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         travellerHealth = GetComponent<travellerHealth>();
@@ -29,15 +35,38 @@ public class travellerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveToLamp();
-        nav.SetDestination(target.position);
+        GameObject[] targetLamps = findPossible();
+        if (targetLamps.Length > 0){
+            moveToTarget(targetLamps);
+        }
         Animating();
+
     }
       
-    void moveToLamp(){
-        if (target == startPoint){
-            //At the startPoint
+    GameObject[] findPossible(){
+        GameObject[] adjacent;
+        List<GameObject> possibleTargets = new List<GameObject>();
+        if (currentLight == null){//Initial State
+            adjacent = startAdjacent;
+        }else{
+            adjacent = currentLight.GetComponentInParent<lightSourceController>().adjacentSources;
+        }
+        foreach (GameObject lamp in adjacent){
+            int lightType = lamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
+            if (lightType == 1 || lightType == 2)
+            {
+                possibleTargets.Add(lamp);
+            }
+        }
+        GameObject[] targetLamps = possibleTargets.ToArray();
+        return targetLamps;
+    }
 
+    void moveToTarget(GameObject[] targetLamps){
+        if (currentLight == null){
+            int ran = Random.Range(0, targetLamps.Length);
+            targetLight = targetLamps[ran];
+            nav.SetDestination(targetLight.transform.position);
         }
     }
 
