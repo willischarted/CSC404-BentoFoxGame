@@ -1592,7 +1592,6 @@ MonoBehaviour:
   - {fileID: 781461796}
   - {fileID: 1904258414}
   offset: {x: 0.2, y: 0, z: 0.2}
-  toriiOffset: {x: 0.5, y: 0, z: 0.5}
   lampDistance: 1
 --- !u!95 &620013065
 Animator:
@@ -4641,6 +4640,14 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706105980720088, guid: 5bc8f4e9d5f6041a8a9eea427b28fd56, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 4706105980720088, guid: 5bc8f4e9d5f6041a8a9eea427b28fd56, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -250
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc8f4e9d5f6041a8a9eea427b28fd56, type: 2}

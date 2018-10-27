@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class travellerMovement : MonoBehaviour
@@ -38,7 +37,7 @@ public class travellerMovement : MonoBehaviour
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
         finishLevel = false;
     }
-    // Update is called once per frame
+
     void Update()
     {
         if (!finishLevel){
@@ -59,7 +58,7 @@ public class travellerMovement : MonoBehaviour
     }
 
     public void loadNextLevel(){
-        
+        SceneManager.LoadScene(0);
     }
 
     void MoveToTarget(){
@@ -81,7 +80,7 @@ public class travellerMovement : MonoBehaviour
 
         if (targetLamps.Length > 0){
             //unless the latest is light up in the array, otherwise always go to the default one
-            if (latestLight != null && ArrayUtility.Contains(targetLamps, latestLight)){
+            if (latestLight != null && (System.Array.IndexOf(targetLamps, latestLight) >= 0)){
                 targetLight = latestLight;
             }else{
                 targetLight = targetLamps[0]; 

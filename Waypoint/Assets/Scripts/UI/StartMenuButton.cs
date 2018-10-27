@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartMenuButton : MonoBehaviour {
-    public void newGameBtn (string newGameLevel){
-        SceneManager.LoadScene(newGameLevel);
+    public void newGameBtn (){
+        SceneManager.LoadScene(1);
     }
     public void exitBtn()
     {
