@@ -58,7 +58,7 @@ public class travellerMovement : MonoBehaviour
     }
 
     public void loadNextLevel(){
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
     }
 
     void MoveToTarget(){
