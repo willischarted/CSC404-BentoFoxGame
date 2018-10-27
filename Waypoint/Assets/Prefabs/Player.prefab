@@ -59,11 +59,11 @@ GameObject:
   - component: {fileID: 135251577570462120}
   - component: {fileID: 108318971627062764}
   - component: {fileID: 54933472734363914}
-  - component: {fileID: 114273362359865910}
   - component: {fileID: 96377970724684436}
   - component: {fileID: 198005053966787910}
   - component: {fileID: 199170289296269140}
   - component: {fileID: 82454903268184688}
+  - component: {fileID: 114161309495196386}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -95,9 +95,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4206753390967458}
-  - component: {fileID: 114264031600815190}
   - component: {fileID: 65325316940745690}
   - component: {fileID: 54102799371563664}
+  - component: {fileID: 114584232024874280}
   m_Layer: 0
   m_Name: InteractionRadius
   m_TagString: Untagged
@@ -138,8 +138,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1428154381906084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.72, y: 1.8, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.489, y: 1.5, z: -5.11}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 4182811498111156}
   - {fileID: 4781128317443514}
@@ -313,7 +313,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5, y: 7, z: 5}
+  m_Size: {x: 10, y: 14, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &82454903268184688
 AudioSource:
@@ -557,29 +557,7 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114264031600815190
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798128601573740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c8b2490d57a4ff6a8c77b8b17f5db7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionText: {fileID: 0}
-  currentTarget: {fileID: 0}
-  targetMonster: {fileID: 0}
-  targetTraveller: {fileID: 0}
-  stunCost: 20
-  interactionPopUp: {fileID: 0}
-  popUpText: {fileID: 0}
-  textVerticalOffset: 2
-  travellerLureIcon: {fileID: 21300000, guid: fa5817997a0554cc7a318287ce785b07, type: 3}
-  monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
-  lureImage: {fileID: 0}
---- !u!114 &114273362359865910
+--- !u!114 &114161309495196386
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,7 +565,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1428154381906084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c70e6d1043a1f4f6eb5abbb3ba4f0333, type: 3}
+  m_Script: {fileID: 11500000, guid: e3a681964579546d3a310688bd6478dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
@@ -606,7 +584,7 @@ MonoBehaviour:
   light1Value: 5
   light2Value: 10
   light3Value: 15
-  lightValueOn: 0
+  lightValueOn: 7
 --- !u!114 &114335323224405010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -628,6 +606,28 @@ MonoBehaviour:
   textVerticalOffset: 0
   travellerLureIcon: {fileID: 0}
   monsterLureIcon: {fileID: 0}
+  lureImage: {fileID: 0}
+--- !u!114 &114584232024874280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1798128601573740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7704f6fd1101246a6ab9bc51df2b2931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionText: {fileID: 0}
+  currentTarget: {fileID: 0}
+  targetMonster: {fileID: 0}
+  targetTraveller: {fileID: 0}
+  stunCost: 20
+  interactionPopUp: {fileID: 0}
+  popUpText: {fileID: 0}
+  textVerticalOffset: 2
+  travellerLureIcon: {fileID: 21300000, guid: fa5817997a0554cc7a318287ce785b07, type: 3}
+  monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
   lureImage: {fileID: 0}
 --- !u!135 &135251577570462120
 SphereCollider:
