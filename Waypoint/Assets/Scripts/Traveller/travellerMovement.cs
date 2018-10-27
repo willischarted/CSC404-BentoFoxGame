@@ -9,10 +9,9 @@ public class travellerMovement : MonoBehaviour
 
     public float speed = 200f;
     Animator anim;
-    Vector3 target;
     NavMeshAgent nav;
-
-    Transform player;
+    Transform startPoint;
+    Transform target;
 
     travellerHealth travellerHealth;
 
@@ -20,7 +19,8 @@ public class travellerMovement : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        startPoint = GameObject.FindGameObjectWithTag("StartArea").transform;
+        target = startPoint;
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         travellerHealth = GetComponent<travellerHealth>();
@@ -29,6 +29,16 @@ public class travellerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        nav.SetDestination(player.position);
+        FindTarget();
+        nav.SetDestination(target.position);
+        Animating();
+    }
+      
+    void FindTarget(){
+        
+    }
+
+    void Animating(){
+        
     }
 }
