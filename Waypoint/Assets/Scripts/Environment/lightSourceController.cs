@@ -52,7 +52,7 @@ public class lightSourceController : MonoBehaviour {
 
 				//reduce the visual visibility (not gameplay visibilty) of light 
 				float lightRatio = timeRemaining / lightDuration;
-				Debug.Log(lightRatio);
+				//Debug.Log(lightRatio);
 				lampLight.intensity = startIntensity * lightRatio;
 
 			}
