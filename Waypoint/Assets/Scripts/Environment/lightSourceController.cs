@@ -103,7 +103,10 @@ public class lightSourceController : MonoBehaviour {
 	public void setCurrentLightType(int type) {
 		currentLightType = type;
 		timeRemaining = lightDuration;
-		startIntensity = lampLight.intensity;
+        if (lampLight){
+            startIntensity = lampLight.intensity; 
+        }
+	
 	}
 
 	public int getCurrentLightType() {
