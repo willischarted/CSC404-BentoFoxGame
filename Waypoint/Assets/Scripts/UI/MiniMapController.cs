@@ -11,8 +11,8 @@ public class MiniMapController : MonoBehaviour {
 
 	//public Sprite travellerIcon;
 
-	public GameObject indicatorIcon;
-	private GameObject onscreenIcon;
+	//public GameObject indicatorIcon;
+	public GameObject onscreenIcon;
 
 	public Canvas canvas;
 
@@ -21,8 +21,8 @@ public class MiniMapController : MonoBehaviour {
 	
 	void Start() {
 
-		onscreenIcon = Instantiate(indicatorIcon, indicatorIcon.transform.position, indicatorIcon.transform.rotation);
-		onscreenIcon.SetActive(false);
+		//onscreenIcon = Instantiate(indicatorIcon, indicatorIcon.transform.position, indicatorIcon.transform.rotation);
+		//onscreenIcon.SetActive(false);
 		//onscreenIcon.transform.parent = canvas.transform;
 	}
 
@@ -60,7 +60,7 @@ public class MiniMapController : MonoBehaviour {
 
 			//get rid of the arrow indicator?
 			onscreenIcon.SetActive(false);
-			onscreenIcon.transform.parent = null;
+			//onscreenIcon.transform.parent = null;
 			//indicatorIcon.SetActive(false);
 		}
 		else 
@@ -92,7 +92,7 @@ public class MiniMapController : MonoBehaviour {
 			//slope formula
 			float m = angleCos / angleSin;
 
-			Vector3 screenBounds = screenCenter * 0.9f;
+			Vector3 screenBounds = screenCenter * 0.85f;
 
 			//up/down
 			if (angleCos >0) {
@@ -112,10 +112,12 @@ public class MiniMapController : MonoBehaviour {
 
 			travScreenPos += screenCenter;
 
-		
+		//	onscreenIcon.transform.parent = canvas.transform;
+			
 			onscreenIcon.transform.position = travScreenPos;
 			onscreenIcon.transform.rotation = Quaternion.Euler(0,0,indicatorAngle*Mathf.Rad2Deg);
-			onscreenIcon.transform.parent = canvas.transform;
+
+			
 			onscreenIcon.SetActive(true);
 			//indicatorIcon.transform.localPosition = travScreenPos;
 			//indicatorIcon.transform.localRotation = Quaternion.Euler(0,0,indicatorAngle*Mathf.Rad2Deg);
