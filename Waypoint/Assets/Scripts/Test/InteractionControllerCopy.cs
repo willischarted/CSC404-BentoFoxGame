@@ -35,9 +35,6 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 
 
-	public Sprite travellerLureIcon;
-	public Sprite monsterLureIcon;
-	public Image lureImage; 
 
 	private bool healUnlocked;
 	private bool stunUnlocked;
@@ -192,6 +189,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y +textVerticalOffset;
 			popUpController.updateWorldObjectTransform(popUpLocation);
+			controlLureImage();
 			return;
 		}
 
@@ -203,6 +201,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y +textVerticalOffset;
 			popUpController.updateWorldObjectTransform(popUpLocation);
+			controlLureImage();
 			return;
 		}
 
@@ -214,6 +213,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y + textVerticalOffset;
 			popUpController.updateWorldObjectTransform(popUpLocation);
+			controlLureImage();
 			return;
 		}
 
@@ -259,14 +259,15 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	void controlLureImage() {
 		//check if light is in traveller radius
-		
+		/* 
 		GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
 		if (trav == null)
 			Debug.Log("Could not find the traveller");
 		travellerScript tScript = trav.GetComponent<travellerScript>();
 		if (tScript == null)
 			Debug.Log("could not find tScript");
-		
+		*/
+		popUpController.setTravelIcon(currentTarget);
 		//get the current lamp that the traveller is at
 
 		// get its adjacent lamps from light controller
@@ -280,6 +281,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		//go through all monster tagged objects
 		//for each grab script and get the current lamp
+		/* 
 		foreach (GameObject g in GameObject.FindGameObjectsWithTag("Monster")) {
 			EnemyMovement eMovement = g.GetComponent<EnemyMovement>();
 			if (eMovement == null)
@@ -300,16 +302,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 			}
 			
 		}
+		*/
 	}
 
-	bool checkAdjacent(GameObject[] lamps) {
-		foreach (GameObject g in lamps) {
-			if (g.Equals(currentTarget)) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 
 	  void unlockAbilties() {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);

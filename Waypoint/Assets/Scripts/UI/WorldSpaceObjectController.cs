@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldSpaceObjectController : MonoBehaviour {
 
 	private GameObject player;
 
+
+	public Sprite travellerLureIcon;
+	public Sprite monsterLureIcon;
+	public Image lureImage; 
 
 	// Use this for initialization
 	void Start () {
@@ -39,4 +44,36 @@ public class WorldSpaceObjectController : MonoBehaviour {
 		transform.position = newPosition;
 
 	}
+
+	public void setTravelIcon(GameObject lamp) {
+		GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
+		if (trav == null)
+			Debug.Log("Could not find traveller");
+		travellerMovement tScript = trav.GetComponent<travellerMovement>();
+		if (tScript == null)
+			Debug.Log("could not find travellerscript");
+		GameObject travLamp = tScript.currentLight;
+		lightSourceController lController = travLamp.GetComponent<lightSourceController>();
+		if (lController == null) 
+			Debug.Log("Could not find the lights controller script");
+
+		if (checkAdjacent(lController.adjacentSources, lamp)) {
+			lureImage.sprite = travellerLureIcon;
+			lureImage.enabled = true;
+		}
+		else {
+			lureImage.enabled = false;
+		}
+		
+	}
+
+	bool checkAdjacent(GameObject[] lamps, GameObject Lamp) {
+		foreach (GameObject g in lamps) {
+			if (g.Equals(Lamp)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
