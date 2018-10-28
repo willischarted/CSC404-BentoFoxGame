@@ -22,6 +22,7 @@ public class travellerHealth : MonoBehaviour {
     bool isDead;
     bool isLowHealth;
     bool damaged;
+    bool healed;
 
 	void Awake () {
         anim = GetComponent<Animator>();
@@ -52,9 +53,19 @@ public class travellerHealth : MonoBehaviour {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         damaged = false;
+        healed = false;
         //When low health, the screen shows a warning image
     }
     //TODO: getHeal
+    public void GetHeal(int amount){
+        healed = true;
+        currentHealth += amount;
+        healthSlider.value = currentHealth;
+
+        //TODO: clothe material change, not function now
+        lightValue = lightValue * (currentHealth / startingHealth);
+        cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+    }
     //TODO: warningLowHealth
     public void TakeBasicDamage (int amount){
         damaged = true;
