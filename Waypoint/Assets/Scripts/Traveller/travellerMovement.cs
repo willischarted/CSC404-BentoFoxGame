@@ -94,6 +94,7 @@ public class travellerMovement : MonoBehaviour
             else if (possibleTargets.Contains(justVisited)){
                 possibleTargets.Remove(justVisited);
             }
+            //else go to the default one
             else{
                 targetLight = possibleTargets[0];
             }
