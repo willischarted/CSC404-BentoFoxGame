@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3399,7 +3399,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4772370351765760, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.1733925
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 4772370351765760, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3407,7 +3407,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4772370351765760, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.4929166
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 4772370351765760, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3428,6 +3428,21 @@ Prefab:
     - target: {fileID: 4772370351765760, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114178995235954486, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee,
+        type: 2}
+      propertyPath: roamCenterPoint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114178995235954486, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee,
+        type: 2}
+      propertyPath: roamCenterPoint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114178995235954486, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee,
+        type: 2}
+      propertyPath: roamCenterPoint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f7e6afc4ffbfd74ea768b844fd4f5ee, type: 2}
@@ -4507,21 +4522,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114674210578669660, guid: d17434b735f304dcbb222d849c13b1e0,
         type: 2}
-      propertyPath: exitPoint
-      value: 
-      objectReference: {fileID: 191725426}
-    - target: {fileID: 114667778981719780, guid: d17434b735f304dcbb222d849c13b1e0,
-        type: 2}
-      propertyPath: damageImage
-      value: 
-      objectReference: {fileID: 1869462323}
-    - target: {fileID: 114667778981719780, guid: d17434b735f304dcbb222d849c13b1e0,
-        type: 2}
-      propertyPath: healthSlider
-      value: 
-      objectReference: {fileID: 1869462324}
-    - target: {fileID: 114674210578669660, guid: d17434b735f304dcbb222d849c13b1e0,
-        type: 2}
       propertyPath: startAdjacent.Array.data[0]
       value: 
       objectReference: {fileID: 53021470}
@@ -4530,6 +4530,21 @@ Prefab:
       propertyPath: startAdjacent.Array.data[1]
       value: 
       objectReference: {fileID: 1111387429}
+    - target: {fileID: 114674210578669660, guid: d17434b735f304dcbb222d849c13b1e0,
+        type: 2}
+      propertyPath: exitPoint
+      value: 
+      objectReference: {fileID: 191725426}
+    - target: {fileID: 114667778981719780, guid: d17434b735f304dcbb222d849c13b1e0,
+        type: 2}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1869462324}
+    - target: {fileID: 114667778981719780, guid: d17434b735f304dcbb222d849c13b1e0,
+        type: 2}
+      propertyPath: damageImage
+      value: 
+      objectReference: {fileID: 1869462323}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d17434b735f304dcbb222d849c13b1e0, type: 2}
   m_IsPrefabAsset: 0

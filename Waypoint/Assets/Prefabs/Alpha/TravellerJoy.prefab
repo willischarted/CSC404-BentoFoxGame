@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1120130332343174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0.25508562, z: -7.05}
+  m_LocalPosition: {x: 0.17570098, y: 0.25508562, z: -6.826207}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4401201999068406}
@@ -296,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startAdjacent:
   - {fileID: 0}
+  - {fileID: 0}
   offset: {x: 0, y: 0, z: 0.2}
   lampDistance: 1
   currentLight: {fileID: 0}
@@ -309,7 +310,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 8
   m_Acceleration: 0.2
   avoidancePriority: 50
   m_AngularSpeed: 100
