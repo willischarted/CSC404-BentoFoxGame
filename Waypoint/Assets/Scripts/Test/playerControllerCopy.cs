@@ -29,7 +29,7 @@ public class playerControllerCopy: MonoBehaviour {
     
     // Used to determine what light/ability firefly has equipped
     private int equippedLight;
-    private float lightResource;
+    public float lightResource;
 
     // Link to firefly Resource UI
     public Slider resourceBar;
@@ -73,11 +73,11 @@ public class playerControllerCopy: MonoBehaviour {
 
       
          // Toggle between 4 types of light magic
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("X")){
+       // if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("X")){
             //equippedLight = 0;
             //setFireFlyMaterial();
 
-        }
+        //}
 
         //if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetButtonDown("Square")){
             //equippedLight = 1;
@@ -233,19 +233,19 @@ public class playerControllerCopy: MonoBehaviour {
 
              //material.color = Color.blue;
             material.SetColor("_EmissionColor", Color.yellow);
-            setTrailRenderer();
+            //setTrailRenderer();
         }
         else if (color == 2) {
           //material.color = Color.green;
             material.SetColor("_EmissionColor", Color.green);
-            setTrailRenderer();
+            //setTrailRenderer();
         }
         else if (color == 3) {
            
 
             //material.color = Color.red;
             material.SetColor("_EmissionColor", Color.red);
-            setTrailRenderer();
+            //setTrailRenderer();
         }
         /* 
         else if (color == 3) {
@@ -273,9 +273,10 @@ public class playerControllerCopy: MonoBehaviour {
     }
 
     void setFireFlyMaterial() {
-       MeshRenderer[] meshRenderers  = GetComponentsInChildren<MeshRenderer>();
-       foreach (MeshRenderer m in meshRenderers) {
-           if (m.gameObject.name == "Sphere")
+       
+    SkinnedMeshRenderer[] meshRenderers  = GetComponentsInChildren< SkinnedMeshRenderer>();
+        foreach ( SkinnedMeshRenderer m in meshRenderers) {
+            if (m.gameObject.name == "model:body_03_GEO") //was "Sphere
                 setMaterialColor(m.material,equippedLight);
        }
 
