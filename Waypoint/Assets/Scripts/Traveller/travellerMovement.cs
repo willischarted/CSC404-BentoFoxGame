@@ -12,6 +12,7 @@ public class travellerMovement : MonoBehaviour
     public Vector3 offset;
     public float lampDistance = 1f;
     public GameObject currentLight;
+    public Transform exitPoint;
 
     GameObject latestLight;
     GameObject justVisited;
@@ -52,7 +53,7 @@ public class travellerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Exit"))
         {
             finishLevel = true;
-            nav.SetDestination(other.gameObject.transform.position);
+            nav.SetDestination(exitPoint.position);
             loadNextLevel();
         }
     }
