@@ -52,17 +52,35 @@ public class WorldSpaceObjectController : MonoBehaviour {
 		travellerMovement tScript = trav.GetComponent<travellerMovement>();
 		if (tScript == null)
 			Debug.Log("could not find travellerscript");
-		GameObject travLamp = tScript.currentLight;
-		lightSourceController lController = travLamp.GetComponent<lightSourceController>();
-		if (lController == null) 
-			Debug.Log("Could not find the lights controller script");
+		
+	
 
-		if (checkAdjacent(lController.adjacentSources, lamp)) {
-			lureImage.sprite = travellerLureIcon;
-			lureImage.enabled = true;
+		if (tScript.currentLight == null) {
+
+			if (checkAdjacent(tScript.startAdjacent, lamp)) {
+				lureImage.sprite = travellerLureIcon;
+				lureImage.enabled = true;
+			}
+			else {
+				lureImage.enabled = false;
+			}
+
 		}
+
 		else {
-			lureImage.enabled = false;
+				
+			GameObject travLamp = tScript.currentLight;
+			lightSourceController lController = travLamp.GetComponent<lightSourceController>();
+			if (lController == null) 
+				Debug.Log("Could not find the lights controller script");
+		
+			if (checkAdjacent(lController.adjacentSources, lamp)) {
+				lureImage.sprite = travellerLureIcon;
+				lureImage.enabled = true;
+			}
+			else {
+				lureImage.enabled = false;
+			}
 		}
 		
 	}
