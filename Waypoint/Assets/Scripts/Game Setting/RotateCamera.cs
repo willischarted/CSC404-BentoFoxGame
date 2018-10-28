@@ -13,7 +13,7 @@ public class RotateCamera : MonoBehaviour {
 
     // Transform of the gameobject we are following
     public Transform target;
-    private playerController targetController;
+    private playerControllerCopy targetController;
 
     // Current values for the camera rotation
     private float currentX = 0.0f;
@@ -68,7 +68,7 @@ public class RotateCamera : MonoBehaviour {
          cameraMovingBack = false;
 
 
-        targetController = target.GetComponent<playerController>();
+        targetController = target.GetComponent<playerControllerCopy>();
         if (targetController == null)
             Debug.Log("Could not find targetcontroller!");
      }
@@ -88,6 +88,7 @@ public class RotateCamera : MonoBehaviour {
         
 
        // if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("L2")) {
+       /* 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Square")){
             tacticalView = !tacticalView;
             
@@ -112,6 +113,7 @@ public class RotateCamera : MonoBehaviour {
                 targetController.setRestrictMovement(true);
             }
         }
+        */
 
 /* 
         if (Input.GetKeyUp(KeyCode.Space) || Input.GetButtonUp("L2")) {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using UnityEngine.SceneManagement;
+
 public class InteractionControllerCopy : MonoBehaviour {
 
 	
@@ -36,6 +38,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 	public Sprite travellerLureIcon;
 	public Sprite monsterLureIcon;
 	public Image lureImage; 
+
+	private bool healUnlocked;
+	private bool stunUnlocked;
 
 
 	 
@@ -98,7 +103,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 				//call stun enemy function
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
 						pController.setTargetLight(currentTarget);
-					
+						Debug.Log("truning on light");
 					
 				}
 
@@ -180,7 +185,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			//monsters.Add(other.gameObject);
 	//	}
 
-		if (other.tag == "Traveller") {
+		if (other.tag == "Traveller" && healUnlocked) {
 			targetTraveller = other.gameObject;
 			//interactionText.text = "Hold X to transfer light to Traveller";
 			interactionPopUp.SetActive(true);
@@ -190,7 +195,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 
-		if (other.tag == "Monster") {
+		if (other.tag == "Monster" && stunUnlocked) {
 			//currentTarget = other.gameObject;
 			targetMonster = other.gameObject;
 			//interactionText.text = "Press X to stun Monster";
@@ -305,6 +310,31 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
 		return false;
 	}
+
+	  void unlockAbilties() {
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        //if ()
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name.CompareTo("Level1") == 0) {
+            healUnlocked = false;
+			stunUnlocked = false;
+
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level2") == 0) {
+             healUnlocked = true;
+			 stunUnlocked = true;
+        }
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0) {
+            healUnlocked = true;
+			 stunUnlocked = true;
+			
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
+            healUnlocked = true;
+			 stunUnlocked = true;
+        }
+    }
 
 
 	

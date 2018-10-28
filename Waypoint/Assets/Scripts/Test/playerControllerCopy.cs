@@ -35,7 +35,7 @@ public class playerControllerCopy: MonoBehaviour {
     public Slider resourceBar;
     public Text resourceCount;
 
-    public float tempLightCost;
+    private float tempLightCost;
 
     public Image abilityBackground;
     public Image abilityIcon;
@@ -49,6 +49,8 @@ public class playerControllerCopy: MonoBehaviour {
 
     public float lightValueOn;
 
+    private bool toggleUnlocked;
+
     void Awake(){
         equippedLight = 1;
         restrictMovement = false;
@@ -60,11 +62,15 @@ public class playerControllerCopy: MonoBehaviour {
 	// Use this for initialization
     void Start () {
         lightReady = false;
-        lightResource = 1000;
+        tempLightCost = light1Value;
+        //if (lightResource == 0)
+        //    lightResource = 100;
         rb = GetComponent<Rigidbody>();
         count = 0;
         SetCountText();
         audioSource = GetComponent<AudioSource>();
+
+        unlockAbilties();
        
 	}
 	
@@ -84,7 +90,7 @@ public class playerControllerCopy: MonoBehaviour {
             //setFireFlyMaterial();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
        // }
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")){
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle") && toggleUnlocked){
             //equippedLight = 2;
             //setFireFlyMaterial();
             abilityBackground.color = Color.yellow;
@@ -96,11 +102,14 @@ public class playerControllerCopy: MonoBehaviour {
             
             setFireFlyMaterial();
             updateAbilityUI(); 
+            Invoke ("setBackgroundWhite", .5f);
         }
 
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) {
-           Invoke ("setBackgroundWhite", .5f);
-        }
+     //   if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) {
+       //   
+       // }
+
+
         if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Circle")){
             //equippedLight = 3;
             //setFireFlyMaterial();
@@ -188,10 +197,11 @@ public class playerControllerCopy: MonoBehaviour {
             }
             else{
                 //setLightColor(lampLight, equippedLight);
-                if (lightResource >=tempLightCost){
+                if (lightResource >= tempLightCost){
  
                 setChildLight(lightSource.GetComponentsInChildren<Light>());
                 lampLight.intensity = lightValueOn;
+                Debug.Log("the intensity is  " + lampLight.intensity);
                // cCollider.enabled = true;
                 audioSource.clip = onSoundEffect;
                 audioSource.Play();
@@ -406,12 +416,15 @@ public class playerControllerCopy: MonoBehaviour {
     public void updateAbilityUI() {
         if (equippedLight == 1) {
             abilityIcon.sprite = icon1;
+            tempLightCost = light1Value;
         }
         if (equippedLight == 2) {
             abilityIcon.sprite = icon2;
+             tempLightCost = light2Value;
         }
         if (equippedLight == 3) {
             abilityIcon.sprite = icon3;
+            tempLightCost = light3Value;
         }
 
         
@@ -419,6 +432,30 @@ public class playerControllerCopy: MonoBehaviour {
 
     public void setBackgroundWhite() {
         abilityBackground.color = Color.white;
+    }
+
+
+
+
+
+    void unlockAbilties() {
+        // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        //if ()
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name.CompareTo("Level1") == 0) {
+            toggleUnlocked = false;
+
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level2") == 0) {
+             toggleUnlocked = true;
+        }
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0) {
+            toggleUnlocked = true;
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
+            toggleUnlocked = true;
+        }
     }
 
 }
