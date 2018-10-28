@@ -56,6 +56,9 @@ public class travellerMovement : MonoBehaviour
             nav.SetDestination(exitPoint.position);
             loadNextLevel();
         }
+        else if (other.gameObject.CompareTag("Monster")){
+            travellerHealth.TakeBasicDamage(5);
+        }
     }
 
     public void loadNextLevel(){
