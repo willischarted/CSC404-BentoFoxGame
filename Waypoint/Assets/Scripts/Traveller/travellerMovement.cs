@@ -13,14 +13,15 @@ public class travellerMovement : MonoBehaviour
     public float lampDistance = 1f;
     public GameObject currentLight;
     public Transform exitPoint;
+    public GameObject justVisited;
 
     GameObject latestLight;
-    GameObject justVisited;
     GameObject targetLight;
     Animator anim;
     NavMeshAgent nav;
     travellerHealth travellerHealth;
     GameObject[] lamps;
+    List<GameObject> history = new List<GameObject>();
     bool finishLevel;
 
 
@@ -43,6 +44,7 @@ public class travellerMovement : MonoBehaviour
     {
         if (!finishLevel){
             FindCurrent();
+            FindJustVisited();
             MoveToTarget();
             Animating();
         }
@@ -82,14 +84,18 @@ public class travellerMovement : MonoBehaviour
                 possibleTargets.Add(lamp);
             }
         }
-        GameObject[] targetLamps = possibleTargets.ToArray();
 
-        if (targetLamps.Length > 0){
-            //unless the latest is light up in the array, otherwise always go to the default one
-            if (latestLight != null && (System.Array.IndexOf(targetLamps, latestLight) >= 0)){
+        if (possibleTargets.Count > 0){
+            //always go to the latest light
+            if (latestLight != null && (possibleTargets.Contains(latestLight))){
                 targetLight = latestLight;
-            }else{
-                targetLight = targetLamps[0]; 
+            }
+            //if the justVisited in the targetLamps array, ignore it
+            else if (possibleTargets.Contains(justVisited)){
+                possibleTargets.Remove(justVisited);
+            }
+            else{
+                targetLight = possibleTargets[0];
             }
 
             nav.SetDestination(targetLight.transform.position - offset);
@@ -100,9 +106,23 @@ public class travellerMovement : MonoBehaviour
         foreach (GameObject lamp in lamps){
             if (Vector3.Distance(transform.position, lamp.transform.position) < lampDistance){
                 currentLight = lamp;
+                if (history.Count == 0){
+                    history.Add(currentLight);
+                } else if (history[history.Count - 1] != currentLight){
+                    history.Add(currentLight);
+                }
             }
         }
     }
+
+    private void FindJustVisited(){
+        //the second-last in the history list
+        if (history.Count >= 2)
+        {
+            justVisited = history[history.Count - 2];
+        }
+    }
+
 
     public void findLatest(GameObject lightSource){
         latestLight = lightSource.gameObject;
