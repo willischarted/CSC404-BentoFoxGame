@@ -27,8 +27,9 @@ public class travellerHealth : MonoBehaviour {
         anim = GetComponent<Animator>();
         travellerMovement = GetComponent<travellerMovement>();
         currentHealth = startingHealth;
-        
-        cloak = transform.Find("Traveler_Base").GetComponentInChildren<Renderer>().material;
+
+        cloak = transform.Find("Traveler_Base").GetComponentInChildren<MeshRenderer>().material;
+        //cloak = GetComponent<MeshRenderer>().material;
         lightValue =  0.005f;
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         Debug.Log("cloak: " + cloak);
@@ -40,6 +41,7 @@ public class travellerHealth : MonoBehaviour {
           if (Input.GetKeyDown(KeyCode.H))
         {
             currentHealth -= 10;
+            Debug.Log(lightValue);
             lightValue = lightValue * (currentHealth / startingHealth);
             lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
             cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
