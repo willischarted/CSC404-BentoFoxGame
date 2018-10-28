@@ -11,7 +11,9 @@ public class travellerHealth : MonoBehaviour {
     //public Image lowHealthImage;
     public Image damageImage;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-    public float flashSpeed = 50f; 
+    public float flashSpeed = 50f;
+    private MeshRenderer[] meshRenderers;
+    private MeshRenderer meshRendererTraveller;
 
     Material cloak;
     float lightValue;
@@ -25,14 +27,23 @@ public class travellerHealth : MonoBehaviour {
         anim = GetComponent<Animator>();
         travellerMovement = GetComponent<travellerMovement>();
         currentHealth = startingHealth;
-
-        cloak = GetComponentInChildren<Renderer>().material;
-        lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
+        
+        cloak = transform.Find("Traveler_Base").GetComponentInChildren<Renderer>().material;
+        lightValue =  0.005f;
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
-	}
+        Debug.Log("cloak: " + cloak);
+    }
 	
 	void Update () {
         //When take damege, flash color
+        /*  Testing of cloth change*/
+          if (Input.GetKeyDown(KeyCode.H))
+        {
+            currentHealth -= 10;
+            lightValue = lightValue * (currentHealth / startingHealth);
+            lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
+            cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        }
         if(damaged){
             damageImage.color = flashColour;
         }else{
@@ -40,7 +51,7 @@ public class travellerHealth : MonoBehaviour {
         }
         damaged = false;
         //When low health, the screen shows a warning image
-	}
+    }
     //TODO: getHeal
     //TODO: warningLowHealth
     public void TakeBasicDamage (int amount){
