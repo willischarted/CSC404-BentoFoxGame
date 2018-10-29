@@ -25,6 +25,7 @@ public class EnemyMovement : MonoBehaviour {
     public float lampDistance = 5f;
     GameObject currentLamp;
     GameObject[] lamps;
+    public GameObject targetLamp;
 
     private void Awake()
     {
@@ -84,6 +85,7 @@ public class EnemyMovement : MonoBehaviour {
                 monsterAnim.SetTrigger("recovered");
                 timer = 0f;
                 movingToLamp = false;
+                targetLamp = null;
             }
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Chase"))
@@ -96,6 +98,7 @@ public class EnemyMovement : MonoBehaviour {
                 monsterAnim.SetTrigger("travellerLost");
                 currentLamp = null;
                 movingToLamp = false;
+                targetLamp = null;
             }
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
@@ -118,6 +121,7 @@ public class EnemyMovement : MonoBehaviour {
                     }
                 }
             }
+            targetLamp = null;
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Investigating"))
         {
@@ -130,6 +134,7 @@ public class EnemyMovement : MonoBehaviour {
                 currentTarget = transform.position;
                 Debug.Log("Reset");
             }
+            targetLamp = null;
         }
         else
         {
@@ -184,10 +189,11 @@ public class EnemyMovement : MonoBehaviour {
                     possibleTargets.Add(adjacentlamp);
                 }
             }
-            if (lController.getCurrentLightType() == 1 || lController.getCurrentLightType() ==3)
+            if (lController.getCurrentLightType() == 1 || lController.getCurrentLightType() ==3) //possible bug need to fix when lamps are implemented
             {
                 currentTarget = transform.position;
                 nav.SetDestination(currentTarget);
+                targetLamp = null;
                 movingToLamp = false;
                 return;
             }
@@ -198,7 +204,7 @@ public class EnemyMovement : MonoBehaviour {
                 Debug.Log("PLEASE PLACE BREAKPOINT HERE unsure if this will behave correctly");
             }
             int ran = Random.Range(0, targetLamps.Length); //unsure doesnt work with length - 1, tried the remove 1 now it works???!!!
-            GameObject targetLamp = targetLamps[ran];
+            targetLamp = targetLamps[ran];
             currentTarget = targetLamp.transform.position;
             nav.SetDestination(currentTarget);
             movingToLamp = true;
