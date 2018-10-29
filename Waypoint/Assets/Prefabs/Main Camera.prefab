@@ -66,13 +66,13 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 73
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 6967
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -91,7 +91,7 @@ Skybox:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1384557907773374}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: 3e42e241afffb4e0a824dc4cc5870041, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: 5c1d62f6457c5e940a15603f0177f2a6, type: 2}
 --- !u!81 &81046374897775950
 AudioListener:
   m_ObjectHideFlags: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
   target: {fileID: 0}
   turnSpeedX: 50
   turnSpeedY: 50
-  offset: {x: 0, y: 0, z: -5}
+  offset: {x: 0, y: 0.15, z: -2}
   cameraText: {fileID: 0}
   speed: 8
   cameraSpeed: 20
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1384557907773374}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
