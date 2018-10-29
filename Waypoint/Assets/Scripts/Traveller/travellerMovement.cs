@@ -14,6 +14,7 @@ public class travellerMovement : MonoBehaviour
     public GameObject currentLight;
     public Transform exitPoint;
     public GameObject justVisited;
+    public bool loadNext;
 
     GameObject latestLight;
     GameObject targetLight;
@@ -38,6 +39,7 @@ public class travellerMovement : MonoBehaviour
         travellerHealth = GetComponent<travellerHealth>();
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
         finishLevel = false;
+        loadNext = false;
     }
 
     void Update()
@@ -56,7 +58,10 @@ public class travellerMovement : MonoBehaviour
         {
             finishLevel = true;
             nav.SetDestination(exitPoint.position);
-            loadNextLevel();
+
+            if (transform.position == exitPoint.position){
+                loadNextLevel();
+            }
         }
         else if (other.gameObject.CompareTag("Monster")){
             if (other.GetType() == typeof(CapsuleCollider)){
@@ -67,6 +72,7 @@ public class travellerMovement : MonoBehaviour
 
     public void loadNextLevel(){
         //SceneManager.LoadScene(0);
+        loadNext = true;
     }
 
     private void MoveToTarget(){
