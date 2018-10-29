@@ -19,7 +19,7 @@ public class travellerHealth : MonoBehaviour {
     float lightValue;
     Animator anim;
     travellerMovement travellerMovement;
-    bool isDead;
+    public bool isDead;
     bool isLowHealth;
     bool damaged;
     bool healed;
