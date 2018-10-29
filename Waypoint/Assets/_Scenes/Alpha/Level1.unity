@@ -1186,12 +1186,6 @@ Transform:
   m_Father: {fileID: 1714471185}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &160393145 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114709752378765414, guid: 5bc8f4e9d5f6041a8a9eea427b28fd56,
-    type: 2}
-  m_PrefabInternal: {fileID: 1077392705}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &210428095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2662,11 +2656,6 @@ Prefab:
       propertyPath: popUpText
       value: 
       objectReference: {fileID: 1440098424}
-    - target: {fileID: 114584232024874280, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: lureImage
-      value: 
-      objectReference: {fileID: 160393145}
     - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
       propertyPath: countText
@@ -2697,87 +2686,7 @@ Prefab:
       propertyPath: abilityIcon
       value: 
       objectReference: {fileID: 1077392710}
-    - target: {fileID: 1428154381906084, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65325316940745690, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 65325316940745690, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 65325316940745690, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 23515600537045244, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 135251577570462120, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 96377970724684436, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 23446866331939478, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 137782490775909848, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 5ea7b704dd4b44802868eefff2cf1f1a, type: 2}
-    - target: {fileID: 135251577570462120, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Radius
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 54933472734363914, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 54933472734363914, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 116
-      objectReference: {fileID: 0}
-    - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: speed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: light1Value
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: tempLightCost
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
-        type: 2}
-      propertyPath: lightResource
-      value: 50
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 108318971627062764, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &686843655
@@ -3756,10 +3665,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1384557907773374, guid: 014a43ae3f5db4d55924d139386a9753, type: 2}
-      propertyPath: m_Name
-      value: Main Camera
-      objectReference: {fileID: 0}
     - target: {fileID: 114212405416405900, guid: 014a43ae3f5db4d55924d139386a9753,
         type: 2}
       propertyPath: target
@@ -3770,45 +3675,6 @@ Prefab:
       propertyPath: cameraText
       value: 
       objectReference: {fileID: 1823190279}
-    - target: {fileID: 20724944439947162, guid: 014a43ae3f5db4d55924d139386a9753,
-        type: 2}
-      propertyPath: m_CullingMask.m_Bits
-      value: 6967
-      objectReference: {fileID: 0}
-    - target: {fileID: 114212405416405900, guid: 014a43ae3f5db4d55924d139386a9753,
-        type: 2}
-      propertyPath: offset.z
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 20724944439947162, guid: 014a43ae3f5db4d55924d139386a9753,
-        type: 2}
-      propertyPath: field of view
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 114561199739478104, guid: 014a43ae3f5db4d55924d139386a9753,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1384557907773374, guid: 014a43ae3f5db4d55924d139386a9753, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 45001010190960972, guid: 014a43ae3f5db4d55924d139386a9753,
-        type: 2}
-      propertyPath: m_CustomSkybox
-      value: 
-      objectReference: {fileID: 2100000, guid: 5c1d62f6457c5e940a15603f0177f2a6, type: 2}
-    - target: {fileID: 114212405416405900, guid: 014a43ae3f5db4d55924d139386a9753,
-        type: 2}
-      propertyPath: offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114212405416405900, guid: 014a43ae3f5db4d55924d139386a9753,
-        type: 2}
-      propertyPath: offset.y
-      value: 0.15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 014a43ae3f5db4d55924d139386a9753, type: 2}
   m_IsPrefabAsset: 0
