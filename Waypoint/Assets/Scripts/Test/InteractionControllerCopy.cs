@@ -64,6 +64,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+		//axis playtesting
+		//Debug.Log(Input.GetAxis("DPadX"));
+		//Debug.Log(Input.GetAxis("DPadY"));
+
 		// Heal when held in vicinity of monster
 		// impulse stun when tapped
         
