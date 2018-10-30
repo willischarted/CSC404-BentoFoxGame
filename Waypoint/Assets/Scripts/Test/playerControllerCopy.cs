@@ -228,7 +228,7 @@ public class playerControllerCopy: MonoBehaviour {
                 }
 
                 //
-                if (equippedLight == 3) {
+                if (equippedLight == 1 || equippedLight == 3) {
                     Debug.Log("Sending signal to all monsters");
                     GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
                     foreach (GameObject g in monsters) {
