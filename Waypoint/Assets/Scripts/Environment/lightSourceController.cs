@@ -26,9 +26,18 @@ public class lightSourceController : MonoBehaviour {
 
 	float startIntensity;
 
+	private playerControllerCopy pScript;
+
 
 	// Use this for initialization
 	void Start () {
+
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		pScript = player.GetComponent<playerControllerCopy>();
+
+		if (pScript == null) {
+			Debug.Log("pScript is nnull");
+		}
 		setMiniMapPaths();
 		lampLight = GetComponentInChildren<Light>();
 		if (lampLight == null)
@@ -96,16 +105,43 @@ public class lightSourceController : MonoBehaviour {
         		bulb.DisableKeyword("_EMISSION");
 			}
 		}
+	
+
 		setCurrentLightType(0);
 
 	}
 
 	public void setCurrentLightType(int type) {
+		
+		
+		if (type == 0) {
+
+			Debug.Log("Returning some resource");
+			float percentageReturn = timeRemaining / lightDuration;
+			Debug.Log(percentageReturn);
+
+			if (currentLightType == 1) {
+				pScript.addResource(pScript.light1Value * percentageReturn);
+			}
+			else if (currentLightType == 2) {
+				pScript.addResource(pScript.light1Value * percentageReturn);
+			}
+			else if (currentLightType == 3 ) {
+				pScript.addResource(pScript.light1Value * percentageReturn);
+
+			}
+			currentLightType = type;
+			return;
+		}
+		
 		currentLightType = type;
 		timeRemaining = lightDuration;
+
         if (lampLight){
             startIntensity = lampLight.intensity; 
+			
         }
+
 	
 	}
 
