@@ -14,7 +14,8 @@ public class travellerMovement : MonoBehaviour
     public GameObject currentLight;
     public Transform exitPoint;
     public GameObject justVisited;
-    public bool loadNext;
+    public GameObject levelUpMenu;
+    private EndLevel endlvl;
 
     GameObject latestLight;
     GameObject targetLight;
@@ -30,6 +31,7 @@ public class travellerMovement : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        endlvl = levelUpMenu.GetComponent<EndLevel>();
         currentLight = null;
         latestLight = null;
         justVisited = null;
@@ -39,7 +41,6 @@ public class travellerMovement : MonoBehaviour
         travellerHealth = GetComponent<travellerHealth>();
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
         finishLevel = false;
-        loadNext = false;
     }
 
     void Update()
@@ -58,10 +59,7 @@ public class travellerMovement : MonoBehaviour
         {
             finishLevel = true;
             nav.SetDestination(exitPoint.position);
-
-            if (transform.position == exitPoint.position){
-                loadNextLevel();
-            }
+            loadNextLevel();
         }
         else if (other.gameObject.CompareTag("Monster")){
             if (other.GetType() == typeof(CapsuleCollider)){
@@ -72,7 +70,7 @@ public class travellerMovement : MonoBehaviour
 
     public void loadNextLevel(){
         //SceneManager.LoadScene(0);
-        loadNext = true;
+        endlvl.levelComplete();
     }
 
     private void MoveToTarget(){

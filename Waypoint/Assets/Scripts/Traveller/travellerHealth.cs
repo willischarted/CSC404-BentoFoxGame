@@ -8,6 +8,7 @@ public class travellerHealth : MonoBehaviour {
     public float startingHealth = 100;
     public float currentHealth;
     public Slider healthSlider;
+    public GameObject goMenu;
     //public Image lowHealthImage;
     public Image damageImage;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
@@ -15,6 +16,7 @@ public class travellerHealth : MonoBehaviour {
     private MeshRenderer[] meshRenderers;
     private MeshRenderer meshRendererTraveller;
 
+    private GameOver gameEnder;
     Material cloak;
     float lightValue;
     Animator anim;
@@ -24,7 +26,9 @@ public class travellerHealth : MonoBehaviour {
     bool damaged;
     bool healed;
 
-	void Awake () {
+	void Awake ()
+    {
+        gameEnder = goMenu.GetComponent<GameOver>();
         anim = GetComponent<Animator>();
         travellerMovement = GetComponent<travellerMovement>();
         currentHealth = startingHealth;
@@ -41,12 +45,13 @@ public class travellerHealth : MonoBehaviour {
         /*  Testing of cloth change*/
           if (Input.GetKeyDown(KeyCode.H))
         {
-            currentHealth -= 10;
+            TakeBasicDamage(10);
             Debug.Log(lightValue);
             lightValue = lightValue * (currentHealth / startingHealth);
             lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
             cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         }
+
         if(damaged){
             damageImage.color = flashColour;
         }else{
@@ -101,7 +106,7 @@ public class travellerHealth : MonoBehaviour {
         isDead = true;
         anim.SetTrigger("isDead");
         travellerMovement.enabled = false;
-        restart();
+        gameEnder.gameOverr();
     }
 
     public void restart(){
