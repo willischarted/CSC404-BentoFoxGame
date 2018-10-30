@@ -15,6 +15,7 @@ public class EnemyMovement : MonoBehaviour {
     public float maxRotation = 45f;
     float timer = 0f;
     Vector3 direction;
+    Vector3 upward; 
 
     public float MAX_LD;
     public GameObject lastVisited;
@@ -36,6 +37,7 @@ public class EnemyMovement : MonoBehaviour {
         col = GetComponent<SphereCollider>();
         currentTarget = transform.position;
         timer = 0f;
+        upward.Set(0f, 0.2f, 0f);
         currentLamp = null;
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
         List<GameObject> validLamps = new List<GameObject>();
@@ -105,7 +107,7 @@ public class EnemyMovement : MonoBehaviour {
         {
             Debug.Log("Alerted");
             RaycastHit hit;
-            if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position + upward , direction.normalized, out hit, Mathf.Infinity))
             {
                 if (hit.collider.gameObject.transform == traveller)
                 {
