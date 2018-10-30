@@ -40,6 +40,9 @@ public class playerControllerCopy: MonoBehaviour {
     public GameObject pauseUI;
     private PauseMenu pauseScript;
 
+    public GameObject gameOver;
+    private GameOver gameOverScript;
+
     public Image abilityBackground;
     public Image abilityIcon;
     public Sprite icon1;
@@ -70,6 +73,7 @@ public class playerControllerCopy: MonoBehaviour {
         //    lightResource = 100;
         rb = GetComponent<Rigidbody>();
         pauseScript = pauseUI.GetComponent<PauseMenu>();
+        gameOverScript = gameOver.GetComponent<GameOver>();
         count = 0;
         SetCountText();
         audioSource = GetComponent<AudioSource>();
@@ -124,11 +128,15 @@ public class playerControllerCopy: MonoBehaviour {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         // }
 
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonUp("L1"))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonUp("Start"))
         {
             pauseScript.pause();
         }
 
+        if((!tMovement.beatLevel) && (lightResource < 10) && !(anyLightsOn()))
+        {
+            gameOverScript.gameOverr();
+        }
 
         // Only interact while r2 is pulled, set tag otherwise release.
         /* 
@@ -480,6 +488,21 @@ public class playerControllerCopy: MonoBehaviour {
         else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
             toggleUnlocked = true;
         }
+    }
+
+    //Are there any lights on?
+    private bool anyLightsOn()
+    {
+        GameObject [] lights = GameObject.FindGameObjectsWithTag("LampLight");
+        foreach (GameObject light in lights)
+        {
+            lightSourceController lsc = light.GetComponent<lightSourceController>();
+            if (lsc.getCurrentLightType() != 0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
