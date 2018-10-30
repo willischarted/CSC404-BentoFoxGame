@@ -58,7 +58,7 @@ public class GameOver : MonoBehaviour
         {
             if (optionNum != 0)
             {
-                optionNum += 1;
+                optionNum -= 1;
             }
             else
             {
