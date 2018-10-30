@@ -63,7 +63,7 @@ public class lightSourceController : MonoBehaviour {
 
 	//function to immediately turn light off
 	public void setLightOff() {
-		Debug.Log("Turn off light here");
+		//Debug.Log("Turn off light here");
 		//Light lampLight = GetComponentInChildren<Light>();
 		Renderer[] bulbs = GetComponentsInChildren<Renderer>();
 		if (bulbs == null)
@@ -90,7 +90,7 @@ public class lightSourceController : MonoBehaviour {
 		*/
 
 		foreach (Renderer r in bulbs) {
-			Debug.Log(r.gameObject.name);//r.gameObject.name == "Bulb"
+			//Debug.Log(r.gameObject.name);//r.gameObject.name == "Bulb"
 			if (string.Equals(r.gameObject.name, "Bulb")) {
 				Material bulb = r.material;
         		bulb.DisableKeyword("_EMISSION");

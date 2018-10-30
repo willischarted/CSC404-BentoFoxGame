@@ -212,7 +212,7 @@ public class playerController : MonoBehaviour {
         //Debug.Log("called set light");
         if (lightSource.CompareTag("LampLight"))
         {
-            Debug.Log(lightSource.transform.position);
+           // Debug.Log(lightSource.transform.position);
             count = count + 1;
             SetCountText();
            // cCollider = lightSource.GetComponentInParent<CapsuleCollider>();

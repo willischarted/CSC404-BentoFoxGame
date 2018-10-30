@@ -105,7 +105,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 				//call stun enemy function
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
 						pController.setTargetLight(currentTarget);
-						Debug.Log("truning on light");
+						//Debug.Log("truning on light");
 					
 				}
 
@@ -315,7 +315,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	  void unlockAbilties() {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         //if ()
-        Debug.Log(SceneManager.GetActiveScene().name);
+        //Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name.CompareTo("Level1") == 0) {
             healUnlocked = false;
 			stunUnlocked = false;

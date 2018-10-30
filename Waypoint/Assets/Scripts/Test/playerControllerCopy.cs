@@ -164,7 +164,7 @@ public class playerControllerCopy: MonoBehaviour {
         //Debug.Log("called set light");
         if (lightSource.CompareTag("LampLight"))
         {
-            Debug.Log(lightSource.transform.position);
+           // Debug.Log(lightSource.transform.position);
             count = count + 1;
             SetCountText();
            // cCollider = lightSource.GetComponentInParent<CapsuleCollider>();
@@ -201,7 +201,7 @@ public class playerControllerCopy: MonoBehaviour {
  
                 setChildLight(lightSource.GetComponentsInChildren<Light>());
                 lampLight.intensity = lightValueOn;
-                Debug.Log("the intensity is  " + lampLight.intensity);
+               // Debug.Log("the intensity is  " + lampLight.intensity);
                // cCollider.enabled = true;
                 audioSource.clip = onSoundEffect;
                 audioSource.Play();
@@ -441,7 +441,7 @@ public class playerControllerCopy: MonoBehaviour {
     void unlockAbilties() {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         //if ()
-        Debug.Log(SceneManager.GetActiveScene().name);
+        //Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name.CompareTo("Level1") == 0) {
             toggleUnlocked = false;
 

@@ -56,7 +56,7 @@ public class MiniMapController : MonoBehaviour {
 	//		travScreenPos.x > 0 && travScreenPos.x < objectRectTransform.rect.width &&
 	//		travScreenPos.y > 0 && travScreenPos.y < objectRectTransform.rect.height)
 		{
-			Debug.Log("Onscreen");
+			//Debug.Log("Onscreen");
 
 			//get rid of the arrow indicator?
 			onscreenIcon.SetActive(false);
@@ -65,7 +65,7 @@ public class MiniMapController : MonoBehaviour {
 		}
 		else 
 		{
-			Debug.Log("Offscreen");
+			//Debug.Log("Offscreen");
 			if (travScreenPos.z < 0)
 				travScreenPos *= -1;
 			// flip the coordinates, everything is mirrored. Arrows point to something then flip around
