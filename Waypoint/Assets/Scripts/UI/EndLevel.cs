@@ -17,17 +17,18 @@ public class EndLevel : MonoBehaviour
     private float gameSpeed;
     private Button restartBtn;
     private Button startMenuBtn;
+    private Button nextLevelBtn;
     //private Transform selector;
 
 
     private void Start()
     {
         levelUp.SetActive(false);
-        options = new int[2];
+        options = new int[3];
         optionNum = 0;
         restartBtn = transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();
         startMenuBtn = transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
-        //nextLevelBtn = transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
+        nextLevelBtn = transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
     }
 
     private void Update()
@@ -46,7 +47,7 @@ public class EndLevel : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow) || (yAxisInUse && yValue == 1))
         {
-            if (optionNum != 1)
+            if (optionNum != 2)
             {
                 optionNum += 1;
             }
@@ -63,40 +64,41 @@ public class EndLevel : MonoBehaviour
             }
             else
             {
-                optionNum = 1;
+                optionNum = 2;
             }
         }
 
         if (optionNum == 0)
         {
-            restartBtn.Select();
+            nextLevelBtn.Select();
         }
         if (optionNum == 1)
+        {
+            restartBtn.Select();
+        }
+        if (optionNum == 2)
         {
             startMenuBtn.Select();
         }
         /* uncomment when the next Level button exists
          * Also when the next nevel button exists, it should probably be 
-         * option 0 instead
-        if (optionNum == 2)
-        {
-            nextLevelBtn.Select();
-        }*/
+         * option 0 instead*/
+  
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("X"))
         {
-            if (optionNum == 0)
+            if (optionNum == 1)
             {
                 restartLevel();
             }
-            else if (optionNum == 1)
+            else if (optionNum == 2)
             {
                 startMenu();
             }
-         /*   else if (optionNum == 2)
+            else if (optionNum == 0)
             {
                 nextLevel();
-            }*/
+            }
         }
     }
 
@@ -122,9 +124,21 @@ public class EndLevel : MonoBehaviour
 
     public void nextLevel()
     {
-        GameController.level++;
-        Time.timeScale = 1f;
-        levelUp.SetActive(false);
-        SceneManager.LoadScene("Level" + GameController.level);
+        if (GameController.level == 4)
+        {
+
+            GameController.level = 1;
+            Time.timeScale = 1f;
+            levelUp.SetActive(false);
+            SceneManager.LoadScene("Start Menu");
+        }
+        else
+        {
+            GameController.level++;
+            Debug.Log(GameController.level);
+            Time.timeScale = 1f;
+            levelUp.SetActive(false);
+            SceneManager.LoadScene("Level" + GameController.level);
+        }
     }
 }
