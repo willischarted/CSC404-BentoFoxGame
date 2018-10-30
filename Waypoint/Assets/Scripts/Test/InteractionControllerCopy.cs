@@ -105,6 +105,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 			//0.2f is general approximation of a tap
 			if (heldDuration <= 0.5f) {
 				//start impulse
+				if (targetMonster != null && targetMonster.tag=="Monster") {
+					setStun();
+					return;
+				}
 				
 				//call stun enemy function
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
@@ -113,10 +117,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 					
 				}
 
-				if (targetMonster != null && targetMonster.tag=="Monster") {
-					setStun();
-					return;
-				}
+				
 				
 			}
 			heldDuration = 0f;
@@ -131,18 +132,24 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 
-
 		if (currentTarget) {
 			//interactionText.text = "Light";
 			popUpText.fontSize = 150;
 			popUpText.text =   "Light";
 			return;
 		}
-
+		
 		if (targetMonster && currentTarget) {
-			interactionText.text = "Press X to stun Monster \n Hold X to transfer light to Traveller";
+			popUpText.fontSize = 150;
+			popUpText.text =   "Stun";
 			return;
 		}
+
+
+
+		
+
+		
 
 
 		if (targetMonster) {
