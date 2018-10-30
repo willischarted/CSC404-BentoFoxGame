@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 223586657377033004}
   - component: {fileID: 114272334863153020}
   - component: {fileID: 114861197471544464}
+  - component: {fileID: 114641560525675436}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -288,6 +289,18 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Start Menu
+--- !u!114 &114641560525675436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465802554669840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70ba2cc16799c1428e6fb9c0121f50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
 --- !u!114 &114660144514985016
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 223138420330494506}
   - component: {fileID: 114070088088429596}
   - component: {fileID: 114363047470937972}
+  - component: {fileID: 114787456317045356}
   m_Layer: 5
   m_Name: LevelCompleteMenu
   m_TagString: Untagged
@@ -337,6 +338,18 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Level\n Complete!"
+--- !u!114 &114787456317045356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1097514529892106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acbaae5c96175749badcb4d2fb671b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelUp: {fileID: 0}
 --- !u!114 &114796583617959004
 MonoBehaviour:
   m_ObjectHideFlags: 1
