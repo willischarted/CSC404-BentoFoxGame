@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44495818, g: 0.4945373, b: 0.5736695, a: 1}
+  m_IndirectSpecularColor: {r: 0.4449579, g: 0.49453682, b: 0.5736692, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7711,7 +7711,7 @@ Prefab:
     - target: {fileID: 224756539075326084, guid: e201524255b3d3641bc6928a1be5b1b2,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224756539075326084, guid: e201524255b3d3641bc6928a1be5b1b2,
         type: 2}
@@ -7751,7 +7751,7 @@ Prefab:
     - target: {fileID: 224756539075326084, guid: e201524255b3d3641bc6928a1be5b1b2,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224756539075326084, guid: e201524255b3d3641bc6928a1be5b1b2,
         type: 2}
@@ -8211,7 +8211,7 @@ Prefab:
     - target: {fileID: 224255389160924482, guid: 463ec4441f575de4e910171bfcc78008,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224255389160924482, guid: 463ec4441f575de4e910171bfcc78008,
         type: 2}
@@ -8251,7 +8251,7 @@ Prefab:
     - target: {fileID: 224255389160924482, guid: 463ec4441f575de4e910171bfcc78008,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224255389160924482, guid: 463ec4441f575de4e910171bfcc78008,
         type: 2}
@@ -9199,7 +9199,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &402313176
 GameObject:
@@ -10280,7 +10280,7 @@ Prefab:
     - target: {fileID: 224125523258815362, guid: f053d365198a5c5419e79fdcf985bb86,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224125523258815362, guid: f053d365198a5c5419e79fdcf985bb86,
         type: 2}
@@ -10320,7 +10320,7 @@ Prefab:
     - target: {fileID: 224125523258815362, guid: f053d365198a5c5419e79fdcf985bb86,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224125523258815362, guid: f053d365198a5c5419e79fdcf985bb86,
         type: 2}
@@ -10959,6 +10959,11 @@ Prefab:
       propertyPath: pauseUI
       value: 
       objectReference: {fileID: 541882592}
+    - target: {fileID: 114584232024874280, guid: 7951c7f06bccf4622b7f6c79a4964954,
+        type: 2}
+      propertyPath: textVerticalOffset
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
   m_IsPrefabAsset: 0
@@ -39463,7 +39468,7 @@ Transform:
   - {fileID: 1229096523}
   - {fileID: 1796596659}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1715107974
 GameObject:
@@ -42826,6 +42831,10 @@ Prefab:
     - target: {fileID: 1420773173866926, guid: 5bc8f4e9d5f6041a8a9eea427b28fd56, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1682771841852954, guid: 5bc8f4e9d5f6041a8a9eea427b28fd56, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc8f4e9d5f6041a8a9eea427b28fd56, type: 2}
@@ -49611,7 +49620,7 @@ Transform:
   - {fileID: 1363841696}
   - {fileID: 1901498402}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2113703167
 GameObject:
@@ -49983,5 +49992,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}

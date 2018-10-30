@@ -31,7 +31,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	private WorldSpaceObjectController popUpController;
 	public Text popUpText;
 
-	public int textVerticalOffset;
+	public float textVerticalOffset;
 
 
 
