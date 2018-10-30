@@ -37,6 +37,9 @@ public class playerControllerCopy: MonoBehaviour {
 
     private float tempLightCost;
 
+    public GameObject pauseUI;
+    private PauseMenu pauseScript;
+
     public Image abilityBackground;
     public Image abilityIcon;
     public Sprite icon1;
@@ -66,6 +69,7 @@ public class playerControllerCopy: MonoBehaviour {
         //if (lightResource == 0)
         //    lightResource = 100;
         rb = GetComponent<Rigidbody>();
+        pauseScript = pauseUI.GetComponent<PauseMenu>();
         count = 0;
         SetCountText();
         audioSource = GetComponent<AudioSource>();
@@ -115,10 +119,15 @@ public class playerControllerCopy: MonoBehaviour {
             //setFireFlyMaterial();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         }
-            // Restart button
-      //  if (Input.GetButtonDown("L1") || Input.GetKeyDown(KeyCode.R)) {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-       // }
+        // Restart button
+        //  if (Input.GetButtonDown("L1") || Input.GetKeyDown(KeyCode.R)) {
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        // }
+
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonUp("L1"))
+        {
+            pauseScript.pause();
+        }
 
 
         // Only interact while r2 is pulled, set tag otherwise release.
@@ -131,7 +140,7 @@ public class playerControllerCopy: MonoBehaviour {
         }
         */
     }
-    
+
     void FixedUpdate()
     {
         if (!restrictMovement){
