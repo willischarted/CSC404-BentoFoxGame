@@ -104,18 +104,20 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 			//0.2f is general approximation of a tap
 			if (heldDuration <= 0.5f) {
+
+				//call stun enemy function
+				if (currentTarget != null && currentTarget.tag == "LampLight") {
+					pController.setTargetLight(currentTarget);
+					//Debug.Log("truning on light");
+					return;
+				}
 				//start impulse
 				if (targetMonster != null && targetMonster.tag=="Monster") {
 					setStun();
 					return;
 				}
 				
-				//call stun enemy function
-				if (currentTarget != null && currentTarget.tag == "LampLight") {
-						pController.setTargetLight(currentTarget);
-						//Debug.Log("truning on light");
-					
-				}
+			
 
 				
 				
@@ -138,7 +140,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			popUpText.text =   "Light";
 			return;
 		}
-		
+
 		if (targetMonster && currentTarget) {
 			popUpText.fontSize = 150;
 			popUpText.text =   "Stun";
@@ -217,7 +219,18 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 
-		if (other.tag == "Monster" && stunUnlocked) {
+		if (other.tag == "LampLight") {
+			currentTarget = other.gameObject;
+			//interactionText.text = "Press X to interact with Light Source";
+			interactionPopUp.SetActive(true);
+			Vector3 popUpLocation = other.gameObject.transform.position;
+			popUpLocation.y = popUpLocation.y + textVerticalOffset;
+			popUpController.updateWorldObjectTransform(popUpLocation);
+			controlLureImage();
+			return;
+		}
+
+		if (other.tag == "Monster" && stunUnlocked && currentTarget == null) {
 			//currentTarget = other.gameObject;
 			targetMonster = other.gameObject;
 			//interactionText.text = "Press X to stun Monster";
@@ -230,16 +243,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
 
 
-		if (other.tag == "LampLight") {
-			currentTarget = other.gameObject;
-			//interactionText.text = "Press X to interact with Light Source";
-			interactionPopUp.SetActive(true);
-			Vector3 popUpLocation = other.gameObject.transform.position;
-			popUpLocation.y = popUpLocation.y + textVerticalOffset;
-			popUpController.updateWorldObjectTransform(popUpLocation);
-			controlLureImage();
-			return;
-		}
+	
 
 	}
 
