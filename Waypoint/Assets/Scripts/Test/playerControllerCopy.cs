@@ -214,10 +214,25 @@ public class playerControllerCopy: MonoBehaviour {
                // cCollider.enabled = true;
                 audioSource.clip = onSoundEffect;
                 audioSource.Play();
-                    if (equippedLight == 1 || equippedLight == 2)
-                    {
-                        tMovement.findLatest(lightSource);
+                if (equippedLight == 1 || equippedLight == 2)
+                {
+                    tMovement.findLatest(lightSource);
+                }
+
+                //
+                if (equippedLight == 3) {
+                    Debug.Log("Sending signal to all monsters");
+                    GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                    foreach (GameObject g in monsters) {
+                        EnemyMovement eScript = GetComponent<EnemyMovement>();
+                        if (eScript ==null)
+                            Debug.Log("Could not find script for monster");
+                        else {
+                            eScript.monsterLampLit(lightSource);
+                        }
                     }
+                }
+
                 bulb.EnableKeyword("_EMISSION");
                 setMaterialColor(bulb, equippedLight);
 
