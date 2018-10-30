@@ -25,7 +25,6 @@ public class travellerMovement : MonoBehaviour
     GameObject[] lamps;
     List<GameObject> history = new List<GameObject>();
     bool closeToExit;
-    bool finishLevel;
 
 
 
@@ -68,7 +67,7 @@ public class travellerMovement : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Monster")){
             if (other.GetType() == typeof(CapsuleCollider)){
-                travellerHealth.TakeBasicDamage(5);
+                travellerHealth.TakeBasicDamage(20);
             }     
         }
     }
