@@ -4,28 +4,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartMenuButton : MonoBehaviour
+public class EndLevel : MonoBehaviour
 {
 
     //Button Array
     //place array
-    public GameObject canvas;
+    public GameObject levelUp;
     private int[] options;
     private int optionNum;
     private bool xAxisInUse = false;
     private bool yAxisInUse = false;
     private float gameSpeed;
-    private Button newGameBtn;
-    private Button exitBtn;
+    private Button restartBtn;
+    private Button startMenuBtn;
     //private Transform selector;
 
 
     private void Start()
     {
+        levelUp.SetActive(false);
         options = new int[2];
         optionNum = 0;
-        newGameBtn = canvas.transform.GetChild(1).GetComponent<Button>();
-        exitBtn = canvas.transform.GetChild(2).GetComponent<Button>();
+        restartBtn = transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();
+        startMenuBtn = transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
         //nextLevelBtn = transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
     }
 
@@ -68,11 +69,11 @@ public class StartMenuButton : MonoBehaviour
 
         if (optionNum == 0)
         {
-            newGameBtn.Select();
+            restartBtn.Select();
         }
         if (optionNum == 1)
         {
-            exitBtn.Select();
+            startMenuBtn.Select();
         }
         /* uncomment when the next Level button exists
         if (optionNum == 2)
@@ -84,28 +85,44 @@ public class StartMenuButton : MonoBehaviour
         {
             if (optionNum == 0)
             {
-                startGame();
+                restartLevel();
             }
             else if (optionNum == 1)
             {
-                Quit();
+                startMenu();
             }
-            /*   else if (optionNum == 2)
-               {
-                   nextLevel();
-               }*/
+         /*   else if (optionNum == 2)
+            {
+                nextLevel();
+            }*/
         }
     }
 
-    public void Quit()
+    public void levelComplete()
     {
-        Application.Quit();
+        Time.timeScale = 0f;
+        levelUp.SetActive(true);
     }
 
-    public void startGame()
+    public void restartLevel()
     {
-        GameController.level = 1;
         Time.timeScale = 1f;
+        levelUp.SetActive(false);
+        SceneManager.LoadScene("Level" + GameController.level);
+    }
+
+    public void startMenu()
+    {
+        Time.timeScale = 1f;
+        levelUp.SetActive(false);
+        SceneManager.LoadScene("Start Menu");
+    }
+
+    public void nextLevel()
+    {
+        GameController.level++;
+        Time.timeScale = 1f;
+        levelUp.SetActive(false);
         SceneManager.LoadScene("Level" + GameController.level);
     }
 }

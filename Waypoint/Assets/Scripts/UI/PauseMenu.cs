@@ -4,29 +4,31 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class StartMenuButton : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
 
     //Button Array
     //place array
-    public GameObject canvas;
+    public GameObject pauseMenu;
     private int[] options;
     private int optionNum;
     private bool xAxisInUse = false;
     private bool yAxisInUse = false;
     private float gameSpeed;
-    private Button newGameBtn;
-    private Button exitBtn;
+    private Button resumeBtn;
+    private Button restartBtn;
+    private Button startMenuBtn;
     //private Transform selector;
 
 
     private void Start()
     {
-        options = new int[2];
+        pauseMenu.SetActive(false);
+        options = new int[3];
         optionNum = 0;
-        newGameBtn = canvas.transform.GetChild(1).GetComponent<Button>();
-        exitBtn = canvas.transform.GetChild(2).GetComponent<Button>();
-        //nextLevelBtn = transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
+        resumeBtn = transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();
+        restartBtn = transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
+        startMenuBtn = transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
     }
 
     private void Update()
@@ -45,7 +47,7 @@ public class StartMenuButton : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow) || (yAxisInUse && yValue == 1))
         {
-            if (optionNum != 1)
+            if (optionNum != 2)
             {
                 optionNum += 1;
             }
@@ -62,50 +64,68 @@ public class StartMenuButton : MonoBehaviour
             }
             else
             {
-                optionNum = 1;
+                optionNum = 2;
             }
         }
 
-        if (optionNum == 0)
+        if(optionNum  == 0)
         {
-            newGameBtn.Select();
+            resumeBtn.Select();
         }
         if (optionNum == 1)
         {
-            exitBtn.Select();
+            restartBtn.Select();
         }
-        /* uncomment when the next Level button exists
         if (optionNum == 2)
         {
-            nextLevelBtn.Select();
-        }*/
+            startMenuBtn.Select();
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("X"))
         {
-            if (optionNum == 0)
+            if (optionNum == 1)
             {
-                startGame();
+                Debug.Log("restart");
+                restartLevel();
             }
-            else if (optionNum == 1)
+            else if (optionNum == 2)
             {
-                Quit();
+                startMenu();
             }
-            /*   else if (optionNum == 2)
-               {
-                   nextLevel();
-               }*/
+            else if (optionNum == 0)
+            {
+                resume();
+            }
         }
+        
     }
 
-    public void Quit()
+    public void resume()
     {
-        Application.Quit();
-    }
-
-    public void startGame()
-    {
-        GameController.level = 1;
+        Debug.Log("resume");
         Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+    }
+
+    public void restartLevel()
+    {
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
         SceneManager.LoadScene("Level" + GameController.level);
     }
+
+    public void startMenu()
+    {
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+        SceneManager.LoadScene("Start Menu");
+    }
+
+    public void pause()
+    {
+        //Debug.Log("pause");
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
 }
