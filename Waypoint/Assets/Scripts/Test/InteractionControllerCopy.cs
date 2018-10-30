@@ -59,6 +59,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Debug.Log("Could not find worldspacecontroller");
 
 		
+		unlockAbilties();
+
+		
 	}
 	
 	// Update is called once per frame
@@ -80,10 +83,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 				//start healing
 				//setHealing = true;
 				if (targetTraveller != null && targetTraveller.tag=="Traveller") {
-					travellerScript tScript = targetTraveller.GetComponent<travellerScript>();
+					travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
 					if (pController.getResource() > 0) {
-					tScript.increaseCape();
-					pController.addResource(-0.1f);
+						//tScript.increaseCape();
+						tScript.GetHeal(1);
+						pController.addResource(-0.1f);
 					}
 					return;
 				}
@@ -119,6 +123,14 @@ public class InteractionControllerCopy : MonoBehaviour {
 			//if (setHealing)
 			//	setHealing = false;
 		}
+
+		if (currentTarget && targetTraveller) {
+			//interactionText.text = "Light";
+			popUpText.fontSize = 85;
+			popUpText.text =   "Light/Heal";
+			return;
+		}
+
 
 		if (currentTarget) {
 			//interactionText.text = "Light";
@@ -180,7 +192,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	}
 	*/
-	void OnTriggerEnter(Collider other) {
+	void OnTriggerStay(Collider other) {
 	//	Debug.Log(other.name);
 	//	if (other.tag == "Monster") {
 			//add to array
@@ -315,25 +327,26 @@ public class InteractionControllerCopy : MonoBehaviour {
 	  void unlockAbilties() {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         //if ()
-        //Debug.Log(SceneManager.GetActiveScene().name);
+        Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name.CompareTo("Level1") == 0) {
             healUnlocked = false;
 			stunUnlocked = false;
 
         }
         else if (SceneManager.GetActiveScene().name.CompareTo("Level2") == 0) {
-             healUnlocked = true;
-			 stunUnlocked = true;
+             healUnlocked = false;
+			 stunUnlocked = false;
         }
 
         else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0) {
-            healUnlocked = true;
-			 stunUnlocked = true;
+            healUnlocked = false;
+			stunUnlocked = false;
 			
         }
         else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
+			Debug.Log("Unlock for level4");
             healUnlocked = true;
-			 stunUnlocked = true;
+			stunUnlocked = true;
         }
     }
 
