@@ -24,6 +24,7 @@ public class travellerMovement : MonoBehaviour
     travellerHealth travellerHealth;
     GameObject[] lamps;
     List<GameObject> history = new List<GameObject>();
+    bool closeToExit;
     bool finishLevel;
 
 
@@ -40,16 +41,20 @@ public class travellerMovement : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         travellerHealth = GetComponent<travellerHealth>();
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
-        finishLevel = false;
+        closeToExit = false;
     }
 
     void Update()
     {
-        if (!finishLevel){
+        if (!closeToExit){
             FindCurrent();
             FindJustVisited();
             MoveToTarget();
             Animating();
+        }
+        if (Vector3.Distance(exitPoint.position, transform.position) < 0.3)
+        {
+            loadNextLevel();
         }
     }
 
@@ -57,9 +62,9 @@ public class travellerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Exit"))
         {
-            finishLevel = true;
+            closeToExit = true;
             nav.SetDestination(exitPoint.position);
-            loadNextLevel();
+
         }
         else if (other.gameObject.CompareTag("Monster")){
             if (other.GetType() == typeof(CapsuleCollider)){
