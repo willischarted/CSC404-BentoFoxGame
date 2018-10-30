@@ -76,6 +76,8 @@ public class EndLevel : MonoBehaviour
             startMenuBtn.Select();
         }
         /* uncomment when the next Level button exists
+         * Also when the next nevel button exists, it should probably be 
+         * option 0 instead
         if (optionNum == 2)
         {
             nextLevelBtn.Select();
@@ -108,7 +110,7 @@ public class EndLevel : MonoBehaviour
     {
         Time.timeScale = 1f;
         levelUp.SetActive(false);
-        SceneManager.LoadScene("Level" + GameController.level);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void startMenu()
