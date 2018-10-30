@@ -25,7 +25,7 @@ public class travellerMovement : MonoBehaviour
     GameObject[] lamps;
     List<GameObject> history = new List<GameObject>();
     bool closeToExit;
-
+    public bool beatLevel = false;
 
 
     // Use this for initialization
@@ -53,6 +53,7 @@ public class travellerMovement : MonoBehaviour
         }
         if (Vector3.Distance(exitPoint.position, transform.position) < 0.3)
         {
+            beatLevel = true;
             loadNextLevel();
         }
     }
