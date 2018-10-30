@@ -56,6 +56,7 @@ public class playerControllerCopy: MonoBehaviour {
     public float lightValueOn;
 
     private bool toggleUnlocked;
+    private bool inTutorial;
 
     void Awake(){
         equippedLight = 1;
@@ -84,6 +85,8 @@ public class playerControllerCopy: MonoBehaviour {
 	
 	// Update is called once per frame
     void Update() {
+        if (inTutorial)
+            return;
 
       
          // Toggle between 4 types of light magic
@@ -151,6 +154,8 @@ public class playerControllerCopy: MonoBehaviour {
 
     void FixedUpdate()
     {
+        if (inTutorial)
+            return;
         if (!restrictMovement){
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
@@ -504,5 +509,9 @@ public class playerControllerCopy: MonoBehaviour {
         }
         return false;
     }
+
+    public void setInTutorial(bool _inTutorial){
+        inTutorial = _inTutorial;
+    }   
 
 }

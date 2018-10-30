@@ -5,35 +5,55 @@ using UnityEngine.Video;
 using UnityEngine.UI;
  public class tutorialVideoPlayer : MonoBehaviour {
 	RenderTexture rTexture;
- 	private VideoPlayer player;
+ 	private VideoPlayer vPlayer;
 	private RawImage image;
+
+	private playerControllerCopy pScript;
+	private InteractionControllerCopy iScript;
+
+	public GameObject nextTutorial;
+
  	void Awake(){
 	
 	}
 	// Use this for initialization
 	void Start () {
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		if (player == null)
+			Debug.Log("Could not find player");
+		pScript = player.GetComponent<playerControllerCopy>();
+		if (pScript == null)
+			Debug.Log("Could not find pScript");
+		
+		iScript = player.GetComponentInChildren<InteractionControllerCopy>();
+		if (iScript == null) {
+			Debug.Log("Could not find the ineteractioncontroller");
+		}
+
+		pScript.setInTutorial(true);
+		iScript.setInTutorial(true);
 		
 		
  		//player.
 		//
-		player = GetComponent<VideoPlayer>();
-		if (player == null)
+		vPlayer = GetComponentInChildren<VideoPlayer>();
+		if (vPlayer == null)
 			Debug.Log("Could not find video player");
-		image = GetComponent<RawImage>();
+		image = GetComponentInChildren<RawImage>();
 		if (image == null) 
 			Debug.Log("Could not find image");
- 		Debug.Log((int)player.clip.width);
-		Debug.Log((int)player.clip.height);
+ 		Debug.Log((int)vPlayer.clip.width);
+		Debug.Log((int)vPlayer.clip.height);
 		
-		rTexture = new RenderTexture((int)player.clip.width, (int)player.clip.height, 0);
-		rTexture = new RenderTexture((int)player.clip.width, (int)player.clip.height, 0);
+		rTexture = new RenderTexture((int)vPlayer.clip.width, (int)vPlayer.clip.height, 0);
+		rTexture = new RenderTexture((int)vPlayer.clip.width, (int)vPlayer.clip.height, 0);
 		
-		player.targetTexture = rTexture;
+		vPlayer.targetTexture = rTexture;
         image.texture = rTexture;
  
         Vector3 scale = image.transform.localScale;
  
-        scale.y = player.clip.height / (float)player.clip.width * scale.y;
+        scale.y = vPlayer.clip.height / (float)vPlayer.clip.width * scale.y;
  
         image.transform.localScale = scale;
  		
@@ -44,10 +64,30 @@ using UnityEngine.UI;
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.P)) {
-			player.Play();
+			vPlayer.Play();
 		}	
 		if (Input.GetKeyDown(KeyCode.S)) {
-			player.Stop();
+			vPlayer.Stop();
 		}	
+
+		if (Input.GetButtonDown("X") || Input.GetMouseButton(0) ) {
+			//x out of th
+			
+		
+
+			if (nextTutorial != null) {
+				nextTutorial.SetActive(true);
+
+			}
+			else{
+				pScript.setInTutorial(false);
+				iScript.setInTutorial(false);
+			}
+			this.gameObject.SetActive(false);
+
+
+			//call player -> not in tutorial anymore.
+
+		}
 	}
  }

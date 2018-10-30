@@ -40,7 +40,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 	private bool stunUnlocked;
 
 
-	 
+	private bool inTutorial;
+
 
 
 
@@ -67,7 +68,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
+		if (inTutorial)
+			return;
 		//axis playtesting
 		//Debug.Log(Input.GetAxis("DPadX"));
 		//Debug.Log(Input.GetAxis("DPadY"));
@@ -360,6 +362,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 			stunUnlocked = true;
         }
     }
+
+	public void setInTutorial(bool _inTutorial) {
+		inTutorial = _inTutorial;
+	}
 
 
 	
