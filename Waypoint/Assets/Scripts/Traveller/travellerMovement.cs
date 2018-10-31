@@ -68,7 +68,7 @@ public class travellerMovement : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Monster")){
             if (other.GetType() == typeof(CapsuleCollider)){
-                travellerHealth.TakeBasicDamage(20);
+                travellerHealth.TakeBasicDamage(10);
             }     
         }
     }
