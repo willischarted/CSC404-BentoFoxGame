@@ -80,7 +80,7 @@ public class RotateCamera : MonoBehaviour {
         currentX += Input.GetAxis("Mouse X") * turnSpeedX;
         
         // * -1f to make it  inverted/Notinverted
-        currentY += Input.GetAxis("Mouse Y") * turnSpeedY * -1f;
+        currentY += Input.GetAxis("Mouse Y") * turnSpeedY * 1f;
         // Ensure it is within min and max y camera bounds
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
 
