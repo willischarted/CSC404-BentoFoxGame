@@ -98,7 +98,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (Input.GetMouseButton(1) || Input.GetButton("Square")) {
 			heldDuration += Time.deltaTime;
-			if (heldDuration > 0.75f) { //&& !setHealing) {
+			if (heldDuration > 0.5f) { //&& !setHealing) {
 				//start healing
 				//setHealing = true;
 				if (targetTraveller != null && targetTraveller.tag=="Traveller") {
@@ -122,7 +122,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			
 
 			//0.2f is general approximation of a tap
-			if (heldDuration <= 0.75f) {
+			if (heldDuration <= 0.5f) {
 
 			
 				//start impulse
