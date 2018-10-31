@@ -252,6 +252,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (litLamp == adjacentlamp)
                 {
+                    targetLamp = litLamp;
                     currentTarget = litLamp.transform.position;
                     nav.SetDestination(currentTarget);
                     movingToLamp = true;
