@@ -237,7 +237,7 @@ public class playerControllerCopy: MonoBehaviour {
                     Debug.Log("Sending signal to all monsters");
                     GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
                     foreach (GameObject g in monsters) {
-                        EnemyMovement eScript = GetComponent<EnemyMovement>();
+                        EnemyMovement eScript = g.GetComponent<EnemyMovement>();
                         if (eScript ==null)
                             Debug.Log("Could not find script for monster");
                         else {
