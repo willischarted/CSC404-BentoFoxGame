@@ -140,7 +140,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			//if (setHealing)
 			//	setHealing = false;
 		}
-		if (Input.GetButtonDown("X") || Input.GetMouseButton(1)) {
+		if (Input.GetButtonDown("X") || Input.GetMouseButton(0)) {
 				//call stun enemy function
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
 					pController.setTargetLight(currentTarget);
