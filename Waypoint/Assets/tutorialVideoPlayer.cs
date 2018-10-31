@@ -18,6 +18,7 @@ using UnityEngine.UI;
 	}
 	// Use this for initialization
 	void Start () {
+		Time.timeScale = 0f;
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		if (player == null)
 			Debug.Log("Could not find player");
@@ -84,6 +85,7 @@ using UnityEngine.UI;
 				iScript.setInTutorial(false);
 			}
 			this.gameObject.SetActive(false);
+			Time.timeScale = 1f;
 
 
 			//call player -> not in tutorial anymore.
