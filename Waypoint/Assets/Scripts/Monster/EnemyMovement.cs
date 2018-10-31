@@ -3,7 +3,8 @@ using UnityEngine.AI;
 using UnityEngine;
 
 
-public class EnemyMovement : MonoBehaviour {
+public class EnemyMovement : MonoBehaviour
+{
 
     Transform traveller;
     Animator monsterAnim;
@@ -15,7 +16,7 @@ public class EnemyMovement : MonoBehaviour {
     public float maxRotation = 45f;
     float timer = 0f;
     Vector3 direction;
-    Vector3 upward; 
+    Vector3 upward;
 
     public float MAX_LD;
     public GameObject lastVisited;
@@ -70,13 +71,14 @@ public class EnemyMovement : MonoBehaviour {
                 }
             }
 
-         
+
         }
-        
+
     }
 
 
-    void Update() {
+    void Update()
+    {
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
             Debug.Log("Stunned");
@@ -107,7 +109,7 @@ public class EnemyMovement : MonoBehaviour {
         {
             Debug.Log("Alerted");
             RaycastHit hit;
-            if (Physics.Raycast(transform.position + upward , direction.normalized, out hit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position + upward, direction.normalized, out hit, Mathf.Infinity))
             {
                 if (hit.collider.gameObject.transform == traveller)
                 {
@@ -141,11 +143,11 @@ public class EnemyMovement : MonoBehaviour {
         else
         {
             if (!movingToLamp)
-                { // not currently moving, find new place to move to
+            { // not currently moving, find new place to move to
                 Debug.Log("not moving");
                 moveToLamp();
-                }
-            else if (Vector3.Distance(transform.position,currentTarget) < lampDistance)
+            }
+            else if (Vector3.Distance(transform.position, currentTarget) < lampDistance)
             { //reached destination, should make this variable public for testing
                 movingToLamp = false;
                 Debug.Log("in the elseif");
@@ -158,8 +160,9 @@ public class EnemyMovement : MonoBehaviour {
             }
         }
     }
-    
-    public void moveToLamp() {
+
+    public void moveToLamp()
+    {
         Debug.Log("in the move to lamp");
         if (currentLamp == null) // initial gamestate when monster is first placed
         {
@@ -191,7 +194,7 @@ public class EnemyMovement : MonoBehaviour {
                     possibleTargets.Add(adjacentlamp);
                 }
             }
-            if (lController.getCurrentLightType() == 1 || lController.getCurrentLightType() ==3) //possible bug need to fix when lamps are implemented
+            if (lController.getCurrentLightType() == 1 || lController.getCurrentLightType() == 3) //possible bug need to fix when lamps are implemented
             {
                 currentTarget = transform.position;
                 nav.SetDestination(currentTarget);
@@ -228,20 +231,31 @@ public class EnemyMovement : MonoBehaviour {
     public void monsterLampLit(GameObject litLamp)
     {
         Debug.Log("MonsterLampLit");
-
-        lightSourceController lController = currentLamp.GetComponentInParent<lightSourceController>();
+        GameObject lamp;
+        if (targetLamp == null)
+        {
+            lamp = currentLamp;
+        }
+        else
+        {
+            lamp = targetLamp;
+        }
+        lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
         if (lController == null)
         {
             Debug.Log("Could not find lightsourcontroller");
         }
-        GameObject[] adjacentLamps = lController.getAdjacentSources();
-        foreach (GameObject adjacentlamp in adjacentLamps)
+        else
         {
-            if (litLamp == adjacentlamp)
+            GameObject[] adjacentLamps = lController.getAdjacentSources();
+            foreach (GameObject adjacentlamp in adjacentLamps)
             {
-                currentTarget = litLamp.transform.position;
-                nav.SetDestination(currentTarget);
-                movingToLamp = true;
+                if (litLamp == adjacentlamp)
+                {
+                    currentTarget = litLamp.transform.position;
+                    nav.SetDestination(currentTarget);
+                    movingToLamp = true;
+                }
             }
         }
     }
