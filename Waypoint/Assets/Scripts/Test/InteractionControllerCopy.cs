@@ -35,6 +35,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 	private WorldSpaceObjectController popUpController2;
 	public Text popUpText2;
 
+	public GameObject interactionPopUp3;
+	private WorldSpaceObjectController popUpController3;
+	public Text popUpText3;
+
 	public float textVerticalOffset;
 
 
@@ -65,6 +69,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		popUpController2 = interactionPopUp2.GetComponent<WorldSpaceObjectController>();
 		if (popUpController2 == null)
+			Debug.Log("Could not find worldspacecontroller");
+		
+		popUpController3 = interactionPopUp3.GetComponent<WorldSpaceObjectController>();
+		if (popUpController3 == null)
 			Debug.Log("Could not find worldspacecontroller");
 
 
@@ -165,12 +173,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 
 		
-		if (targetMonster && targetTraveller) {
-			//interactionText.text = "Stun";
-			popUpText2.fontSize = 80;
-			popUpText2.text =   "Press to Stun/Hold to heal";
-			return;
-		}
+	
 		
 
 
@@ -182,8 +185,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
 		if (targetTraveller) {
 			//interactionText.text = "(Hold) Heal";
-			popUpText2.fontSize = 90;
-			popUpText2.text = "Hold to Heal";
+			popUpText3.fontSize = 90;
+			popUpText3.text = "Hold to Heal";
 			return;
 		}
 		
@@ -231,10 +234,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (other.tag == "Traveller" && healUnlocked) {
 			targetTraveller = other.gameObject;
 			//interactionText.text = "Hold X to transfer light to Traveller";
-			interactionPopUp2.SetActive(true);
+			interactionPopUp3.SetActive(true);
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y +textVerticalOffset;
-			popUpController2.updateWorldObjectTransform(popUpLocation);
+			popUpController3.updateWorldObjectTransform(popUpLocation);
 			controlLureImage();
 			return;
 		}
@@ -271,7 +274,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (other.tag == "Traveller" && other.gameObject == targetTraveller) {
 			//currentTarget = null;
-			interactionPopUp2.SetActive(false);
+			interactionPopUp3.SetActive(false);
 			targetTraveller = null;
 			//interactionText.text  = "";
 			return;
