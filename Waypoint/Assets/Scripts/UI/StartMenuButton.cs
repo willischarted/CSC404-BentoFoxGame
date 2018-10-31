@@ -35,16 +35,47 @@ public class StartMenuButton : MonoBehaviour
         float yValue = Input.GetAxis("DPadY");
         if (yValue != 0f)
         {
+           
             if (!yAxisInUse)
             {
-                yAxisInUse = true;
+                 Debug.Log("pressed dpad");
+                if (yValue == 1f) {
+                  yAxisInUse = true;
+                  if (optionNum != 1)
+                {
+                    optionNum += 1;
+                 }
+                 else
+                     {
+                    optionNum = 0;
+                    }
+                }
+            else if (yValue == -1f){
+                 yAxisInUse = true;
+                if (optionNum != 1)
+                {
+                    optionNum += 1;
+                 }
+                else
+                {
+                optionNum = 0;
+                 }
             }
+
+               
+            }
+           
         }
-        if (yValue == 0)
+
+        if (yValue == 0) {
             yAxisInUse = false;
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || (yAxisInUse && yValue == 1))
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))// || (yAxisInUse && yValue == 1)
+
         {
+            Debug.Log("Incrementing");
             if (optionNum != 1)
             {
                 optionNum += 1;
@@ -54,7 +85,7 @@ public class StartMenuButton : MonoBehaviour
                 optionNum = 0;
             }
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) || (yAxisInUse && yValue != 1))
+        if (Input.GetKeyDown(KeyCode.UpArrow))// || (yAxisInUse && yValue != 1)
         {
             if (optionNum != 0)
             {
