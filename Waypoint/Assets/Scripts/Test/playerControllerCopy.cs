@@ -8,9 +8,9 @@ using UnityEngine.SceneManagement;
 public class playerControllerCopy: MonoBehaviour {
     //enum lightType {Default, Traveller, Monster};
 
-    public string color1;
-    public string color2;
-    public string color3;
+    public Color color1;
+    public Color color2;
+    public Color color3;
 
     public float speed;
     public Text countText;
@@ -314,20 +314,20 @@ public class playerControllerCopy: MonoBehaviour {
             //Color.TryParseHexString("#F00", out light.color);
             //light.color = Color.blue;//Color.yellow;
 
-            ColorUtility.TryParseHtmlString(color1, out c);
-            light.color = c;
+          //  ColorUtility.TryParseHtmlString(color1, out c);
+            light.color = color1;
 
         }
         else if (color == 2) {
             //light.color = Color.red;
             //light.color = Color.green;
-            ColorUtility.TryParseHtmlString(color2, out c);
-            light.color = c;
+            //ColorUtility.TryParseHtmlString(color2, out c);
+            light.color = color2;
         }
         else if (color == 3) {
             //light.color = Color.red;
-            ColorUtility.TryParseHtmlString(color3, out c);
-            light.color = c;
+           // ColorUtility.TryParseHtmlString(color3, out c);
+            light.color = color3;
         }
       //  else if (color == 3) {
       //      light.color = Color.green;
