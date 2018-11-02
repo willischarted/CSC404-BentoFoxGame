@@ -14,5 +14,6 @@ public class tiedLight : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         lt.intensity = parentLight.intensity;
+		lt.color = parentLight.color;
     }
 }

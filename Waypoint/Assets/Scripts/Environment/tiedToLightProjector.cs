@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class tiedToLight : MonoBehaviour {
+public class tiedToLightProjector : MonoBehaviour {
     public Light parentLight;
     private Projector obj;
 	// Use this for initialization
@@ -14,6 +14,7 @@ public class tiedToLight : MonoBehaviour {
 	void Update () {
         if (parentLight.intensity > 0 && parentLight.enabled == true)
         {
+            obj.material.SetColor("_Color", parentLight.color);
             obj.enabled = true;
         }
         else
