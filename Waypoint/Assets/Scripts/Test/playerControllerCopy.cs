@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 public class playerControllerCopy: MonoBehaviour {
     //enum lightType {Default, Traveller, Monster};
 
+    public string color1;
+    public string color2;
+    public string color3;
+
     public float speed;
     public Text countText;
     private Rigidbody rb;
@@ -57,6 +61,8 @@ public class playerControllerCopy: MonoBehaviour {
 
     private bool toggleUnlocked;
     private bool inTutorial;
+
+    
 
     void Awake(){
         equippedLight = 1;
@@ -303,16 +309,25 @@ public class playerControllerCopy: MonoBehaviour {
         */
     }
     void setLightColor(Light light, int color) {
+        Color c;
         if (color == 1) {
             //Color.TryParseHexString("#F00", out light.color);
-            light.color = Color.yellow;//Color.yellow;
+            //light.color = Color.blue;//Color.yellow;
+
+            ColorUtility.TryParseHtmlString(color1, out c);
+            light.color = c;
+
         }
         else if (color == 2) {
             //light.color = Color.red;
-            light.color = Color.green;
+            //light.color = Color.green;
+            ColorUtility.TryParseHtmlString(color2, out c);
+            light.color = c;
         }
         else if (color == 3) {
-            light.color = Color.red;
+            //light.color = Color.red;
+            ColorUtility.TryParseHtmlString(color3, out c);
+            light.color = c;
         }
       //  else if (color == 3) {
       //      light.color = Color.green;
