@@ -69,10 +69,10 @@ MonoBehaviour:
       screenEdgeMask:
         intensity: 0.03
   depthOfField:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
-      focusDistance: 2.3
-      aperture: 5.6
+      focusDistance: 4
+      aperture: 4
       focalLength: 50
       useCameraFov: 0
       kernelSize: 2
@@ -100,10 +100,10 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.3
+        intensity: 0.04
         threshold: 1.5
-        softKnee: 0.5
-        radius: 7
+        softKnee: 0.528
+        radius: 3.28
         antiFlicker: 1
       lensDirt:
         texture: {fileID: 0}
@@ -121,11 +121,11 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0
-        temperature: -24
-        tint: 17
+        temperature: -15
+        tint: 25
         hueShift: 0
-        saturation: 1
-        contrast: 1.15
+        saturation: 0.92
+        contrast: 1.02
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
@@ -149,6 +149,15 @@ MonoBehaviour:
             - serializedVersion: 3
               time: 0
               value: 0
+              inSlope: 0
+              outSlope: 1
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 0.77
+              value: 0.7714286
               inSlope: 1
               outSlope: 1
               tangentMode: 0
@@ -159,7 +168,7 @@ MonoBehaviour:
               time: 1
               value: 1
               inSlope: 1
-              outSlope: 1
+              outSlope: 0
               tangentMode: 0
               weightedMode: 0
               inWeight: 0
@@ -322,9 +331,9 @@ MonoBehaviour:
       mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.52
-      smoothness: 0.3
-      roundness: 0.8
+      intensity: 0.4
+      smoothness: 0.409
+      roundness: 0.698
       mask: {fileID: 0}
       opacity: 1
       rounded: 0
