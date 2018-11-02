@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class lantern_01_matswitcher : MonoBehaviour {
     public Material lit_mat;
+    public Light lt;
     private GameObject lightObject;
     private lightSourceController lightScript;
     private MeshRenderer my_renderer;
@@ -28,6 +29,7 @@ public class lantern_01_matswitcher : MonoBehaviour {
         } else
         {
             my_renderer.material = lit_mat;
+            my_renderer.material.SetColor("_EmissionColor", lt.color);
         }
 	}
 }
