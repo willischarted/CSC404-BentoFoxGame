@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: playerbody 2
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 9cbc9a5f684fc974298f917f43e07f02, type: 3}
   m_ShaderKeywords: _GLOSSYREFLECTIONS_OFF _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1ff5d604277000b48a9ba925dc7990b9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -54,6 +54,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 2800000, guid: 65b82234ad162304ab9906179785c644, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 2800000, guid: 65b82234ad162304ab9906179785c644, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -65,6 +73,8 @@ Material:
     - _Metallic: 0.138
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OutlineDot: 0.25
+    - _OutlineExtrusion: 0
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
@@ -74,3 +84,4 @@ Material:
     m_Colors:
     - _Color: {r: 0.8962264, g: 0.1442318, b: 0.097232126, a: 1}
     - _EmissionColor: {r: 0.05882353, g: 0.05882353, b: 0.05882353, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
