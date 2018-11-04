@@ -45,6 +45,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 
 	private bool healUnlocked;
+	private bool canHeal;
 	private bool stunUnlocked;
 
 
@@ -57,6 +58,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	void Start () {
 		//impulseCooldown = 5.0f;
 		//setImpulse = false;
+		canHeal = false;
 		setHealing = false;
 		pController = GetComponentInParent<playerControllerCopy>();
 		if (pController == null) {
@@ -96,12 +98,12 @@ public class InteractionControllerCopy : MonoBehaviour {
         
 		//Debug.Log(currentTarget);
 
-		if (Input.GetMouseButton(1) || Input.GetButton("Square")) {
+		if (Input.GetMouseButtonDown(1) || Input.GetButton("Square")) {
 			heldDuration += Time.deltaTime;
 			if (heldDuration > 0.5f) { //&& !setHealing) {
 				//start healing
 				//setHealing = true;
-				if (targetTraveller != null && targetTraveller.tag=="Traveller") {
+				if (targetTraveller != null && targetTraveller.tag == "Traveller" && canHeal) {
 					travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
 					if (pController.getResource() > 0) {
 						//tScript.increaseCape();
@@ -140,7 +142,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			//if (setHealing)
 			//	setHealing = false;
 		}
-		if (Input.GetButtonDown("X") || Input.GetMouseButton(0)) {
+		if (Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)) {
 				//call stun enemy function
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
 					pController.setTargetLight(currentTarget);
@@ -233,12 +235,24 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (other.tag == "Traveller" && healUnlocked) {
 			targetTraveller = other.gameObject;
-			//interactionText.text = "Hold X to transfer light to Traveller";
-			interactionPopUp3.SetActive(true);
-			Vector3 popUpLocation = other.gameObject.transform.position;
-			popUpLocation.y = popUpLocation.y +textVerticalOffset;
-			popUpController3.updateWorldObjectTransform(popUpLocation);
-			controlLureImage();
+			travellerHealth tHealth = targetTraveller.GetComponent<travellerHealth>();
+			if (tHealth == null)
+				Debug.Log("Could not get traveller health script");
+			if (tHealth.currentHealth != tHealth.startingHealth) {
+				canHeal = true;
+				//interactionText.text = "Hold X to transfer light to Traveller";
+				interactionPopUp3.SetActive(true);
+				Vector3 popUpLocation = other.gameObject.transform.position;
+				popUpLocation.y = popUpLocation.y +textVerticalOffset;
+				popUpController3.updateWorldObjectTransform(popUpLocation);
+				controlLureImage();
+				//return;
+			}
+			else { 
+				interactionPopUp3.SetActive(false);
+				canHeal = false;
+
+			}
 			return;
 		}
 

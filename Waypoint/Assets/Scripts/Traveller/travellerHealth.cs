@@ -79,7 +79,8 @@ public class travellerHealth : MonoBehaviour {
     //TODO: getHeal
     public void GetHeal(int amount){
         healed = true;
-        currentHealth += amount;
+        Mathf.Clamp(currentHealth += amount, 0, startingHealth);
+       // currentHealth += amount;
         healthSlider.value = currentHealth;
 
         //TODO: clothe material change, not function now
