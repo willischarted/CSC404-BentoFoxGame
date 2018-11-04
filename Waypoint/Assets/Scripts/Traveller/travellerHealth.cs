@@ -18,6 +18,9 @@ public class travellerHealth : MonoBehaviour {
 
     private GameOver gameEnder;
     Material cloak;
+    Material hood;
+    Material l_ear;
+    Material r_ear;
     float lightValue;
     Animator anim;
     travellerMovement travellerMovement;
@@ -25,6 +28,7 @@ public class travellerHealth : MonoBehaviour {
     bool isLowHealth;
     bool damaged;
     bool healed;
+    //Material cloaktwo;
 
 	void Awake ()
     {
@@ -33,7 +37,14 @@ public class travellerHealth : MonoBehaviour {
         travellerMovement = GetComponent<travellerMovement>();
         currentHealth = startingHealth;
 
-        cloak = transform.Find("Traveler_Base").GetComponentInChildren<MeshRenderer>().material;
+        cloak = transform.Find("traveler").transform.Find("model:geo")
+            .transform.Find("model:dress_GEO").GetComponentInChildren<SkinnedMeshRenderer>().material;
+        hood = transform.Find("traveler").transform.Find("model:geo")
+            .transform.Find("model:hoodie_GEO").GetComponentInChildren<SkinnedMeshRenderer>().material;
+        l_ear = transform.Find("traveler").transform.Find("model:geo")
+            .transform.Find("model:ear_L_GEO").GetComponentInChildren<SkinnedMeshRenderer>().material;
+        r_ear = transform.Find("traveler").transform.Find("model:geo")
+            .transform.Find("model:ear_R_GEO").GetComponentInChildren<SkinnedMeshRenderer>().material;
         //cloak = GetComponent<MeshRenderer>().material;
         lightValue =  0.005f;
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
@@ -47,9 +58,13 @@ public class travellerHealth : MonoBehaviour {
         {
             TakeBasicDamage(10);
             Debug.Log(lightValue);
+            Debug.Log("cloak: " + cloak);
             lightValue = lightValue * (currentHealth / startingHealth);
             lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
             cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+            hood.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+            l_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+            r_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         }
 
         if(damaged){
