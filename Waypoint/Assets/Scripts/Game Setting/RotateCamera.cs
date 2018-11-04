@@ -6,6 +6,10 @@ using UnityEngine.UI;
 public class RotateCamera : MonoBehaviour {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Current values for the camera rotation
+    public float currentX;
+    public float currentY;  //starting rotation value
+
      // Minimum and Maximum to the camera rotation y value
     private const float yAngleMin = 0.0f;
     private const float yAngleMax = 50.0f; 
@@ -15,9 +19,7 @@ public class RotateCamera : MonoBehaviour {
     public Transform target;
     private playerControllerCopy targetController;
 
-    // Current values for the camera rotation
-    private float currentX = 0.0f;
-    private float currentY = 25.0f;  //starting rotation value
+
 
 
     // Sensitivity multiplier for panning camera
@@ -71,18 +73,20 @@ public class RotateCamera : MonoBehaviour {
         targetController = target.GetComponent<playerControllerCopy>();
         if (targetController == null)
             Debug.Log("Could not find targetcontroller!");
+
+   
      }
     
 
     void Update() {
-
+      
         if (!tacticalView && !cameraMoving && !cameraMovingBack) {
-        currentX += Input.GetAxis("Mouse X") * turnSpeedX;
+            currentX += Input.GetAxis("Mouse X") * turnSpeedX;
         
-        // * -1f to make it  inverted/Notinverted
-        currentY += Input.GetAxis("Mouse Y") * turnSpeedY * 1f;
-        // Ensure it is within min and max y camera bounds
-        currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+            // * -1f to make it  inverted/Notinverted
+            currentY += Input.GetAxis("Mouse Y") * turnSpeedY * 1f;
+            // Ensure it is within min and max y camera bounds
+            currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
 
         }
         
@@ -201,10 +205,21 @@ public class RotateCamera : MonoBehaviour {
          if (!tacticalView && !cameraMoving && !cameraMovingBack) {
              
      
-            
-            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-            transform.position = target.position + rotation * offset;
-            transform.LookAt(target.position);
+          //  Debug.Log(currentX);
+           // Debug.Log(currentY);
+            Quaternion rotation;
+           // if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") !=0) {
+                rotation = Quaternion.Euler(currentY, currentX, 0);
+                
+                transform.LookAt(target.position);
+                transform.position = target.position + rotation * offset;
+           // }
+         //  else {
+         //       rotation =  Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
+         //       transform.LookAt(target.position);
+         //       transform.position = target.position + rotation * offset;
+         //  }
+          //  transform.position = target.position + rotation * offset;
              
 
          }
