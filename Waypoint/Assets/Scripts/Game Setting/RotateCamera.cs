@@ -127,7 +127,7 @@ public class RotateCamera : MonoBehaviour {
             targetController.setRestrictMovement(true);
         }
 */
-        
+        /* 
         if (cameraMoving) {
             moveCamera();
             if (Vector3.Distance(transform.position, tacticleDestination) < 1f) {
@@ -169,6 +169,7 @@ public class RotateCamera : MonoBehaviour {
             //transform.Translate(moveDirection * Time.deltaTime * cameraSpeed);
             transform.position = transform.position += moveDirection;
         }
+        */
 
     }
 
@@ -205,22 +206,10 @@ public class RotateCamera : MonoBehaviour {
          if (!tacticalView && !cameraMoving && !cameraMovingBack) {
              
      
-          //  Debug.Log(currentX);
-           // Debug.Log(currentY);
-            Quaternion rotation;
-           // if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") !=0) {
-                rotation = Quaternion.Euler(currentY, currentX, 0);
-                
-                transform.LookAt(target.position);
-                transform.position = target.position + rotation * offset;
-           // }
-         //  else {
-         //       rotation =  Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
-         //       transform.LookAt(target.position);
-         //       transform.position = target.position + rotation * offset;
-         //  }
-          //  transform.position = target.position + rotation * offset;
-             
+            Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
+            transform.position = target.position + rotation * offset;
+            transform.LookAt(target.position);
+
 
          }
      }
