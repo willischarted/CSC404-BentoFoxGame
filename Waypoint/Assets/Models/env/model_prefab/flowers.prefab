@@ -9,44 +9,44 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1242417759902764}
+  m_RootGameObject: {fileID: 1425045568567542}
   m_IsPrefabAsset: 1
---- !u!1 &1242417759902764
+--- !u!1 &1425045568567542
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4992993977857962}
-  - component: {fileID: 33561458046026214}
-  - component: {fileID: 23040684396608876}
+  - component: {fileID: 4652194536299624}
+  - component: {fileID: 33781824264760342}
+  - component: {fileID: 23123439423748400}
   m_Layer: 0
-  m_Name: fern
+  m_Name: flowers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4992993977857962
+--- !u!4 &4652194536299624
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242417759902764}
-  m_LocalRotation: {x: -0.51805854, y: -0.48126435, z: -0.48126462, w: 0.51805824}
-  m_LocalPosition: {x: -0.72749835, y: -0.0008647119, z: -5.989632}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_GameObject: {fileID: 1425045568567542}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 1.4516792, y: 0.042026646, z: -5.5479155}
+  m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23040684396608876
+--- !u!23 &23123439423748400
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242417759902764}
+  m_GameObject: {fileID: 1425045568567542}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
@@ -56,7 +56,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 734adc62621e88642ba525b9a83a0933, type: 2}
+  - {fileID: 2100000, guid: e0a9746ad1faa2c428aaf90d86a68e66, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,10 +76,10 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33561458046026214
+--- !u!33 &33781824264760342
 MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1242417759902764}
-  m_Mesh: {fileID: 4300000, guid: 178f529803212f04f84fea81eb363b93, type: 3}
+  m_GameObject: {fileID: 1425045568567542}
+  m_Mesh: {fileID: 4300000, guid: e089ab7e1baa26f4fac5bf2bcfe87176, type: 3}
