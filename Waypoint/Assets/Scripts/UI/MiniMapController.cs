@@ -13,6 +13,7 @@ public class MiniMapController : MonoBehaviour {
 
 	//public GameObject indicatorIcon;
 	public GameObject onscreenIcon;
+	public GameObject onscreenIconTraveller;
 
 	public Canvas canvas;
 
@@ -42,6 +43,8 @@ public class MiniMapController : MonoBehaviour {
 
 
 		Vector3 travScreenPos = Camera.main.WorldToScreenPoint(trav.position);
+
+		Vector3 travIconScreenPos = Camera.main.WorldToScreenPoint(trav.position);
 	//	Vector3 travScreenPos = miniMapCamera.WorldToScreenPoint(trav.position);
 		
 		
@@ -60,6 +63,7 @@ public class MiniMapController : MonoBehaviour {
 
 			//get rid of the arrow indicator?
 			onscreenIcon.SetActive(false);
+			onscreenIconTraveller.SetActive(false);
 			//onscreenIcon.transform.parent = null;
 			//indicatorIcon.SetActive(false);
 		}
@@ -77,6 +81,7 @@ public class MiniMapController : MonoBehaviour {
 
 			// make the center point of the screen 0,0 instead of bottom left
 			travScreenPos -= screenCenter;
+			travIconScreenPos -= screenCenter;
 
 			//find angle between center of screen and where arrow will be pointing
 			float indicatorAngle = Mathf.Atan2(travScreenPos.y, travScreenPos.x);
@@ -89,34 +94,49 @@ public class MiniMapController : MonoBehaviour {
 			//now we must find out where the put the arrow
 			travScreenPos = screenCenter + new Vector3(angleSin*150, angleCos * 150, 0);
 
+			travIconScreenPos = screenCenter + new Vector3(angleSin*150, angleCos * 150, 0);
+
 			//slope formula
 			float m = angleCos / angleSin;
 
 			Vector3 screenBounds = screenCenter * 0.85f;
+			Vector3 iconScreenBounds = screenCenter * 0.70f;
 
 			//up/down
 			if (angleCos >0) {
 				travScreenPos = new Vector3(screenBounds.y/m, screenBounds.y, 0);
+				travIconScreenPos = new Vector3(iconScreenBounds.y/m, iconScreenBounds.y, 0);
 			}
 			//down
 			else {
 				travScreenPos = new Vector3(-screenBounds.y/m, -screenBounds.y, 0);
+				travIconScreenPos = new Vector3(-iconScreenBounds.y/m, -iconScreenBounds.y, 0);
 			}
 			// out of bounds, 
 			if (travScreenPos.x > screenBounds.x) {
 				travScreenPos = new Vector3(screenBounds.x, screenBounds.x * m, 0);
+				travIconScreenPos = new Vector3(iconScreenBounds.x, iconScreenBounds.x * m, 0);
 			}
 			else if (travScreenPos.x < -screenBounds.x) {
 				travScreenPos = new Vector3(-screenBounds.x, -screenBounds.x * m, 0);
+				travIconScreenPos = new Vector3(-iconScreenBounds.x, -iconScreenBounds.x * m, 0);
 			}
 
 			travScreenPos += screenCenter;
+			travIconScreenPos += screenCenter;
+
 
 		
 			onscreenIcon.transform.position = travScreenPos;
-			onscreenIcon.transform.rotation = Quaternion.Euler(0,0,indicatorAngle*Mathf.Rad2Deg);
+			//Vector3 iconScreenPos = travScreenPos + new Vector3 (0f,10f,0f);
+			onscreenIconTraveller.transform.position = travIconScreenPos;
+			
+			onscreenIcon.transform.rotation = Quaternion.Euler(0,0,indicatorAngle * Mathf.Rad2Deg);
+			
+			
 			//onscreenIcon.transform.parent = canvas.transform;
 			onscreenIcon.SetActive(true);
+			onscreenIconTraveller.SetActive(true);
 			//indicatorIcon.transform.localPosition = travScreenPos;
 			//indicatorIcon.transform.localRotation = Quaternion.Euler(0,0,indicatorAngle*Mathf.Rad2Deg);
 			//indicatorIcon.SetActive(true);
