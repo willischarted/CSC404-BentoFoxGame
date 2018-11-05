@@ -4362,7 +4362,7 @@ GameObject:
   - component: {fileID: 511893334}
   - component: {fileID: 511893335}
   m_Layer: 0
-  m_Name: InteractionPopUp2
+  m_Name: MonsterPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6415,12 +6415,12 @@ Prefab:
         type: 2}
       propertyPath: interactionPopUp
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1954404477}
     - target: {fileID: 114584232024874280, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
       propertyPath: popUpText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1954404476}
     - target: {fileID: 114584232024874280, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
       propertyPath: lureImage
@@ -6495,12 +6495,12 @@ Prefab:
         type: 2}
       propertyPath: interactionPopUp3
       value: 
-      objectReference: {fileID: 1954404477}
+      objectReference: {fileID: 511893333}
     - target: {fileID: 114584232024874280, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
       propertyPath: popUpText3
       value: 
-      objectReference: {fileID: 1954404476}
+      objectReference: {fileID: 1845589936}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
   m_IsPrefabAsset: 0
@@ -9044,6 +9044,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1289010213833866, guid: 6427758f9663a4b50b4291a017459338, type: 2}
+      propertyPath: m_Name
+      value: TravellerPopup
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6427758f9663a4b50b4291a017459338, type: 2}
   m_IsPrefabAsset: 0
@@ -9518,7 +9522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1039015222
 Transform:
   m_ObjectHideFlags: 0
@@ -10406,7 +10410,7 @@ Prefab:
     - target: {fileID: 20337783446873508, guid: 670f490a2ebc84e5bbc521a0bb1d8702,
         type: 2}
       propertyPath: orthographic size
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114115726905229888, guid: 670f490a2ebc84e5bbc521a0bb1d8702,
         type: 2}
@@ -10660,7 +10664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1197130899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36015,8 +36019,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1289010213833866, guid: 6427758f9663a4b50b4291a017459338, type: 2}
       propertyPath: m_Name
-      value: InteractionPopUp2 (1)
+      value: LampPopUp
       objectReference: {fileID: 0}
+    - target: {fileID: 1289010213833866, guid: 6427758f9663a4b50b4291a017459338, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1224654743685506, guid: 6427758f9663a4b50b4291a017459338, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114776469183846860, guid: 6427758f9663a4b50b4291a017459338,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: be2f3d7d8cd8a428b9fcb3b6a9b5d9ae,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6427758f9663a4b50b4291a017459338, type: 2}
   m_IsPrefabAsset: 0
