@@ -20,6 +20,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	private List<GameObject> monsters;
 
 	public GameObject currentTarget;
+	private lightSourceController lScript;
 
 	public GameObject targetMonster;
 
@@ -159,10 +160,24 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
 		*/
 
-		if (currentTarget) {
+		if (currentTarget && (lScript != null)) {
 			//interactionText.text = "Light";
-			popUpText.fontSize = 150;
-			popUpText.text =   "Light";
+			popUpText.fontSize = 100;
+			
+			if(lScript.getCurrentLightType() !=0) {
+				popUpText.text =   "Harvest";
+				// " + (int) lScript.harvestAmount()
+			}
+			else if (pController.getResource() < pController.getCurrentResourceNeeded()) {
+				popUpText.text =   "Not Enough!";
+			}
+			else {
+				popUpText.text =   "Ignite" ;
+				//(int) pController.getCurrentResourceNeeded() + ")"
+				Debug.Log("Setting to ignite");
+			}
+			//popUpText.text = "hello";
+			Debug.Log("Could not set text");
 			return;
 		}
 		/* 
@@ -226,6 +241,13 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	}
 	*/
+	void OnTriggerEnter(Collider other) {
+		if (other.tag == "LampLight") {
+			lScript = other.GetComponent<lightSourceController>();
+			if (lScript == null) 
+				Debug.Log("Could not get lscript");
+		}
+	}
 	void OnTriggerStay(Collider other) {
 	//	Debug.Log(other.name);
 	//	if (other.tag == "Monster") {
@@ -296,6 +318,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
 			interactionPopUp.SetActive(false);
 			currentTarget = null;
+			lScript = null;
 			//interactionText.text  = "";
 			return;
 		}

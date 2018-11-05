@@ -107,7 +107,7 @@ public class playerControllerCopy: MonoBehaviour {
             //setFireFlyMaterial();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
        // }
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle") && toggleUnlocked){
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) && toggleUnlocked){
             //equippedLight = 2;
             //setFireFlyMaterial();
             abilityBackground.color = Color.yellow;
@@ -126,12 +126,14 @@ public class playerControllerCopy: MonoBehaviour {
        //   
        // }
 
-
+        /* 
         if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Circle")){
             //equippedLight = 3;
             //setFireFlyMaterial();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         }
+
+        */
         // Restart button
         //  if (Input.GetButtonDown("L1") || Input.GetKeyDown(KeyCode.R)) {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
@@ -528,5 +530,18 @@ public class playerControllerCopy: MonoBehaviour {
     public void setInTutorial(bool _inTutorial){
         inTutorial = _inTutorial;
     }   
+
+    public int getCurrentResourceNeeded() {
+        if (equippedLight == 1) {
+            return light1Value;
+        }
+        if (equippedLight == 2) {
+             return light2Value;
+        }
+        if (equippedLight == 3) {
+            return light3Value;
+        }
+        return 0;
+    }
 
 }

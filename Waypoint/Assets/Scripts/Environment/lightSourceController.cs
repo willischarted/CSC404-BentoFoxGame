@@ -145,6 +145,25 @@ public class lightSourceController : MonoBehaviour {
 	
 	}
 
+	public float harvestAmount() {
+		float percentageReturn = timeRemaining / lightDuration;
+		if (currentLightType == 1) {
+			//float percentageReturn = timeRemaining / lightDuration;
+			return pScript.light1Value * percentageReturn;
+		}
+		else if (currentLightType == 2) {
+		//	float percentageReturn = timeRemaining / lightDuration;
+			return pScript.light2Value * percentageReturn;
+		}
+		else if (currentLightType == 2) {
+			//float percentageReturn = timeRemaining / lightDuration;
+			return pScript.light2Value * percentageReturn;
+		}
+		return 0f;
+	
+
+	}
+
 	public int getCurrentLightType() {
 		return currentLightType;
 	}
