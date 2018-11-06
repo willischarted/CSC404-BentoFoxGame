@@ -47,6 +47,10 @@ public class playerControllerCopy: MonoBehaviour {
     public GameObject gameOver;
     private GameOver gameOverScript;
 
+
+    public GameObject lightAbility;
+    private abilityIconController abilityUIScript;
+
     public Image abilityBackground;
     public Image abilityIcon;
     public Sprite icon1;
@@ -71,6 +75,10 @@ public class playerControllerCopy: MonoBehaviour {
         if (tMovement == null) {
             Debug.Log("Could not find tscript");
         }
+
+        abilityUIScript = lightAbility.GetComponent<abilityIconController>();
+        if (abilityUIScript == null)
+            Debug.Log("Could not find abilityUIscript");
     }
 	// Use this for initialization
     void Start () {
@@ -117,9 +125,11 @@ public class playerControllerCopy: MonoBehaviour {
             else 
                 equippedLight++;
             
-            setFireFlyMaterial();
-            updateAbilityUI(); 
-            Invoke ("setBackgroundWhite", .5f);
+           // setFireFlyMaterial();
+           // updateAbilityUI(); 
+
+            abilityUIScript.updateAbilityIcon(equippedLight);
+           // Invoke ("setBackgroundWhite", .5f);
         }
 
      //   if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) {

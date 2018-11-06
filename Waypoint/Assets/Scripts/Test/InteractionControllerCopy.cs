@@ -20,6 +20,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	private List<GameObject> monsters;
 
 	public GameObject currentTarget;
+	[SerializeField]
 	private lightSourceController lScript;
 
 	public GameObject targetMonster;
