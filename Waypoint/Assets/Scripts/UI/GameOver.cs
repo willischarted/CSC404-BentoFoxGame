@@ -37,13 +37,38 @@ public class GameOver : MonoBehaviour
         {
             if (!yAxisInUse)
             {
-                yAxisInUse = true;
+                Debug.Log("pressed dpad");
+                if (yValue == 1f) {
+                    yAxisInUse = true;
+                    if (optionNum != 1)
+                    {
+                        optionNum += 1;
+                    }
+                else
+                {
+                    optionNum = 0;
+                }
             }
+                else if (yValue == -1f)
+                {
+                    yAxisInUse = true;
+                    if (optionNum != 0)
+                    {
+                        optionNum -= 1;
+                    }
+                    else
+                    {
+                        optionNum = 1;
+                    }
+                }
+            }   
+           
         }
+        
         if (yValue == 0)
             yAxisInUse = false;
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || (yAxisInUse && yValue == 1))
+        if (Input.GetKeyDown(KeyCode.DownArrow) ) //|| (yAxisInUse && yValue == 1)
         {
             if (optionNum != 1)
             {
@@ -54,7 +79,7 @@ public class GameOver : MonoBehaviour
                 optionNum = 0;
             }
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) || (yAxisInUse && yValue != 1))
+        if (Input.GetKeyDown(KeyCode.UpArrow) ) //|| (yAxisInUse && yValue != 1)
         {
             if (optionNum != 0)
             {

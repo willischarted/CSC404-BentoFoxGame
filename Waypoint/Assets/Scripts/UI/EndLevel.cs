@@ -39,13 +39,40 @@ public class EndLevel : MonoBehaviour
         {
             if (!yAxisInUse)
             {
-                yAxisInUse = true;
+                if (yValue == 1f) {
+                    yAxisInUse = true;
+
+                    if (optionNum != 2)
+                    {
+                        optionNum += 1;
+                    }
+                    else
+                    {
+                    optionNum = 0;
+                    }
+                }
+                else if (yValue == -1f) {
+                    if (optionNum != 0)
+                    {
+                        optionNum -= 1;
+                    }
+                    else
+                    {
+                    optionNum = 2;
+                    }
+
+                }
             }
         }
+
+
         if (yValue == 0)
             yAxisInUse = false;
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || (yAxisInUse && yValue == 1))
+
+
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))//|| (yAxisInUse && yValue == 1)
         {
             if (optionNum != 2)
             {
@@ -56,7 +83,7 @@ public class EndLevel : MonoBehaviour
                 optionNum = 0;
             }
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) || (yAxisInUse && yValue != 1))
+        if (Input.GetKeyDown(KeyCode.UpArrow) )//|| (yAxisInUse && yValue != 1)
         {
             if (optionNum != 0)
             {

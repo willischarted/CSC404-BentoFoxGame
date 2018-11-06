@@ -38,32 +38,32 @@ public class StartMenuButton : MonoBehaviour
            
             if (!yAxisInUse)
             {
-                 Debug.Log("pressed dpad");
+                Debug.Log("pressed dpad");
                 if (yValue == 1f) {
-                  yAxisInUse = true;
-                  if (optionNum != 1)
+                    yAxisInUse = true;
+                    if (optionNum != 1)
                 {
                     optionNum += 1;
-                 }
-                 else
-                     {
-                    optionNum = 0;
-                    }
                 }
-            else if (yValue == -1f){
-                 yAxisInUse = true;
-                if (optionNum != 1)
-                {
-                    optionNum += 1;
-                 }
                 else
                 {
-                optionNum = 0;
-                 }
+                    optionNum = 0;
+                }
             }
+                else if (yValue == -1f)
+                {
+                    yAxisInUse = true;
+                    if (optionNum != 0)
+                    {
+                        optionNum -= 1;
+                    }
+                    else
+                    {
+                        optionNum = 1;
+                    }
+                }
 
-               
-            }
+            }   
            
         }
 
