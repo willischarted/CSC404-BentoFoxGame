@@ -2518,6 +2518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 249768148}
+  - component: {fileID: 249768149}
   m_Layer: 5
   m_Name: equippedLight
   m_TagString: Untagged
@@ -2548,6 +2549,25 @@ RectTransform:
   m_AnchoredPosition: {x: -289.6, y: 17.900024}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &249768149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 249768147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55864d8abc7864dad92d4d56a0c373a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityIcon: {fileID: 141933114}
+  backgroundIcon: {fileID: 1808253162}
+  icon1: {fileID: 21300000, guid: 2ea95efae67ad44d5aefabb787697cc5, type: 3}
+  icon2: {fileID: 21300000, guid: 718764a9fada44be39418d9493dbde36, type: 3}
+  icon3: {fileID: 21300000, guid: 8f813dddb1c634e649a7385e16c564ad, type: 3}
+  background1: {fileID: 21300000, guid: 9c24d1f0ec4d046a9867a1a5f5a359c2, type: 3}
+  background2: {fileID: 21300000, guid: a29ce86b8596c4755b7a9a73c86e6ce2, type: 3}
+  background3: {fileID: 21300000, guid: f3d5eb56c2532432a9f3aa4f1790efb5, type: 3}
 --- !u!1 &250357906
 GameObject:
   m_ObjectHideFlags: 0
