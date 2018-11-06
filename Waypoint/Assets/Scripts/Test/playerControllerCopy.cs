@@ -66,6 +66,7 @@ public class playerControllerCopy: MonoBehaviour {
     private bool toggleUnlocked;
     private bool inTutorial;
 
+    public float rotateSpeed = 10f;
     
 
     void Awake(){
@@ -192,7 +193,9 @@ public class playerControllerCopy: MonoBehaviour {
 
             if (moveDirection == Vector3.zero)
                 return;
-            transform.rotation = Quaternion.LookRotation(moveDirection);
+            //transform.rotation = Quaternion.LookRotation(moveDirection); //old
+            var rotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
             rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
 
 
