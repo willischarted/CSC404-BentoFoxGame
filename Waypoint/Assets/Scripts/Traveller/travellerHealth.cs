@@ -22,6 +22,7 @@ public class travellerHealth : MonoBehaviour {
     Material l_ear;
     Material r_ear;
     float lightValue;
+    float orig_lightValue;
     Animator anim;
     travellerMovement travellerMovement;
     public bool isDead;
@@ -47,6 +48,7 @@ public class travellerHealth : MonoBehaviour {
             .transform.Find("model:ear_R_GEO").GetComponentInChildren<SkinnedMeshRenderer>().material;
         //cloak = GetComponent<MeshRenderer>().material;
         lightValue =  0.005f;
+        orig_lightValue = 0.005f;
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         Debug.Log("cloak: " + cloak);
     }
@@ -54,7 +56,7 @@ public class travellerHealth : MonoBehaviour {
 	void Update () {
         //When take damege, flash color
         /*  Testing of cloth change*/
-          if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             TakeBasicDamage(10);
             Debug.Log(lightValue);
@@ -65,6 +67,10 @@ public class travellerHealth : MonoBehaviour {
             hood.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
             l_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
             r_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+            cloak.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+            hood.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+            l_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+            r_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         }
 
         if(damaged){
@@ -84,8 +90,16 @@ public class travellerHealth : MonoBehaviour {
         healthSlider.value = currentHealth;
 
         //TODO: clothe material change, not function now
-        lightValue = lightValue * (currentHealth / startingHealth);
+        lightValue = orig_lightValue * (currentHealth / startingHealth);
+        lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        hood.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        l_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        r_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        cloak.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        hood.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        l_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        r_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
     }
     //TODO: warningLowHealth
     public void TakeBasicDamage (int amount){
@@ -94,8 +108,16 @@ public class travellerHealth : MonoBehaviour {
         healthSlider.value = currentHealth;
 
         //TODO: clothe material change, not function now
-        lightValue = lightValue * (currentHealth / startingHealth);
+        lightValue = orig_lightValue * (currentHealth / startingHealth);
+        lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        hood.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        l_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        r_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        cloak.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        hood.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        l_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        r_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         if (currentHealth <= 0 && !isDead)
         {
             Death();
@@ -108,8 +130,16 @@ public class travellerHealth : MonoBehaviour {
         healthSlider.value = currentHealth;
 
         //TODO: clothe material change
-        lightValue = lightValue * (currentHealth / startingHealth);
+        lightValue = orig_lightValue * (currentHealth / startingHealth);
+        lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        hood.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        l_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        r_ear.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        cloak.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        hood.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        l_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
+        r_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
 
         if (currentHealth <= 3 && !isDead)
         {
