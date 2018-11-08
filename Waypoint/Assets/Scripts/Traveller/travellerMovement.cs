@@ -28,6 +28,7 @@ public class travellerMovement : MonoBehaviour
     public bool beatLevel = false;
 
 
+
     // Use this for initialization
     void Awake()
     {
@@ -56,6 +57,13 @@ public class travellerMovement : MonoBehaviour
             beatLevel = true;
             loadNextLevel();
         }
+
+        float distRemaining = nav.remainingDistance; 
+        if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
+        {
+             anim.SetBool("isMoving", false);
+        }
+     
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,6 +72,7 @@ public class travellerMovement : MonoBehaviour
         {
             closeToExit = true;
             nav.SetDestination(exitPoint.position);
+            anim.SetBool("isMoving", true);
 
         }
         else if (other.gameObject.CompareTag("Monster")){
@@ -109,6 +118,8 @@ public class travellerMovement : MonoBehaviour
             }
 
             nav.SetDestination(targetLight.transform.position - offset);
+            anim.SetBool("isMoving", true);
+
         }
     }
 
