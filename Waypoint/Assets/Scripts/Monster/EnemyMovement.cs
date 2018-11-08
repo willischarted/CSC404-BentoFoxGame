@@ -84,7 +84,7 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log("Stunned");
             nav.SetDestination(transform.position);
 
-            removeFromTravellerList();
+           
 
             timer += Time.deltaTime;
             if (timer > 5)
@@ -109,7 +109,7 @@ public class EnemyMovement : MonoBehaviour
                 targetLamp = null;
                 
                 
-                removeFromTravellerList();
+             
 
                
                
@@ -124,7 +124,7 @@ public class EnemyMovement : MonoBehaviour
                 if (hit.collider.gameObject.transform == traveller)
                 {
                     monsterAnim.SetTrigger("travellerSpotted");
-                    addToTravellerList();
+                   
                 }
 
                 else
@@ -240,32 +240,7 @@ public class EnemyMovement : MonoBehaviour
     }   
 
 
-    //future proofing for now.
-    public void addToTravellerList() {
-
-        GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
-        if (trav == null)
-            Debug.Log("Could not find the traveller");
-        travellerMovement  travMovement = trav.GetComponent<travellerMovement>();
-        if (travMovement == null)
-            Debug.Log("Could not find traveller movement");
-       if (!travMovement.checkForMonster(gameObject)) {
-            travMovement.addMonsterToAlerted(gameObject);
-       }
-
-    }
-     public void removeFromTravellerList() {
-
-        GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
-        if (trav == null)
-            Debug.Log("Could not find the traveller");
-        travellerMovement  travMovement = trav.GetComponent<travellerMovement>();
-        if (travMovement == null)
-            Debug.Log("Could not find traveller movement");
-        
-        travMovement.removeMonsterFromAlerted(gameObject);
-        
-    }
+   
     
 
     public void monsterLampLit(GameObject litLamp)
