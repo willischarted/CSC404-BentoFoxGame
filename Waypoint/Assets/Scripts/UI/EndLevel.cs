@@ -52,6 +52,7 @@ public class EndLevel : MonoBehaviour
                     }
                 }
                 else if (yValue == -1f) {
+                     yAxisInUse = true;
                     if (optionNum != 0)
                     {
                         optionNum -= 1;

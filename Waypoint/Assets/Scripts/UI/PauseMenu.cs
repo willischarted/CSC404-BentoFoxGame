@@ -35,17 +35,43 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log(optionNum);
         float yValue = Input.GetAxis("DPadY");
-        if (yValue != 0f)
+          if (yValue != 0f)
         {
             if (!yAxisInUse)
             {
-                yAxisInUse = true;
+                if (yValue == 1f) {
+                    Debug.Log("Pressed dpad down");
+                    yAxisInUse = true;
+
+                    if (optionNum != 2)
+                    {
+                        optionNum += 1;
+                    }
+                    else
+                    {
+                    optionNum = 0;
+                    }
+                }
+                else if (yValue == -1f) {
+                    Debug.Log("Pressed dpad up");
+                    yAxisInUse = true;
+                    if (optionNum != 0)
+                    {
+                        optionNum -= 1;
+                    }
+                    else
+                    {
+                        optionNum = 2;
+                    }
+
+                }
             }
         }
+
         if (yValue == 0)
             yAxisInUse = false;
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || (yAxisInUse && yValue == 1))
+        if (Input.GetKeyDown(KeyCode.DownArrow)) // || (yAxisInUse && yValue == 1)
         {
             if (optionNum != 2)
             {
@@ -56,7 +82,7 @@ public class PauseMenu : MonoBehaviour
                 optionNum = 0;
             }
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) || (yAxisInUse && yValue != 1))
+        if (Input.GetKeyDown(KeyCode.UpArrow))// || (yAxisInUse && yValue != 1)
         {
             if (optionNum != 0)
             {
