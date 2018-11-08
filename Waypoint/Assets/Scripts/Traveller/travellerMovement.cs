@@ -31,6 +31,9 @@ public class travellerMovement : MonoBehaviour
     // We want to use different states
 
     private bool isScared;
+
+    private List<GameObject> alertedMonsters = new List<GameObject>();
+
     
 
 
@@ -48,6 +51,8 @@ public class travellerMovement : MonoBehaviour
         travellerHealth = GetComponent<travellerHealth>();
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
         closeToExit = false;
+
+        isScared = false;
     }
 
     void Update()
@@ -64,8 +69,21 @@ public class travellerMovement : MonoBehaviour
             loadNextLevel();
         }
 
+
+        if (alertedMonsters.Count == 0 && isScared) {
+           setTravellerScared(false);
+        }
+
+        if (alertedMonsters.Count >= 1 && !isScared) {
+            setTravellerScared(true);
+        }
+
+
+
         float distRemaining = nav.remainingDistance; 
-       
+
+
+
         if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
         {
             anim.SetBool("isMoving", false);
@@ -164,6 +182,18 @@ public class travellerMovement : MonoBehaviour
     public void setTravellerScared(bool _isScared) {
         isScared = _isScared;
         anim.SetBool("isScared", isScared);
+    }
+
+    public void addMonsterToAlerted(GameObject monster) {
+        alertedMonsters.Add(monster);
+    }
+
+    public void removeMonsterFromAlerted(GameObject monster) {
+        alertedMonsters.Remove(monster);
+    }
+
+    public bool checkForMonster(GameObject monster) {
+        return alertedMonsters.Contains(monster);
     }
 
 
