@@ -28,6 +28,12 @@ public class travellerMovement : MonoBehaviour
     public bool beatLevel = false;
 
 
+    // We want to use different states
+
+    private bool isScared;
+    
+
+
 
     // Use this for initialization
     void Awake()
@@ -61,7 +67,7 @@ public class travellerMovement : MonoBehaviour
         float distRemaining = nav.remainingDistance; 
         if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
         {
-             anim.SetBool("isMoving", false);
+            anim.SetBool("isMoving", false);
         }
      
     }
