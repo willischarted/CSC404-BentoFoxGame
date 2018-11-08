@@ -100,7 +100,12 @@ public class InteractionControllerCopy : MonoBehaviour {
         
 		//Debug.Log(currentTarget);
 
-		if (Input.GetMouseButtonDown(1) || Input.GetButton("Square")) {
+	//	if (Input.GetMouseButtonDown(1) || Input.GetButton("Square")) {
+		
+			
+	//	}
+
+		if (Input.GetButton("Circle")) {
 			heldDuration += Time.deltaTime;
 			if (heldDuration > 0.5f) { //&& !setHealing) {
 				//start healing
@@ -118,15 +123,19 @@ public class InteractionControllerCopy : MonoBehaviour {
 			
 					
 			}
-			
+
 		}
 
-		if (Input.GetMouseButtonUp(1) ||  Input.GetButtonUp("Square")) {
+		if (Input.GetButtonUp("Circle")) {
+			heldDuration = 0f;
+		}
+
+		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square")) {
 			//Debug.Log(heldDuration);
 			
 
 			//0.2f is general approximation of a tap
-			if (heldDuration <= 0.5f) {
+			//if (heldDuration <= 0.5f) {
 
 			
 				//start impulse
@@ -139,8 +148,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 				
 				
-			}
-			heldDuration = 0f;
+		//	}
+			//heldDuration = 0f;
 			//if (setHealing)
 			//	setHealing = false;
 		}
