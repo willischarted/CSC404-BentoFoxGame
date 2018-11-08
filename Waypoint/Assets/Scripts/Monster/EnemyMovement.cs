@@ -100,9 +100,13 @@ public class EnemyMovement : MonoBehaviour
             if (Vector3.Distance(roamCenterPoint, traveller.position) >= maxRoamDistance)
             {
                 monsterAnim.SetTrigger("travellerLost");
+
                 currentLamp = null;
                 movingToLamp = false;
                 targetLamp = null;
+
+               
+               
             }
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
@@ -226,7 +230,22 @@ public class EnemyMovement : MonoBehaviour
             }
         }
         return null;
+    }   
+
+
+    //future proofing for now.
+    public void setTravellerState(bool travState) {
+
+        GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
+        if (trav == null)
+            Debug.Log("Could not find the traveller");
+        travellerMovement  travMovement = trav.GetComponent<travellerMovement>();
+        if (travMovement == null)
+            Debug.Log("Could not find traveller movement");
+        
+        travMovement.setTravellerScared(travState);
     }
+    
 
     public void monsterLampLit(GameObject litLamp)
     {

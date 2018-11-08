@@ -65,6 +65,7 @@ public class travellerMovement : MonoBehaviour
         }
 
         float distRemaining = nav.remainingDistance; 
+       
         if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
         {
             anim.SetBool("isMoving", false);
@@ -158,6 +159,11 @@ public class travellerMovement : MonoBehaviour
     void Animating()
     {
 
+    }
+
+    public void setTravellerScared(bool _isScared) {
+        isScared = _isScared;
+        anim.SetBool("isScared", isScared);
     }
 
 
