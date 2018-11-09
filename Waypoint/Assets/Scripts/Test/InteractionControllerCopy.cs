@@ -175,13 +175,16 @@ public class InteractionControllerCopy : MonoBehaviour {
 			popUpText.fontSize = 100;
 			
 			if(lScript.getCurrentLightType() !=0) {
+				popUpText.fontSize = 110;
 				popUpText.text =   "Harvest";
 				// " + (int) lScript.harvestAmount()
 			}
 			else if (pController.getResource() < pController.getCurrentResourceNeeded()) {
+				popUpText.fontSize = 120;
 				popUpText.text =   "Not Enough!";
 			}
 			else {
+				popUpText.fontSize = 120;
 				popUpText.text =   "Ignite" ;
 				//(int) pController.getCurrentResourceNeeded() + ")"
 				Debug.Log("Setting to ignite");
@@ -203,19 +206,21 @@ public class InteractionControllerCopy : MonoBehaviour {
 	
 		
 
-
+		/* 
 		if (targetMonster) {
 			//interactionText.text = "Stun";
-			popUpText2.fontSize = 150;
+			popUpText2.fontSize = 120;
 			popUpText2.text =   "Stun";
 			return;
 		}
 		if (targetTraveller) {
 			//interactionText.text = "(Hold) Heal";
-			popUpText3.fontSize = 90;
+			popUpText3.fontSize = 80;
 			popUpText3.text = "Hold to Heal";
 			return;
 		}
+
+		*/
 		
 		else {
 			interactionText.text = "";
@@ -277,7 +282,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 				Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
 				popUpController3.updateWorldObjectTransform(popUpLocation);
-				controlLureImage();
+				//controlLureImage();
 				//return;
 			}
 			else { 
@@ -295,7 +300,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y + textVerticalOffset;
 			popUpController.updateWorldObjectTransform(popUpLocation);
-			controlLureImage();
+			//controlLureImage();
 			return;
 		}
 
