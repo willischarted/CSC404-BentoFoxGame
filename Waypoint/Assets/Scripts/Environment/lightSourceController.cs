@@ -28,6 +28,8 @@ public class lightSourceController : MonoBehaviour {
 
 	private playerControllerCopy pScript;
 
+	monsterFireController mfController;
+
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +44,10 @@ public class lightSourceController : MonoBehaviour {
 		lampLight = GetComponentInChildren<Light>();
 		if (lampLight == null)
 			Debug.Log("Could not find light in child!");
+
+		mfController = GetComponentInChildren<monsterFireController>();
+		if (mfController == null) 
+			Debug.Log("Could not find monsterfire effect controoller");
 
 		//startIntensity = lampLight.intensity;
 		
@@ -128,6 +134,7 @@ public class lightSourceController : MonoBehaviour {
 			}
 			else if (currentLightType == 3 ) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
+				mfController.turnOffFX();
 
 			}
 			currentLightType = type;
@@ -142,6 +149,9 @@ public class lightSourceController : MonoBehaviour {
 			
         }
 
+		if (currentLightType == 3) {
+			mfController.turnOnFX();
+		}
 	
 	}
 
