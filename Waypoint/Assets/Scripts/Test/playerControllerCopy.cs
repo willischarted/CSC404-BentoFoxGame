@@ -51,11 +51,11 @@ public class playerControllerCopy: MonoBehaviour {
     public GameObject lightAbility;
     private abilityIconController abilityUIScript;
 
-    public Image abilityBackground;
-    public Image abilityIcon;
-    public Sprite icon1;
-    public Sprite icon2;
-    public Sprite icon3;
+   // public Image abilityBackground;
+   // public Image abilityIcon;
+   // public Sprite icon1;
+   // public Sprite icon2;
+   // public Sprite icon3;
 
     public int light1Value;
     public int light2Value;
@@ -119,7 +119,7 @@ public class playerControllerCopy: MonoBehaviour {
         if ((Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) && toggleUnlocked){
             //equippedLight = 2;
             //setFireFlyMaterial();
-            abilityBackground.color = Color.yellow;
+           // abilityBackground.color = Color.yellow;
             if (equippedLight == 3) {
                 equippedLight = 1;
             }
@@ -482,15 +482,15 @@ public class playerControllerCopy: MonoBehaviour {
 
     public void updateAbilityUI() {
         if (equippedLight == 1) {
-            abilityIcon.sprite = icon1;
+            //abilityIcon.sprite = icon1;
             tempLightCost = light1Value;
         }
         if (equippedLight == 2) {
-            abilityIcon.sprite = icon2;
+           // abilityIcon.sprite = icon2;
              tempLightCost = light2Value;
         }
         if (equippedLight == 3) {
-            abilityIcon.sprite = icon3;
+            //abilityIcon.sprite = icon3;
             tempLightCost = light3Value;
         }
 
@@ -498,7 +498,7 @@ public class playerControllerCopy: MonoBehaviour {
     }
 
     public void setBackgroundWhite() {
-        abilityBackground.color = Color.white;
+        //abilityBackground.color = Color.white;
     }
 
 
