@@ -180,7 +180,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 				// " + (int) lScript.harvestAmount()
 			}
 			else if (pController.getResource() < pController.getCurrentResourceNeeded()) {
-				popUpText.fontSize = 120;
+				popUpText.fontSize = 80;
 				popUpText.text =   "Not Enough!";
 			}
 			else {
@@ -423,10 +423,19 @@ public class InteractionControllerCopy : MonoBehaviour {
              healUnlocked = true;
 			 stunUnlocked = false;
         }
+		else if (SceneManager.GetActiveScene().name.CompareTo("Level2.5") == 0) {
+             healUnlocked = true;
+			 stunUnlocked = false;
+        }
 
         else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0) {
             healUnlocked = true;
 			stunUnlocked = false;
+			
+        }
+		else if (SceneManager.GetActiveScene().name.CompareTo("Level3.5") == 0) {
+            healUnlocked = true;
+			stunUnlocked = true;
 			
         }
         else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
