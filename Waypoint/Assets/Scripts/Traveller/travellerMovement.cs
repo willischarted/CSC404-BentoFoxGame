@@ -86,7 +86,7 @@ public class travellerMovement : MonoBehaviour
         {
             closeToExit = true;
             nav.SetDestination(exitPoint.position);
-            anim.SetBool("isMoving", true);
+            anim.SetTrigger("isExit");
 
         }
         else if (other.gameObject.CompareTag("Monster")){
