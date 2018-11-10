@@ -180,7 +180,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 				// " + (int) lScript.harvestAmount()
 			}
 			else if (pController.getResource() < pController.getCurrentResourceNeeded()) {
-				popUpText.fontSize = 80;
+				popUpText.fontSize = 70;
 				popUpText.text =   "Not Enough!";
 			}
 			else {

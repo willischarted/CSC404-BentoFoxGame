@@ -253,7 +253,7 @@ public class playerControllerCopy: MonoBehaviour {
             }
             else{
                 //setLightColor(lampLight, equippedLight);
-                if (lightResource >= tempLightCost){
+                if (getResource() >= getCurrentResourceNeeded()){
  
                 setChildLight(lightSource.GetComponentsInChildren<Light>());
                 lampLight.intensity = lightValueOn;
