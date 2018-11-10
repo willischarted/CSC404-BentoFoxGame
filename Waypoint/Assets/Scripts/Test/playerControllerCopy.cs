@@ -64,6 +64,9 @@ public class playerControllerCopy: MonoBehaviour {
     public float lightValueOn;
 
     private bool toggleUnlocked;
+
+    //used to restrict light for lv 2.5
+    private bool monLightOnly;
     private bool inTutorial;
 
     public float rotateSpeed = 10f;
@@ -120,11 +123,21 @@ public class playerControllerCopy: MonoBehaviour {
             //equippedLight = 2;
             //setFireFlyMaterial();
            // abilityBackground.color = Color.yellow;
+
+
+
             if (equippedLight == 3) {
                 equippedLight = 1;
             }
-            else 
-                equippedLight++;
+            else{
+                if (monLightOnly)
+                    equippedLight+=2;
+                
+                else
+                    equippedLight++;
+
+            }
+            
             
            // setFireFlyMaterial();
            // updateAbilityUI(); 
@@ -514,7 +527,12 @@ public class playerControllerCopy: MonoBehaviour {
 
         }
         else if (SceneManager.GetActiveScene().name.CompareTo("Level2") == 0) {
-             toggleUnlocked = false;
+            toggleUnlocked = false;
+        }
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level2.5") == 0) {
+            toggleUnlocked = true;
+            monLightOnly = true;
         }
 
         else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0) {
