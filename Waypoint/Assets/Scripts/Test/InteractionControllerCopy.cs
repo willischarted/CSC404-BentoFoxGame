@@ -105,7 +105,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			
 	//	}
 
-		if (Input.GetButton("Circle")) {
+		if (Input.GetButton("Circle") || Input.GetKey(KeyCode.Space)) {
 			heldDuration += Time.deltaTime;
 			if (heldDuration > 0.5f) { //&& !setHealing) {
 				//start healing
@@ -126,7 +126,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		}
 
-		if (Input.GetButtonUp("Circle")) {
+		if (Input.GetButtonUp("Circle")|| Input.GetKeyUp(KeyCode.Space)) {
 			heldDuration = 0f;
 		}
 
