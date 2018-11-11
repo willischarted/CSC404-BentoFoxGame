@@ -14846,6 +14846,16 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 0.53
       objectReference: {fileID: 0}
+    - target: {fileID: 114797997258692474, guid: f053d365198a5c5419e79fdcf985bb86,
+        type: 2}
+      propertyPath: darkThemeLowPassFilter
+      value: 
+      objectReference: {fileID: 2050991944}
+    - target: {fileID: 114797997258692474, guid: f053d365198a5c5419e79fdcf985bb86,
+        type: 2}
+      propertyPath: travellerThemeLowPassFilter
+      value: 
+      objectReference: {fileID: 1276963969}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f053d365198a5c5419e79fdcf985bb86, type: 2}
   m_IsPrefabAsset: 0
@@ -18695,8 +18705,8 @@ RectTransform:
   m_Father: {fileID: 470945897}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -41974,6 +41984,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1120130332343174, guid: d17434b735f304dcbb222d849c13b1e0,
     type: 2}
   m_PrefabInternal: {fileID: 1276963967}
+--- !u!169 &1276963969 stripped
+AudioLowPassFilter:
+  m_CorrespondingSourceObject: {fileID: 169574984357503002, guid: d17434b735f304dcbb222d849c13b1e0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1276963967}
+--- !u!82 &1276963970 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 82886083746478648, guid: d17434b735f304dcbb222d849c13b1e0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1276963967}
 --- !u!1 &1278330515
 GameObject:
   m_ObjectHideFlags: 0
@@ -42828,6 +42848,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114106499950572080, guid: 463ec4441f575de4e910171bfcc78008,
+        type: 2}
+      propertyPath: darkTheme
+      value: 
+      objectReference: {fileID: 2050991945}
+    - target: {fileID: 114106499950572080, guid: 463ec4441f575de4e910171bfcc78008,
+        type: 2}
+      propertyPath: travellerTheme
+      value: 
+      objectReference: {fileID: 1276963970}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 463ec4441f575de4e910171bfcc78008, type: 2}
   m_IsPrefabAsset: 0
@@ -65492,7 +65522,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -67094,6 +67124,16 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 437187ad378129745947459c3dd71608, type: 2}
   m_IsPrefabAsset: 0
+--- !u!169 &2050991944 stripped
+AudioLowPassFilter:
+  m_CorrespondingSourceObject: {fileID: 169293719661502466, guid: 437187ad378129745947459c3dd71608,
+    type: 2}
+  m_PrefabInternal: {fileID: 2050991943}
+--- !u!82 &2050991945 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 82819052247857726, guid: 437187ad378129745947459c3dd71608,
+    type: 2}
+  m_PrefabInternal: {fileID: 2050991943}
 --- !u!1 &2051431601
 GameObject:
   m_ObjectHideFlags: 0
