@@ -32,7 +32,13 @@ using UnityEngine.UI;
 			if (iScript == null) {
 				Debug.Log("Could not find the ineteractioncontroller");
 			}
-
+            GameObject [] monsters = GameObject.FindGameObjectsWithTag("Monster");
+            foreach (GameObject mons in monsters)
+            {
+                AudioSource roamSound = mons.transform.Find("Audio Source")
+                .GetComponent<AudioSource>();
+                roamSound.enabled = false;
+            }
 			pScript.setInTutorial(true);
 			iScript.setInTutorial(true);
 		if (!tutorialStart){
@@ -112,10 +118,16 @@ using UnityEngine.UI;
 				}
 				this.gameObject.SetActive(false);
 				Time.timeScale = 1f;
+                GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+                foreach (GameObject mons in monsters)
+                {
+                    AudioSource roamSound = mons.transform.Find("Audio Source")
+                    .GetComponent<AudioSource>();
+                    roamSound.enabled = true;
+                }
 
-
-			//call player -> not in tutorial anymore.
-			}
+                //call player -> not in tutorial anymore.
+            }
 		}
 	}
  }
