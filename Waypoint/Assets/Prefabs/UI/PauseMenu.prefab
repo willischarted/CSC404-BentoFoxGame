@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114632095386859510}
   - component: {fileID: 114119210005867828}
   - component: {fileID: 114581106892272816}
+  - component: {fileID: 114797997258692474}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -456,6 +457,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114797997258692474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1159778520130178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6244f9e8d58de6444a6e4a7a68087250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  darkThemeLowPassFilter: {fileID: 0}
+  travellerThemeLowPassFilter: {fileID: 0}
 --- !u!222 &222086306757696352
 CanvasRenderer:
   m_ObjectHideFlags: 1

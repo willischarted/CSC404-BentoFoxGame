@@ -136,12 +136,14 @@ public class PauseMenu : MonoBehaviour
         Debug.Log("resume");
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
+        pauseMenu.GetComponent<PauseMenuAuidoController>().lowPassOff();
     }
 
     public void restartLevel()
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
+        pauseMenu.GetComponent<PauseMenuAuidoController>().lowPassOff();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -149,6 +151,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
+        pauseMenu.GetComponent<PauseMenuAuidoController>().lowPassOff();
         SceneManager.LoadScene("Start Menu");
     }
 
@@ -156,6 +159,7 @@ public class PauseMenu : MonoBehaviour
     {
         //Debug.Log("pause");
         pauseMenu.SetActive(true);
+        pauseMenu.GetComponent<PauseMenuAuidoController>().lowPassOn();
         Time.timeScale = 0f;
     }
 
