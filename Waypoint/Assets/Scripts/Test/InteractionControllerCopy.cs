@@ -127,16 +127,14 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square")) {
 			
-				if (targetMonster != null && targetMonster.tag=="Monster") {
-					setStun();
-					return;
-				}
-				
-			
-
-				
+			if (monstersInRange.Count >=1) {
+				setStun();
+				return;
+			}				
 	
 		}
+
+
 		if (Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)) {
 				//call stun enemy function
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
@@ -281,7 +279,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			//interactionText.text  = "";
 			return;
 		}
-		if (other.tag == "Monster") { //&& other.gameObject == targetMonster
+		if (other.tag == "Monster" && monstersInRange.Count >=1) { //maybe use isunlocked?? //&& other.gameObject == targetMonster
 			//interactionPopUp2.SetActive(false);
 			//currentTarget = null;
 			//targetMonster = null;
@@ -296,15 +294,19 @@ public class InteractionControllerCopy : MonoBehaviour {
 	}
 
 	void setStun() {
-		//for each monster in array
-		Animator anim = targetMonster.GetComponent<Animator>();
+		Debug.Log("Setting stun");
+		foreach (GameObject m in monstersInRange) {
+			//for each monster in array
+			Animator anim = m.GetComponent<Animator>();
 			if (anim == null) {
 				Debug.Log("Could not find anim");
 			}
 			anim.SetTrigger("isStunned");
-			pController.addResource(-stunCost);
+			
 		
-		// get animator contoller and set stun
+			// get animator contoller and set stun
+		}
+		pController.addResource(-stunCost);
 	}
 
 	void controlLureImage() {
@@ -413,6 +415,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		}
 	}
+
+	
 
 	
 
