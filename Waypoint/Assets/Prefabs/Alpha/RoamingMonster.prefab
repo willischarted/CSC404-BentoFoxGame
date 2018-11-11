@@ -218,7 +218,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1801262752401382}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.5652666, y: 0.006, z: -0.30780625}
+  m_LocalPosition: {x: 2.77, y: 0.11, z: -0.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4202559650910272}
@@ -514,6 +514,7 @@ MonoBehaviour:
   targetLamp: {fileID: 0}
   roamingSound: {fileID: 0}
   attackSound: {fileID: 0}
+  popUp: {fileID: 0}
 --- !u!135 &135814471198896440
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -524,7 +525,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136388128996083578
 CapsuleCollider:
