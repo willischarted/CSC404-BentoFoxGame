@@ -162,11 +162,42 @@ public class EndLevel : MonoBehaviour
         }
         else
         {
-            GameController.level++;
-            Debug.Log(GameController.level);
-            Time.timeScale = 1f;
-            levelUp.SetActive(false);
-            SceneManager.LoadScene("Level" + GameController.level);
+            string currScene = SceneManager.GetActiveScene().name;
+            Debug.Log("currscene: " + currScene);
+            if (currScene == "Level3.5")
+            {
+                GameController.level = 4;
+                Time.timeScale = 1f;
+                levelUp.SetActive(false);
+                SceneManager.LoadScene("Level" + GameController.level);
+            }
+            else if (currScene == "Level3")
+            {
+                Time.timeScale = 1f;
+                levelUp.SetActive(false);
+                SceneManager.LoadScene("Level3.5");
+            }
+            else if (currScene == "Level2.5")
+            {
+                Time.timeScale = 1f;
+                levelUp.SetActive(false);
+                GameController.level = 3;
+                SceneManager.LoadScene("Level" + GameController.level);
+            }
+            else if (currScene == "Level2")
+            {
+                Time.timeScale = 1f;
+                levelUp.SetActive(false);
+                SceneManager.LoadScene("Level2.5");
+            }
+            else
+            {
+                GameController.level++;
+                Debug.Log(GameController.level);
+                Time.timeScale = 1f;
+                levelUp.SetActive(false);
+                SceneManager.LoadScene("Level" + GameController.level);
+            }
         }
     }
 }
