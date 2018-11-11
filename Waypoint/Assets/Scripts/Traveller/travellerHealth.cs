@@ -29,6 +29,7 @@ public class travellerHealth : MonoBehaviour {
     bool isLowHealth;
     bool damaged;
     bool healed;
+    private AudioSource takeStationary;
     //Material cloaktwo;
 
 	void Awake ()
@@ -37,7 +38,8 @@ public class travellerHealth : MonoBehaviour {
         anim = GetComponent<Animator>();
         travellerMovement = GetComponent<travellerMovement>();
         currentHealth = startingHealth;
-
+        takeStationary = transform.Find("Audio Source").transform.GetComponent<AudioSource>();
+        takeStationary.enabled = true;
         cloak = transform.Find("traveler").transform.Find("model:geo")
             .transform.Find("model:dress_GEO").GetComponentInChildren<SkinnedMeshRenderer>().material;
         hood = transform.Find("traveler").transform.Find("model:geo")
@@ -101,6 +103,7 @@ public class travellerHealth : MonoBehaviour {
         l_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         r_ear.SetColor("_Color", new Color(255f, 255f, 255f, 1.0f) * lightValue);
     }
+
     //TODO: warningLowHealth
     public void TakeBasicDamage (int amount){
         damaged = true;
@@ -128,7 +131,7 @@ public class travellerHealth : MonoBehaviour {
         damaged = true;
         currentHealth = currentHealth / 2;
         healthSlider.value = currentHealth;
-
+        takeStationary.Play();
         //TODO: clothe material change
         lightValue = orig_lightValue * (currentHealth / startingHealth);
         lightValue = Mathf.Clamp(lightValue, -0.002f, 0.005f);
