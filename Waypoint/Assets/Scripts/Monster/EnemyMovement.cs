@@ -61,11 +61,12 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
+
     void OnTriggerStay(Collider other)
     {
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
-            Debug.Log("inhere");
+            //Debug.Log("inhere");
             return;
         }
         else
@@ -84,6 +85,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
     }
+
 
 
     void Update()
@@ -112,7 +114,7 @@ public class EnemyMovement : MonoBehaviour
         //end of monster sound control
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
-            Debug.Log("Stunned");
+            //Debug.Log("Stunned");
             nav.SetDestination(transform.position);
             //Monster sounds
             roamingSound.enabled = false;
@@ -130,10 +132,11 @@ public class EnemyMovement : MonoBehaviour
                 movingToLamp = false;
                 targetLamp = null;
             }
+            return;
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Chase"))
         {
-            Debug.Log("Chase");
+            //Debug.Log("Chase");
             currentTarget = traveller.position;
             nav.SetDestination(currentTarget);
             if (Vector3.Distance(roamCenterPoint, traveller.position) >= maxRoamDistance)
@@ -155,7 +158,7 @@ public class EnemyMovement : MonoBehaviour
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
         {
-            Debug.Log("Alerted");
+            //Debug.Log("Alerted");
             RaycastHit hit;
             if (Physics.Raycast(transform.position + upward, direction.normalized, out hit, Mathf.Infinity))
             {
@@ -178,14 +181,14 @@ public class EnemyMovement : MonoBehaviour
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Investigating"))
         {
-            Debug.Log("Investigating");
+            //Debug.Log("Investigating");
             nav.SetDestination(currentTarget);
             if (Vector3.Distance(transform.position, currentTarget) < 1 || Vector3.Distance(roamCenterPoint, currentTarget) <= maxRoamDistance)
             {
                 monsterAnim.SetTrigger("nothingFound");
                 movingToLamp = false;
                 currentTarget = transform.position;
-                Debug.Log("Reset");
+                //Debug.Log("Reset");
             }
 
             targetLamp = null;
@@ -194,26 +197,26 @@ public class EnemyMovement : MonoBehaviour
         {
             if (!movingToLamp)
             { // not currently moving, find new place to move to
-                Debug.Log("not moving");
+                //Debug.Log("not moving");
                 moveToLamp();
             }
             else if (Vector3.Distance(transform.position, currentTarget) < lampDistance)
             { //reached destination, should make this variable public for testing
                 movingToLamp = false;
-                Debug.Log("in the elseif");
+                //Debug.Log("in the elseif");
                 nav.SetDestination(transform.position);
                 currentLamp = findCurrentLamp();
             }
             else
             {
-                Debug.Log("in the else");
+                //Debug.Log("in the else");
             }
         }
     }
 
     public void moveToLamp()
     {
-        Debug.Log("in the move to lamp");
+        //Debug.Log("in the move to lamp");
 
         if (currentLamp == null) // initial gamestate when monster is first placed
         {
@@ -257,7 +260,7 @@ public class EnemyMovement : MonoBehaviour
             if (targetLamps.Length == 0)
             {
                 targetLamps = adjacentLamps; //WILL NEED TO DEBUGGGGGGG
-                Debug.Log("PLEASE PLACE BREAKPOINT HERE unsure if this will behave correctly");
+                //Debug.Log("PLEASE PLACE BREAKPOINT HERE unsure if this will behave correctly");
             }
             int ran = Random.Range(0, targetLamps.Length); //unsure doesnt work with length - 1, tried the remove 1 now it works???!!!
             targetLamp = targetLamps[ran];
