@@ -28,9 +28,15 @@ public class EnemyMovement : MonoBehaviour
     GameObject currentLamp;
     GameObject[] lamps;
     public GameObject targetLamp;
+    public AudioSource roamingSound;
+    public AudioSource attackSound;
 
     private void Awake()
     {
+        roamingSound = transform.Find("Audio Source").transform.GetComponent<AudioSource>();
+        attackSound = transform.Find("Audio Source (1)").transform.GetComponent<AudioSource>();
+        attackSound.enabled = false;
+        roamingSound.enabled = true;
         moving = false;
         traveller = GameObject.FindGameObjectsWithTag("Traveller")[0].transform;
         nav = GetComponent<NavMeshAgent>();
@@ -50,6 +56,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
         lamps = validLamps.ToArray();
+
     }
 
     void OnTriggerStay(Collider other)
@@ -79,17 +86,44 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
+        //monster sounds; possibly temporary, depending if we use 3D audio controller
+        //The attackSound is almost definitely temporary, assuming we will someday have
+        //and attack state 
+        float distanceFromTraveler = Vector3.Distance(transform.position, traveller.transform.position);
+        if (distanceFromTraveler < 1)
+        {
+            attackSound.enabled = true;
+        }
+        else if (distanceFromTraveler < 3 && distanceFromTraveler > 1) {
+            roamingSound.enabled = true;
+            roamingSound.volume = (1 / distanceFromTraveler);
+            attackSound.enabled = false;
+        }
+        else
+        {
+            if (!roamingSound.isPlaying)
+            {
+                roamingSound.Play();
+            }
+            roamingSound.volume = (1 / distanceFromTraveler) / 3;
+        }
+        //end of monster sound control
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
             Debug.Log("Stunned");
             nav.SetDestination(transform.position);
+            //Monster sounds
+            roamingSound.enabled = false;
+            attackSound.enabled = false;
 
-           
 
             timer += Time.deltaTime;
             if (timer > 5)
             {
                 monsterAnim.SetTrigger("recovered");
+                //Monster sounds
+                roamingSound.enabled = true;
+                //
                 timer = 0f;
                 movingToLamp = false;
                 targetLamp = null;
@@ -103,7 +137,9 @@ public class EnemyMovement : MonoBehaviour
             if (Vector3.Distance(roamCenterPoint, traveller.position) >= maxRoamDistance)
             {
                 monsterAnim.SetTrigger("travellerLost");
-
+                //monster sounds
+                roamingSound.enabled = true;
+                attackSound.enabled = false;
                 currentLamp = null;
                 movingToLamp = false;
                 targetLamp = null;
@@ -149,6 +185,7 @@ public class EnemyMovement : MonoBehaviour
                 currentTarget = transform.position;
                 Debug.Log("Reset");
             }
+
             targetLamp = null;
         }
         else
@@ -175,6 +212,7 @@ public class EnemyMovement : MonoBehaviour
     public void moveToLamp()
     {
         Debug.Log("in the move to lamp");
+
         if (currentLamp == null) // initial gamestate when monster is first placed
         {
             float distance = Mathf.Infinity;
