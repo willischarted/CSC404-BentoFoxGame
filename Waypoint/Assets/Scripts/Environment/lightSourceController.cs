@@ -122,9 +122,9 @@ public class lightSourceController : MonoBehaviour {
 		
 		if (type == 0) {
 
-			Debug.Log("Returning some resource");
+			//Debug.Log("Returning some resource");
 			float percentageReturn = timeRemaining / lightDuration;
-			Debug.Log(percentageReturn);
+			//Debug.Log(percentageReturn);
 
 			if (currentLightType == 1) {
 				pScript.addResource(pScript.light1Value * percentageReturn);

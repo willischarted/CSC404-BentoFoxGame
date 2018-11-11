@@ -162,10 +162,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 				popUpText.fontSize = 120;
 				popUpText.text =   "Ignite" ;
 				//(int) pController.getCurrentResourceNeeded() + ")"
-				Debug.Log("Setting to ignite");
+				//Debug.Log("Setting to ignite");
 			}
 			//popUpText.text = "hello";
-			Debug.Log("Could not set text");
+			//Debug.Log("Could not set text");
 			return;
 		}
 		
@@ -294,7 +294,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	}
 
 	void setStun() {
-		Debug.Log("Setting stun");
+		//Debug.Log("Setting stun");
 		foreach (GameObject m in monstersInRange) {
 			//for each monster in array
 			Animator anim = m.GetComponent<Animator>();
@@ -362,7 +362,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	  void unlockAbilties() {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         //if ()
-        Debug.Log(SceneManager.GetActiveScene().name);
+        //Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name.CompareTo("Level1") == 0) {
             healUnlocked = false;
 			stunUnlocked = false;
@@ -388,7 +388,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			
         }
         else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
-			Debug.Log("Unlock for level4");
+			//Debug.Log("Unlock for level4");
             healUnlocked = true;
 			stunUnlocked = true;
         }
