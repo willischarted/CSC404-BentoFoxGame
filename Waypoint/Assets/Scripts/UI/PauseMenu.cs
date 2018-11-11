@@ -123,6 +123,10 @@ public class PauseMenu : MonoBehaviour
                 resume();
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Circle"))
+        {
+            resume();
+        }
         
     }
 
