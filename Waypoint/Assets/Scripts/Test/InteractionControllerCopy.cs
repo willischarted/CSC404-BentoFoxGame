@@ -43,6 +43,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	public float textVerticalOffset;
 
+	public GameObject monsterPopup;
+	public Canvas worldCanvas;
+
+	public List<GameObject> monstersInRange;
+
 
 
 
@@ -83,6 +88,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 		
 		unlockAbilties();
 
+		createMonsterPopups();
+
 		
 	}
 	
@@ -91,19 +98,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (inTutorial)
 			return;
-		//axis playtesting
-		//Debug.Log(Input.GetAxis("DPadX"));
-		//Debug.Log(Input.GetAxis("DPadY"));
-
-		// Heal when held in vicinity of monster
-		// impulse stun when tapped
-        
-		//Debug.Log(currentTarget);
-
-	//	if (Input.GetMouseButtonDown(1) || Input.GetButton("Square")) {
-		
-			
-	//	}
+	
 
 		if (Input.GetButton("Circle") || Input.GetKey(KeyCode.Space)) {
 			heldDuration += Time.deltaTime;
@@ -131,14 +126,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square")) {
-			//Debug.Log(heldDuration);
 			
-
-			//0.2f is general approximation of a tap
-			//if (heldDuration <= 0.5f) {
-
-			
-				//start impulse
 				if (targetMonster != null && targetMonster.tag=="Monster") {
 					setStun();
 					return;
@@ -147,11 +135,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			
 
 				
-				
-		//	}
-			//heldDuration = 0f;
-			//if (setHealing)
-			//	setHealing = false;
+	
 		}
 		if (Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)) {
 				//call stun enemy function
@@ -161,14 +145,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 					return;
 				}
 		}
-		/* 
-		if (currentTarget && targetTraveller) {
-			//interactionText.text = "Light";
-			popUpText.fontSize = 85;
-			popUpText.text =   "Light/Heal";
-			return;
-		}
-		*/
+	
 
 		if (currentTarget && (lScript != null)) {
 			//interactionText.text = "Light";
@@ -193,34 +170,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Debug.Log("Could not set text");
 			return;
 		}
-		/* 
-		if (targetMonster && currentTarget) {
-			popUpText.fontSize = 150;
-			popUpText.text =   "Stun";
-			return;
-		}
-		*/
-
-
 		
-	
-		
-
-		/* 
-		if (targetMonster) {
-			//interactionText.text = "Stun";
-			popUpText2.fontSize = 120;
-			popUpText2.text =   "Stun";
-			return;
-		}
-		if (targetTraveller) {
-			//interactionText.text = "(Hold) Heal";
-			popUpText3.fontSize = 80;
-			popUpText3.text = "Hold to Heal";
-			return;
-		}
-
-		*/
 		
 		else {
 			interactionText.text = "";
@@ -229,33 +179,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		
 	}
 
-	/*
-	//check performace later
-	void OnTriggerStay(Collider other)
-    {
-		
-		if (other.tag == "Traveller") {
-			currentTarget = other.gameObject;
-			interactionText.text = "Hold X to transfer light to Traveller";
-			return;
-		}
-
-		if (other.tag == "Monster") {
-			currentTarget = other.gameObject;
-			interactionText.text = "Press X to stun Monster";
-			return;
-		}
-
-
-		if (other.tag == "Switch") {
-			currentTarget = other.gameObject;
-			interactionText.text = "Press X to interact with Light Source";
-			return;
-		}
-
-
-	}
-	*/
+	
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "LampLight") {
 			lScript = other.GetComponent<lightSourceController>();
@@ -264,11 +188,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
 	}
 	void OnTriggerStay(Collider other) {
-	//	Debug.Log(other.name);
-	//	if (other.tag == "Monster") {
-			//add to array
-			//monsters.Add(other.gameObject);
-	//	}
+
 
 		if (other.tag == "Traveller" && healUnlocked) {
 			targetTraveller = other.gameObject;
@@ -305,6 +225,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
 
 		if (other.tag == "Monster" && stunUnlocked) {
+			
+			/* 
 			//currentTarget = other.gameObject;
 			targetMonster = other.gameObject;
 			//interactionText.text = "Press X to stun Monster";
@@ -314,6 +236,28 @@ public class InteractionControllerCopy : MonoBehaviour {
 			popUpController2.updateWorldObjectTransform(popUpLocation);
 			controlLureImage();
 			return;
+			*/
+
+			if (!monstersInRange.Contains(other.gameObject)){
+				monstersInRange.Add(other.gameObject);
+			}
+
+			EnemyMovement monScript = other.gameObject.GetComponent<EnemyMovement>();
+			if (monScript == null) {
+				Debug.Log("Could not find monscript");
+			}
+			else {
+				monScript.popUp.SetActive(true);
+				Vector3 popUpLocation = other.gameObject.transform.position;
+				popUpLocation.y = popUpLocation.y +textVerticalOffset;
+				monScript.popUp.GetComponent<WorldSpaceObjectController>().updateWorldObjectTransform(popUpLocation);
+				return;
+
+			}
+			
+	
+	
+	
 		}
 
 
@@ -337,11 +281,14 @@ public class InteractionControllerCopy : MonoBehaviour {
 			//interactionText.text  = "";
 			return;
 		}
-		if (other.tag == "Monster" && other.gameObject == targetMonster) {
-			interactionPopUp2.SetActive(false);
+		if (other.tag == "Monster") { //&& other.gameObject == targetMonster
+			//interactionPopUp2.SetActive(false);
 			//currentTarget = null;
-			targetMonster = null;
+			//targetMonster = null;
 			//interactionText.text  = "";
+			EnemyMovement monScript = other.gameObject.GetComponent<EnemyMovement>();
+			monScript.popUp.SetActive(false);
+			monstersInRange.Remove(other.gameObject);
 			return;
 		}
 
@@ -449,6 +396,23 @@ public class InteractionControllerCopy : MonoBehaviour {
 		inTutorial = _inTutorial;
 	}
 
+	public void createMonsterPopups() {
+		foreach(GameObject m in GameObject.FindGameObjectsWithTag("Monster")) {
+			EnemyMovement monScript = m.GetComponent<EnemyMovement>();
+			if (monScript == null) {
+				Debug.Log("Could not find monScript");
+			}
+			else {
+				GameObject mPopup = Instantiate(monsterPopup, transform.position, Quaternion.identity);
+				mPopup.transform.parent = worldCanvas.transform;
+				mPopup.SetActive(false);
+				
+				monScript.popUp = mPopup;
+			}
+
+
+		}
+	}
 
 	
 

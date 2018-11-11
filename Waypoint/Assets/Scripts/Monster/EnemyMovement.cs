@@ -31,6 +31,8 @@ public class EnemyMovement : MonoBehaviour
     public AudioSource roamingSound;
     public AudioSource attackSound;
 
+    public GameObject popUp;
+
     private void Awake()
     {
         roamingSound = transform.Find("Audio Source").transform.GetComponent<AudioSource>();
