@@ -381,7 +381,7 @@ public class EnemyMovement : MonoBehaviour
     public bool startAttack() {
         //important -> must stop movement before animation
         // or you will get slide effect
-        if (currentAttackCooldown == 0) { //only attack on a cooldown 
+        if (isRoaming && currentAttackCooldown == 0) { //only attack on a cooldown 
             nav.isStopped = true;
             bodyAnim.SetTrigger("isAttack");
             Invoke("doneAttacking", 1f);
