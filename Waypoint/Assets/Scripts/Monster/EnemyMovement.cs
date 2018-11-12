@@ -269,7 +269,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (!isStunned){
             if (movingToLamp != bodyAnim.GetBool("isMoving")) {
-                Debug.Log("called switch");
+                //Debug.Log("called switch");
                 bodyAnim.SetBool("isMoving", movingToLamp);
             }
         }
@@ -281,7 +281,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void moveToLamp()
     {
-        Debug.Log("in the move to lamp");
+        //Debug.Log("in the move to lamp");
 
         if (currentLamp == null) // initial gamestate when monster is first placed
         {

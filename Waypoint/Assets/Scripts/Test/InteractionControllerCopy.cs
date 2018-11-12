@@ -110,7 +110,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 					if (pController.getResource() > 0) {
 						//tScript.increaseCape();
 						tScript.GetHeal(1);
-						pController.addResource(-0.1f);
+						pController.addResource(-1f);
 					}
 					return;
 				}
@@ -125,9 +125,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 			heldDuration = 0f;
 		}
 
-		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square")) {
+		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square") ) {
 			
-			if (monstersInRange.Count >=1) {
+			if (pController.getResource() >= 20 && monstersInRange.Count >=1) {
 				setStun();
 				return;
 			}				
@@ -193,6 +193,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 			travellerHealth tHealth = targetTraveller.GetComponent<travellerHealth>();
 			if (tHealth == null)
 				Debug.Log("Could not get traveller health script");
+
+
 			if (tHealth.currentHealth != tHealth.startingHealth) {
 				canHeal = true;
 				//interactionText.text = "Hold X to transfer light to Traveller";
@@ -200,6 +202,15 @@ public class InteractionControllerCopy : MonoBehaviour {
 				Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
 				popUpController3.updateWorldObjectTransform(popUpLocation);
+
+				if (pController.getResource() > 0) {
+					popUpText3.fontSize = 80;
+					popUpText3.text = "Hold to Heal";
+				}
+				else {
+					popUpText3.fontSize = 80;
+					popUpText3.text = "Not Enough!";
+				} 
 				//controlLureImage();
 				//return;
 			}
@@ -244,11 +255,24 @@ public class InteractionControllerCopy : MonoBehaviour {
 			if (monScript == null) {
 				Debug.Log("Could not find monscript");
 			}
+
 			else {
 				monScript.popUp.SetActive(true);
 				Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
 				monScript.popUp.GetComponent<WorldSpaceObjectController>().updateWorldObjectTransform(popUpLocation);
+				Text monText = monScript.popUp.GetComponentInChildren<Text>();
+				if (pController.getResource() >= 20){ // change to public var later
+					
+					monText.fontSize = 100;
+					monText.text =   "Stun";
+				}
+
+				else {
+					monText.fontSize = 80;
+					monText.text =   "Not Enough!";
+				}
+
 				return;
 
 			}

@@ -33,7 +33,7 @@ public class EndLevel : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(optionNum);
+        //Debug.Log(optionNum);
         float yValue = Input.GetAxis("DPadY");
         if (yValue != 0f)
         {
