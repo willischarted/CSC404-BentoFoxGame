@@ -36,6 +36,9 @@ public class EnemyMovement : MonoBehaviour
     public GameObject monsterGeo;
     private Animator bodyAnim;
     public bool isRoaming;
+    public float attackCooldownValue;
+    [SerializeField]
+    private float currentAttackCooldown;
 
     private void Awake()
     {
@@ -68,6 +71,8 @@ public class EnemyMovement : MonoBehaviour
         if (bodyAnim == null)
             Debug.Log("Could not find the bodyanim");
         }
+
+        currentAttackCooldown = 0;
 
 
        
@@ -109,19 +114,23 @@ public class EnemyMovement : MonoBehaviour
             //channge nothing, it can go back to doing what it does after
                 return;
             }
+            /* 
             else { //once animation is done make sure we can move again
                 if (nav.isStopped)
                     nav.isStopped = false;
             }
+            */
        
 
-            if (movingToLamp != bodyAnim.GetBool("isMoving")) {
-                Debug.Log("called switch");
-                bodyAnim.SetBool("isMoving", movingToLamp);
-            }
+       
 
             if (Input.GetKeyDown(KeyCode.M)) {
                 startAttack();
+            }
+
+            if (currentAttackCooldown != 0) {
+                
+                currentAttackCooldown = Mathf.Clamp(currentAttackCooldown -= Time.deltaTime, 0f, attackCooldownValue);
             }
         }
        
@@ -247,6 +256,13 @@ public class EnemyMovement : MonoBehaviour
                 //Debug.Log("in the else");
             }
         }
+
+        if (isRoaming){
+            if (movingToLamp != bodyAnim.GetBool("isMoving")) {
+                Debug.Log("called switch");
+                bodyAnim.SetBool("isMoving", movingToLamp);
+            }
+        }
   
        
       
@@ -362,12 +378,23 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-    public void startAttack() {
+    public bool startAttack() {
         //important -> must stop movement before animation
         // or you will get slide effect
-        nav.isStopped = true;
-        bodyAnim.SetTrigger("isAttack");
+        if (currentAttackCooldown == 0) { //only attack on a cooldown 
+            nav.isStopped = true;
+            bodyAnim.SetTrigger("isAttack");
+            Invoke("doneAttacking", 1f);
+            currentAttackCooldown = attackCooldownValue;
+            return true;
+        }
+        return false;
 
+    }
+    //Must use this since the animation is so short it cause the nav mesh
+    // to continue moving almost immeditely
+    public void doneAttacking() {
+        nav.isStopped = false;
     }
 }
 

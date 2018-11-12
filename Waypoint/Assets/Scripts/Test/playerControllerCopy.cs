@@ -337,7 +337,7 @@ public class playerControllerCopy: MonoBehaviour {
         */
     }
     void setLightColor(Light light, int color) {
-        Color c;
+        //Color c;
         if (color == 1) {
             //Color.TryParseHexString("#F00", out light.color);
             //light.color = Color.blue;//Color.yellow;
