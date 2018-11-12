@@ -35,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
 
     public GameObject monsterGeo;
     private Animator bodyAnim;
-    public bool isRoaming;
+
     public float attackCooldownValue;
     [SerializeField]
     private float currentAttackCooldown;
@@ -68,11 +68,11 @@ public class EnemyMovement : MonoBehaviour
         }
         lamps = validLamps.ToArray();
 
-        if (isRoaming) {
+       
         bodyAnim = monsterGeo.GetComponent<Animator>();
         if (bodyAnim == null)
             Debug.Log("Could not find the bodyanim");
-        }
+      
 
         currentAttackCooldown = 0;
         isStunned = false;
@@ -110,7 +110,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {       
-        if (isRoaming) {
+       
         
             if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
             {   //for now do nothing while animation completes
@@ -126,7 +126,7 @@ public class EnemyMovement : MonoBehaviour
        
 
        
-
+            //for testing purposes
             if (Input.GetKeyDown(KeyCode.M)) {
                 startAttack();
             }
@@ -135,7 +135,7 @@ public class EnemyMovement : MonoBehaviour
                 
                 currentAttackCooldown = Mathf.Clamp(currentAttackCooldown -= Time.deltaTime, 0f, attackCooldownValue);
             }
-        }
+        
        
        
         //monster sounds; possibly temporary, depending if we use 3D audio controller
@@ -162,13 +162,7 @@ public class EnemyMovement : MonoBehaviour
         //end of monster sound control
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {   
-            /* 
-            if (isRoaming){
-          
-                bodyAnim.SetBool("isMoving", false);
-            
-            }
-            */
+           
 
             //Debug.Log("Stunned");
             nav.SetDestination(transform.position);
@@ -273,7 +267,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        if (isRoaming && !isStunned){
+        if (!isStunned){
             if (movingToLamp != bodyAnim.GetBool("isMoving")) {
                 Debug.Log("called switch");
                 bodyAnim.SetBool("isMoving", movingToLamp);
@@ -397,7 +391,7 @@ public class EnemyMovement : MonoBehaviour
     public bool startAttack() {
         //important -> must stop movement before animation
         // or you will get slide effect                             //optimize -> change  to local var 
-        if (isRoaming && currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned")) { //only attack on a cooldown 
+        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned")) { //only attack on a cooldown 
             nav.isStopped = true;
             bodyAnim.SetTrigger("isAttack");
             Invoke("doneAttacking", 1f);
@@ -419,11 +413,10 @@ public class EnemyMovement : MonoBehaviour
 
     public void setStunned() {
 
-        if (isRoaming){
+        
           
-            bodyAnim.SetBool("isMoving", false);
+        bodyAnim.SetBool("isMoving", false);
             
-        }
         monsterAnim.SetTrigger("isStunned");
         isStunned = true;
     }

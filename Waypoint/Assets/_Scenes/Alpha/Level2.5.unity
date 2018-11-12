@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3660,6 +3660,11 @@ AudioLowPassFilter:
   m_CorrespondingSourceObject: {fileID: 169293719661502466, guid: 437187ad378129745947459c3dd71608,
     type: 2}
   m_PrefabInternal: {fileID: 333194207}
+--- !u!82 &333194209 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 82819052247857726, guid: 437187ad378129745947459c3dd71608,
+    type: 2}
+  m_PrefabInternal: {fileID: 333194207}
 --- !u!1 &339689492
 GameObject:
   m_ObjectHideFlags: 0
@@ -4787,7 +4792,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7766,7 +7771,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: 5}
   m_SizeDelta: {x: 30, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -17593,7 +17598,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 5, y: -6.25}
   m_SizeDelta: {x: 20, y: 11.5}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -27002,8 +27007,8 @@ RectTransform:
   m_Father: {fileID: 266269371}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -27933,6 +27938,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114106499950572080, guid: 463ec4441f575de4e910171bfcc78008,
+        type: 2}
+      propertyPath: darkTheme
+      value: 
+      objectReference: {fileID: 333194209}
+    - target: {fileID: 114106499950572080, guid: 463ec4441f575de4e910171bfcc78008,
+        type: 2}
+      propertyPath: travellerTheme
+      value: 
+      objectReference: {fileID: 1692657333}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 463ec4441f575de4e910171bfcc78008, type: 2}
   m_IsPrefabAsset: 0
@@ -28356,6 +28371,11 @@ GameObject:
 --- !u!169 &1692657332 stripped
 AudioLowPassFilter:
   m_CorrespondingSourceObject: {fileID: 169574984357503002, guid: d17434b735f304dcbb222d849c13b1e0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1692657330}
+--- !u!82 &1692657333 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 82886083746478648, guid: d17434b735f304dcbb222d849c13b1e0,
     type: 2}
   m_PrefabInternal: {fileID: 1692657330}
 --- !u!4 &1692657340 stripped
