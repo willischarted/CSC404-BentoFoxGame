@@ -39,6 +39,8 @@ public class EnemyMovement : MonoBehaviour
     public float attackCooldownValue;
     [SerializeField]
     private float currentAttackCooldown;
+    //Need local variable to avoid race conditions with update frame
+    private bool isStunned;
 
     private void Awake()
     {
@@ -73,6 +75,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         currentAttackCooldown = 0;
+        isStunned = false;
 
 
        
@@ -158,7 +161,15 @@ public class EnemyMovement : MonoBehaviour
         }
         //end of monster sound control
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
-        {
+        {   
+            /* 
+            if (isRoaming){
+          
+                bodyAnim.SetBool("isMoving", false);
+            
+            }
+            */
+
             //Debug.Log("Stunned");
             nav.SetDestination(transform.position);
             //Monster sounds
@@ -177,9 +188,14 @@ public class EnemyMovement : MonoBehaviour
                 movingToLamp = false;
                
                 targetLamp = null;
+
+                isStunned = false;
             }
+            
+           
             return;
         }
+        
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Chase"))
         {
             //Debug.Log("Chase");
@@ -257,7 +273,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        if (isRoaming){
+        if (isRoaming && !isStunned){
             if (movingToLamp != bodyAnim.GetBool("isMoving")) {
                 Debug.Log("called switch");
                 bodyAnim.SetBool("isMoving", movingToLamp);
@@ -271,7 +287,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void moveToLamp()
     {
-        //Debug.Log("in the move to lamp");
+        Debug.Log("in the move to lamp");
 
         if (currentLamp == null) // initial gamestate when monster is first placed
         {
@@ -380,8 +396,8 @@ public class EnemyMovement : MonoBehaviour
 
     public bool startAttack() {
         //important -> must stop movement before animation
-        // or you will get slide effect
-        if (isRoaming && currentAttackCooldown == 0) { //only attack on a cooldown 
+        // or you will get slide effect                             //optimize -> change  to local var 
+        if (isRoaming && currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned")) { //only attack on a cooldown 
             nav.isStopped = true;
             bodyAnim.SetTrigger("isAttack");
             Invoke("doneAttacking", 1f);
@@ -399,6 +415,17 @@ public class EnemyMovement : MonoBehaviour
         travellerHealth travHealth = trav.GetComponent<travellerHealth>();
         travHealth.TakeBasicDamage(10);
         nav.isStopped = false;
+    }
+
+    public void setStunned() {
+
+        if (isRoaming){
+          
+            bodyAnim.SetBool("isMoving", false);
+            
+        }
+        monsterAnim.SetTrigger("isStunned");
+        isStunned = true;
     }
 }
 

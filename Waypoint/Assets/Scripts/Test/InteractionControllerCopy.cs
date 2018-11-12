@@ -295,13 +295,21 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	void setStun() {
 		//Debug.Log("Setting stun");
+		
 		foreach (GameObject m in monstersInRange) {
 			//for each monster in array
+
+			/* 
 			Animator anim = m.GetComponent<Animator>();
 			if (anim == null) {
 				Debug.Log("Could not find anim");
 			}
 			anim.SetTrigger("isStunned");
+			*/
+			EnemyMovement monScript = m.GetComponent<EnemyMovement>();
+			if (monScript == null)
+				Debug.Log("Could not find monScript!");
+			monScript.setStunned();
 			
 		
 			// get animator contoller and set stun
