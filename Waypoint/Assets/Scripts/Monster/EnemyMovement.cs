@@ -33,6 +33,10 @@ public class EnemyMovement : MonoBehaviour
 
     public GameObject popUp;
 
+    public GameObject monsterGeo;
+    private Animator bodyAnim;
+    public bool isRoaming;
+
     private void Awake()
     {
         roamingSound = transform.Find("Audio Source").transform.GetComponent<AudioSource>();
@@ -59,6 +63,14 @@ public class EnemyMovement : MonoBehaviour
         }
         lamps = validLamps.ToArray();
 
+        if (isRoaming) {
+        bodyAnim = monsterGeo.GetComponent<Animator>();
+        if (bodyAnim == null)
+            Debug.Log("Could not find the bodyanim");
+        }
+
+
+       
     }
 
 
@@ -89,7 +101,31 @@ public class EnemyMovement : MonoBehaviour
 
 
     void Update()
-    {
+    {       
+        if (isRoaming) {
+        
+            if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
+            {   //for now do nothing while animation completes
+            //channge nothing, it can go back to doing what it does after
+                return;
+            }
+            else { //once animation is done make sure we can move again
+                if (nav.isStopped)
+                    nav.isStopped = false;
+            }
+       
+
+            if (movingToLamp != bodyAnim.GetBool("isMoving")) {
+                Debug.Log("called switch");
+                bodyAnim.SetBool("isMoving", movingToLamp);
+            }
+
+            if (Input.GetKeyDown(KeyCode.M)) {
+                startAttack();
+            }
+        }
+       
+       
         //monster sounds; possibly temporary, depending if we use 3D audio controller
         //The attackSound is almost definitely temporary, assuming we will someday have
         //and attack state 
@@ -130,6 +166,7 @@ public class EnemyMovement : MonoBehaviour
                 //
                 timer = 0f;
                 movingToLamp = false;
+               
                 targetLamp = null;
             }
             return;
@@ -149,11 +186,6 @@ public class EnemyMovement : MonoBehaviour
                 movingToLamp = false;
                 targetLamp = null;
                 
-                
-             
-
-               
-               
             }
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
@@ -188,6 +220,8 @@ public class EnemyMovement : MonoBehaviour
                 monsterAnim.SetTrigger("nothingFound");
                 movingToLamp = false;
                 currentTarget = transform.position;
+                
+               
                 //Debug.Log("Reset");
             }
 
@@ -203,6 +237,7 @@ public class EnemyMovement : MonoBehaviour
             else if (Vector3.Distance(transform.position, currentTarget) < lampDistance)
             { //reached destination, should make this variable public for testing
                 movingToLamp = false;
+               
                 //Debug.Log("in the elseif");
                 nav.SetDestination(transform.position);
                 currentLamp = findCurrentLamp();
@@ -212,6 +247,10 @@ public class EnemyMovement : MonoBehaviour
                 //Debug.Log("in the else");
             }
         }
+  
+       
+      
+           
     }
 
     public void moveToLamp()
@@ -254,6 +293,7 @@ public class EnemyMovement : MonoBehaviour
                 nav.SetDestination(currentTarget);
                 targetLamp = null;
                 movingToLamp = false;
+               
                 return;
             }
             GameObject[] targetLamps = possibleTargets.ToArray();
@@ -267,6 +307,7 @@ public class EnemyMovement : MonoBehaviour
             currentTarget = targetLamp.transform.position;
             nav.SetDestination(currentTarget);
             movingToLamp = true;
+           
         }
     }
 
@@ -314,9 +355,19 @@ public class EnemyMovement : MonoBehaviour
                     currentTarget = litLamp.transform.position;
                     nav.SetDestination(currentTarget);
                     movingToLamp = true;
+                   
                 }
             }
         }
+    }
+
+
+    public void startAttack() {
+        //important -> must stop movement before animation
+        // or you will get slide effect
+        nav.isStopped = true;
+        bodyAnim.SetTrigger("isAttack");
+
     }
 }
 
