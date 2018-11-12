@@ -386,6 +386,7 @@ public class EnemyMovement : MonoBehaviour
             bodyAnim.SetTrigger("isAttack");
             Invoke("doneAttacking", 1f);
             currentAttackCooldown = attackCooldownValue;
+
             return true;
         }
         return false;
@@ -394,6 +395,9 @@ public class EnemyMovement : MonoBehaviour
     //Must use this since the animation is so short it cause the nav mesh
     // to continue moving almost immeditely
     public void doneAttacking() {
+        GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
+        travellerHealth travHealth = trav.GetComponent<travellerHealth>();
+        travHealth.TakeBasicDamage(10);
         nav.isStopped = false;
     }
 }

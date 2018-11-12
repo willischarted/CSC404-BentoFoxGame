@@ -89,9 +89,24 @@ public class travellerMovement : MonoBehaviour
             anim.SetTrigger("isExit");
 
         }
+        /* 
         else if (other.gameObject.CompareTag("Monster")){
             if (other.GetType() == typeof(CapsuleCollider)){
                 travellerHealth.TakeBasicDamage(10);
+            }     
+        }
+        */
+    }
+
+    private void OnTriggerStay(Collider other) {
+        if (other.gameObject.CompareTag("Monster")){
+            if (other.GetType() == typeof(CapsuleCollider)){
+                EnemyMovement monScript = other.gameObject.GetComponent<EnemyMovement>();
+                if (monScript == null)
+                    Debug.Log("Could not find the monScript");
+                //if (monScript.startAttack())
+                  //  travellerHealth.TakeBasicDamage(10);
+                monScript.startAttack();
             }     
         }
     }
