@@ -68,6 +68,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4025501790824118}
+  - component: {fileID: 114234212111276312}
+  - component: {fileID: 114975728868545814}
   m_Layer: 0
   m_Name: fireflyLantern
   m_TagString: Untagged
@@ -150,8 +152,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1431885642876596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.980298, y: 4.76, z: -33.309364}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.099999905, z: 0.68700075}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4884711830574666}
   m_Father: {fileID: 0}
@@ -242,7 +244,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1036878201672104}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.37, y: -4.71, z: 0.3899994}
+  m_LocalPosition: {x: -4.31, y: -5.01, z: 0.3899994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4860747920056414}
@@ -506,3 +508,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1701357615713542}
   m_Mesh: {fileID: 4300000, guid: ee43a32986f377d46beadce0a81a1098, type: 3}
+--- !u!114 &114234212111276312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1431885642876596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be355f9ec90308c4fb8893eee7276147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pivot: {fileID: 4025501790824118}
+  mass: {fileID: 0}
+  separation: 0
+  speed: 2
+  angleUpLimit: 20
+  angleLowLimit: -20
+--- !u!114 &114975728868545814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1431885642876596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3a5018a1782e64492464c3e402be9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handle: {fileID: 4025501790824118}
+  handL: {fileID: 0}
+  handR: {fileID: 0}
