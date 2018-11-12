@@ -408,7 +408,8 @@ public class EnemyMovement : MonoBehaviour
         GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
         travellerHealth travHealth = trav.GetComponent<travellerHealth>();
         travHealth.TakeBasicDamage(10);
-        nav.isStopped = false;
+        if (nav.isStopped)
+            nav.isStopped = false;
     }
 
     public void setStunned() {
