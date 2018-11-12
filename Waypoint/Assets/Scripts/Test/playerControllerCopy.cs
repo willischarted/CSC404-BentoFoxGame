@@ -220,21 +220,19 @@ public class playerControllerCopy: MonoBehaviour {
         //Debug.Log("called set light");
         if (lightSource.CompareTag("LampLight"))
         {
-           // Debug.Log(lightSource.transform.position);
+
             count = count + 1;
             SetCountText();
-           // cCollider = lightSource.GetComponentInParent<CapsuleCollider>();
+
             lampLight = lightSource.gameObject.GetComponentInChildren<Light>();
-            Material bulb = lightSource.GetComponentInChildren<Renderer>().material;
-            //Behaviour halo =(Behaviour)other.GetComponent ("Halo");
-            
-            //.Log(bulb.name);
-            if (bulb == null)
-                Debug.Log("HHH");
+           // Material bulb = lightSource.GetComponentInChildren<Renderer>().material;
+
+           // if (bulb == null)
+            //    Debug.Log("HHH");
             if (lampLight.intensity > 0)
             {
                 lampLight.intensity = 0;
-             //   cCollider.enabled = false;
+
                 audioSource.clip = offSoundEffect;
                 audioSource.Play();
 
@@ -242,33 +240,29 @@ public class playerControllerCopy: MonoBehaviour {
                     tMovement.findLatest(lightSource);
                 }
                     
-                bulb.DisableKeyword("_EMISSION");
-                //addResource(tempLightCost);
+                //bulb.DisableKeyword("_EMISSION");
 
-                //halo.enabled = false;
                 lightSourceController lController = lightSource.GetComponentInParent<lightSourceController>();
                 if (lController != null)
                     lController.setCurrentLightType(0);
                 
             }
             else{
-                //setLightColor(lampLight, equippedLight);
+               
                 if (getResource() >= getCurrentResourceNeeded()){
  
-                setChildLight(lightSource.GetComponentsInChildren<Light>());
-                lampLight.intensity = lightValueOn;
-               // Debug.Log("the intensity is  " + lampLight.intensity);
-               // cCollider.enabled = true;
-                audioSource.clip = onSoundEffect;
-                audioSource.Play();
-                if (equippedLight == 1 || equippedLight == 2)
-                {
-                    tMovement.findLatest(lightSource);
-                }
+                    setChildLight(lightSource.GetComponentsInChildren<Light>());
+                    lampLight.intensity = lightValueOn;
+              
+                    audioSource.clip = onSoundEffect;
+                    audioSource.Play();
+                    if (equippedLight == 1 || equippedLight == 2)
+                    {
+                        tMovement.findLatest(lightSource);
+                    }
 
-                //
                 if (equippedLight == 1 || equippedLight == 3) {
-                    //Debug.Log("Sending signal to all monsters");
+
                     GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
                     foreach (GameObject g in monsters) {
                         EnemyMovement eScript = g.GetComponent<EnemyMovement>();
@@ -280,19 +274,13 @@ public class playerControllerCopy: MonoBehaviour {
                     }
                 }
 
-                bulb.EnableKeyword("_EMISSION");
-                setMaterialColor(bulb, equippedLight);
-
-                // halo.enabled = true;
-
-                //addResource(-tempLightCost);
                 subtractResource();
                 lightSourceController lController = lightSource.GetComponentInParent<lightSourceController>();
                 if (lController != null)
                     lController.setCurrentLightType(equippedLight);
 
                 }
-                //halo.enabled = true;
+
             }
         }
     }
