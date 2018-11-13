@@ -34,6 +34,7 @@ public class playerControllerCopy: MonoBehaviour {
     // Used to determine what light/ability firefly has equipped
     private int equippedLight;
     public float lightResource;
+    public float startingResource;
 
     // Link to firefly Resource UI
     public Slider resourceBar;
@@ -83,6 +84,8 @@ public class playerControllerCopy: MonoBehaviour {
         abilityUIScript = lightAbility.GetComponent<abilityIconController>();
         if (abilityUIScript == null)
             Debug.Log("Could not find abilityUIscript");
+
+        
     }
 	// Use this for initialization
     void Start () {
@@ -98,6 +101,7 @@ public class playerControllerCopy: MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
 
         unlockAbilties();
+        startingResource = lightResource;
        
 	}
 	
