@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
     float timer = 0f;
     Vector3 direction;
     Vector3 upward;
+    float soundTimer = 0f;
 
     public float MAX_LD;
     public GameObject lastVisited;
@@ -55,6 +56,7 @@ public class EnemyMovement : MonoBehaviour
         col = GetComponent<SphereCollider>();
         currentTarget = transform.position;
         timer = 0f;
+        soundTimer = 0f;
         upward.Set(0f, 0.2f, 0f);
         currentLamp = null;
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
@@ -135,21 +137,41 @@ public class EnemyMovement : MonoBehaviour
                 
                 currentAttackCooldown = Mathf.Clamp(currentAttackCooldown -= Time.deltaTime, 0f, attackCooldownValue);
             }
-        
-       
-       
+
+
+
         //monster sounds; possibly temporary, depending if we use 3D audio controller
         //The attackSound is almost definitely temporary, assuming we will someday have
         //and attack state 
+        soundTimer += Time.deltaTime;
         float distanceFromTraveler = Vector3.Distance(transform.position, traveller.transform.position);
         if (distanceFromTraveler < 1)
         {
-            attackSound.enabled = true;
+            if (startAttack())
+            {
+                attackSound.enabled = true;
+                attackSound.volume = 0.5f;
+                if (!attackSound.isPlaying)
+                {
+                    attackSound.Play();
+                }
+            }
         }
-        else if (distanceFromTraveler < 3 && distanceFromTraveler > 1) {
-            roamingSound.enabled = true;
-            roamingSound.volume = (1 / distanceFromTraveler);
-            attackSound.enabled = false;
+        else if (distanceFromTraveler < 3)// && distanceFromTraveler > 1)
+        {
+            if (soundTimer < 1)
+            {
+                roamingSound.enabled = true;
+                roamingSound.volume = (1 / distanceFromTraveler) / 2;
+                if (!roamingSound.isPlaying)
+                {
+                    roamingSound.Play();
+                }
+            }
+            else
+            {
+                roamingSound.enabled = false;
+            }
         }
         else
         {
@@ -157,7 +179,12 @@ public class EnemyMovement : MonoBehaviour
             {
                 roamingSound.Play();
             }
-            roamingSound.volume = (1 / distanceFromTraveler) / 3;
+            roamingSound.volume = 0;
+        }
+        if (soundTimer > 3)
+        {
+            roamingSound.volume = 0;
+            soundTimer = 0f;
         }
         //end of monster sound control
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
@@ -238,8 +265,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 monsterAnim.SetTrigger("nothingFound");
                 movingToLamp = false;
-                currentTarget = transform.position;
-                
+                currentTarget = transform.position;                
                
                 //Debug.Log("Reset");
             }
@@ -408,6 +434,7 @@ public class EnemyMovement : MonoBehaviour
         GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
         travellerHealth travHealth = trav.GetComponent<travellerHealth>();
         travHealth.TakeBasicDamage(10);
+        attackSound.enabled = false;
         if (nav.isStopped)
             nav.isStopped = false;
     }
