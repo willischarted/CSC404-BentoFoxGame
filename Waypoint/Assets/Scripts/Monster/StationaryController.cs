@@ -68,7 +68,7 @@ public class StationaryController : MonoBehaviour {
                 th1.TakeStationaryDamage();            
             }
             anim.SetTrigger("isDead");
-            Invoke("setDeath", 10);        
+            //Invoke("setDeath", 10);        
         }    
     }
 
