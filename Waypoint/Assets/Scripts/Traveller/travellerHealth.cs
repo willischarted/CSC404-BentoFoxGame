@@ -155,6 +155,10 @@ public class travellerHealth : MonoBehaviour {
         isDead = true;
         anim.SetTrigger("isDead");
         travellerMovement.enabled = false;
+        Invoke("endGame", 4.0f);
+    }
+
+    void endGame() {
         gameEnder.gameOverr();
     }
 
