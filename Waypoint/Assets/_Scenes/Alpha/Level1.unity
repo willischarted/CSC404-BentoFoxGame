@@ -38144,9 +38144,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 525223682}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 25
+  m_MaxValue: 30
   m_WholeNumbers: 0
-  m_Value: 25
+  m_Value: 30
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -38185,7 +38185,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 25
+  m_Text: 30
 --- !u!114 &1077392712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62889,6 +62889,16 @@ Prefab:
     - target: {fileID: 4374914984286448, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
+        type: 2}
+      propertyPath: lightResource
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
+        type: 2}
+      propertyPath: startingResource
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
