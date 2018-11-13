@@ -189,6 +189,7 @@ public class playerControllerCopy: MonoBehaviour {
         if (inTutorial)
             return;
         if (!restrictMovement){
+           
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
             var camera = Camera.main;
@@ -204,12 +205,19 @@ public class playerControllerCopy: MonoBehaviour {
 
             Vector3 moveDirection = relativeForward * moveVertical + relativeRight * moveHorizontal;
 
-            if (moveDirection == Vector3.zero)
+            if (moveDirection == Vector3.zero) {
+                rb.velocity = Vector3.zero;
                 return;
+
+            }
             //transform.rotation = Quaternion.LookRotation(moveDirection); //old
             var rotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+            
+            
             rb.MovePosition(transform.position + moveDirection * speed * Time.deltaTime);
+            //rb.AddForce (moveDirection * speed);
+           // rb.velocity = new Vector3(relativeForward * moveVertical, 0.0f, relativeRight * moveHorizontal);
 
 
         }
@@ -567,5 +575,15 @@ public class playerControllerCopy: MonoBehaviour {
         }
         return 0;
     }
+
+    void OnCollisionEnter(Collision collision){
+		if (collision.gameObject.tag == "Wall") {
+            Debug.Log("Hitting the wall");
+           // Physics.IgnoreCollision();
+           
+			rb.velocity = Vector3.zero;
+            
+		}
+	}
 
 }

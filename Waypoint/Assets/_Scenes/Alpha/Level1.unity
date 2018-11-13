@@ -18705,8 +18705,8 @@ RectTransform:
   m_Father: {fileID: 470945897}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -38933,6 +38933,10 @@ Prefab:
     - target: {fileID: 400000, guid: ecee835380d952b40b93c59cdda49af7, type: 3}
       propertyPath: m_LocalScale.z
       value: 660.2483
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ecee835380d952b40b93c59cdda49af7, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2300000, guid: ecee835380d952b40b93c59cdda49af7, type: 3}
@@ -65527,7 +65531,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
