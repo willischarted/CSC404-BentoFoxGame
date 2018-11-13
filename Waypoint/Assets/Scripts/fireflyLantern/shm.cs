@@ -18,11 +18,12 @@ public class shm : MonoBehaviour {
     void FixedUpdate()
     {
         float moveVertical = Input.GetAxis("Vertical");
-        startAngle = angleUpLimit - moveVertical * 20;
-        endAngle = angleLowLimit - moveVertical * 20;
         float f = (Mathf.Sin(fTimer * speed - Mathf.PI / 2.0f) + 1.0f) / 2.0f;
-        v3T.Set(Mathf.Lerp(startAngle, endAngle, f),firefly.transform.rotation.y,0f);
+        startAngle = angleUpLimit;// + moveVertical * 20;
+        endAngle = angleLowLimit;// + moveVertical * 20;
+        v3T.Set(Mathf.Lerp(startAngle, endAngle, f), firefly.transform.eulerAngles.y, 0f);
         pivot.eulerAngles = v3T;
         fTimer += Time.deltaTime;
+
     }
 }
