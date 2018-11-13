@@ -164,7 +164,7 @@ public class EndLevel : MonoBehaviour
         {
             string currScene = SceneManager.GetActiveScene().name;
             Debug.Log("currscene: " + currScene);
-            if (currScene == "Level3.5")
+            /*if (currScene == "Level3.5")
             {
                 GameController.level = 4;
                 Time.timeScale = 1f;
@@ -176,8 +176,8 @@ public class EndLevel : MonoBehaviour
                 Time.timeScale = 1f;
                 levelUp.SetActive(false);
                 SceneManager.LoadScene("Level3.5");
-            }
-            else if (currScene == "Level2.5")
+            }*/
+            if (currScene == "Level2.5")
             {
                 Time.timeScale = 1f;
                 levelUp.SetActive(false);
