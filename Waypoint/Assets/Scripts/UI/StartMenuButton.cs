@@ -17,6 +17,8 @@ public class StartMenuButton : MonoBehaviour
     private float gameSpeed;
     private Button newGameBtn;
     private Button exitBtn;
+    public AudioSource MenuTheme;
+    public AudioSource newGameSound;
     //private Transform selector;
 
 
@@ -135,6 +137,8 @@ public class StartMenuButton : MonoBehaviour
 
     public void startGame()
     {
+        MenuTheme.Stop();
+        newGameSound.PlayOneShot(newGameSound.clip);
         GameController.level = 1;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Level" + GameController.level);
