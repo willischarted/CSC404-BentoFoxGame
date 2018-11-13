@@ -23,7 +23,7 @@ public class HintsController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("TouchPad")) {
+		if (Input.GetButtonDown("TouchPad") || Input.GetKeyDown(KeyCode.T)) {
 			setHintsBox = !setHintsBox;
 			hintsBox.SetActive(setHintsBox);
 
