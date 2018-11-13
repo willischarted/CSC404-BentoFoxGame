@@ -138,7 +138,12 @@ public class StartMenuButton : MonoBehaviour
     public void startGame()
     {
         MenuTheme.Stop();
+        StartCoroutine(loadLevel());
+    }
+    IEnumerator loadLevel()
+    {
         newGameSound.PlayOneShot(newGameSound.clip);
+        yield return new WaitForSeconds(1.5f);
         GameController.level = 1;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Level" + GameController.level);
