@@ -20,6 +20,7 @@ public class AudioController : MonoBehaviour {
         if (index == 1){
             PlayLight();
             PlayDark();
+            lowpassOff();
         }
     }
 	
