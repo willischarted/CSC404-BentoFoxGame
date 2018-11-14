@@ -8,6 +8,7 @@ public class lightThemeMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         findTraveller();
             
 		
