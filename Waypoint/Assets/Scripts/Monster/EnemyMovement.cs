@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.AI;
 using UnityEngine;
 
@@ -42,6 +43,8 @@ public class EnemyMovement : MonoBehaviour
     private float currentAttackCooldown;
     //Need local variable to avoid race conditions with update frame
     private bool isStunned;
+    private bool isdistracted;
+    public bool isBaby;
 
     private void Awake()
     {
@@ -70,17 +73,17 @@ public class EnemyMovement : MonoBehaviour
         }
         lamps = validLamps.ToArray();
 
-       
+
         bodyAnim = monsterGeo.GetComponent<Animator>();
         if (bodyAnim == null)
             Debug.Log("Could not find the bodyanim");
-      
+
 
         currentAttackCooldown = 0;
         isStunned = false;
+        isdistracted = false;
 
 
-       
     }
 
 
@@ -111,32 +114,34 @@ public class EnemyMovement : MonoBehaviour
 
 
     void Update()
-    {       
-       
-        
-            if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
-            {   //for now do nothing while animation completes
+    {
+
+
+        if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
+        {   //for now do nothing while animation completes
             //channge nothing, it can go back to doing what it does after
-                return;
-            }
-            /* 
-            else { //once animation is done make sure we can move again
-                if (nav.isStopped)
-                    nav.isStopped = false;
-            }
-            */
-       
+            return;
+        }
+        /* 
+        else { //once animation is done make sure we can move again
+            if (nav.isStopped)
+                nav.isStopped = false;
+        }
+        */
 
-       
-            //for testing purposes
-            if (Input.GetKeyDown(KeyCode.M)) {
-                startAttack();
-            }
 
-            if (currentAttackCooldown != 0) {
-                
-                currentAttackCooldown = Mathf.Clamp(currentAttackCooldown -= Time.deltaTime, 0f, attackCooldownValue);
-            }
+
+        //for testing purposes
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            startAttack();
+        }
+
+        if (currentAttackCooldown != 0)
+        {
+
+            currentAttackCooldown = Mathf.Clamp(currentAttackCooldown -= Time.deltaTime, 0f, attackCooldownValue);
+        }
 
 
 
@@ -145,7 +150,7 @@ public class EnemyMovement : MonoBehaviour
         //and attack state 
         soundTimer += Time.deltaTime;
         float distanceFromTraveler = Vector3.Distance(transform.position, traveller.transform.position);
-        if (distanceFromTraveler < 1)
+        if (distanceFromTraveler < 1 && !isdistracted)
         {
             if (startAttack())
             {
@@ -188,8 +193,8 @@ public class EnemyMovement : MonoBehaviour
         }
         //end of monster sound control
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
-        {   
-           
+        {
+
 
             //Debug.Log("Stunned");
             nav.SetDestination(transform.position);
@@ -207,16 +212,16 @@ public class EnemyMovement : MonoBehaviour
                 //
                 timer = 0f;
                 movingToLamp = false;
-               
+
                 targetLamp = null;
 
                 isStunned = false;
             }
-            
-           
+
+
             return;
         }
-        
+
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Chase"))
         {
             //Debug.Log("Chase");
@@ -231,19 +236,20 @@ public class EnemyMovement : MonoBehaviour
                 currentLamp = null;
                 movingToLamp = false;
                 targetLamp = null;
-                
+
             }
         }
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
         {
             //Debug.Log("Alerted");
+            isdistracted = false;
             RaycastHit hit;
             if (Physics.Raycast(transform.position + upward, direction.normalized, out hit, Mathf.Infinity))
             {
                 if (hit.collider.gameObject.transform == traveller)
                 {
                     monsterAnim.SetTrigger("travellerSpotted");
-                   
+
                 }
 
                 else
@@ -265,8 +271,8 @@ public class EnemyMovement : MonoBehaviour
             {
                 monsterAnim.SetTrigger("nothingFound");
                 movingToLamp = false;
-                currentTarget = transform.position;                
-               
+                currentTarget = transform.position;
+
                 //Debug.Log("Reset");
             }
 
@@ -282,7 +288,7 @@ public class EnemyMovement : MonoBehaviour
             else if (Vector3.Distance(transform.position, currentTarget) < lampDistance)
             { //reached destination, should make this variable public for testing
                 movingToLamp = false;
-               
+
                 //Debug.Log("in the elseif");
                 nav.SetDestination(transform.position);
                 currentLamp = findCurrentLamp();
@@ -293,16 +299,18 @@ public class EnemyMovement : MonoBehaviour
             }
         }
 
-        if (!isStunned){
-            if (movingToLamp != bodyAnim.GetBool("isMoving")) {
+        if (!isStunned)
+        {
+            if (movingToLamp != bodyAnim.GetBool("isMoving"))
+            {
                 //Debug.Log("called switch");
                 bodyAnim.SetBool("isMoving", movingToLamp);
             }
         }
-  
-       
-      
-           
+
+
+
+
     }
 
     public void moveToLamp()
@@ -345,7 +353,7 @@ public class EnemyMovement : MonoBehaviour
                 nav.SetDestination(currentTarget);
                 targetLamp = null;
                 movingToLamp = false;
-               
+
                 return;
             }
             GameObject[] targetLamps = possibleTargets.ToArray();
@@ -359,7 +367,7 @@ public class EnemyMovement : MonoBehaviour
             currentTarget = targetLamp.transform.position;
             nav.SetDestination(currentTarget);
             movingToLamp = true;
-           
+
         }
     }
 
@@ -373,25 +381,39 @@ public class EnemyMovement : MonoBehaviour
             }
         }
         return null;
-    }   
+    }
 
 
-   
-    
+
+
 
     public void monsterLampLit(GameObject litLamp)
     {
+        float distance = Mathf.Infinity;
+        GameObject newCurrentLamp = null;
+        foreach (GameObject newlamp in lamps) //this part is also not quite working
+        {
+            if (Vector3.Distance(transform.position, newlamp.transform.position) < distance) // edge case, does not take into account lit lamp
+            {
+                distance = Vector3.Distance(transform.position, newlamp.transform.position);
+                newCurrentLamp = newlamp;
+            }
+        }
         Debug.Log("MonsterLampLit");
-        GameObject lamp;
-        if (targetLamp == null)
+        if (newCurrentLamp == litLamp)
         {
-            lamp = currentLamp;
+            monsterAnim.SetTrigger("nearbyLitLamp");
+            Debug.Log("inhere1");
+            targetLamp = litLamp;
+            currentTarget = litLamp.transform.position;
+            nav.SetDestination(currentTarget);
+            movingToLamp = true;
+            if (!isBaby)
+            {
+                isdistracted = true;
+            }
         }
-        else
-        {
-            lamp = targetLamp;
-        }
-        lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
+        lightSourceController lController = newCurrentLamp.GetComponentInParent<lightSourceController>();
         if (lController == null)
         {
             Debug.Log("Could not find lightsourcontroller");
@@ -403,21 +425,28 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (litLamp == adjacentlamp)
                 {
+                    monsterAnim.SetTrigger("nearbyLitLamp");
+                    Debug.Log("inhere2");
                     targetLamp = litLamp;
                     currentTarget = litLamp.transform.position;
                     nav.SetDestination(currentTarget);
                     movingToLamp = true;
-                   
+                    if (!isBaby)
+                    {
+                        isdistracted = true;
+                    }
                 }
             }
         }
     }
 
 
-    public bool startAttack() {
+    public bool startAttack()
+    {
         //important -> must stop movement before animation
         // or you will get slide effect                             //optimize -> change  to local var 
-        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned")) { //only attack on a cooldown 
+        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned") && !isdistracted)
+        { //only attack on a cooldown 
             nav.isStopped = true;
             bodyAnim.SetTrigger("isAttack");
             Invoke("doneAttacking", 1f);
@@ -430,7 +459,8 @@ public class EnemyMovement : MonoBehaviour
     }
     //Must use this since the animation is so short it cause the nav mesh
     // to continue moving almost immeditely
-    public void doneAttacking() {
+    public void doneAttacking()
+    {
         GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
         travellerHealth travHealth = trav.GetComponent<travellerHealth>();
         travHealth.TakeBasicDamage(10);
@@ -439,14 +469,16 @@ public class EnemyMovement : MonoBehaviour
             nav.isStopped = false;
     }
 
-    public void setStunned() {
+    public void setStunned()
+    {
 
-        
-          
+
+
         bodyAnim.SetBool("isMoving", false);
-            
+
         monsterAnim.SetTrigger("isStunned");
         isStunned = true;
     }
-}
 
+
+}
