@@ -19,9 +19,13 @@ public class GameOverAudioController : MonoBehaviour {
 		if (gameOver.activeSelf == true && clipsPlayed == false)
         {
             Debug.Log("in here trying to play gameoveraudio");
-            
-            darkTheme.Stop();
-            travellerTheme.Stop();
+
+            // darkTheme.Stop();
+            // travellerTheme.Stop();
+
+
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
             gameOverZinger.PlayOneShot(gameOverZinger.clip);
             gameOverDroneLoop.PlayDelayed(0.5f);  
             clipsPlayed = true;
