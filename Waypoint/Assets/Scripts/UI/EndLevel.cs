@@ -141,6 +141,7 @@ public class EndLevel : MonoBehaviour
         Time.timeScale = 1f;
         levelUp.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     public void startMenu()
@@ -148,6 +149,8 @@ public class EndLevel : MonoBehaviour
         Time.timeScale = 1f;
         levelUp.SetActive(false);
         SceneManager.LoadScene("Start Menu");
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
     }
 
     public void nextLevel()
@@ -159,6 +162,8 @@ public class EndLevel : MonoBehaviour
             Time.timeScale = 1f;
             levelUp.SetActive(false);
             SceneManager.LoadScene("Start Menu");
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
         }
         else
         {

@@ -124,6 +124,8 @@ public class GameOver : MonoBehaviour
         Time.timeScale = 1f;
         gameOver.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().PlayDark();
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().PlayLight();
     }
 
     public void startMenu()
@@ -131,6 +133,8 @@ public class GameOver : MonoBehaviour
         Time.timeScale = 1f;
         gameOver.SetActive(false);
         SceneManager.LoadScene("Start Menu");
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
     }
 }
 
