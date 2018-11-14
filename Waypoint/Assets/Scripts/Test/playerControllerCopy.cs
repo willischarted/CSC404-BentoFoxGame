@@ -32,7 +32,7 @@ public class playerControllerCopy: MonoBehaviour {
     private bool restrictMovement;
     
     // Used to determine what light/ability firefly has equipped
-    private int equippedLight;
+    public int equippedLight;
     public float lightResource;
     public float startingResource;
 
