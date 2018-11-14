@@ -32,7 +32,8 @@ public class StationaryController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (flag == 1){
-            childMonster1.SetActive(false);
+            //childMonster1.SetActive(false);
+            Destroy(childMonster1);
             gameObject.SetActive(false);
         }
         soundTimer += Time.deltaTime;        
@@ -68,11 +69,37 @@ public class StationaryController : MonoBehaviour {
                 th1.TakeStationaryDamage();            
             }
             anim.SetTrigger("isDead");
-            //Invoke("setDeath", 10);        
+            //Invoke("playFire", 1f);        
         }    
     }
 
     void setDeath() {
          flag = 1;  
+    }
+
+    void playFire() {
+        
+        monsterFireController fController = GetComponentInChildren<monsterFireController>();
+        if (fController == null)
+            Debug.Log("Could not find firecontroller");
+        fController.turnOnFX();
+
+        Invoke("removeBody",2f);
+        Invoke("stopFire", 2.5f);
+        
+    }
+
+    void stopFire() {
+            monsterFireController fController = GetComponentInChildren<monsterFireController>();
+        if (fController == null)
+            Debug.Log("Could not find firecontroller");
+        fController.turnOffFX();
+
+        Invoke("setDeath", 2f);
+
+    }
+
+    void removeBody() {
+        monsterGeo.SetActive(false);
     }
 }
