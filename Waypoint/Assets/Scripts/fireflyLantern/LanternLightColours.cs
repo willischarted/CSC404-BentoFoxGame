@@ -21,7 +21,19 @@ public class LanternLightColours : MonoBehaviour {
 	void Update () {
         currentResource = player.GetComponent<playerControllerCopy>().lightResource;
         lightFactor = 4.0f * (currentResource/ startingResource);
-        Debug.Log(currentResource);
-        Lantern.SetColor("_EmissionColor", Color.yellow*lightFactor);
+        if (player.GetComponent<playerControllerCopy>().equippedLight == 1)
+        {
+            Lantern.SetColor("_EmissionColor", Color.yellow * lightFactor);
+        }
+        else if (player.GetComponent<playerControllerCopy>().equippedLight == 2)
+        {
+            Lantern.SetColor("_EmissionColor", Color.blue * lightFactor);
+
+        }
+        else
+        {
+            Lantern.SetColor("_EmissionColor", new Color(0.5803f,0.1294f,0.6588f,1f) * lightFactor);
+        }
+        
     }
 }
