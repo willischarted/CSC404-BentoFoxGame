@@ -145,8 +145,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().lowpassOff();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().PlayDark();
-        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().PlayLight();
+
+
     }
 
     public void startMenu()

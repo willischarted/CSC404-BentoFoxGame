@@ -16,14 +16,22 @@ public class AudioController : MonoBehaviour {
         lightTheme = transform.Find("lightTheme").gameObject.GetComponent<AudioSource>();
         darkTheme = transform.Find("darkTheme").gameObject.GetComponent<AudioSource>();
         DontDestroyOnLoad(transform.gameObject);
-        int index = SceneManager.GetActiveScene().buildIndex;
-        if (index == 1){
-            PlayLight();
-            PlayDark();
-            lowpassOff();
-        }
+        StopDark();
+        StopLight();
+        //checkPlay();
     }
-	
+    public void checkPlay()
+    {
+        //int index = SceneManager.GetActiveScene().buildIndex;
+        //if (index == 1)
+        //{
+            if(!lightTheme.isPlaying){
+                PlayLight();
+                PlayDark();
+                lowpassOff(); 
+            }
+        //}
+    }
     public void PlayLight(){
         if (lightTheme.isPlaying) return;
         lightTheme.Play();

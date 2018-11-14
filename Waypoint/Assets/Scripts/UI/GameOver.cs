@@ -124,8 +124,7 @@ public class GameOver : MonoBehaviour
         Time.timeScale = 1f;
         gameOver.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().PlayDark();
-        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().PlayLight();
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().checkPlay();
     }
 
     public void startMenu()

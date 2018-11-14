@@ -139,6 +139,7 @@ public class StartMenuButton : MonoBehaviour
     {
         MenuTheme.Stop();
         StartCoroutine(loadLevel());
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().checkPlay();
     }
     IEnumerator loadLevel()
     {
@@ -147,5 +148,6 @@ public class StartMenuButton : MonoBehaviour
         GameController.level = 1;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Level" + GameController.level);
+
     }
 }
