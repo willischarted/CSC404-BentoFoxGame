@@ -69,7 +69,7 @@ public class StationaryController : MonoBehaviour {
                 th1.TakeStationaryDamage();            
             }
             anim.SetTrigger("isDead");
-            //Invoke("playFire", 1f);        
+            Invoke("playFire", 3f);        
         }    
     }
 
