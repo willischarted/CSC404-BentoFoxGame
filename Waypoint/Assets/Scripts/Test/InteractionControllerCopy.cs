@@ -140,7 +140,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)) {
 				//call stun enemy function
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
-					if (lScript.getCurrentLightType() == 0 && pController.getResource() > pController.getCurrentResourceNeeded()){
+					if (lScript.getCurrentLightType() == 0 && pController.getResource() >= pController.getCurrentResourceNeeded()){
 						pController.setTargetLight(currentTarget);
 						lScript.turnOnPaths();
 						Debug.Log("truning on light");
