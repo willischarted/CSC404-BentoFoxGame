@@ -48,6 +48,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	public List<GameObject> monstersInRange;
 
+	public GameObject lightPath;
+
 
 
 
@@ -137,9 +139,15 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)) {
 				//call stun enemy function
-				if (currentTarget != null && currentTarget.tag == "LampLight") {
+				if (currentTarget != null && currentTarget.tag == "LampLight" && pController.getResource() > pController.getCurrentResourceNeeded()) {
 					pController.setTargetLight(currentTarget);
-					//Debug.Log("truning on light");
+					lightSourceController lController = currentTarget.GetComponent<lightSourceController>();
+					if (lController == null) {
+						Debug.Log("Could not find lightsource controller");
+					
+					}
+					lController.turnOnPaths();
+					Debug.Log("truning on light");
 					return;
 				}
 		}

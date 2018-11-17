@@ -261,7 +261,7 @@ public class playerControllerCopy: MonoBehaviour {
             }
             else{
                
-                if (getResource() >= getCurrentResourceNeeded()){
+               
  
                     setChildLight(lightSource.GetComponentsInChildren<Light>());
                     lampLight.intensity = lightValueOn;
@@ -291,7 +291,7 @@ public class playerControllerCopy: MonoBehaviour {
                 if (lController != null)
                     lController.setCurrentLightType(equippedLight);
 
-                }
+                
 
             }
         }

@@ -20,9 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4140294117079596}
   - component: {fileID: 120032995694610400}
+  - component: {fileID: 114792951347049430}
   m_Layer: 10
   m_Name: MiniMapPath
-  m_TagString: Untagged
+  m_TagString: miniMapPath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114792951347049430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1903417718525682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4f770c16d0b430986ac3ea9afc3fa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &120032995694610400
 LineRenderer:
   m_ObjectHideFlags: 1

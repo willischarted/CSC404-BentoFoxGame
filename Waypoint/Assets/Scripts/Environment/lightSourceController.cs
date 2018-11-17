@@ -196,6 +196,26 @@ public class lightSourceController : MonoBehaviour {
         	positions[1] = g.transform.position;
 			lRenderer.positionCount = positions.Length;
 			lRenderer.SetPositions(positions);
+
+			//m.SetActive(false);
+			lRenderer.enabled = false;
+		}
+	}
+
+	public void turnOnPaths() {
+		Debug.Log("Turning on paths");
+		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
+		Debug.Log(paths.Length);
+		foreach (miniMapPathController m in paths) {
+			m.turnOnPath();
+			
+		}
+	}
+
+	public void turnOffPaths() {
+		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
+		foreach (miniMapPathController m in paths) {
+			m.turnOffPath();
 		}
 	}
 }
