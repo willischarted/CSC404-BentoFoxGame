@@ -194,9 +194,12 @@ public class lightSourceController : MonoBehaviour {
 			GameObject m = Instantiate(mapPath, transform.position, Quaternion.identity);
 			m.transform.parent = transform;
 			LineRenderer lRenderer = m.GetComponent<LineRenderer>();
+		
 			if (lRenderer == null) {
 				Debug.Log("Couldn't find linerederer");
 			}
+			lRenderer.numCapVertices = 5;
+			lRenderer.numCornerVertices = 5;
 
 			Vector3[] positions = new Vector3[2];
 			positions[0] = transform.position;
@@ -218,6 +221,8 @@ public class lightSourceController : MonoBehaviour {
 			if (lRenderer == null) {
 				Debug.Log("Couldn't find linerederer");
 			}
+			lRenderer.numCapVertices = 5;
+			lRenderer.numCornerVertices = 5;
 
 			Vector3[] positions = new Vector3[2];
 			Vector3 newPosition = transform.position;
