@@ -307,7 +307,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
-			lScript.turnOffWorldPaths();
+			if (lScript != null)
+				lScript.turnOffWorldPaths();
 			interactionPopUp.SetActive(false);
 			currentTarget = null;
 			lScript = null;
