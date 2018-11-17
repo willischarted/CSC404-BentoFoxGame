@@ -119,6 +119,7 @@ public class lightSourceController : MonoBehaviour {
 	
 
 		setCurrentLightType(0);
+		turnOffPaths();
 
 	}
 
@@ -143,6 +144,7 @@ public class lightSourceController : MonoBehaviour {
 
 			}
 			currentLightType = type;
+			//turnOffPaths();
 			return;
 		}
 		
@@ -262,6 +264,7 @@ public class lightSourceController : MonoBehaviour {
 		foreach (miniMapPathController m in paths) {
 			m.turnOffPath();
 		}
+		Debug.Log("Turning off paths");
 	}
 
 	public void turnOffWorldPaths() {
