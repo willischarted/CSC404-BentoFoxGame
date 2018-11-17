@@ -139,16 +139,13 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)) {
 				//call stun enemy function
-				if (currentTarget != null && currentTarget.tag == "LampLight" && pController.getResource() > pController.getCurrentResourceNeeded()) {
-					pController.setTargetLight(currentTarget);
-					lightSourceController lController = currentTarget.GetComponent<lightSourceController>();
-					if (lController == null) {
-						Debug.Log("Could not find lightsource controller");
-					
+				if (currentTarget != null && currentTarget.tag == "LampLight") {
+					if (lScript.getCurrentLightType() > 0 || (lScript.getCurrentLightType() == 0 && pController.getResource() > pController.getCurrentResourceNeeded())){
+						pController.setTargetLight(currentTarget);
+						lScript.turnOnPaths();
+						Debug.Log("truning on light");
+						return;
 					}
-					lController.turnOnPaths();
-					Debug.Log("truning on light");
-					return;
 				}
 		}
 	
@@ -191,6 +188,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 			lScript = other.GetComponent<lightSourceController>();
 			if (lScript == null) 
 				Debug.Log("Could not get lscript");
+
+			lScript.turnOnWorldPaths();
 		}
 	}
 	void OnTriggerStay(Collider other) {
@@ -305,6 +304,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
+			lScript.turnOffWorldPaths();
 			interactionPopUp.SetActive(false);
 			currentTarget = null;
 			lScript = null;

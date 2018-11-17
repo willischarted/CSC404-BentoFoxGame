@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4140294117079596}
   - component: {fileID: 120032995694610400}
-  - component: {fileID: 114956811193036024}
-  m_Layer: 10
-  m_Name: MiniMapPath
+  - component: {fileID: 114930128608323592}
+  m_Layer: 0
+  m_Name: worldPath
   m_TagString: miniMapPath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114956811193036024
+--- !u!114 &114930128608323592
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1903417718525682}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a4f770c16d0b430986ac3ea9afc3fa4, type: 3}
+  m_Script: {fileID: 11500000, guid: 817f37ad619684b198e5f9410106f94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!120 &120032995694610400
@@ -67,7 +67,7 @@ LineRenderer:
   m_ReflectionProbeUsage: 0
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 29dfd1270ae77414999d97831b593137, type: 2}
+  - {fileID: 2100000, guid: 0ef8567b6db3849088873e91ac9a4ee5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,7 +92,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.15
+    widthMultiplier: 0.02
     widthCurve:
       serializedVersion: 2
       m_Curve:

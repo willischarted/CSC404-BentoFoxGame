@@ -20,7 +20,10 @@ public class lightSourceController : MonoBehaviour {
 
 	public GameObject[] adjacentSources;
 
+	//path drawn on map
 	public GameObject mapPath;
+	//path drawn in world
+	public GameObject worldPath;
 
 	Light lampLight;
 
@@ -30,6 +33,7 @@ public class lightSourceController : MonoBehaviour {
 
 	monsterFireController mfController;
 
+	public float yoffset;
 
 	// Use this for initialization
 	void Start () {
@@ -40,7 +44,7 @@ public class lightSourceController : MonoBehaviour {
 		if (pScript == null) {
 			Debug.Log("pScript is nnull");
 		}
-		setMiniMapPaths();
+		
 		lampLight = GetComponentInChildren<Light>();
 		if (lampLight == null)
 			Debug.Log("Could not find light in child!");
@@ -50,7 +54,8 @@ public class lightSourceController : MonoBehaviour {
 			Debug.Log("Could not find monsterfire effect controoller");
 
 		//startIntensity = lampLight.intensity;
-		
+		setMiniMapPaths();
+		setWorldPaths();
 	}
 	
 	// Update is called once per frame
@@ -202,6 +207,45 @@ public class lightSourceController : MonoBehaviour {
 		}
 	}
 
+	public void setWorldPaths() {
+		foreach(GameObject g in adjacentSources) {
+			
+			GameObject m = Instantiate(worldPath, transform.position, Quaternion.identity);
+			m.transform.parent = transform;
+			LineRenderer lRenderer = m.GetComponent<LineRenderer>();
+			if (lRenderer == null) {
+				Debug.Log("Couldn't find linerederer");
+			}
+
+			Vector3[] positions = new Vector3[2];
+			Vector3 newPosition = transform.position;
+			newPosition.y = transform.position.y + yoffset;
+			Vector3 newPosition2 = g.transform.position;
+			newPosition2.y = g.transform.position.y + yoffset;
+
+			positions[0] = newPosition;
+        	positions[1] = newPosition2;
+			lRenderer.positionCount = positions.Length;
+			lRenderer.SetPositions(positions);
+
+			//m.SetActive(false);
+			lRenderer.enabled = false;
+		}
+	}
+
+	public void turnOnWorldPaths() {
+		Debug.Log("Turning on paths");
+		
+		pathController[] paths =  GetComponentsInChildren<pathController>();
+		Debug.Log(paths.Length);
+		foreach (pathController m in paths) {
+			m.turnOnPath();
+			
+		}
+		
+		return;
+	}
+
 	public void turnOnPaths() {
 		Debug.Log("Turning on paths");
 		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
@@ -213,9 +257,19 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void turnOffPaths() {
+
 		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
 		foreach (miniMapPathController m in paths) {
 			m.turnOffPath();
 		}
+	}
+
+	public void turnOffWorldPaths() {
+	
+		pathController[] paths =  GetComponentsInChildren<pathController>();
+		foreach (pathController m in paths) {
+			m.turnOffPath();
+		}
+	
 	}
 }
