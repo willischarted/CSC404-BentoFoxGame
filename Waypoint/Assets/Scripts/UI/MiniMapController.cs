@@ -17,11 +17,21 @@ public class MiniMapController : MonoBehaviour {
 
 	public Canvas canvas;
 
+	private GameObject miniMapUI;
+	private Animator miniMapAnim;
+
 	//public Camera miniMapCamera;
 
 	
 	void Start() {
-
+		miniMapUI = GameObject.FindGameObjectWithTag("MiniMap");
+		if (miniMapUI == null)
+			Debug.Log("Could not find the minimapUI");
+		
+		miniMapAnim = miniMapUI.GetComponent<Animator>();
+		if (miniMapAnim == null)
+			Debug.Log("Could not find minimapAnim");
+		
 		//onscreenIcon = Instantiate(indicatorIcon, indicatorIcon.transform.position, indicatorIcon.transform.rotation);
 		//onscreenIcon.SetActive(false);
 		//onscreenIcon.transform.parent = canvas.transform;
@@ -39,6 +49,11 @@ public class MiniMapController : MonoBehaviour {
 			fAngle *= 180.0f;
 			Debug.Log(fAngle);
 
+		}
+
+		if (Input.GetButtonDown("TouchPad") || Input.GetKeyDown(KeyCode.M)) {
+			miniMapAnim.SetBool("isExpand", !miniMapAnim.GetBool("isExpand"));
+		
 		}
 
 
