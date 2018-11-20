@@ -14018,9 +14018,41 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1077392706}
+    - target: {fileID: 20337783446873508, guid: 670f490a2ebc84e5bbc521a0bb1d8702,
+        type: 2}
+      propertyPath: orthographic size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050290594151040, guid: 670f490a2ebc84e5bbc521a0bb1d8702, type: 2}
+      propertyPath: m_TagString
+      value: MiniMapCamera
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 670f490a2ebc84e5bbc521a0bb1d8702, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &236906711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1050290594151040, guid: 670f490a2ebc84e5bbc521a0bb1d8702,
+    type: 2}
+  m_PrefabInternal: {fileID: 236906710}
+--- !u!95 &236906712
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 236906711}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c72605f773fc424d89cefdb1065b0dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &257459433
 GameObject:
   m_ObjectHideFlags: 0
@@ -18552,8 +18584,8 @@ RectTransform:
   - {fileID: 854454756}
   - {fileID: 370061866}
   - {fileID: 969360156}
-  - {fileID: 1014102996}
   - {fileID: 986702844}
+  - {fileID: 1014102996}
   - {fileID: 1805440256}
   m_Father: {fileID: 393776483}
   m_RootOrder: 0
@@ -36900,7 +36932,7 @@ RectTransform:
   - {fileID: 380502197}
   - {fileID: 1140246708}
   m_Father: {fileID: 510927915}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}

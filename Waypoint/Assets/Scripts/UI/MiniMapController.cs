@@ -19,11 +19,25 @@ public class MiniMapController : MonoBehaviour {
 
 	private GameObject miniMapUI;
 	private Animator miniMapAnim;
+	private GameObject miniMapCamera;
+	private Animator miniMapCameraAnim;
+
+	private GameObject playerGameObject;
+	private playerControllerCopy pScript;
 
 	//public Camera miniMapCamera;
-
+	
 	
 	void Start() {
+
+		playerGameObject = GameObject.FindGameObjectWithTag("Player");
+		if (playerGameObject == null)
+			Debug.Log("Could not find playergameobject");
+
+		pScript = playerGameObject.GetComponent<playerControllerCopy>();
+		if (pScript == null)
+			Debug.Log("Could not find pscript");
+
 		miniMapUI = GameObject.FindGameObjectWithTag("MiniMap");
 		if (miniMapUI == null)
 			Debug.Log("Could not find the minimapUI");
@@ -31,6 +45,12 @@ public class MiniMapController : MonoBehaviour {
 		miniMapAnim = miniMapUI.GetComponent<Animator>();
 		if (miniMapAnim == null)
 			Debug.Log("Could not find minimapAnim");
+
+		miniMapCamera = GameObject.FindGameObjectWithTag("MiniMapCamera");
+		
+		if (miniMapCamera == null)
+			Debug.Log("Could not find the minimapCamera");
+		miniMapCameraAnim = miniMapCamera.GetComponent<Animator>();
 		
 		//onscreenIcon = Instantiate(indicatorIcon, indicatorIcon.transform.position, indicatorIcon.transform.rotation);
 		//onscreenIcon.SetActive(false);
@@ -52,7 +72,19 @@ public class MiniMapController : MonoBehaviour {
 		}
 
 		if (Input.GetButtonDown("TouchPad") || Input.GetKeyDown(KeyCode.M)) {
+
+			
+
 			miniMapAnim.SetBool("isExpand", !miniMapAnim.GetBool("isExpand"));
+			miniMapCameraAnim.SetBool("isZoom", !miniMapCameraAnim.GetBool("isZoom"));
+
+			bool shouldPause = miniMapAnim.GetBool("isExpand");
+			if (shouldPause)
+				//restrict player movement
+				restrictPlayer();
+			else
+				//unrestrict player movement
+				Invoke("unrestrictPlayer", 1.2f);
 		
 		}
 
@@ -158,7 +190,15 @@ public class MiniMapController : MonoBehaviour {
 		}
 	}
 
+	void restrictPlayer() {
+		//Time.timeScale = 0f;
+		pScript.setRestrictMovement(true);
+	}
 
+	void unrestrictPlayer() 
+	{
+		pScript.setRestrictMovement(false);
+	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
