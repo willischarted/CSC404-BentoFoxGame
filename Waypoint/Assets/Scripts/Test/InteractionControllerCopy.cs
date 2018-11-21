@@ -53,6 +53,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 
 
+
 	private bool healUnlocked;
 	private bool canHeal;
 	private bool stunUnlocked;
@@ -61,7 +62,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	private bool inTutorial;
 
 
-
+	private bool isHealing;
 
 	// Use this for initialization
 	void Start () {
@@ -92,6 +93,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		createMonsterPopups();
 
+		//travSlider = Instantiate(travHealthPrefab, transform.position, Quaternion.identity);
+		//travSlider.SetActive(false);
+		isHealing = false;
+
+
 		
 	}
 	
@@ -101,7 +107,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (inTutorial)
 			return;
 	
-
+		if (Input.GetButtonDown("Circle") || Input.GetKeyDown(KeyCode.Space)) {
+			isHealing = true;
+		}
 		if (Input.GetButton("Circle") || Input.GetKey(KeyCode.Space)) {
 			heldDuration += Time.deltaTime;
 			if (heldDuration > 0.5f) { //&& !setHealing) {
@@ -125,6 +133,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (Input.GetButtonUp("Circle")|| Input.GetKeyUp(KeyCode.Space)) {
 			heldDuration = 0f;
+			isHealing = false;
 		}
 
 		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square") ) {
@@ -207,12 +216,19 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 			if (tHealth.currentHealth != tHealth.startingHealth) {
 				canHeal = true;
+			
+				//canHeal = true;
 				//interactionText.text = "Hold X to transfer light to Traveller";
 				interactionPopUp3.SetActive(true);
 				Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
 				popUpController3.updateWorldObjectTransform(popUpLocation);
 
+				if (isHealing){
+					popUpText3.fontSize = 80;
+					popUpText3.text = "Healing";
+				}
+				else {
 				if (pController.getResource() > 0) {
 					popUpText3.fontSize = 80;
 					popUpText3.text = "Hold to Heal";
@@ -223,6 +239,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 				} 
 				//controlLureImage();
 				//return;
+				}
+				
 			}
 			else { 
 				interactionPopUp3.SetActive(false);
