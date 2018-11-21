@@ -151,11 +151,17 @@ public class InteractionControllerCopy : MonoBehaviour {
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
 					if (lScript.getCurrentLightType() == 0 && pController.getResource() >= pController.getCurrentResourceNeeded()){
 						pController.setTargetLight(currentTarget);
+						
+						//set color
+						lScript.setMiniMapPathColor(pController.equippedLight);
 						lScript.turnOnPaths();
+						
+						
 						Debug.Log("truning on light");
 						return;
 					}
 					else if (lScript.getCurrentLightType() > 0 ) {
+						lScript.setMiniMapPathColor(0);
 						lScript.turnOffPaths();
 					}
 				}
@@ -201,7 +207,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 			if (lScript == null) 
 				Debug.Log("Could not get lscript");
 
-			lScript.turnOnWorldPaths();
+			//lScript.turnOnWorldPaths();
+			lScript.turnOnPaths();
 		}
 	}
 	void OnTriggerStay(Collider other) {
@@ -325,8 +332,12 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
-			if (lScript != null)
-				lScript.turnOffWorldPaths();
+			if (lScript != null && lScript.getCurrentLightType() == 0){
+				//lScript.setMiniMapPathColor(0);
+				//lScript.turnOffWorldPaths();
+				lScript.turnOffPaths();
+				Debug.Log("turning off)");
+			}
 			interactionPopUp.SetActive(false);
 			currentTarget = null;
 			lScript = null;

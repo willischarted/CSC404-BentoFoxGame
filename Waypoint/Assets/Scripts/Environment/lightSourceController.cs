@@ -280,4 +280,10 @@ public class lightSourceController : MonoBehaviour {
 		}
 	
 	}
+
+	public void setMiniMapPathColor(int col) {
+		foreach (miniMapPathController m in  GetComponentsInChildren<miniMapPathController>()) {
+			m.setPathColor(col);
+		}
+	}
 }
