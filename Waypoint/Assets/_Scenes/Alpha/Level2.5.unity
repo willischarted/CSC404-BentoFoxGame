@@ -9866,6 +9866,69 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1152710205}
   m_CullTransparentMesh: 0
+--- !u!1001 &1170504460
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1692657340}
+    m_Modifications:
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407733871995554, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b616a727c44734e0aab5eec1e264b7f9, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!1 &1170504461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1381214199821770, guid: b616a727c44734e0aab5eec1e264b7f9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1170504460}
 --- !u!43 &1172004178
 Mesh:
   m_ObjectHideFlags: 0
@@ -16106,6 +16169,11 @@ Prefab:
       propertyPath: levelUpMenu
       value: 
       objectReference: {fileID: 106434510}
+    - target: {fileID: 114667778981719780, guid: d17434b735f304dcbb222d849c13b1e0,
+        type: 2}
+      propertyPath: healingVFX
+      value: 
+      objectReference: {fileID: 1170504461}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d17434b735f304dcbb222d849c13b1e0, type: 2}
   m_IsPrefabAsset: 0

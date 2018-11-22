@@ -109,6 +109,13 @@ public class InteractionControllerCopy : MonoBehaviour {
 	
 		if (Input.GetButtonDown("Circle") || Input.GetKeyDown(KeyCode.Space)) {
 			isHealing = true;
+			
+			travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
+			if (tScript.currentHealth != tScript.startingHealth)  {
+				tScript.startHealEffect();
+			}
+
+
 		}
 		if (Input.GetButton("Circle") || Input.GetKey(KeyCode.Space)) {
 			heldDuration += Time.deltaTime;
@@ -120,6 +127,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 					if (pController.getResource() > 0) {
 						//tScript.increaseCape();
 						tScript.GetHeal(1);
+
 						pController.addResource(-1f);
 					}
 					return;
@@ -134,6 +142,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (Input.GetButtonUp("Circle")|| Input.GetKeyUp(KeyCode.Space)) {
 			heldDuration = 0f;
 			isHealing = false;
+			travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
+			if (tScript.isHealingEffectOn())
+				tScript.stopHealingEffect();
 		}
 
 		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square") ) {
@@ -150,8 +161,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 				//call stun enemy function
 				if (currentTarget != null && currentTarget.tag == "LampLight") {
 					if (lScript.getCurrentLightType() == 0 && pController.getResource() >= pController.getCurrentResourceNeeded()){
+					
 						pController.setTargetLight(currentTarget);
-						
 						//set color
 						lScript.setMiniMapPathColor(pController.equippedLight);
 						lScript.turnOnPaths();
@@ -161,6 +172,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 						return;
 					}
 					else if (lScript.getCurrentLightType() > 0 ) {
+						Debug.Log("turning off light");
+						pController.setTargetLight(currentTarget);
 						lScript.setMiniMapPathColor(0);
 						lScript.turnOffPaths();
 					}

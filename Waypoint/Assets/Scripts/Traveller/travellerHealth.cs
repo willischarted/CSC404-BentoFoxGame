@@ -32,6 +32,10 @@ public class travellerHealth : MonoBehaviour {
     private AudioSource takeStationary;
     //Material cloaktwo;
 
+    public GameObject healingVFX;
+    private ParticleSystem healingParticleSystem;
+
+
 	void Awake ()
     {
         gameEnder = goMenu.GetComponent<GameOver>();
@@ -53,6 +57,10 @@ public class travellerHealth : MonoBehaviour {
         orig_lightValue = 0.005f;
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
         Debug.Log("cloak: " + cloak);
+
+        healingParticleSystem = healingVFX.GetComponent<ParticleSystem>();
+        if (healingParticleSystem == null)
+            Debug.Log("could not find healtheffect");
     }
 	
 	void Update () {
@@ -164,5 +172,16 @@ public class travellerHealth : MonoBehaviour {
 
     public void restart(){
         //TODO: Restart
+    }
+
+    public void startHealEffect() {
+        healingParticleSystem.Play();
+    }
+
+    public void stopHealingEffect() {
+        healingParticleSystem.Stop();
+    }
+    public bool isHealingEffectOn() {
+        return healingParticleSystem.isPlaying;
     }
 }
