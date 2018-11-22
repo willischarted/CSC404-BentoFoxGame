@@ -122,16 +122,25 @@ public class InteractionControllerCopy : MonoBehaviour {
 			if (heldDuration > 0.5f) { //&& !setHealing) {
 				//start healing
 				//setHealing = true;
-				if (targetTraveller != null && targetTraveller.tag == "Traveller" && canHeal) {
+				if (targetTraveller != null && targetTraveller.tag == "Traveller" ) {
 					travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
-					if (pController.getResource() > 0) {
-						//tScript.increaseCape();
-						tScript.GetHeal(1);
+					if (canHeal){
+						
+						if (pController.getResource() > 0) {
+							//tScript.increaseCape();
+							tScript.GetHeal(1);
 
-						pController.addResource(-1f);
+							pController.addResource(-1f);
+						}
+						return;
 					}
-					return;
+					else {
+						if (tScript.isHealingEffectOn())
+							tScript.stopHealingEffect();
+					}
+				
 				}
+				
 
 			
 					
@@ -264,6 +273,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			}
 			else { 
 				interactionPopUp3.SetActive(false);
+				
 				canHeal = false;
 
 			}
