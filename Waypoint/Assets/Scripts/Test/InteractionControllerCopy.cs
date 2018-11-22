@@ -134,9 +134,15 @@ public class InteractionControllerCopy : MonoBehaviour {
 						}
 						return;
 					}
+
+					//stop healing if we cannot heal
 					else {
 						if (tScript.isHealingEffectOn())
 							tScript.stopHealingEffect();
+						//Debug.Log("stopping effect");
+						//Debug.Log(tScript.currentHealth);
+						//Debug.Log(tScript.startingHealth);
+
 					}
 				
 				}
@@ -151,9 +157,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (Input.GetButtonUp("Circle")|| Input.GetKeyUp(KeyCode.Space)) {
 			heldDuration = 0f;
 			isHealing = false;
-			travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
-			if (tScript.isHealingEffectOn())
-				tScript.stopHealingEffect();
+			if (targetTraveller != null){
+				travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
+				if (tScript.isHealingEffectOn())
+					tScript.stopHealingEffect();
+				}
 		}
 
 		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square") ) {
