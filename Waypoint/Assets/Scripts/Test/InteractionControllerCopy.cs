@@ -402,6 +402,13 @@ public class InteractionControllerCopy : MonoBehaviour {
 			}
 			anim.SetTrigger("isStunned");
 			*/
+			stunEffectController sScript = m.GetComponentInChildren<stunEffectController>();
+			if (sScript == null) {
+				Debug.Log("Could not find the stun effect");
+
+			}
+			sScript.playStunEffect();
+
 			EnemyMovement monScript = m.GetComponent<EnemyMovement>();
 			if (monScript == null)
 				Debug.Log("Could not find monScript!");
