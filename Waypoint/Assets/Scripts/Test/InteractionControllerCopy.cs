@@ -50,6 +50,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	public GameObject lightPath;
 
+	//the world space ui slider (not the canvas one)
+	public GameObject travHealingBar;
+	private WorldSpaceObjectController travHealingBarController;
+
 
 
 
@@ -87,6 +91,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (popUpController3 == null)
 			Debug.Log("Could not find worldspacecontroller");
 
+		
+		travHealingBarController = travHealingBar.GetComponent<WorldSpaceObjectController>();
+		if (travHealingBarController == null)
+			Debug.Log("Could not find travhealingbarcontroller"); 
+
 
 		
 		unlockAbilties();
@@ -109,10 +118,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 	
 		if (Input.GetButtonDown("Circle") || Input.GetKeyDown(KeyCode.Space)) {
 			isHealing = true;
-			
-			travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
-			if (tScript.currentHealth != tScript.startingHealth)  {
-				tScript.startHealEffect();
+			if (targetTraveller != null && targetTraveller.tag == "Traveller" ) {
+				travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
+				if (tScript.currentHealth != tScript.startingHealth)  {
+					tScript.startHealEffect();
+				}
 			}
 
 
@@ -162,6 +172,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 				if (tScript.isHealingEffectOn())
 					tScript.stopHealingEffect();
 				}
+			if (travHealingBar.activeInHierarchy)
+				travHealingBar.SetActive(false);
 		}
 
 		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square") ) {
@@ -256,24 +268,32 @@ public class InteractionControllerCopy : MonoBehaviour {
 			
 				//canHeal = true;
 				//interactionText.text = "Hold X to transfer light to Traveller";
-				interactionPopUp3.SetActive(true);
+				
+			//	travHealingBar.SetActive(true);
 				Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
 				popUpController3.updateWorldObjectTransform(popUpLocation);
-
+				travHealingBarController.updateWorldObjectTransform(popUpLocation);
+				
 				if (isHealing){
-					popUpText3.fontSize = 80;
-					popUpText3.text = "Healing";
+					//popUpText3.fontSize = 80;
+					//popUpText3.text = "Healing";
+					interactionPopUp3.SetActive(false);
+					travHealingBar.SetActive(true);
+					//travhealing
 				}
 				else {
-				if (pController.getResource() > 0) {
-					popUpText3.fontSize = 80;
-					popUpText3.text = "Hold to Heal";
-				}
-				else {
-					popUpText3.fontSize = 80;
-					popUpText3.text = "Not Enough!";
-				} 
+					interactionPopUp3.SetActive(true);
+					if (pController.getResource() > 0) {
+						popUpText3.fontSize = 80;
+						popUpText3.text = "Hold to Heal";
+					}
+					else {
+						popUpText3.fontSize = 80;
+						popUpText3.text = "Not Enough!";
+					} 
+				
+					
 				//controlLureImage();
 				//return;
 				}
@@ -281,7 +301,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			}
 			else { 
 				interactionPopUp3.SetActive(false);
-				
+				travHealingBar.SetActive(false);
 				canHeal = false;
 
 			}
@@ -358,6 +378,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (other.tag == "Traveller" && other.gameObject == targetTraveller) {
 			//currentTarget = null;
 			interactionPopUp3.SetActive(false);
+			travHealingBar.SetActive(false);
 			targetTraveller = null;
 			//interactionText.text  = "";
 			return;
