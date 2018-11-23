@@ -811,7 +811,7 @@ RectTransform:
   - {fileID: 896463506}
   - {fileID: 934739608}
   m_Father: {fileID: 1150096863}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -1098,6 +1098,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1149640327353010, guid: d28157b6434cf4e10ba8fe19e64e75e3,
     type: 2}
   m_PrefabInternal: {fileID: 158697277}
+--- !u!114 &158697280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114108980065098550, guid: d28157b6434cf4e10ba8fe19e64e75e3,
+    type: 2}
+  m_PrefabInternal: {fileID: 158697277}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &180537731
 Prefab:
   m_ObjectHideFlags: 0
@@ -4455,7 +4461,7 @@ RectTransform:
   m_GameObject: {fileID: 469622865}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3937284, y: 1.3937284, z: 1.3937284}
+  m_LocalScale: {x: 1.0261325, y: 1.0261325, z: 1.0261325}
   m_Children:
   - {fileID: 1857081703}
   - {fileID: 1759505338}
@@ -4463,12 +4469,12 @@ RectTransform:
   - {fileID: 1784249254}
   - {fileID: 1784249252}
   - {fileID: 158697278}
-  m_Father: {fileID: 1150096863}
-  m_RootOrder: 12
+  m_Father: {fileID: 1319549570}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400.00003, y: -260.6272}
+  m_AnchoredPosition: {x: -0.000030517578, y: -20.386765}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &469622867
@@ -7792,7 +7798,7 @@ Prefab:
     - target: {fileID: 224494536340474356, guid: f365b67e3f4e94cdea43893a05a42ab8,
         type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 224494536340474356, guid: f365b67e3f4e94cdea43893a05a42ab8,
         type: 2}
@@ -9853,7 +9859,6 @@ RectTransform:
   - {fileID: 110903687}
   - {fileID: 1468060382}
   - {fileID: 802492648}
-  - {fileID: 469622866}
   - {fileID: 142596835}
   - {fileID: 918803878}
   m_Father: {fileID: 1319549570}
@@ -12370,6 +12375,7 @@ Transform:
   m_Children:
   - {fileID: 1150096863}
   - {fileID: 282446040}
+  - {fileID: 469622866}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16290,6 +16296,11 @@ Prefab:
       propertyPath: healingVFX
       value: 
       objectReference: {fileID: 1170504461}
+    - target: {fileID: 114667778981719780, guid: d17434b735f304dcbb222d849c13b1e0,
+        type: 2}
+      propertyPath: travHealthBar
+      value: 
+      objectReference: {fileID: 158697280}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d17434b735f304dcbb222d849c13b1e0, type: 2}
   m_IsPrefabAsset: 0

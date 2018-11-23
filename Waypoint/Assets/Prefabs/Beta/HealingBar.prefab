@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224651134057843968}
   - component: {fileID: 114108980065098550}
+  - component: {fileID: 114747097979112592}
   m_Layer: 5
   m_Name: HealingBar
   m_TagString: Untagged
@@ -237,6 +238,20 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114747097979112592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1149640327353010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed20ceff559c462ca9c170f287de24d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  travellerLureIcon: {fileID: 0}
+  monsterLureIcon: {fileID: 0}
+  lureImage: {fileID: 0}
 --- !u!222 &222271594643137988
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -33590,20 +33590,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224651134057843968, guid: d28157b6434cf4e10ba8fe19e64e75e3,
     type: 2}
   m_PrefabInternal: {fileID: 1882882544}
---- !u!114 &1273625412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1273625410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eed20ceff559c462ca9c170f287de24d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  travellerLureIcon: {fileID: 0}
-  monsterLureIcon: {fileID: 0}
-  lureImage: {fileID: 0}
 --- !u!1 &1277016669
 GameObject:
   m_ObjectHideFlags: 0
@@ -46754,6 +46740,11 @@ Prefab:
       propertyPath: healingVFX
       value: 
       objectReference: {fileID: 790305700}
+    - target: {fileID: 114667778981719780, guid: d17434b735f304dcbb222d849c13b1e0,
+        type: 2}
+      propertyPath: travHealthBar
+      value: 
+      objectReference: {fileID: 1882882545}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d17434b735f304dcbb222d849c13b1e0, type: 2}
   m_IsPrefabAsset: 0
@@ -52340,13 +52331,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1149640327353010, guid: d28157b6434cf4e10ba8fe19e64e75e3, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d28157b6434cf4e10ba8fe19e64e75e3, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1882882545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114108980065098550, guid: d28157b6434cf4e10ba8fe19e64e75e3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1882882544}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1882993514
 GameObject:
   m_ObjectHideFlags: 0

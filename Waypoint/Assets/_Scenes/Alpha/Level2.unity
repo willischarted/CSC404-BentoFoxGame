@@ -14324,6 +14324,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1149640327353010, guid: d28157b6434cf4e10ba8fe19e64e75e3,
     type: 2}
   m_PrefabInternal: {fileID: 1634377444}
+--- !u!114 &1634377447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114108980065098550, guid: d28157b6434cf4e10ba8fe19e64e75e3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1634377444}
+  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!43 &1635479193
 Mesh:
   m_ObjectHideFlags: 0
@@ -14913,6 +14919,11 @@ Prefab:
       propertyPath: healingVFX
       value: 
       objectReference: {fileID: 1703400806}
+    - target: {fileID: 114667778981719780, guid: d17434b735f304dcbb222d849c13b1e0,
+        type: 2}
+      propertyPath: travHealthBar
+      value: 
+      objectReference: {fileID: 1634377447}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d17434b735f304dcbb222d849c13b1e0, type: 2}
   m_IsPrefabAsset: 0

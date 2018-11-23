@@ -8,6 +8,8 @@ public class travellerHealth : MonoBehaviour {
     public float startingHealth = 100;
     public float currentHealth;
     public Slider healthSlider;
+    public Slider travHealthBar;
+
     public GameObject goMenu;
     //public Image lowHealthImage;
     public Image damageImage;
@@ -98,6 +100,7 @@ public class travellerHealth : MonoBehaviour {
         Mathf.Clamp(currentHealth += amount, 0, startingHealth);
        // currentHealth += amount;
         healthSlider.value = currentHealth;
+        travHealthBar.value = currentHealth;
 
         //TODO: clothe material change, not function now
         lightValue = orig_lightValue * (currentHealth / startingHealth);
@@ -117,6 +120,7 @@ public class travellerHealth : MonoBehaviour {
         damaged = true;
         currentHealth -= amount;
         healthSlider.value = currentHealth;
+        travHealthBar.value = currentHealth;
 
         //TODO: clothe material change, not function now
         lightValue = orig_lightValue * (currentHealth / startingHealth);
@@ -139,6 +143,8 @@ public class travellerHealth : MonoBehaviour {
         damaged = true;
         currentHealth = currentHealth / 2;
         healthSlider.value = currentHealth;
+        travHealthBar.value = currentHealth;
+
         takeStationary.Play();
         //TODO: clothe material change
         lightValue = orig_lightValue * (currentHealth / startingHealth);
