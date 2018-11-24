@@ -35,11 +35,17 @@ public class lightSourceController : MonoBehaviour {
 
 	public float yoffset;
 
+	travellerMovement tMovement;
+
 	// Use this for initialization
 	void Start () {
 
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		pScript = player.GetComponent<playerControllerCopy>();
+
+		GameObject traveller = GameObject.FindGameObjectWithTag("Traveller");
+		tMovement = traveller.GetComponent<travellerMovement>();
+
 
 		if (pScript == null) {
 			Debug.Log("pScript is nnull");
@@ -134,9 +140,13 @@ public class lightSourceController : MonoBehaviour {
 
 			if (currentLightType == 1) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
+				//once it is off remove from the history
+				tMovement.removeFromHistory(gameObject);
 			}
 			else if (currentLightType == 2) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
+					//once it is off remove from the history
+					tMovement.removeFromHistory(gameObject);
 			}
 			else if (currentLightType == 3 ) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
@@ -145,6 +155,9 @@ public class lightSourceController : MonoBehaviour {
 			}
 			currentLightType = type;
 			//turnOffPaths();
+
+		
+
 			return;
 		}
 		

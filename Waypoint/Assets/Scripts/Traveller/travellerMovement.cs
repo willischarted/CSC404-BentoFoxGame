@@ -56,9 +56,9 @@ public class travellerMovement : MonoBehaviour
     {
         if (!closeToExit){
             FindCurrent();
-            FindJustVisited();
+            //FindJustVisited();
             MoveToTarget();
-            Animating();
+            //Animating();
         }
         if (Vector3.Distance(exitPoint.position, transform.position) < 0.3)
         {
@@ -71,9 +71,10 @@ public class travellerMovement : MonoBehaviour
 
         float distRemaining = nav.remainingDistance; 
 
+        
 
-
-        if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
+       if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
+       // if (nav.pathStatus == NavMeshPathStatus.PathComplete)
         {
             anim.SetBool("isMoving", false);
         }
@@ -133,17 +134,31 @@ public class travellerMovement : MonoBehaviour
         }
 
         if (possibleTargets.Count > 0){
-            //always go to the latest light
-            if (latestLight != null && (possibleTargets.Contains(latestLight))){
+            // remove any past nodes from possible move list
+            foreach (GameObject g in history) {
+                if (possibleTargets.Contains(g))
+                    possibleTargets.Remove(g);
+            }
+
+            //always go to the latest light, if possible
+            if (latestLight != null && (possibleTargets.Contains(latestLight) && !history.Contains(latestLight))){ //not one we have visited
                 targetLight = latestLight;
             }
+
+            /* 
             //if the justVisited in the targetLamps array, ignore it
             else if (possibleTargets.Contains(justVisited)){
                 possibleTargets.Remove(justVisited);
             }
+            */
+
+           
             //else go to the default one
             else{
-                targetLight = possibleTargets[0];
+                // after pruning if we still have a light it can go to
+                if (possibleTargets.Count > 0) {
+                    targetLight = possibleTargets[0];
+                }
             }
 
             nav.SetDestination(targetLight.transform.position - offset);
@@ -156,11 +171,18 @@ public class travellerMovement : MonoBehaviour
         foreach (GameObject lamp in lamps){
             if (Vector3.Distance(transform.position, lamp.transform.position) < lampDistance){
                 currentLight = lamp;
+
+                if (!history.Contains(currentLight))  {
+                    history.Add(currentLight);
+                }
+
+                /* 
                 if (history.Count == 0){
                     history.Add(currentLight);
                 } else if (history[history.Count - 1] != currentLight){
                     history.Add(currentLight);
                 }
+                */
             }
         }
     }
@@ -181,6 +203,12 @@ public class travellerMovement : MonoBehaviour
     void Animating()
     {
 
+    }
+
+    public void removeFromHistory(GameObject g) {
+        if (history.Contains(g)) {
+            history.Remove(g);
+        }
     }
 
 
