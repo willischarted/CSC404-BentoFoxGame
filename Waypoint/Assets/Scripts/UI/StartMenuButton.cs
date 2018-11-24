@@ -19,6 +19,8 @@ public class StartMenuButton : MonoBehaviour
     private Button exitBtn;
     public AudioSource MenuTheme;
     public AudioSource newGameSound;
+    public Transform fadeScreen;
+    private Animator fade;
     //private Transform selector;
 
 
@@ -28,6 +30,7 @@ public class StartMenuButton : MonoBehaviour
         optionNum = 0;
         newGameBtn = canvas.transform.GetChild(1).GetComponent<Button>();
         exitBtn = canvas.transform.GetChild(2).GetComponent<Button>();
+        fade = fadeScreen.GetChild(0).GetComponent<Animator>();
         //nextLevelBtn = transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
     }
 
@@ -143,9 +146,10 @@ public class StartMenuButton : MonoBehaviour
     IEnumerator loadLevel()
     {
         newGameSound.PlayOneShot(newGameSound.clip);
-        yield return new WaitForSeconds(1.5f);
         GameController.level = 1;
         Time.timeScale = 1f;
+        fade.SetTrigger("fadeOut");
+        yield return new WaitForSeconds(2.0f);        
         SceneManager.LoadScene("Level" + GameController.level);
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().checkPlay();
 
