@@ -149,8 +149,9 @@ public class StartMenuButton : MonoBehaviour
         GameController.level = 1;
         Time.timeScale = 1f;
         fade.SetTrigger("fadeOut");
+        canvas.SetActive(false);
         yield return new WaitForSeconds(2.0f);        
-        SceneManager.LoadScene("Level" + GameController.level);
+        SceneManager.LoadScene("Level2");
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().checkPlay();
 
     }
