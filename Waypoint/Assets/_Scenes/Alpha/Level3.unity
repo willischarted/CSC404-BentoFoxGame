@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.010407382, g: 0.04968481, b: 0.06283645, a: 1}
+  m_IndirectSpecularColor: {r: 0.010474019, g: 0.04975693, b: 0.062980324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2039,6 +2039,21 @@ Prefab:
       propertyPath: levelUp
       value: 
       objectReference: {fileID: 198676122}
+    - target: {fileID: 114787456317045356, guid: e201524255b3d3641bc6928a1be5b1b2,
+        type: 2}
+      propertyPath: nextLevelName
+      value: Level3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114787456317045356, guid: e201524255b3d3641bc6928a1be5b1b2,
+        type: 2}
+      propertyPath: fadeScreen
+      value: 
+      objectReference: {fileID: 1244260438}
+    - target: {fileID: 114787456317045356, guid: e201524255b3d3641bc6928a1be5b1b2,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1430681387}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e201524255b3d3641bc6928a1be5b1b2, type: 2}
   m_IsPrefabAsset: 0
@@ -7909,6 +7924,131 @@ Transform:
   m_Father: {fileID: 1714471185}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1244260437
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114702262896960490, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: levelStartPopup
+      value: 
+      objectReference: {fileID: 1430681387}
+    - target: {fileID: 114347259620310494, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: nextLevelName
+      value: Level4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114347259620310494, guid: 51c48f2256174804b9f2c3fbde27f744,
+        type: 2}
+      propertyPath: levelUp
+      value: 
+      objectReference: {fileID: 198676122}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 51c48f2256174804b9f2c3fbde27f744, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!224 &1244260438 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224462906383272538, guid: 51c48f2256174804b9f2c3fbde27f744,
+    type: 2}
+  m_PrefabInternal: {fileID: 1244260437}
 --- !u!114 &1270338135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8599,7 +8739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1430681388
 RectTransform:
   m_ObjectHideFlags: 0
