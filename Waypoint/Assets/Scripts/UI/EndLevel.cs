@@ -10,7 +10,6 @@ public class EndLevel : MonoBehaviour
     //Button Array
     //place array
     public GameObject levelUp;
-    private int[] options;
     private int optionNum;
     private bool xAxisInUse = false;
     private bool yAxisInUse = false;
@@ -18,22 +17,25 @@ public class EndLevel : MonoBehaviour
     private Button restartBtn;
     private Button startMenuBtn;
     private Button nextLevelBtn;
+    public Transform fadeScreen;
+    private Animator fade;
+    public GameObject canvas;
     //private Transform selector;
 
 
     private void Start()
     {
         levelUp.SetActive(false);
-        options = new int[3];
         optionNum = 0;
-        restartBtn = transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();
-        startMenuBtn = transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
-        nextLevelBtn = transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
+        restartBtn = levelUp.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();
+        startMenuBtn = levelUp.transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
+        nextLevelBtn = levelUp.transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
+        fade = fadeScreen.GetChild(0).GetComponent<Animator>();
+        fade.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 
     private void Update()
     {
-        //Debug.Log(optionNum);
         float yValue = Input.GetAxis("DPadY");
         if (yValue != 0f)
         {
@@ -108,11 +110,6 @@ public class EndLevel : MonoBehaviour
         {
             startMenuBtn.Select();
         }
-        /* uncomment when the next Level button exists
-         * Also when the next nevel button exists, it should probably be 
-         * option 0 instead*/
-  
-
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("X"))
         {
             if (optionNum == 1)
@@ -152,57 +149,59 @@ public class EndLevel : MonoBehaviour
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
     }
-
     public void nextLevel()
     {
-        if (GameController.level == 4)
-        {
+        /*     if (GameController.level == 4)
+             {
 
-            GameController.level = 1;
-            Time.timeScale = 1f;
-            levelUp.SetActive(false);
-            SceneManager.LoadScene("Start Menu");
-            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
-            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
-        }
-        else
-        {
-            string currScene = SceneManager.GetActiveScene().name;
-            Debug.Log("currscene: " + currScene);
-            /*if (currScene == "Level3.5")
-            {
-                GameController.level = 4;
-                Time.timeScale = 1f;
-                levelUp.SetActive(false);
-                SceneManager.LoadScene("Level" + GameController.level);
-            }
-            else if (currScene == "Level3")
-            {
-                Time.timeScale = 1f;
-                levelUp.SetActive(false);
-                SceneManager.LoadScene("Level3.5");
-            }*/
-            if (currScene == "Level2.5")
-            {
-                Time.timeScale = 1f;
-                levelUp.SetActive(false);
-                GameController.level = 3;
-                SceneManager.LoadScene("Level" + GameController.level);
-            }
-            else if (currScene == "Level2")
-            {
-                Time.timeScale = 1f;
-                levelUp.SetActive(false);
-                SceneManager.LoadScene("Level2.5");
-            }
-            else
-            {
-                GameController.level++;
-                Debug.Log(GameController.level);
-                Time.timeScale = 1f;
-                levelUp.SetActive(false);
-                SceneManager.LoadScene("Level" + GameController.level);
-            }
-        }
+                 GameController.level = 1;
+                 Time.timeScale = 1f;
+                 levelUp.SetActive(false);
+                 SceneManager.LoadScene("Start Menu");
+                 GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
+                 GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
+             }
+             else
+             {
+                 string currScene = SceneManager.GetActiveScene().name;
+                 Debug.Log("currscene: " + currScene);
+                 if (currScene == "Level3.5")
+                 {
+                     GameController.level = 4;
+                     Time.timeScale = 1f;
+                     levelUp.SetActive(false);
+                     SceneManager.LoadScene("Level" + GameController.level);
+                 }
+                 else if (currScene == "Level3")
+                 {
+                     Time.timeScale = 1f;
+                     levelUp.SetActive(false);
+                     SceneManager.LoadScene("Level3.5");
+                 }
+                 if (currScene == "Level2.5")
+                 {
+                     Time.timeScale = 1f;
+                     levelUp.SetActive(false);
+                     GameController.level = 3;
+                     SceneManager.LoadScene("Level" + GameController.level);
+                 }
+                 else if (currScene == "Level2")
+                 {
+                     Time.timeScale = 1f;
+                     levelUp.SetActive(false);
+                     SceneManager.LoadScene("Level2.5");
+                 }
+                 else
+                 {
+                     GameController.level++;
+                     Debug.Log(GameController.level);
+                     Time.timeScale = 1f;
+                     levelUp.SetActive(false);
+                     //SceneManager.LoadScene("Level" + GameController.level);
+                     SceneManager.LoadScene(nextLevelName);
+                 }
+             }*/
+        canvas.SetActive(false);
+        fade.SetTrigger("fadeOut");
     }
 }

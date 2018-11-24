@@ -15,7 +15,7 @@ public class PlayTutorials : MonoBehaviour {
 	void Update () {
         if (levelStartPopup != null && done != true)
         {
-            if (timer < 1.5f)
+            if (timer < 1f)
             {
                 timer += Time.deltaTime;
             }
