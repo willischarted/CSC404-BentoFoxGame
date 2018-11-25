@@ -38,6 +38,8 @@ public class MiniMapController : MonoBehaviour {
 		if (pScript == null)
 			Debug.Log("Could not find pscript");
 
+
+		/* 
 		miniMapUI = GameObject.FindGameObjectWithTag("MiniMap");
 		if (miniMapUI == null)
 			Debug.Log("Could not find the minimapUI");
@@ -51,6 +53,7 @@ public class MiniMapController : MonoBehaviour {
 		if (miniMapCamera == null)
 			Debug.Log("Could not find the minimapCamera");
 		miniMapCameraAnim = miniMapCamera.GetComponent<Animator>();
+		*/
 		
 		//onscreenIcon = Instantiate(indicatorIcon, indicatorIcon.transform.position, indicatorIcon.transform.rotation);
 		//onscreenIcon.SetActive(false);
@@ -71,6 +74,7 @@ public class MiniMapController : MonoBehaviour {
 
 		}
 
+		/* 
 		if (Input.GetButtonDown("TouchPad") || Input.GetKeyDown(KeyCode.M)) {
 
 			
@@ -88,7 +92,7 @@ public class MiniMapController : MonoBehaviour {
 		
 		}
 
-
+		*/
 		Vector3 travScreenPos = Camera.main.WorldToScreenPoint(trav.position);
 
 		Vector3 travIconScreenPos = Camera.main.WorldToScreenPoint(trav.position);

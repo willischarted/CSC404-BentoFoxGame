@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class lightSourceController : MonoBehaviour {
+
+
+	public bool isStartingPoint;
 	/*
 		0 = turned off
 		1 = default -> attracts both
@@ -35,11 +38,21 @@ public class lightSourceController : MonoBehaviour {
 
 	public float yoffset;
 
+	travellerMovement tMovement;
+	void Awake() {
+		setMiniMapPaths();
+		setWorldPaths();
+	}
+
 	// Use this for initialization
 	void Start () {
 
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		pScript = player.GetComponent<playerControllerCopy>();
+
+		GameObject traveller = GameObject.FindGameObjectWithTag("Traveller");
+		tMovement = traveller.GetComponent<travellerMovement>();
+
 
 		if (pScript == null) {
 			Debug.Log("pScript is nnull");
@@ -54,12 +67,15 @@ public class lightSourceController : MonoBehaviour {
 			Debug.Log("Could not find monsterfire effect controoller");
 
 		//startIntensity = lampLight.intensity;
-		setMiniMapPaths();
-		setWorldPaths();
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(isStartingPoint)
+			return;
+
 		if (getCurrentLightType() > 0) {
 			if(timeRemaining <= 0f) 
 			{
@@ -83,6 +99,7 @@ public class lightSourceController : MonoBehaviour {
 
 	//function to immediately turn light off
 	public void setLightOff() {
+
 		//Debug.Log("Turn off light here");
 		//Light lampLight = GetComponentInChildren<Light>();
 		Renderer[] bulbs = GetComponentsInChildren<Renderer>();
@@ -134,9 +151,14 @@ public class lightSourceController : MonoBehaviour {
 
 			if (currentLightType == 1) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
+				//once it is off remove from the history (for lights away from trav that we turn on/off)
+				tMovement.removeFromHistory(gameObject);
+				//Debug.Log("Removed from history");
 			}
 			else if (currentLightType == 2) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
+					//once it is off remove from the history
+					tMovement.removeFromHistory(gameObject);
 			}
 			else if (currentLightType == 3 ) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
@@ -145,10 +167,18 @@ public class lightSourceController : MonoBehaviour {
 			}
 			currentLightType = type;
 			//turnOffPaths();
+
+		
+
 			return;
 		}
 		
 		currentLightType = type;
+
+		//for if the trav is at a certain light and it turns off, and we turn it on again.
+		if (currentLightType == 1 || currentLightType == 2) {
+			tMovement.removeFromHistory(gameObject);
+		}
 		timeRemaining = lightDuration;
 
         if (lampLight){
@@ -208,8 +238,10 @@ public class lightSourceController : MonoBehaviour {
 			lRenderer.SetPositions(positions);
 
 			//m.SetActive(false);
-			lRenderer.enabled = false;
+			if (!isStartingPoint)
+				lRenderer.enabled = false;
 		}
+
 	}
 
 	public void setWorldPaths() {
@@ -236,15 +268,17 @@ public class lightSourceController : MonoBehaviour {
 			lRenderer.SetPositions(positions);
 
 			//m.SetActive(false);
-			lRenderer.enabled = false;
+			if (!isStartingPoint)
+				lRenderer.enabled = false;
 		}
+
 	}
 
 	public void turnOnWorldPaths() {
-		Debug.Log("Turning on paths");
+		//Debug.Log("Turning on paths");
 		
 		pathController[] paths =  GetComponentsInChildren<pathController>();
-		Debug.Log(paths.Length);
+		//Debug.Log(paths.Length);
 		foreach (pathController m in paths) {
 			m.turnOnPath();
 			
@@ -254,9 +288,10 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void turnOnPaths() {
-		Debug.Log("Turning on paths");
+		
+		//Debug.Log("Turning on paths");
 		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
-		Debug.Log(paths.Length);
+	//	Debug.Log(paths.Length);
 		foreach (miniMapPathController m in paths) {
 			m.turnOnPath();
 			
@@ -264,16 +299,18 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void turnOffPaths() {
-
+		if(isStartingPoint)
+			return;
 		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
 		foreach (miniMapPathController m in paths) {
 			m.turnOffPath();
 		}
-		Debug.Log("Turning off paths");
+		//Debug.Log("Turning off paths");
 	}
 
 	public void turnOffWorldPaths() {
-	
+		if(isStartingPoint)
+			return;
 		pathController[] paths =  GetComponentsInChildren<pathController>();
 		foreach (pathController m in paths) {
 			m.turnOffPath();

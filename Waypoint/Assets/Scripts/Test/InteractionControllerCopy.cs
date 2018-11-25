@@ -197,11 +197,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 						lScript.turnOnPaths();
 						
 						
-						Debug.Log("truning on light");
+						//Debug.Log("truning on light");
 						return;
 					}
 					else if (lScript.getCurrentLightType() > 0 ) {
-						Debug.Log("turning off light");
+						//Debug.Log("turning off light");
 						pController.setTargetLight(currentTarget);
 						lScript.setMiniMapPathColor(0);
 						lScript.turnOffPaths();
@@ -249,7 +249,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			if (lScript == null) 
 				Debug.Log("Could not get lscript");
 
-			//lScript.turnOnWorldPaths();
+			lScript.turnOnWorldPaths();
 			lScript.turnOnPaths();
 		}
 	}
@@ -333,16 +333,18 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 			*/
 
-			if (!monstersInRange.Contains(other.gameObject)){
-				monstersInRange.Add(other.gameObject);
-			}
+			
 
 			EnemyMovement monScript = other.gameObject.GetComponent<EnemyMovement>();
 			if (monScript == null) {
 				Debug.Log("Could not find monscript");
 			}
-
-			else {
+			//else
+			if (!monScript.getIsStunned()) {
+				
+				if (!monstersInRange.Contains(other.gameObject)){
+					monstersInRange.Add(other.gameObject);
+				}
 				monScript.popUp.SetActive(true);
 				Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
@@ -361,6 +363,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 				return;
 
+			}
+			else {
+				monScript.popUp.SetActive(false);
+				monstersInRange.Remove(other.gameObject);
 			}
 			
 	
@@ -384,12 +390,16 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
-			if (lScript != null && lScript.getCurrentLightType() == 0){
-				//lScript.setMiniMapPathColor(0);
-				//lScript.turnOffWorldPaths();
-				lScript.turnOffPaths();
-				Debug.Log("turning off)");
+			if (lScript != null){
+				if ( lScript.getCurrentLightType() == 0) {
+					//lScript.setMiniMapPathColor(0);
+				
+					lScript.turnOffPaths();
+					//Debug.Log("turning off)");
+				}
+				lScript.turnOffWorldPaths();
 			}
+			
 			interactionPopUp.SetActive(false);
 			currentTarget = null;
 			lScript = null;

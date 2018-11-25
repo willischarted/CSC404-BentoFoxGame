@@ -58,7 +58,7 @@ public class travellerHealth : MonoBehaviour {
         lightValue =  0.005f;
         orig_lightValue = 0.005f;
         cloak.SetColor("_EmissionColor", new Color(255f, 255f, 255f, 1.0f) * lightValue);
-        Debug.Log("cloak: " + cloak);
+        //Debug.Log("cloak: " + cloak);
 
         healingParticleSystem = healingVFX.GetComponent<ParticleSystem>();
         if (healingParticleSystem == null)
