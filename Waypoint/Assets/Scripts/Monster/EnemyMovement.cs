@@ -453,5 +453,8 @@ public class EnemyMovement : MonoBehaviour
         monsterAnim.SetTrigger("isStunned");
         isStunned = true;
     }
+    public bool getIsStunned() {
+        return isStunned;
+    }
 }
 

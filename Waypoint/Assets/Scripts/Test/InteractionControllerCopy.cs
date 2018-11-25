@@ -333,16 +333,18 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 			*/
 
-			if (!monstersInRange.Contains(other.gameObject)){
-				monstersInRange.Add(other.gameObject);
-			}
+			
 
 			EnemyMovement monScript = other.gameObject.GetComponent<EnemyMovement>();
 			if (monScript == null) {
 				Debug.Log("Could not find monscript");
 			}
-
-			else {
+			//else
+			if (!monScript.getIsStunned()) {
+				
+				if (!monstersInRange.Contains(other.gameObject)){
+					monstersInRange.Add(other.gameObject);
+				}
 				monScript.popUp.SetActive(true);
 				Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
@@ -361,6 +363,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 				return;
 
+			}
+			else {
+				monScript.popUp.SetActive(false);
+				monstersInRange.Remove(other.gameObject);
 			}
 			
 	
