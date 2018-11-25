@@ -59,10 +59,18 @@ public class travellerMovement : MonoBehaviour
     }
 
     void Update()
+
     {
+        /* 
+        if (Input.GetKeyDown(KeyCode.C)) {
+            Debug.Log(targetLight);
+            Debug.Log(currentLight);
+        }
+        */
         if (!closeToExit){
 
             if (targetLight != null && targetLight != currentLight) {
+                //Debug.Log("running first");
                 //check to see if it turned off
                 lightSourceController lScript = targetLight.GetComponent<lightSourceController>();
                 // the targte light was turned off before we got there
@@ -81,8 +89,10 @@ public class travellerMovement : MonoBehaviour
 
             //what if the current light we are at is turned off
             if (currentLight != null) {
+                 
                 lightSourceController currentScript = currentLight.GetComponent<lightSourceController>();
                 if(currentScript.getCurrentLightType() == 0) {
+                    //Debug.Log("running second");
                     //go back to any adjacent ones
                     MoveBack();
                     //if not just stay there.
@@ -165,6 +175,7 @@ public class travellerMovement : MonoBehaviour
     }
 
     private void MoveToTarget(){
+       // Debug.Log("move to target normal");
         GameObject[] adjacent;
         List<GameObject> possibleTargets = new List<GameObject>();
         if (currentLight == null){
@@ -181,13 +192,18 @@ public class travellerMovement : MonoBehaviour
         }
         // remove any past nodes from possible move list
         foreach (GameObject g in history) {
-        if (possibleTargets.Contains(g))
-            possibleTargets.Remove(g);
+            if (possibleTargets.Contains(g)) {
+               // Debug.Log("removing " + g);
+                possibleTargets.Remove(g);
+            }
         }
 
 
      
         if (possibleTargets.Count > 0){
+           
+           // foreach(GameObject g in possibleTargets)
+           //      Debug.Log(g);
           
             //always go to the latest light, if possible
             if (latestLight != null && (possibleTargets.Contains(latestLight) && !history.Contains(latestLight))){ //not one we have visited

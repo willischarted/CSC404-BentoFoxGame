@@ -197,11 +197,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 						lScript.turnOnPaths();
 						
 						
-						Debug.Log("truning on light");
+						//Debug.Log("truning on light");
 						return;
 					}
 					else if (lScript.getCurrentLightType() > 0 ) {
-						Debug.Log("turning off light");
+						//Debug.Log("turning off light");
 						pController.setTargetLight(currentTarget);
 						lScript.setMiniMapPathColor(0);
 						lScript.turnOffPaths();
@@ -389,7 +389,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 					//lScript.setMiniMapPathColor(0);
 				
 					lScript.turnOffPaths();
-					Debug.Log("turning off)");
+					//Debug.Log("turning off)");
 				}
 				lScript.turnOffWorldPaths();
 			}

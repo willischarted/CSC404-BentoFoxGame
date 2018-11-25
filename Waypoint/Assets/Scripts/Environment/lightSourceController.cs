@@ -151,8 +151,9 @@ public class lightSourceController : MonoBehaviour {
 
 			if (currentLightType == 1) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
-				//once it is off remove from the history
+				//once it is off remove from the history (for lights away from trav that we turn on/off)
 				tMovement.removeFromHistory(gameObject);
+				//Debug.Log("Removed from history");
 			}
 			else if (currentLightType == 2) {
 				pScript.addResource(pScript.light1Value * percentageReturn);
@@ -173,6 +174,11 @@ public class lightSourceController : MonoBehaviour {
 		}
 		
 		currentLightType = type;
+
+		//for if the trav is at a certain light and it turns off, and we turn it on again.
+		if (currentLightType == 1 || currentLightType == 2) {
+			tMovement.removeFromHistory(gameObject);
+		}
 		timeRemaining = lightDuration;
 
         if (lampLight){
@@ -269,10 +275,10 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void turnOnWorldPaths() {
-		Debug.Log("Turning on paths");
+		//Debug.Log("Turning on paths");
 		
 		pathController[] paths =  GetComponentsInChildren<pathController>();
-		Debug.Log(paths.Length);
+		//Debug.Log(paths.Length);
 		foreach (pathController m in paths) {
 			m.turnOnPath();
 			
@@ -283,9 +289,9 @@ public class lightSourceController : MonoBehaviour {
 
 	public void turnOnPaths() {
 		
-		Debug.Log("Turning on paths");
+		//Debug.Log("Turning on paths");
 		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
-		Debug.Log(paths.Length);
+	//	Debug.Log(paths.Length);
 		foreach (miniMapPathController m in paths) {
 			m.turnOnPath();
 			
@@ -299,7 +305,7 @@ public class lightSourceController : MonoBehaviour {
 		foreach (miniMapPathController m in paths) {
 			m.turnOffPath();
 		}
-		Debug.Log("Turning off paths");
+		//Debug.Log("Turning off paths");
 	}
 
 	public void turnOffWorldPaths() {
