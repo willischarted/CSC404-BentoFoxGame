@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class travellerMovement : MonoBehaviour
 {
-
+    public GameObject startingPoint;
+    
     public GameObject[] startAdjacent;
     public Vector3 offset;
     public float lampDistance = 1f;

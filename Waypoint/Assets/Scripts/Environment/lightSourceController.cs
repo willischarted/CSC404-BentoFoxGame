@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class lightSourceController : MonoBehaviour {
+
+
+	public bool isStartingPoint;
 	/*
 		0 = turned off
 		1 = default -> attracts both
@@ -36,6 +39,10 @@ public class lightSourceController : MonoBehaviour {
 	public float yoffset;
 
 	travellerMovement tMovement;
+	void Awake() {
+		setMiniMapPaths();
+		setWorldPaths();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -60,12 +67,15 @@ public class lightSourceController : MonoBehaviour {
 			Debug.Log("Could not find monsterfire effect controoller");
 
 		//startIntensity = lampLight.intensity;
-		setMiniMapPaths();
-		setWorldPaths();
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(isStartingPoint)
+			return;
+
 		if (getCurrentLightType() > 0) {
 			if(timeRemaining <= 0f) 
 			{
@@ -89,6 +99,7 @@ public class lightSourceController : MonoBehaviour {
 
 	//function to immediately turn light off
 	public void setLightOff() {
+
 		//Debug.Log("Turn off light here");
 		//Light lampLight = GetComponentInChildren<Light>();
 		Renderer[] bulbs = GetComponentsInChildren<Renderer>();
@@ -221,8 +232,10 @@ public class lightSourceController : MonoBehaviour {
 			lRenderer.SetPositions(positions);
 
 			//m.SetActive(false);
-			lRenderer.enabled = false;
+			if (!isStartingPoint)
+				lRenderer.enabled = false;
 		}
+
 	}
 
 	public void setWorldPaths() {
@@ -249,8 +262,10 @@ public class lightSourceController : MonoBehaviour {
 			lRenderer.SetPositions(positions);
 
 			//m.SetActive(false);
-			lRenderer.enabled = false;
+			if (!isStartingPoint)
+				lRenderer.enabled = false;
 		}
+
 	}
 
 	public void turnOnWorldPaths() {
@@ -267,6 +282,7 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void turnOnPaths() {
+		
 		Debug.Log("Turning on paths");
 		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
 		Debug.Log(paths.Length);
@@ -277,7 +293,8 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void turnOffPaths() {
-
+		if(isStartingPoint)
+			return;
 		miniMapPathController[] paths =  GetComponentsInChildren<miniMapPathController>();
 		foreach (miniMapPathController m in paths) {
 			m.turnOffPath();
@@ -286,7 +303,8 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void turnOffWorldPaths() {
-	
+		if(isStartingPoint)
+			return;
 		pathController[] paths =  GetComponentsInChildren<pathController>();
 		foreach (pathController m in paths) {
 			m.turnOffPath();
