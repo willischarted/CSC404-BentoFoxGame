@@ -249,7 +249,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			if (lScript == null) 
 				Debug.Log("Could not get lscript");
 
-			//lScript.turnOnWorldPaths();
+			lScript.turnOnWorldPaths();
 			lScript.turnOnPaths();
 		}
 	}
@@ -384,12 +384,16 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
-			if (lScript != null && lScript.getCurrentLightType() == 0){
-				//lScript.setMiniMapPathColor(0);
-				//lScript.turnOffWorldPaths();
-				lScript.turnOffPaths();
-				Debug.Log("turning off)");
+			if (lScript != null){
+				if ( lScript.getCurrentLightType() == 0) {
+					//lScript.setMiniMapPathColor(0);
+				
+					lScript.turnOffPaths();
+					Debug.Log("turning off)");
+				}
+				lScript.turnOffWorldPaths();
 			}
+			
 			interactionPopUp.SetActive(false);
 			currentTarget = null;
 			lScript = null;
