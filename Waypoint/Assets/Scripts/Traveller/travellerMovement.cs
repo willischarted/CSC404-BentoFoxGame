@@ -133,14 +133,16 @@ public class travellerMovement : MonoBehaviour
                 possibleTargets.Add(lamp);
             }
         }
+        // remove any past nodes from possible move list
+        foreach (GameObject g in history) {
+        if (possibleTargets.Contains(g))
+            possibleTargets.Remove(g);
+        }
 
+
+     
         if (possibleTargets.Count > 0){
-            // remove any past nodes from possible move list
-            foreach (GameObject g in history) {
-                if (possibleTargets.Contains(g))
-                    possibleTargets.Remove(g);
-            }
-
+          
             //always go to the latest light, if possible
             if (latestLight != null && (possibleTargets.Contains(latestLight) && !history.Contains(latestLight))){ //not one we have visited
                 targetLight = latestLight;
@@ -157,14 +159,16 @@ public class travellerMovement : MonoBehaviour
             //else go to the default one
             else{
                 // after pruning if we still have a light it can go to
-                if (possibleTargets.Count > 0) {
+               // if (possibleTargets.Count > 0) {
                     targetLight = possibleTargets[0];
-                }
+               // }
             }
 
             nav.SetDestination(targetLight.transform.position - offset);
             anim.SetBool("isMoving", true);
 
+            if (startingPoint != null)
+               Destroy(startingPoint);
         }
     }
 
