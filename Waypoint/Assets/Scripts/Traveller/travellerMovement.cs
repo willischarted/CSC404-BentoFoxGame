@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class travellerMovement : MonoBehaviour
 {
     public GameObject startingPoint;
+    private Vector3 startingPointTransform;
     
     public GameObject[] startAdjacent;
     public Vector3 offset;
@@ -51,12 +52,45 @@ public class travellerMovement : MonoBehaviour
         closeToExit = false;
 
         isScared = false;
+
+        startingPointTransform = new Vector3(startingPoint.transform.position.x,
+                                            startingPoint.transform.position.y, 
+                                            startingPoint.transform.position.z);
     }
 
     void Update()
     {
         if (!closeToExit){
+
+            if (targetLight != null && targetLight != currentLight) {
+                //check to see if it turned off
+                lightSourceController lScript = targetLight.GetComponent<lightSourceController>();
+                // the targte light was turned off before we got there
+                if (lScript.getCurrentLightType() == 0) {
+                    //go back to the current light -> have not run find current yet
+                    if (currentLight == null)
+                        MoveToTarget(startingPointTransform);
+                    else
+                        MoveToTarget(currentLight);
+                    return;
+                }
+
+                
+            }
             FindCurrent();
+
+            //what if the current light we are at is turned off
+            if (currentLight != null) {
+                lightSourceController currentScript = currentLight.GetComponent<lightSourceController>();
+                if(currentScript.getCurrentLightType() == 0) {
+                    //go back to any adjacent ones
+                    MoveBack();
+                    //if not just stay there.
+                    return;
+                }
+            }
+
+
             //FindJustVisited();
             MoveToTarget();
             //Animating();
@@ -118,6 +152,18 @@ public class travellerMovement : MonoBehaviour
         endlvl.levelComplete();
     }
 
+    private void MoveToTarget(GameObject g) {
+        targetLight = g;
+        nav.SetDestination(targetLight.transform.position - offset);
+        anim.SetBool("isMoving", true);
+    }
+
+     private void MoveToTarget(Vector3 t) {
+        
+        nav.SetDestination(t - offset);
+        anim.SetBool("isMoving", true);
+    }
+
     private void MoveToTarget(){
         GameObject[] adjacent;
         List<GameObject> possibleTargets = new List<GameObject>();
@@ -162,6 +208,42 @@ public class travellerMovement : MonoBehaviour
                // if (possibleTargets.Count > 0) {
                     targetLight = possibleTargets[0];
                // }
+            }
+
+            nav.SetDestination(targetLight.transform.position - offset);
+            anim.SetBool("isMoving", true);
+
+            if (startingPoint != null)
+               Destroy(startingPoint);
+        }
+    }
+
+     private void MoveBack(){
+        GameObject[] adjacent;
+        List<GameObject> possibleTargets = new List<GameObject>();
+        adjacent = currentLight.GetComponentInParent<lightSourceController>().adjacentSources;
+        
+
+        foreach (GameObject lamp in adjacent){
+            int lightType = lamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
+            if (lightType == 1 || lightType == 2){
+                possibleTargets.Add(lamp);
+            }
+        }
+
+     
+        if (possibleTargets.Count > 0){
+          
+            //always go to the latest light, if possible
+            if (latestLight != null && (possibleTargets.Contains(latestLight) && !history.Contains(latestLight))){ //not one we have visited
+                targetLight = latestLight;
+            }
+
+ 
+            else{
+
+                targetLight = possibleTargets[0];
+
             }
 
             nav.SetDestination(targetLight.transform.position - offset);
