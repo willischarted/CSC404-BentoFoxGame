@@ -113,7 +113,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Debug.Log("Could not find the healing sound effect");
 		isHealing = false;
 
-		timeToHeal = 1f;
+		timeToHeal = .2f;
         currentHealTime = 0f;
 
 
