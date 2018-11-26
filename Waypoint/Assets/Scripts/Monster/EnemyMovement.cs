@@ -287,15 +287,18 @@ public class EnemyMovement : MonoBehaviour
 
     public GameObject findCurrentLamp()
     {
-
-        foreach (GameObject lamp in lamps)
+        float distance = Mathf.Infinity;
+        GameObject newCurrentLamp = null;
+        foreach (GameObject newlamp in lamps) //this part is also not quite working
         {
-            if (Vector3.Distance(transform.position, lamp.transform.position) < lampDistance)
+            if (Vector3.Distance(transform.position, newlamp.transform.position) < distance) // edge case, does not take into account lit lamp
             {
-                return lamp;
+                distance = Vector3.Distance(transform.position, newlamp.transform.position);
+                newCurrentLamp = newlamp;
             }
         }
-        return null;
+        return newCurrentLamp;
+        
     }
 
     public void monsterLampLit(GameObject litLamp)
