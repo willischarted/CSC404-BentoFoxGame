@@ -17,6 +17,11 @@ public class fadeTiming : MonoBehaviour {
 		
 	}
 
+    public void whenFadeStart()
+    {
+        levelUp.SetActive(false);
+    }
+
     public void whenFadeComplete()
     {
         levelUp.SetActive(false);
