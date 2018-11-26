@@ -19,13 +19,16 @@ public class fadeTiming : MonoBehaviour {
 
     public void whenFadeStart()
     {
-        levelUp.SetActive(false);
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            levelUp.SetActive(false);
     }
 
     public void whenFadeComplete()
     {
-        levelUp.SetActive(false);
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(nextLevelName);
+        if (SceneManager.GetActiveScene().buildIndex != 0) {
+            levelUp.SetActive(false);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(nextLevelName);
+        }
     }
 }
