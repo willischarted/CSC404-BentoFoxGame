@@ -236,7 +236,6 @@ public class EnemyMovement : MonoBehaviour
                 {
                     monsterAnim.SetTrigger("travellerSpotted");
                 }
-                targetLamp = null;
             }
         }
 
