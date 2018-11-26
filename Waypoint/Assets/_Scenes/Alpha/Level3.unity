@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.010407382, g: 0.04968481, b: 0.06283645, a: 1}
+  m_IndirectSpecularColor: {r: 0.010474019, g: 0.04975693, b: 0.062980324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2583,7 +2583,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4188761692343648, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.677831
+      value: 4.764
       objectReference: {fileID: 0}
     - target: {fileID: 4188761692343648, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -8602,6 +8602,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 208131207}
     m_Modifications:
+    - target: {fileID: 114831148860371842, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4188761692343648, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
       propertyPath: m_LocalPosition.x
       value: -6.406874
@@ -8634,6 +8639,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114831148860371842, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[0]
+      value: 
+      objectReference: {fileID: 721297027}
+    - target: {fileID: 114831148860371842, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[1]
+      value: 
+      objectReference: {fileID: 254253075}
+    - target: {fileID: 114831148860371842, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[2]
+      value: 
+      objectReference: {fileID: 53021470}
+    - target: {fileID: 114831148860371842, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[3]
+      value: 
+      objectReference: {fileID: 1362798075}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
   m_IsPrefabAsset: 0
@@ -12198,6 +12223,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 208131207}
     m_Modifications:
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4787364094857020, guid: d78168ef77c0f05418b5ef5bed6307d5, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.6778307
@@ -12230,6 +12260,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[0]
+      value: 
+      objectReference: {fileID: 1756443399}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[1]
+      value: 
+      objectReference: {fileID: 2005809445}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[2]
+      value: 
+      objectReference: {fileID: 884962652}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78168ef77c0f05418b5ef5bed6307d5, type: 2}
   m_IsPrefabAsset: 0
@@ -15208,9 +15253,14 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 208131207}
     m_Modifications:
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4787364094857020, guid: d78168ef77c0f05418b5ef5bed6307d5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.3065395
+      value: -5.111
       objectReference: {fileID: 0}
     - target: {fileID: 4787364094857020, guid: d78168ef77c0f05418b5ef5bed6307d5, type: 2}
       propertyPath: m_LocalPosition.y
@@ -15244,6 +15294,36 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[0]
+      value: 
+      objectReference: {fileID: 2107711966}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[1]
+      value: 
+      objectReference: {fileID: 1901498403}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[2]
+      value: 
+      objectReference: {fileID: 1756443399}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[3]
+      value: 
+      objectReference: {fileID: 2005809445}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[4]
+      value: 
+      objectReference: {fileID: 254253075}
+    - target: {fileID: 114730840104159826, guid: d78168ef77c0f05418b5ef5bed6307d5,
+        type: 2}
+      propertyPath: setRoaminglamps.Array.data[5]
+      value: 
+      objectReference: {fileID: 721297027}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78168ef77c0f05418b5ef5bed6307d5, type: 2}
   m_IsPrefabAsset: 0
