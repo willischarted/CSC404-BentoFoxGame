@@ -54,7 +54,7 @@ public class EnemyMovement : MonoBehaviour
         roamingSound = transform.Find("Audio Source").transform.GetComponent<AudioSource>();
         attackSound = transform.Find("Audio Source (1)").transform.GetComponent<AudioSource>();
         attackSound.enabled = false;
-        roamingSound.enabled = true;
+        roamingSound.enabled = false;
         moving = false;
         traveller = GameObject.FindGameObjectsWithTag("Traveller")[0].transform;
         nav = GetComponent<NavMeshAgent>();
