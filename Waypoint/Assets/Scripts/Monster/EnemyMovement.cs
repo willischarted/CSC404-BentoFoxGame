@@ -248,14 +248,31 @@ public class EnemyMovement : MonoBehaviour
             }
             else if (Vector3.Distance(transform.position, currentTarget) < lampDistance)
             {
-                Debug.Log("in the elseif");
                 movingToLamp = false;
                 nav.SetDestination(transform.position);
                 currentLamp = findCurrentLamp();
             }
             else
             {
-                Debug.Log("in the else");
+                if (!isLit(targetLamp))
+                {
+                    float lightDuration = 0f;
+                    GameObject[] adjLamps = targetLamp.GetComponentInParent<lightSourceController>().getAdjacentSources();
+                    foreach (GameObject lamp in adjLamps)
+                    {
+                        if (isLit(lamp))
+                        {
+                            if (lightDuration < getLightDuration(lamp))
+                            {
+                                targetLamp = lamp;
+                                lightDuration = getLightDuration(lamp);
+                                movingToLamp = true;
+                            }
+                        }
+                    }
+                }
+                currentTarget = targetLamp.transform.position;
+                nav.SetDestination(currentTarget);
             }
         }
 
@@ -376,12 +393,12 @@ public class EnemyMovement : MonoBehaviour
     void nextLamp(Queue<GameObject> lampQueue)
     {
         float lightDuration = 0f;
-        GameObject[] adjLamps = currentLamp.GetComponentInParent<lightSourceController>().getAdjacentSources();
         if (isLit(currentLamp))
         {
             lightDuration = getLightDuration(currentLamp);
             movingToLamp = false;
         }
+        GameObject[] adjLamps = currentLamp.GetComponentInParent<lightSourceController>().getAdjacentSources();
         foreach (GameObject lamp in adjLamps)
         {
             if (isLit(lamp))
