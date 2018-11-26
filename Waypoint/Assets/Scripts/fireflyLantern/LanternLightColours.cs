@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LanternLightColours : MonoBehaviour {
-    private float lightFactor;
+public class LanternLightColours : MonoBehaviour { 
+    public float lightFactor;
     float lightValue;
     public Material Lantern;
     public GameObject player;
+    public float sphereNum;
     private float startingResource;
     private float currentResource;
 
@@ -20,7 +21,9 @@ public class LanternLightColours : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         currentResource = player.GetComponent<playerControllerCopy>().lightResource;
-        lightFactor = 4.0f * (currentResource/ startingResource);
+        float sphereFactor = ((currentResource / startingResource)-((5f - sphereNum) / 5f))/((0.2f)*sphereNum);
+        if (sphereFactor < 0f) { sphereFactor = 0f; }
+        lightFactor = 3.0f * sphereFactor;
         if (player.GetComponent<playerControllerCopy>().equippedLight == 1)
         {
             Lantern.SetColor("_EmissionColor", Color.yellow * lightFactor);
