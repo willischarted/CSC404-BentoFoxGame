@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.011290867, g: 0.05492454, b: 0.06873685, a: 1}
+  m_IndirectSpecularColor: {r: 0.011289003, g: 0.054922618, b: 0.0687224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3057,6 +3057,11 @@ Prefab:
       propertyPath: setRoaminglamps.Array.data[3]
       value: 
       objectReference: {fileID: 693039994}
+    - target: {fileID: 195173862819208874, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: avoidancePriority
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
   m_IsPrefabAsset: 0
@@ -7639,6 +7644,11 @@ Prefab:
       propertyPath: setRoaminglamps.Array.data[2]
       value: 
       objectReference: {fileID: 693039994}
+    - target: {fileID: 195173862819208874, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: avoidancePriority
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
   m_IsPrefabAsset: 0
@@ -8547,6 +8557,11 @@ Prefab:
       propertyPath: setRoaminglamps.Array.data[4]
       value: 
       objectReference: {fileID: 1620525011}
+    - target: {fileID: 195173862819208874, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: avoidancePriority
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
   m_IsPrefabAsset: 0
@@ -13377,6 +13392,11 @@ Prefab:
       propertyPath: setRoaminglamps.Array.data[5]
       value: 
       objectReference: {fileID: 947893457}
+    - target: {fileID: 195173862819208874, guid: e8167b98a47821f47bbd83f19ee4801a,
+        type: 2}
+      propertyPath: avoidancePriority
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
   m_IsPrefabAsset: 0
@@ -16818,6 +16838,10 @@ Prefab:
       propertyPath: startingPoint
       value: 
       objectReference: {fileID: 97058932}
+    - target: {fileID: 1932574419616044, guid: d17434b735f304dcbb222d849c13b1e0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d17434b735f304dcbb222d849c13b1e0, type: 2}
   m_IsPrefabAsset: 0
