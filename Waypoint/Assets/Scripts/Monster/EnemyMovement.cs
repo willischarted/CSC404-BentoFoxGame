@@ -86,10 +86,11 @@ public class EnemyMovement : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
+        if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned")||isDistracted)
         {
             return;
         }
+
         else
         {
             if (other.gameObject.transform == traveller)
@@ -248,6 +249,7 @@ public class EnemyMovement : MonoBehaviour
             else if (Vector3.Distance(transform.position, currentTarget) < lampDistance)
             {
                 movingToLamp = false;
+                isDistracted = false;
                 nav.SetDestination(transform.position);
                 currentLamp = findCurrentLamp();
             }
@@ -413,7 +415,6 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
         }
-
         if (!isLit(currentLamp) || !isLit(targetLamp))
         {
             targetLamp = lampQueue.Dequeue();
