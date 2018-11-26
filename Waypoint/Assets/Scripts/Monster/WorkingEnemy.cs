@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.AI;
 using UnityEngine;
 
+public class WorkingEnemy : MonoBehaviour {
 
-public class EnemyMovementBackup : MonoBehaviour
-{ 
+    private Queue<GameObject> lampQueue;
+    public static int roamingLampsNum;
+    public GameObject[] setRoaminglamps = new GameObject[roamingLampsNum];
+
+    private bool isDistracted;
+    public bool isBaby;
     Transform traveller;
     Animator monsterAnim;
     NavMeshAgent nav;
@@ -57,29 +63,22 @@ public class EnemyMovementBackup : MonoBehaviour
         timer = 0f;
         soundTimer = 0f;
         upward.Set(0f, 0.2f, 0f);
-        currentLamp = null;
         lamps = GameObject.FindGameObjectsWithTag("LampLight");
         List<GameObject> validLamps = new List<GameObject>();
-        foreach (GameObject lamp in lamps)
+        foreach (GameObject lamp in setRoaminglamps)
         {
-            if (Vector3.Distance(transform.position, lamp.transform.position) <= MAX_LD && Vector3.Distance(roamCenterPoint, lamp.transform.position) <= maxRoamDistance)
-            {
-                validLamps.Add(lamp);
-            }
+            lampQueue.Enqueue(lamp);
         }
-        lamps = validLamps.ToArray();
-
 
         bodyAnim = monsterGeo.GetComponent<Animator>();
         if (bodyAnim == null)
             Debug.Log("Could not find the bodyanim");
 
-
         currentAttackCooldown = 0;
         isStunned = false;
-
-
-
+        isDistracted = false;
+        currentLamp = findCurrentLamp();
+        targetLamp = findCurrentLamp();
     }
 
 
@@ -87,7 +86,6 @@ public class EnemyMovementBackup : MonoBehaviour
     {
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
-            //Debug.Log("inhere");
             return;
         }
         else
@@ -101,10 +99,7 @@ public class EnemyMovementBackup : MonoBehaviour
                     monsterAnim.SetTrigger("isAlerted");
                 }
             }
-
-
         }
-
     }
 
 
@@ -125,8 +120,6 @@ public class EnemyMovementBackup : MonoBehaviour
         }
         */
 
-
-
         //for testing purposes
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -146,7 +139,7 @@ public class EnemyMovementBackup : MonoBehaviour
         //and attack state 
         soundTimer += Time.deltaTime;
         float distanceFromTraveler = Vector3.Distance(transform.position, traveller.transform.position);
-        if (distanceFromTraveler < 1)
+        if (distanceFromTraveler < 1 && !isDistracted)
         {
             if (startAttack())
             {
@@ -193,39 +186,31 @@ public class EnemyMovementBackup : MonoBehaviour
             soundTimer = 0f;
         }
         //end of monster sound control
+
+
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
-
-
-            //Debug.Log("Stunned");
             nav.SetDestination(transform.position);
             //Monster sounds
             roamingSound.enabled = false;
             attackSound.enabled = false;
-
-
+            
             timer += Time.deltaTime;
             if (timer > 5)
             {
                 monsterAnim.SetTrigger("recovered");
                 //Monster sounds
                 roamingSound.enabled = true;
-                //
+
                 timer = 0f;
                 movingToLamp = false;
-
-                targetLamp = null;
-
                 isStunned = false;
             }
-
-
             return;
         }
 
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Chase"))
         {
-            //Debug.Log("Chase");
             currentTarget = traveller.position;
             nav.SetDestination(currentTarget);
             if (Vector3.Distance(roamCenterPoint, traveller.position) >= maxRoamDistance)
@@ -234,62 +219,34 @@ public class EnemyMovementBackup : MonoBehaviour
                 //monster sounds
                 roamingSound.enabled = true;
                 attackSound.enabled = false;
-                currentLamp = null;
                 movingToLamp = false;
-                targetLamp = null;
-
             }
         }
+
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
         {
             //Debug.Log("Alerted");
+            isDistracted = false;
             RaycastHit hit;
             if (Physics.Raycast(transform.position + upward, direction.normalized, out hit, Mathf.Infinity))
             {
                 if (hit.collider.gameObject.transform == traveller)
                 {
                     monsterAnim.SetTrigger("travellerSpotted");
-
                 }
-
-                else
-                {
-                    if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
-                    {
-                        monsterAnim.SetTrigger("isLooking");
-                        currentTarget = traveller.position;
-                    }
-                }
+                targetLamp = null;
             }
-            targetLamp = null;
         }
-        else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Investigating"))
-        {
-            //Debug.Log("Investigating");
-            nav.SetDestination(currentTarget);
-            if (Vector3.Distance(transform.position, currentTarget) < 1 || Vector3.Distance(roamCenterPoint, currentTarget) <= maxRoamDistance)
-            {
-                monsterAnim.SetTrigger("nothingFound");
-                movingToLamp = false;
-                currentTarget = transform.position;
 
-                //Debug.Log("Reset");
-            }
-
-            targetLamp = null;
-        }
         else
         {
             if (!movingToLamp)
             { // not currently moving, find new place to move to
-                //Debug.Log("not moving");
-                moveToLamp();
+                nextLamp(lampQueue);
             }
             else if (Vector3.Distance(transform.position, currentTarget) < lampDistance)
-            { //reached destination, should make this variable public for testing
+            {
                 movingToLamp = false;
-
-                //Debug.Log("in the elseif");
                 nav.SetDestination(transform.position);
                 currentLamp = findCurrentLamp();
             }
@@ -307,68 +264,6 @@ public class EnemyMovementBackup : MonoBehaviour
                 bodyAnim.SetBool("isMoving", movingToLamp);
             }
         }
-
-
-
-
-    }
-
-    public void moveToLamp()
-    {
-        //Debug.Log("in the move to lamp");
-
-        if (currentLamp == null) // initial gamestate when monster is first placed
-        {
-            float distance = Mathf.Infinity;
-            foreach (GameObject lamp in lamps) //this part is also not quite working
-            {
-                if (Vector3.Distance(transform.position, lamp.transform.position) < distance) // edge case, does not take into account lit lamp
-                {
-                    distance = Vector3.Distance(transform.position, lamp.transform.position);
-                    currentLamp = lamp;
-                }
-            }
-        }
-        else //general case of finding lamps
-        {
-            lightSourceController lController = currentLamp.GetComponentInParent<lightSourceController>();
-            if (lController == null)
-            {
-                Debug.Log("Could not find lightsourcontroller");
-            }
-            GameObject[] adjacentLamps = lController.getAdjacentSources();
-            List<GameObject> possibleTargets = new List<GameObject>();
-            foreach (GameObject adjacentlamp in adjacentLamps)
-            {
-                lightSourceController adjLController = adjacentlamp.GetComponentInParent<lightSourceController>();
-                int lightType = adjLController.getCurrentLightType();
-                if (lightType == 1 || lightType == 3)
-                {
-                    possibleTargets.Add(adjacentlamp);
-                }
-            }
-            if (lController.getCurrentLightType() == 1 || lController.getCurrentLightType() == 3) //possible bug need to fix when lamps are implemented
-            {
-                currentTarget = transform.position;
-                nav.SetDestination(currentTarget);
-                targetLamp = null;
-                movingToLamp = false;
-
-                return;
-            }
-            GameObject[] targetLamps = possibleTargets.ToArray();
-            if (targetLamps.Length == 0)
-            {
-                targetLamps = adjacentLamps; //WILL NEED TO DEBUGGGGGGG
-                //Debug.Log("PLEASE PLACE BREAKPOINT HERE unsure if this will behave correctly");
-            }
-            int ran = Random.Range(0, targetLamps.Length); //unsure doesnt work with length - 1, tried the remove 1 now it works???!!!
-            targetLamp = targetLamps[ran];
-            currentTarget = targetLamp.transform.position;
-            nav.SetDestination(currentTarget);
-            movingToLamp = true;
-
-        }
     }
 
     public GameObject findCurrentLamp()
@@ -383,23 +278,33 @@ public class EnemyMovementBackup : MonoBehaviour
         return null;
     }
 
-
-
-
-
     public void monsterLampLit(GameObject litLamp)
     {
+        float distance = Mathf.Infinity;
+        GameObject newCurrentLamp = null;
+        foreach (GameObject newlamp in lamps) //this part is also not quite working
+        {
+            if (Vector3.Distance(transform.position, newlamp.transform.position) < distance) // edge case, does not take into account lit lamp
+            {
+                distance = Vector3.Distance(transform.position, newlamp.transform.position);
+                newCurrentLamp = newlamp;
+            }
+        }
         Debug.Log("MonsterLampLit");
-        GameObject lamp;
-        if (targetLamp == null)
+        if (newCurrentLamp == litLamp)
         {
-            lamp = currentLamp;
+            monsterAnim.SetTrigger("nearbyLitLamp");
+            Debug.Log("inhere1");
+            targetLamp = litLamp;
+            currentTarget = litLamp.transform.position;
+            nav.SetDestination(currentTarget);
+            movingToLamp = true;
+            if (!isBaby)
+            {
+                isDistracted = true;
+            }
         }
-        else
-        {
-            lamp = targetLamp;
-        }
-        lightSourceController lController = lamp.GetComponentInParent<lightSourceController>();
+        lightSourceController lController = newCurrentLamp.GetComponentInParent<lightSourceController>();
         if (lController == null)
         {
             Debug.Log("Could not find lightsourcontroller");
@@ -411,16 +316,20 @@ public class EnemyMovementBackup : MonoBehaviour
             {
                 if (litLamp == adjacentlamp)
                 {
+                    monsterAnim.SetTrigger("nearbyLitLamp");
+                    Debug.Log("inhere2");
                     targetLamp = litLamp;
                     currentTarget = litLamp.transform.position;
                     nav.SetDestination(currentTarget);
                     movingToLamp = true;
-
+                    if (!isBaby)
+                    {
+                        isDistracted = true;
+                    }
                 }
             }
         }
     }
-
 
     public bool startAttack()
     {
@@ -432,12 +341,11 @@ public class EnemyMovementBackup : MonoBehaviour
             bodyAnim.SetTrigger("isAttack");
             Invoke("doneAttacking", 1f);
             currentAttackCooldown = attackCooldownValue;
-
             return true;
         }
         return false;
-
     }
+
     //Must use this since the animation is so short it cause the nav mesh
     // to continue moving almost immeditely
     public void doneAttacking()
@@ -452,17 +360,54 @@ public class EnemyMovementBackup : MonoBehaviour
 
     public void setStunned()
     {
-
-
-
         bodyAnim.SetBool("isMoving", false);
-
         monsterAnim.SetTrigger("isStunned");
         isStunned = true;
     }
     public bool getIsStunned()
     {
         return isStunned;
+    }
+
+    void nextLamp(Queue<GameObject> lampQueue)
+    {
+        float lightDuration = 0f;
+        GameObject[] adjLamps = currentLamp.GetComponentInParent<lightSourceController>().getAdjacentSources();
+        if (isLit(currentLamp))
+        {
+            lightDuration = getLightDuration(currentLamp);
+            movingToLamp = false;
+        }
+        foreach (GameObject lamp in adjLamps)
+        {
+            if (isLit(lamp))
+            {
+                if (lightDuration < getLightDuration(lamp))
+                {
+                    targetLamp = lamp;
+                    lightDuration = getLightDuration(lamp);
+                    movingToLamp = true;
+                }    
+            }
+        }
+
+        if (!isLit(currentLamp) || !isLit(targetLamp))
+        {
+            targetLamp = lampQueue.Dequeue();
+            lampQueue.Enqueue(targetLamp);
+            movingToLamp = true;
+        }
+    }
+
+    bool isLit(GameObject lamp)
+    {
+        int lightType = lamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
+        return lightType == 1 || lightType == 3;
+    }
+
+    float getLightDuration(GameObject lamp)
+    {
+        return lamp.GetComponentInParent<lightSourceController>().lightDuration;
     }
 }
 
