@@ -54,7 +54,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	public GameObject travHealingBar;
 	private WorldSpaceObjectController travHealingBarController;
 
-
+	private AudioSource healingSFX;
 
 
 
@@ -104,6 +104,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		//travSlider = Instantiate(travHealthPrefab, transform.position, Quaternion.identity);
 		//travSlider.SetActive(false);
+		healingSFX = GetComponent<AudioSource>();
+		if (healingSFX == null)
+			Debug.Log("Could not find the healing sound effect");
 		isHealing = false;
 
 
@@ -122,6 +125,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 				travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
 				if (tScript.currentHealth != tScript.startingHealth)  {
 					tScript.startHealEffect();
+					healingSFX.Play();
 				}
 			}
 
@@ -147,8 +151,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 					//stop healing if we cannot heal
 					else {
-						if (tScript.isHealingEffectOn())
+						if (tScript.isHealingEffectOn()) {
 							tScript.stopHealingEffect();
+							healingSFX.Stop();
+						}
 						//Debug.Log("stopping effect");
 						//Debug.Log(tScript.currentHealth);
 						//Debug.Log(tScript.startingHealth);
@@ -169,9 +175,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 			isHealing = false;
 			if (targetTraveller != null){
 				travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
-				if (tScript.isHealingEffectOn())
+				if (tScript.isHealingEffectOn()) { 
 					tScript.stopHealingEffect();
+					healingSFX.Stop();
 				}
+			}
 			if (travHealingBar.activeInHierarchy)
 				travHealingBar.SetActive(false);
 		}
