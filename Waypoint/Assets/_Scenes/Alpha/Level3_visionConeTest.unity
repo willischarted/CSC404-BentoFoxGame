@@ -2163,7 +2163,7 @@ MonoBehaviour:
     m_Bits: 16384
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 0
   visibleTargets: []
   meshResolution: 1
   edgeResolveIterations: 4
@@ -15472,6 +15472,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4960063611792620, guid: d78168ef77c0f05418b5ef5bed6307d5, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4220516703764978, guid: d78168ef77c0f05418b5ef5bed6307d5, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78168ef77c0f05418b5ef5bed6307d5, type: 2}
   m_IsPrefabAsset: 0
@@ -15480,6 +15488,35 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4787364094857020, guid: d78168ef77c0f05418b5ef5bed6307d5,
     type: 2}
   m_PrefabInternal: {fileID: 1874496196}
+--- !u!1 &1874496198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1801262752401382, guid: d78168ef77c0f05418b5ef5bed6307d5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1874496196}
+--- !u!114 &1874496199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1874496198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a7f9d2691d58348be30643b6f31287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 3
+  viewAngle: 85
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  visibleTargets: []
+  meshResolution: 1
+  edgeResolveIterations: 4
+  edgeDstThreshold: 0.5
+  viewMeshFilter: {fileID: 962390326}
 --- !u!1 &1884482929
 GameObject:
   m_ObjectHideFlags: 0
@@ -16426,35 +16463,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2047895072}
   m_CullTransparentMesh: 0
---- !u!1 &2049623093 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1980262895669754, guid: d78168ef77c0f05418b5ef5bed6307d5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1874496196}
---- !u!114 &2049623096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2049623093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6a7f9d2691d58348be30643b6f31287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 3
-  viewAngle: 85
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 16384
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 4096
-  visibleTargets: []
-  meshResolution: 1
-  edgeResolveIterations: 4
-  edgeDstThreshold: 0.5
-  viewMeshFilter: {fileID: 962390326}
 --- !u!1 &2052462414
 GameObject:
   m_ObjectHideFlags: 0
