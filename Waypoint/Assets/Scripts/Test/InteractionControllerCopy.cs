@@ -68,6 +68,10 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	private bool isHealing;
 
+	
+    private float timeToHeal;
+    private float currentHealTime;
+
 	// Use this for initialization
 	void Start () {
 		//impulseCooldown = 5.0f;
@@ -109,6 +113,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Debug.Log("Could not find the healing sound effect");
 		isHealing = false;
 
+		timeToHeal = 1f;
+        currentHealTime = 0f;
+
 
 		
 	}
@@ -136,16 +143,21 @@ public class InteractionControllerCopy : MonoBehaviour {
 			if (heldDuration > 0.5f) { //&& !setHealing) {
 				//start healing
 				//setHealing = true;
+			
 				if (targetTraveller != null && targetTraveller.tag == "Traveller" ) {
 					travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
+					currentHealTime += Time.deltaTime;
 					if (canHeal){
 						
-						if (pController.getResource() > 0) {
+						if (pController.getResource() > 0 &&  currentHealTime >= timeToHeal) {
 							//tScript.increaseCape();
 							tScript.GetHeal(1);
 
 							pController.addResource(-1f);
+
+							currentHealTime = 0f;
 						}
+
 						return;
 					}
 
