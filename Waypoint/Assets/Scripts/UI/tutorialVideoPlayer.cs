@@ -78,13 +78,13 @@ using UnityEngine.UI;
 	// Update is called once per frame
 	void Update () {
 		if (tutorialStart) {
-			if (Input.GetButtonDown("X") || Input.GetMouseButton(0)) {
+			if (Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)) {
 				nextTutorial.SetActive(true);
 				this.gameObject.SetActive(false);
 				Time.timeScale = 1f;
 
 			}
-			if (Input.GetButtonDown("Circle") || Input.GetMouseButton(1)) {
+			if (Input.GetButtonDown("Circle") || Input.GetMouseButtonDown(1)) {
 				pScript.setInTutorial(false);
 				iScript.setInTutorial(false);
 				this.gameObject.SetActive(false);
@@ -103,7 +103,7 @@ using UnityEngine.UI;
 				vPlayer.Stop();
 			}	
 
-			if (Input.GetButtonDown("X") || Input.GetMouseButton(0) ) {
+			if (Input.GetButtonDown("X") || Input.GetMouseButtonDown(0) ) {
 				//x out of th
 			
 		
