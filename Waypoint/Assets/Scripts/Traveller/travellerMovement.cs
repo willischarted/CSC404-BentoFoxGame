@@ -26,7 +26,7 @@ public class travellerMovement : MonoBehaviour
     travellerHealth travellerHealth;
     GameObject[] lamps;
     List<GameObject> history = new List<GameObject>();
-    bool closeToExit;
+    public bool closeToExit;
     public bool beatLevel = false;
 
 
