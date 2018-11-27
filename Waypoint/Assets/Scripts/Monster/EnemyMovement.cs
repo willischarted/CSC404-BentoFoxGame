@@ -416,7 +416,7 @@ public class EnemyMovement : MonoBehaviour
       //  nav.SetDestination(transform.position);
        // nav.velocity = Vector3.zero;
        // nav.isStopped = true;
-
+        bodyAnim.SetTrigger("isStun");
 
         bodyAnim.SetBool("isMoving", false);
         monsterAnim.SetTrigger("isStunned");
