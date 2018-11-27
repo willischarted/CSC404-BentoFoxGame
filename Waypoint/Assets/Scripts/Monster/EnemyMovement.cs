@@ -429,6 +429,9 @@ public class EnemyMovement : MonoBehaviour
 
     public void setStunned()
     {
+        nav.SetDestination(transform.position);
+        nav.velocity = Vector3.zero;
+        nav.isStopped = true;
 
         if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
             attackInterrupt = true;
@@ -441,6 +444,8 @@ public class EnemyMovement : MonoBehaviour
         bodyAnim.SetBool("isMoving", false);
         monsterAnim.SetTrigger("isStunned");
         isStunned = true;
+
+        
     }
     public bool getIsStunned()
     {
