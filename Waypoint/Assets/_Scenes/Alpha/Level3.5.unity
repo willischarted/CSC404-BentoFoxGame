@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571334, b: 0.3069219, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8433,11 +8433,6 @@ Prefab:
     m_Modifications:
     - target: {fileID: 224756539075326084, guid: e201524255b3d3641bc6928a1be5b1b2,
         type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 224756539075326084, guid: e201524255b3d3641bc6928a1be5b1b2,
-        type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -8528,19 +8523,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114787456317045356, guid: e201524255b3d3641bc6928a1be5b1b2,
         type: 2}
-      propertyPath: levelUp
-      value: 
-      objectReference: {fileID: 198676122}
-    - target: {fileID: 114787456317045356, guid: e201524255b3d3641bc6928a1be5b1b2,
-        type: 2}
       propertyPath: fadeScreen
       value: 
       objectReference: {fileID: 1267014857}
-    - target: {fileID: 114787456317045356, guid: e201524255b3d3641bc6928a1be5b1b2,
-        type: 2}
-      propertyPath: nextLevelName
-      value: Level4
-      objectReference: {fileID: 0}
     - target: {fileID: 114787456317045356, guid: e201524255b3d3641bc6928a1be5b1b2,
         type: 2}
       propertyPath: canvas
@@ -9189,6 +9174,11 @@ Prefab:
       propertyPath: travellerTheme
       value: 
       objectReference: {fileID: 1851022968}
+    - target: {fileID: 224038663111908612, guid: 463ec4441f575de4e910171bfcc78008,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.42
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 463ec4441f575de4e910171bfcc78008, type: 2}
   m_IsPrefabAsset: 0
@@ -13044,6 +13034,11 @@ Prefab:
       propertyPath: travellerThemeLowPassFilter
       value: 
       objectReference: {fileID: 1851022967}
+    - target: {fileID: 224753250946861880, guid: f053d365198a5c5419e79fdcf985bb86,
+        type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.42
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f053d365198a5c5419e79fdcf985bb86, type: 2}
   m_IsPrefabAsset: 0
