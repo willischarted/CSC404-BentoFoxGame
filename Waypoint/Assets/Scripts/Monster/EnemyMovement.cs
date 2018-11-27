@@ -37,6 +37,8 @@ public class EnemyMovement : MonoBehaviour
     public GameObject targetLamp;
     public AudioSource roamingSound;
     public AudioSource attackSound;
+    private travellerHealth tHealth;
+    private travellerMovement tMovement;
 
     public GameObject popUp;
 
@@ -57,6 +59,8 @@ public class EnemyMovement : MonoBehaviour
         roamingSound.enabled = false;
         moving = false;
         traveller = GameObject.FindGameObjectsWithTag("Traveller")[0].transform;
+        tHealth = traveller.GetComponent<travellerHealth>();
+        tMovement = traveller.GetComponent<travellerMovement>();
         nav = GetComponent<NavMeshAgent>();
         monsterAnim = GetComponent<Animator>();
         col = GetComponent<SphereCollider>();
@@ -86,7 +90,7 @@ public class EnemyMovement : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned")||isDistracted)
+        if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned") || isDistracted)
         {
             return;
         }
@@ -158,7 +162,7 @@ public class EnemyMovement : MonoBehaviour
                 }
             }
         }
-        if (distanceFromTraveler < 3)// && distanceFromTraveler > 1)
+        if (distanceFromTraveler < 3 && !tHealth.isDead && !tMovement.closeToExit)// && distanceFromTraveler > 1)
         {
             if (soundTimer < 2)
             {
@@ -196,7 +200,7 @@ public class EnemyMovement : MonoBehaviour
             //nav.SetDestination(transform.position);
             nav.velocity = Vector3.zero;
             nav.isStopped = true;
-           
+
             //Monster sounds
             roamingSound.enabled = false;
             attackSound.enabled = false;
@@ -254,8 +258,8 @@ public class EnemyMovement : MonoBehaviour
             {
                 movingToLamp = false;
                 isDistracted = false;
-               // nav.SetDestination(transform.position);
-               nav.velocity = Vector3.zero;
+                // nav.SetDestination(transform.position);
+                nav.velocity = Vector3.zero;
                 nav.isStopped = true;
                 currentLamp = findCurrentLamp();
             }
@@ -307,7 +311,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
         return newCurrentLamp;
-        
+
     }
 
     public void monsterLampLit(GameObject litLamp)
@@ -436,10 +440,11 @@ public class EnemyMovement : MonoBehaviour
             lampQueue.Enqueue(targetLamp);
             movingToLamp = true;
         }
-        if (currentLamp != targetLamp) {
-        currentTarget = targetLamp.transform.position;
-        nav.SetDestination(currentTarget);
-        nav.isStopped = false;
+        if (currentLamp != targetLamp)
+        {
+            currentTarget = targetLamp.transform.position;
+            nav.SetDestination(currentTarget);
+            nav.isStopped = false;
         }
     }
 
@@ -454,4 +459,3 @@ public class EnemyMovement : MonoBehaviour
         return lamp.GetComponentInParent<lightSourceController>().lightDuration;
     }
 }
-
