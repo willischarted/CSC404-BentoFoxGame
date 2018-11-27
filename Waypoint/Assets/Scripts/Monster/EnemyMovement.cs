@@ -83,7 +83,7 @@ public class EnemyMovement : MonoBehaviour
         isStunned = false;
         isDistracted = false;
         currentLamp = findCurrentLamp();
-        Debug.Log(currentLamp);
+        //Debug.Log(currentLamp);
         targetLamp = findCurrentLamp();
     }
 
@@ -329,11 +329,11 @@ public class EnemyMovement : MonoBehaviour
                 newCurrentLamp = newlamp;
             }
         }
-        Debug.Log("MonsterLampLit");
+       // Debug.Log("MonsterLampLit");
         if (newCurrentLamp == litLamp)
         {
             monsterAnim.SetTrigger("nearbyLitLamp");
-            Debug.Log("inhere1");
+            //Debug.Log("inhere1");
             targetLamp = litLamp;
             currentTarget = litLamp.transform.position;
             nav.SetDestination(currentTarget);
@@ -357,7 +357,7 @@ public class EnemyMovement : MonoBehaviour
                 if (litLamp == adjacentlamp)
                 {
                     monsterAnim.SetTrigger("nearbyLitLamp");
-                    Debug.Log("inhere2");
+                   // Debug.Log("inhere2");
                     targetLamp = litLamp;
                     currentTarget = litLamp.transform.position;
                     nav.SetDestination(currentTarget);
