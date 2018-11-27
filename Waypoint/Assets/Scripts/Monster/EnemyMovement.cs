@@ -409,7 +409,16 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!attackInterrupt) {
         GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
+        if (trav == null)
+            Debug.Log("Could not find trav");
         travellerHealth travHealth = trav.GetComponent<travellerHealth>();
+        if (travHealth == null)
+            Debug.Log("Could not find health sciprt");
+        Animator travAnim = travHealth.getTravellerAnimator();
+        if (travAnim == null)
+            Debug.Log("Could not find the traveller animator");
+        
+        travAnim.SetTrigger("isAttacked");
         travHealth.TakeBasicDamage(10);
         attackSound.enabled = false;
         if (nav.isStopped)

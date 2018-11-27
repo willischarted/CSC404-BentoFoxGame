@@ -190,4 +190,8 @@ public class travellerHealth : MonoBehaviour {
     public bool isHealingEffectOn() {
         return healingParticleSystem.isPlaying;
     }
+
+    public Animator getTravellerAnimator() {
+        return anim;
+    }
 }
