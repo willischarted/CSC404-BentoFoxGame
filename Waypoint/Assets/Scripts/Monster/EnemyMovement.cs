@@ -194,6 +194,7 @@ public class EnemyMovement : MonoBehaviour
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
             //nav.SetDestination(transform.position);
+            nav.velocity = Vector3.zero;
             nav.isStopped = true;
            
             //Monster sounds
@@ -254,6 +255,7 @@ public class EnemyMovement : MonoBehaviour
                 movingToLamp = false;
                 isDistracted = false;
                // nav.SetDestination(transform.position);
+               nav.velocity = Vector3.zero;
                 nav.isStopped = true;
                 currentLamp = findCurrentLamp();
             }
@@ -372,6 +374,7 @@ public class EnemyMovement : MonoBehaviour
         // or you will get slide effect                             //optimize -> change  to local var 
         if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         { //only attack on a cooldown 
+            nav.velocity = Vector3.zero;
             nav.isStopped = true;
             bodyAnim.SetTrigger("isAttack");
             Invoke("doneAttacking", 1f);
@@ -395,6 +398,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void setStunned()
     {
+        nav.velocity = Vector3.zero;
         nav.isStopped = true;
         bodyAnim.SetBool("isMoving", false);
         monsterAnim.SetTrigger("isStunned");
