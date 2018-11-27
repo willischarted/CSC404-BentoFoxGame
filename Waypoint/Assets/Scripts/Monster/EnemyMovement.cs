@@ -278,6 +278,7 @@ public class EnemyMovement : MonoBehaviour
                                 targetLamp = lamp;
                                 lightDuration = getLightDuration(lamp);
                                 movingToLamp = true;
+                                bodyAnim.SetBool("isMoving", true);
                             }
                         }
                     }
@@ -287,7 +288,8 @@ public class EnemyMovement : MonoBehaviour
                 nav.isStopped = false;
             }
         }
-
+            
+        /*
         if (!isStunned)
         {
             if (movingToLamp != bodyAnim.GetBool("isMoving"))
@@ -296,6 +298,7 @@ public class EnemyMovement : MonoBehaviour
                 bodyAnim.SetBool("isMoving", movingToLamp);
             }
         }
+        */
     }
 
     public GameObject findCurrentLamp()
@@ -339,6 +342,7 @@ public class EnemyMovement : MonoBehaviour
             nav.SetDestination(currentTarget);
             nav.isStopped = false;
             movingToLamp = true;
+            bodyAnim.SetBool("isMoving", true);
             if (!isBaby)
             {
                 isDistracted = true;
@@ -363,6 +367,7 @@ public class EnemyMovement : MonoBehaviour
                     nav.SetDestination(currentTarget);
                     nav.isStopped = false;
                     movingToLamp = true;
+                    bodyAnim.SetBool("isMoving", true);
                     if (!isBaby)
                     {
                         isDistracted = true;
@@ -435,6 +440,7 @@ public class EnemyMovement : MonoBehaviour
                     targetLamp = lamp;
                     lightDuration = getLightDuration(lamp);
                     movingToLamp = true;
+                    bodyAnim.SetBool("isMoving", true);
                 }
             }
         }
@@ -443,6 +449,7 @@ public class EnemyMovement : MonoBehaviour
             targetLamp = lampQueue.Dequeue();
             lampQueue.Enqueue(targetLamp);
             movingToLamp = true;
+            bodyAnim.SetBool("isMoving", true);
         }
         if (currentLamp != targetLamp)
         {
