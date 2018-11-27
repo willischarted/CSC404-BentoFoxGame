@@ -31,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
     private bool movingToLamp;
     public Vector3 roamCenterPoint;
     public float maxRoamDistance;
-    public float lampDistance = 5f;
+    public float lampDistance = 1.3f;
     GameObject currentLamp;
     GameObject[] lamps;
     public GameObject targetLamp;
@@ -193,7 +193,9 @@ public class EnemyMovement : MonoBehaviour
 
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
-            nav.SetDestination(transform.position);
+            //nav.SetDestination(transform.position);
+            nav.isStopped = true;
+           
             //Monster sounds
             roamingSound.enabled = false;
             attackSound.enabled = false;
@@ -216,6 +218,7 @@ public class EnemyMovement : MonoBehaviour
         {
             currentTarget = traveller.position;
             nav.SetDestination(currentTarget);
+            nav.isStopped = false;
             if (Vector3.Distance(roamCenterPoint, traveller.position) >= maxRoamDistance)
             {
                 monsterAnim.SetTrigger("travellerLost");
@@ -250,7 +253,8 @@ public class EnemyMovement : MonoBehaviour
             {
                 movingToLamp = false;
                 isDistracted = false;
-                nav.SetDestination(transform.position);
+               // nav.SetDestination(transform.position);
+                nav.isStopped = true;
                 currentLamp = findCurrentLamp();
             }
             else
@@ -274,6 +278,7 @@ public class EnemyMovement : MonoBehaviour
                 }
                 currentTarget = targetLamp.transform.position;
                 nav.SetDestination(currentTarget);
+                nav.isStopped = false;
             }
         }
 
@@ -305,6 +310,9 @@ public class EnemyMovement : MonoBehaviour
 
     public void monsterLampLit(GameObject litLamp)
     {
+
+        if (isStunned)
+            return;
         float distance = Mathf.Infinity;
         GameObject newCurrentLamp = null;
         foreach (GameObject newlamp in lamps) //this part is also not quite working
@@ -323,6 +331,7 @@ public class EnemyMovement : MonoBehaviour
             targetLamp = litLamp;
             currentTarget = litLamp.transform.position;
             nav.SetDestination(currentTarget);
+            nav.isStopped = false;
             movingToLamp = true;
             if (!isBaby)
             {
@@ -346,6 +355,7 @@ public class EnemyMovement : MonoBehaviour
                     targetLamp = litLamp;
                     currentTarget = litLamp.transform.position;
                     nav.SetDestination(currentTarget);
+                    nav.isStopped = false;
                     movingToLamp = true;
                     if (!isBaby)
                     {
@@ -385,6 +395,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void setStunned()
     {
+        nav.isStopped = true;
         bodyAnim.SetBool("isMoving", false);
         monsterAnim.SetTrigger("isStunned");
         isStunned = true;
@@ -421,8 +432,11 @@ public class EnemyMovement : MonoBehaviour
             lampQueue.Enqueue(targetLamp);
             movingToLamp = true;
         }
+        if (currentLamp != targetLamp) {
         currentTarget = targetLamp.transform.position;
         nav.SetDestination(currentTarget);
+        nav.isStopped = false;
+        }
     }
 
     bool isLit(GameObject lamp)
