@@ -56,6 +56,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	private AudioSource healingSFX;
 
+	public Animator anim;
+
 
 
 	private bool healUnlocked;
@@ -150,6 +152,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 					if (canHeal){
 						
 						if (pController.getResource() > 0 &&  currentHealTime >= timeToHeal) {
+							anim.SetBool("isHealing", true);
 							//tScript.increaseCape();
 							tScript.GetHeal(1);
 
@@ -190,10 +193,13 @@ public class InteractionControllerCopy : MonoBehaviour {
 				if (tScript.isHealingEffectOn()) { 
 					tScript.stopHealingEffect();
 					healingSFX.Stop();
+					
 				}
 			}
 			if (travHealingBar.activeInHierarchy)
 				travHealingBar.SetActive(false);
+			// moved outside of off claue above (if you move away from trav it'll loop infintely)
+			anim.SetBool("isHealing", false);
 		}
 
 		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square") ) {
