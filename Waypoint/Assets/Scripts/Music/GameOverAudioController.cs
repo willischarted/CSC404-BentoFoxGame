@@ -5,9 +5,11 @@ using UnityEngine;
 public class GameOverAudioController : MonoBehaviour {
     public GameObject gameOver;
     public AudioSource gameOverDroneLoop;
+    public AudioSource gameOverTopLoop;
     public AudioSource gameOverZinger;
     public AudioSource darkTheme;
     public AudioSource travellerTheme;
+    
     bool clipsPlayed;
 	// Use this for initialization
 	void Start () {
@@ -18,8 +20,7 @@ public class GameOverAudioController : MonoBehaviour {
 	void Update () {
 		if (gameOver.activeSelf == true && clipsPlayed == false)
         {
-            Debug.Log("in here trying to play gameoveraudio");
-
+            //AudioListener.pause = true;
             // darkTheme.Stop();
             // travellerTheme.Stop();
 
@@ -27,7 +28,8 @@ public class GameOverAudioController : MonoBehaviour {
             GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
             GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
             gameOverZinger.PlayOneShot(gameOverZinger.clip);
-            gameOverDroneLoop.PlayDelayed(0.5f);  
+            gameOverDroneLoop.PlayDelayed(0.5f);
+            gameOverTopLoop.PlayDelayed(0.5f);
             clipsPlayed = true;
         }
 	}
