@@ -19,16 +19,41 @@ public class fadeTiming : MonoBehaviour {
 
     public void whenFadeStart()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
+        if (!(levelUp == null))
+        {
             levelUp.SetActive(false);
+        }
     }
 
     public void whenFadeComplete()
     {
-        if (SceneManager.GetActiveScene().buildIndex != 0) {
+        if (!(levelUp == null))
+        {
             levelUp.SetActive(false);
             Time.timeScale = 1f;
             SceneManager.LoadScene(nextLevelName);
+        }
+    }
+
+    public void whenFadeCompleteRestart()
+    {
+        if (!(levelUp == null))
+        {
+            levelUp.SetActive(false);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    public void whenFadeCompleteStartMenu()
+    {
+        if (!(levelUp == null))
+        {
+            levelUp.SetActive(false);
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Start Menu");
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
         }
     }
 }

@@ -20,6 +20,9 @@ public class EndLevel : MonoBehaviour
     public Transform fadeScreen;
     private Animator fade;
     public GameObject canvas;
+    public AudioSource zinger;
+    public AudioSource buttonSound;
+    private float timer;
     //private Transform selector;
 
 
@@ -27,15 +30,22 @@ public class EndLevel : MonoBehaviour
     {
         levelUp.SetActive(false);
         optionNum = 0;
+        timer = 0f;
         restartBtn = levelUp.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>();
         startMenuBtn = levelUp.transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
         nextLevelBtn = levelUp.transform.GetChild(0).transform.GetChild(3).GetComponent<Button>();
         fade = fadeScreen.GetChild(0).GetComponent<Animator>();
         fade.updateMode = AnimatorUpdateMode.UnscaledTime;
+        zinger = transform.Find("Zinger").transform.GetComponent<AudioSource>();
+        buttonSound = transform.Find("ButtonSound").transform.GetComponent<AudioSource>();
     }
 
     private void Update()
     {
+        if(zinger.volume > 0.3)
+        {
+            zinger.volume -= 0.003f;
+        }
         float yValue = Input.GetAxis("DPadY");
         if (yValue != 0f)
         {
@@ -129,78 +139,43 @@ public class EndLevel : MonoBehaviour
 
     public void levelComplete()
     {
-        Time.timeScale = 0f;
         levelUp.SetActive(true);
+        zinger.enabled = true;
+        if (!zinger.isPlaying)
+        {
+            zinger.PlayOneShot(zinger.clip);
+        }
+        Time.timeScale = 0f;
     }
 
     public void restartLevel()
     {
-        Time.timeScale = 1f;
-        levelUp.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
+        buttonSound.enabled = true;
+        buttonSound.PlayOneShot(buttonSound.clip);
+        /*  Time.timeScale = 1f;
+          levelUp.SetActive(false);
+          SceneManager.LoadScene(SceneManager.GetActiveScene().name);*/
+        canvas.SetActive(false);
+        fade.SetTrigger("fadeOutRestart");
     }
 
     public void startMenu()
     {
+        buttonSound.enabled = true;
+        buttonSound.PlayOneShot(buttonSound.clip);
         Time.timeScale = 1f;
         levelUp.SetActive(false);
         SceneManager.LoadScene("Start Menu");
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
+        /*canvas.SetActive(false);
+        fade.SetTrigger("fadeOutStartMenu");*/
     }
+
     public void nextLevel()
     {
-        /*     if (GameController.level == 4)
-             {
-
-                 GameController.level = 1;
-                 Time.timeScale = 1f;
-                 levelUp.SetActive(false);
-                 SceneManager.LoadScene("Start Menu");
-                 GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
-                 GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
-             }
-             else
-             {
-                 string currScene = SceneManager.GetActiveScene().name;
-                 Debug.Log("currscene: " + currScene);
-                 if (currScene == "Level3.5")
-                 {
-                     GameController.level = 4;
-                     Time.timeScale = 1f;
-                     levelUp.SetActive(false);
-                     SceneManager.LoadScene("Level" + GameController.level);
-                 }
-                 else if (currScene == "Level3")
-                 {
-                     Time.timeScale = 1f;
-                     levelUp.SetActive(false);
-                     SceneManager.LoadScene("Level3.5");
-                 }
-                 if (currScene == "Level2.5")
-                 {
-                     Time.timeScale = 1f;
-                     levelUp.SetActive(false);
-                     GameController.level = 3;
-                     SceneManager.LoadScene("Level" + GameController.level);
-                 }
-                 else if (currScene == "Level2")
-                 {
-                     Time.timeScale = 1f;
-                     levelUp.SetActive(false);
-                     SceneManager.LoadScene("Level2.5");
-                 }
-                 else
-                 {
-                     GameController.level++;
-                     Debug.Log(GameController.level);
-                     Time.timeScale = 1f;
-                     levelUp.SetActive(false);
-                     //SceneManager.LoadScene("Level" + GameController.level);
-                     SceneManager.LoadScene(nextLevelName);
-                 }
-             }*/
+        buttonSound.enabled = true;
+        buttonSound.PlayOneShot(buttonSound.clip);
         canvas.SetActive(false);
         fade.SetTrigger("fadeOut");
     }
