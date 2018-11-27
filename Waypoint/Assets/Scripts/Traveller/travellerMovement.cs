@@ -118,9 +118,9 @@ public class travellerMovement : MonoBehaviour
 
         
 
-      // if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
+       if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance == 0)
        // if (nav.pathStatus == NavMeshPathStatus.PathComplete)
-       if (targetLight != null && Vector3.Distance(transform.position, targetLight.transform.position) < lampDistance && anim.GetBool("isMoving"))
+      // if (targetLight != null && Vector3.Distance(transform.position, targetLight.transform.position) < lampDistance && anim.GetBool("isMoving"))
         {
             anim.SetBool("isMoving", false);
         }

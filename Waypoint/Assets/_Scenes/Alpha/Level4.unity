@@ -10309,6 +10309,11 @@ Prefab:
       propertyPath: travHealingBar
       value: 
       objectReference: {fileID: 1724683322}
+    - target: {fileID: 114584232024874280, guid: 7951c7f06bccf4622b7f6c79a4964954,
+        type: 2}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 678575533}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7951c7f06bccf4622b7f6c79a4964954, type: 2}
   m_IsPrefabAsset: 0
@@ -10412,6 +10417,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &678575533 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95967639250045990, guid: 7951c7f06bccf4622b7f6c79a4964954,
+    type: 2}
+  m_PrefabInternal: {fileID: 678575530}
 --- !u!1 &687189882
 GameObject:
   m_ObjectHideFlags: 0
