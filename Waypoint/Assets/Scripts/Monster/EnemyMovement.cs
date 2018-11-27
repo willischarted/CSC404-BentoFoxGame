@@ -51,6 +51,8 @@ public class EnemyMovement : MonoBehaviour
     //Need local variable to avoid race conditions with update frame
     private bool isStunned;
 
+    private bool attackInterrupt;
+
     private void Awake()
     {
         roamingSound = transform.Find("Audio Source").transform.GetComponent<AudioSource>();
@@ -85,6 +87,8 @@ public class EnemyMovement : MonoBehaviour
         currentLamp = findCurrentLamp();
         //Debug.Log(currentLamp);
         targetLamp = findCurrentLamp();
+
+        attackInterrupt = false;
     }
 
 
@@ -403,16 +407,23 @@ public class EnemyMovement : MonoBehaviour
     // to continue moving almost immeditely
     public void doneAttacking()
     {
+        if (!attackInterrupt) {
         GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
         travellerHealth travHealth = trav.GetComponent<travellerHealth>();
         travHealth.TakeBasicDamage(10);
         attackSound.enabled = false;
         if (nav.isStopped)
             nav.isStopped = false;
+        }
+        attackInterrupt = false;
     }
 
     public void setStunned()
     {
+
+        if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
+            attackInterrupt = true;
+        }
       //  nav.SetDestination(transform.position);
        // nav.velocity = Vector3.zero;
        // nav.isStopped = true;
