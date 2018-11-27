@@ -118,6 +118,8 @@ public class EnemyMovement : MonoBehaviour
         if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
         {   //for now do nothing while animation completes
             //channge nothing, it can go back to doing what it does after
+            var rotation = Quaternion.LookRotation(traveller.position);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10f);
             return;
         }
         /* 
@@ -383,9 +385,12 @@ public class EnemyMovement : MonoBehaviour
         // or you will get slide effect                             //optimize -> change  to local var 
         if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         { //only attack on a cooldown 
-         nav.SetDestination(transform.position);
+            nav.SetDestination(transform.position);
             nav.velocity = Vector3.zero;
             nav.isStopped = true;
+
+           
+
             bodyAnim.SetTrigger("isAttack");
             Invoke("doneAttacking", 1f);
             currentAttackCooldown = attackCooldownValue;
