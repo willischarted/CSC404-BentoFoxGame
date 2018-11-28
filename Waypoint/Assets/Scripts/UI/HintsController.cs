@@ -25,7 +25,7 @@ public class HintsController : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown("TouchPad") || Input.GetKeyDown(KeyCode.T)) {
 
-			/* 
+			
 			setHintsBox = !setHintsBox;
 			hintsBox.SetActive(setHintsBox);
 
@@ -39,7 +39,7 @@ public class HintsController : MonoBehaviour {
 			}
 
 
-			*/
+		
 			
 
 		}

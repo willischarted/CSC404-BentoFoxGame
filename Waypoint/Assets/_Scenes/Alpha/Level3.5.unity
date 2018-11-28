@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.011217429, g: 0.054846276, b: 0.0685861, a: 1}
+  m_IndirectSpecularColor: {r: 0.011289003, g: 0.054922618, b: 0.0687224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10257,7 +10257,7 @@ Prefab:
     - target: {fileID: 224494536340474356, guid: f365b67e3f4e94cdea43893a05a42ab8,
         type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 224494536340474356, guid: f365b67e3f4e94cdea43893a05a42ab8,
         type: 2}
@@ -58801,9 +58801,30 @@ Prefab:
     - target: {fileID: 114979655993789570, guid: 1431ee1dd72b34f14ba99930368fa431,
         type: 2}
       propertyPath: m_Text
-      value: "- When near a monster, \nyou can stun it, disabling \nit for several
-        seconds.\n(Costs 20 points)\n\n- Stunning a roaming \nmonster can stop it
-        from\nfollowing the Traveller."
+      value: "- When near a monster, \nyou can stun it, \nstopping it for several
+        \nseconds. (Costs 20 \npoints)\n\n- Stunning a roaming \nmonster can stop
+        it \nfrom following the \nTraveller and even \nattacks."
+      objectReference: {fileID: 0}
+    - target: {fileID: 114771179953907070, guid: 1431ee1dd72b34f14ba99930368fa431,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ec1b2f9be4b394b3182ae1733c683f5f,
+        type: 3}
+    - target: {fileID: 224891211748171322, guid: 1431ee1dd72b34f14ba99930368fa431,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114979655993789570, guid: 1431ee1dd72b34f14ba99930368fa431,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ec1b2f9be4b394b3182ae1733c683f5f,
+        type: 3}
+    - target: {fileID: 1244568594037228, guid: 1431ee1dd72b34f14ba99930368fa431, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1431ee1dd72b34f14ba99930368fa431, type: 2}
