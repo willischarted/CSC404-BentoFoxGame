@@ -34,6 +34,12 @@ public class StationaryController : MonoBehaviour {
         if (flag == 1){
             //childMonster1.SetActive(false);
             Destroy(childMonster1);
+            EnemyMovement eScript = childMonster1.GetComponent<EnemyMovement>();
+            if (eScript == null)
+                Debug.Log("could not find escript");
+            if (eScript.popUp != null)
+                Destroy(eScript.popUp);
+
             gameObject.SetActive(false);
         }
         soundTimer += Time.deltaTime;        
