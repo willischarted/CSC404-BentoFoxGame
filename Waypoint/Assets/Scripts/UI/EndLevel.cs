@@ -23,6 +23,7 @@ public class EndLevel : MonoBehaviour
     public AudioSource zinger;
     public AudioSource buttonSound;
     private float timer;
+    private bool zingerPlayed;
     //private Transform selector;
 
 
@@ -38,6 +39,7 @@ public class EndLevel : MonoBehaviour
         fade.updateMode = AnimatorUpdateMode.UnscaledTime;
         zinger = transform.Find("Zinger").transform.GetComponent<AudioSource>();
         buttonSound = transform.Find("ButtonSound").transform.GetComponent<AudioSource>();
+        zingerPlayed = false;
     }
 
     private void Update()
@@ -141,9 +143,10 @@ public class EndLevel : MonoBehaviour
     {
         levelUp.SetActive(true);
         zinger.enabled = true;
-        if (!zinger.isPlaying)
+        if (!zinger.isPlaying && !zingerPlayed)
         {
-            zinger.PlayOneShot(zinger.clip);
+            zingerPlayed = true;
+            zinger.PlayOneShot(zinger.clip);            
         }
         Time.timeScale = 0f;
     }
