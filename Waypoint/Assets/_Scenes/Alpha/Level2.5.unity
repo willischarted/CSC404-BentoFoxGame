@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.011217429, g: 0.054846276, b: 0.0685861, a: 1}
+  m_IndirectSpecularColor: {r: 0.011289003, g: 0.054922618, b: 0.0687224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7573,28 +7573,42 @@ Prefab:
     - target: {fileID: 114979655993789570, guid: 1431ee1dd72b34f14ba99930368fa431,
         type: 2}
       propertyPath: m_Text
-      value: '- Press Triangle to toggle
-
-        between light types.
-
-
-        - The monster light will
-
-        only attract monsters but
-
-        costs more points of light
-
-        magic.
-
-
-        - Monsters will stay at a lit
-
-        light if ther are no others
-
-        around it.
-
-'
+      value: "- Press Triangle to \nswitch to the monster \nlight. This only attracts
+        \nmonsters but costs \nmore points of light\nmagic.\n\n- Use this to lead
+        \nmonsters away or to \ndistract them.\n"
       objectReference: {fileID: 0}
+    - target: {fileID: 224891211748171322, guid: 1431ee1dd72b34f14ba99930368fa431,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114771179953907070, guid: 1431ee1dd72b34f14ba99930368fa431,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ec1b2f9be4b394b3182ae1733c683f5f,
+        type: 3}
+    - target: {fileID: 114979655993789570, guid: 1431ee1dd72b34f14ba99930368fa431,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ec1b2f9be4b394b3182ae1733c683f5f,
+        type: 3}
+    - target: {fileID: 1394954392372768, guid: 1431ee1dd72b34f14ba99930368fa431, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224870366985204320, guid: 1431ee1dd72b34f14ba99930368fa431,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114855270401733426, guid: 1431ee1dd72b34f14ba99930368fa431,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: ec1b2f9be4b394b3182ae1733c683f5f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1431ee1dd72b34f14ba99930368fa431, type: 2}
   m_IsPrefabAsset: 0
