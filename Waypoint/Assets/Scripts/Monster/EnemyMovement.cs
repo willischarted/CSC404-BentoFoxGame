@@ -459,7 +459,7 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log("Could not find the traveller animator");
         
         travAnim.SetTrigger("isAttacked");
-        travHealth.TakeBasicDamage(10);
+        travHealth.TakeBasicDamage(20);
         attackSound.enabled = false;
         if (nav.isStopped)
             nav.isStopped = false;
