@@ -323,7 +323,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
         Debug.Log(isChaseTrav);
-        if ((Vector3.Distance(transform.position, currentTarget) < lampDistance) && !isChaseTrav)
+        if (((Vector3.Distance(transform.position, currentTarget) < lampDistance) && !isChaseTrav) ||isStunned)
         {
            
             bodyAnim.SetBool("isMoving", false);
@@ -468,6 +468,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void setStunned()
     {
+        isChaseTrav = false;
         nav.SetDestination(transform.position);
         nav.velocity = Vector3.zero;
         nav.isStopped = true;
