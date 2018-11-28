@@ -105,9 +105,14 @@ public class EnemyMovement : MonoBehaviour
             {
                 direction = other.transform.position - transform.position;
                 float angle = Vector3.Angle(direction, transform.forward);
+                //Debug.Log(angle);
                 if (angle < fieldOfViewAngle * 0.5f)
                 {
                     monsterAnim.SetTrigger("isAlerted");
+                }
+                else
+                {
+                    monsterAnim.ResetTrigger("isAlerted");
                 }
             }
         }
@@ -124,6 +129,7 @@ public class EnemyMovement : MonoBehaviour
             //channge nothing, it can go back to doing what it does after
             var rotation = Quaternion.LookRotation(traveller.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10f);
+            nav.SetDestination(transform.position);
             return;
         }
         /* 
@@ -238,6 +244,10 @@ public class EnemyMovement : MonoBehaviour
                 attackSound.enabled = false;
                 movingToLamp = false;
             }
+            if (distanceFromTraveler < 1)
+            {
+                nav.isStopped = true;
+            }
         }
 
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
@@ -251,7 +261,12 @@ public class EnemyMovement : MonoBehaviour
                 {
                     monsterAnim.SetTrigger("travellerSpotted");
                 }
+                else
+                {
+                    monsterAnim.SetTrigger("isLooking");
+                }
             }
+                
         }
 
         else
