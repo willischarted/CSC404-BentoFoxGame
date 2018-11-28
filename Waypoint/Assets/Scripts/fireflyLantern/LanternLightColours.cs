@@ -30,8 +30,7 @@ public class LanternLightColours : MonoBehaviour {
         }
         else if (player.GetComponent<playerControllerCopy>().equippedLight == 2)
         {
-            Lantern.SetColor("_EmissionColor", Color.blue * lightFactor);
-
+            Lantern.SetColor("_EmissionColor", new Color(0.15f, 0.8f, 0.8f, 1f) * lightFactor);
         }
         else
         {
