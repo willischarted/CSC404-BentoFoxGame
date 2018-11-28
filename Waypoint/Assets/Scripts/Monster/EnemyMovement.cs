@@ -309,6 +309,13 @@ public class EnemyMovement : MonoBehaviour
                 nav.isStopped = false;
             }
         }
+
+        if ((Vector3.Distance(transform.position, currentTarget) < lampDistance))
+        {
+           
+            bodyAnim.SetBool("isMoving", false);
+        }
+       
             
         /*
         if (!isStunned)
