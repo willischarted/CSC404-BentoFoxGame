@@ -408,12 +408,16 @@ public class InteractionControllerCopy : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 
 		if (other.tag == "Traveller" && other.gameObject == targetTraveller) {
-			//currentTarget = null;
-			interactionPopUp3.SetActive(false);
+            //currentTarget = null;
+            travellerHealth tScript = other.gameObject.GetComponent<travellerHealth>();
+            tScript.stopHealingEffect();
+            interactionPopUp3.SetActive(false);
 			travHealingBar.SetActive(false);
 			targetTraveller = null;
-			//interactionText.text  = "";
-			return;
+            healingSFX.Stop();
+           
+            //interactionText.text  = "";
+            return;
 		}
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
 			if (lScript != null){

@@ -322,7 +322,8 @@ public class EnemyMovement : MonoBehaviour
                 nav.isStopped = false;
             }
         }
-        Debug.Log(isChaseTrav);
+
+        //Debug.Log(isChaseTrav);
         if (((Vector3.Distance(transform.position, currentTarget) < lampDistance) && !isChaseTrav) ||isStunned)
         {
            
