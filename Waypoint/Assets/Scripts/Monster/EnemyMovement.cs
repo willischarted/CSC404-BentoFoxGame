@@ -53,6 +53,8 @@ public class EnemyMovement : MonoBehaviour
 
     private bool attackInterrupt;
 
+    private bool isChaseTrav;
+
     private void Awake()
     {
         roamingSound = transform.Find("Audio Source").transform.GetComponent<AudioSource>();
@@ -89,6 +91,7 @@ public class EnemyMovement : MonoBehaviour
         targetLamp = findCurrentLamp();
 
         attackInterrupt = false;
+        isChaseTrav = false;
     }
 
 
@@ -209,6 +212,8 @@ public class EnemyMovement : MonoBehaviour
 
         if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
         {
+            if (isChaseTrav)
+                isChaseTrav = false;
             nav.SetDestination(transform.position);
             nav.velocity = Vector3.zero;
             nav.isStopped = true;
@@ -236,6 +241,7 @@ public class EnemyMovement : MonoBehaviour
             currentTarget = traveller.position;
             nav.SetDestination(currentTarget);
             nav.isStopped = false;
+            isChaseTrav = true;
             if (Vector3.Distance(roamCenterPoint, traveller.position) >= maxRoamDistance)
             {
                 monsterAnim.SetTrigger("travellerLost");
@@ -243,16 +249,22 @@ public class EnemyMovement : MonoBehaviour
                 roamingSound.enabled = true;
                 attackSound.enabled = false;
                 movingToLamp = false;
+                isChaseTrav = false;
+
             }
             if (distanceFromTraveler < 1)
             {
+
+                isChaseTrav = false;
                 nav.isStopped = true;
+               
             }
         }
 
         else if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Alerted"))
         {
             //Debug.Log("Alerted");
+            isChaseTrav = false;
             isDistracted = false;
             RaycastHit hit;
             if (Physics.Raycast(transform.position + upward, direction.normalized, out hit, Mathf.Infinity))
@@ -271,6 +283,7 @@ public class EnemyMovement : MonoBehaviour
 
         else
         {
+            isChaseTrav = false;
             if (!movingToLamp)
             { // not currently moving, find new place to move to
                 nextLamp(lampQueue);
@@ -309,11 +322,15 @@ public class EnemyMovement : MonoBehaviour
                 nav.isStopped = false;
             }
         }
-
-        if ((Vector3.Distance(transform.position, currentTarget) < lampDistance))
+        Debug.Log(isChaseTrav);
+        if ((Vector3.Distance(transform.position, currentTarget) < lampDistance) && !isChaseTrav)
         {
            
             bodyAnim.SetBool("isMoving", false);
+        }
+        else
+        {
+            bodyAnim.SetBool("isMoving", true);
         }
        
             
