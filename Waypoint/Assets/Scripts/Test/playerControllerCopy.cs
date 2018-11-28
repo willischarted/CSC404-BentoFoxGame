@@ -25,6 +25,8 @@ public class playerControllerCopy: MonoBehaviour {
     // Audio effects
     public AudioClip onSoundEffect;
     public AudioClip offSoundEffect;
+
+    public AudioClip changeLightSoundEffect;
  	AudioSource audioSource;
     
     // is the firefly interacting, and restricts movement
@@ -129,7 +131,8 @@ public class playerControllerCopy: MonoBehaviour {
            // abilityBackground.color = Color.yellow;
 
 
-
+            audioSource.clip = changeLightSoundEffect;
+            audioSource.Play();
             if (equippedLight == 3) {
                 equippedLight = 1;
             }
