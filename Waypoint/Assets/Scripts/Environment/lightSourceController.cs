@@ -156,12 +156,12 @@ public class lightSourceController : MonoBehaviour {
 				//Debug.Log("Removed from history");
 			}
 			else if (currentLightType == 2) {
-				pScript.addResource(pScript.light1Value * percentageReturn);
+				pScript.addResource(pScript.light2Value * percentageReturn);
 					//once it is off remove from the history
 					tMovement.removeFromHistory(gameObject);
 			}
 			else if (currentLightType == 3 ) {
-				pScript.addResource(pScript.light1Value * percentageReturn);
+				pScript.addResource(pScript.light3Value * percentageReturn);
 				mfController.turnOffFX();
 
 			}
@@ -199,12 +199,13 @@ public class lightSourceController : MonoBehaviour {
 			return pScript.light1Value * percentageReturn;
 		}
 		else if (currentLightType == 2) {
-		//	float percentageReturn = timeRemaining / lightDuration;
+            //	float percentageReturn = timeRemaining / lightDuration;
+            Debug.Log(pScript.light2Value);
 			return pScript.light2Value * percentageReturn;
 		}
-		else if (currentLightType == 2) {
+		else if (currentLightType == 3) {
 			//float percentageReturn = timeRemaining / lightDuration;
-			return pScript.light2Value * percentageReturn;
+			return pScript.light3Value * percentageReturn;
 		}
 		return 0f;
 	
