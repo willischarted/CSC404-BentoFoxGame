@@ -130,7 +130,8 @@ public class EnemyMovement : MonoBehaviour
         if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
         {   //for now do nothing while animation completes
             //channge nothing, it can go back to doing what it does after
-            var rotation = Quaternion.LookRotation(traveller.position);
+           // var rotation = Quaternion.LookRotation(traveller.position);
+            var rotation = Quaternion.LookRotation (traveller.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10f);
             nav.SetDestination(transform.position);
             return;
