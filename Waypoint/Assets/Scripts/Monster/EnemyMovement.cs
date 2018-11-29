@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.AI;
 using UnityEngine;
 
@@ -54,6 +55,7 @@ public class EnemyMovement : MonoBehaviour
     private bool attackInterrupt;
 
     private bool isChaseTrav;
+
 
     private void Awake()
     {
@@ -144,10 +146,10 @@ public class EnemyMovement : MonoBehaviour
         */
 
         //for testing purposes
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            startAttack();
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    startAttack();
+       // }
 
         if (currentAttackCooldown != 0)
         {
@@ -437,18 +439,26 @@ public class EnemyMovement : MonoBehaviour
            
 
             bodyAnim.SetTrigger("isAttack");
-            Invoke("doneAttacking", 1f);
+           // Invoke("doneAttacking", 1f);
+            StartCoroutine(doneAttacking());
             currentAttackCooldown = attackCooldownValue;
             return true;
         }
         return false;
     }
 
+
     //Must use this since the animation is so short it cause the nav mesh
     // to continue moving almost immeditely
-    public void doneAttacking()
+    IEnumerator doneAttacking()
     {
-        if (!attackInterrupt) {
+        
+        //have to wait for next frame to cheack   
+       // yield return new WaitForSeconds(0.4f);
+        //wait until the apex of the animation's swing
+        yield return new WaitForSeconds(1.0672f);
+       
+        Debug.Log("done");
         GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
         if (trav == null)
             Debug.Log("Could not find trav");
@@ -458,26 +468,37 @@ public class EnemyMovement : MonoBehaviour
         Animator travAnim = travHealth.getTravellerAnimator();
         if (travAnim == null)
             Debug.Log("Could not find the traveller animator");
-        
-        travAnim.SetTrigger("isAttacked");
-        travHealth.TakeBasicDamage(20);
-        attackSound.enabled = false;
+        if (!attackInterrupt || !isStunned) { //may have been stunned a few frames before 
+            travAnim.SetTrigger("isAttacked");
+            travHealth.TakeBasicDamage(20);
+            attackSound.enabled = false;
+        }
         if (nav.isStopped)
             nav.isStopped = false;
-        }
+        
+        //    return;
+        
         attackInterrupt = false;
+        //yield return null;
     }
+
 
     public void setStunned()
     {
+       
+
+        if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
+            float playBackTime  = ((bodyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1) * 2) * 0.8f;
+            
+            Debug.Log(playBackTime);
+            if (playBackTime <= 1.0672f)
+                attackInterrupt = true;
+        }
         isChaseTrav = false;
         nav.SetDestination(transform.position);
         nav.velocity = Vector3.zero;
         nav.isStopped = true;
 
-        if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
-            attackInterrupt = true;
-        }
       //  nav.SetDestination(transform.position);
        // nav.velocity = Vector3.zero;
        // nav.isStopped = true;
@@ -540,5 +561,9 @@ public class EnemyMovement : MonoBehaviour
     float getLightDuration(GameObject lamp)
     {
         return lamp.GetComponentInParent<lightSourceController>().lightDuration;
+    }
+
+    public bool getAttackInterrupt() {
+        return attackInterrupt;
     }
 }
