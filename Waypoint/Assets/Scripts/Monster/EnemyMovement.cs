@@ -430,7 +430,7 @@ public class EnemyMovement : MonoBehaviour
     {
         //important -> must stop movement before animation
         // or you will get slide effect                             //optimize -> change  to local var 
-        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned"))
+        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned") && !isStunned)
         { //only attack on a cooldown 
             nav.SetDestination(transform.position);
             nav.velocity = Vector3.zero;
@@ -452,7 +452,7 @@ public class EnemyMovement : MonoBehaviour
     // to continue moving almost immeditely
     IEnumerator doneAttacking()
     {
-        
+
         //have to wait for next frame to cheack   
        // yield return new WaitForSeconds(0.4f);
         //wait until the apex of the animation's swing
@@ -468,7 +468,7 @@ public class EnemyMovement : MonoBehaviour
         Animator travAnim = travHealth.getTravellerAnimator();
         if (travAnim == null)
             Debug.Log("Could not find the traveller animator");
-        if (!attackInterrupt || !isStunned) { //may have been stunned a few frames before 
+        if (!attackInterrupt && !isStunned) { //may have been stunned a few frames before, not interrupted but code raced past, still stunned
             travAnim.SetTrigger("isAttacked");
             travHealth.TakeBasicDamage(20);
             attackSound.enabled = false;
@@ -486,7 +486,7 @@ public class EnemyMovement : MonoBehaviour
     public void setStunned()
     {
        
-
+          isStunned = true;
         if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
             float playBackTime  = ((bodyAnim.GetCurrentAnimatorStateInfo(0).normalizedTime % 1) * 2) * 0.8f;
             
@@ -506,7 +506,7 @@ public class EnemyMovement : MonoBehaviour
 
         bodyAnim.SetBool("isMoving", false);
         monsterAnim.SetTrigger("isStunned");
-        isStunned = true;
+       // isStunned = true;
 
         
     }
