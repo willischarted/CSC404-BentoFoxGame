@@ -76,10 +76,11 @@ public class travellerMovement : MonoBehaviour
                 // the targte light was turned off before we got there
                 if (lScript.getCurrentLightType() == 0) {
                     //go back to the current light -> have not run find current yet
-                    if (currentLight == null)
-                        MoveToTarget(startingPointTransform);
-                    else
+                    if (currentLight != null)
                         MoveToTarget(currentLight);
+                       // MoveToTarget(startingPointTransform);
+                   // else
+                       // MoveToTarget(currentLight);
                     return;
                 }
 
