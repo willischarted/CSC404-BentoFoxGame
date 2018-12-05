@@ -20,6 +20,7 @@ public class travellerMovement : MonoBehaviour
     private EndLevel endlvl;
 
     GameObject latestLight;
+    [SerializeField]
     GameObject targetLight;
     Animator anim;
     NavMeshAgent nav;
@@ -76,11 +77,15 @@ public class travellerMovement : MonoBehaviour
                 // the targte light was turned off before we got there
                 if (lScript.getCurrentLightType() == 0) {
                     //go back to the current light -> have not run find current yet
-                    if (currentLight != null)
+                    if (currentLight == null)
+                    {
+                        MoveToTarget(startingPointTransform);
+                        targetLight = null;
+
+              
+                    }
+                    else
                         MoveToTarget(currentLight);
-                       // MoveToTarget(startingPointTransform);
-                   // else
-                       // MoveToTarget(currentLight);
                     return;
                 }
 
@@ -177,7 +182,7 @@ public class travellerMovement : MonoBehaviour
     }
 
     private void MoveToTarget(){
-       // Debug.Log("move to target normal");
+        Debug.Log("move to target normal");
         GameObject[] adjacent;
         List<GameObject> possibleTargets = new List<GameObject>();
         if (currentLight == null){
@@ -195,7 +200,7 @@ public class travellerMovement : MonoBehaviour
         // remove any past nodes from possible move list
         foreach (GameObject g in history) {
             if (possibleTargets.Contains(g)) {
-               // Debug.Log("removing " + g);
+                Debug.Log("removing " + g);
                 possibleTargets.Remove(g);
             }
         }
@@ -231,8 +236,6 @@ public class travellerMovement : MonoBehaviour
             nav.SetDestination(targetLight.transform.position - offset);
             anim.SetBool("isMoving", true);
 
-            if (startingPoint != null)
-               Destroy(startingPoint);
         }
     }
 
@@ -267,8 +270,8 @@ public class travellerMovement : MonoBehaviour
             nav.SetDestination(targetLight.transform.position - offset);
             anim.SetBool("isMoving", true);
 
-            if (startingPoint != null)
-               Destroy(startingPoint);
+          //  if (startingPoint != null)
+          //     Destroy(startingPoint);
         }
     }
 
