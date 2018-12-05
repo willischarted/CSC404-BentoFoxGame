@@ -91,7 +91,7 @@ public class travellerMovement : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("here");
+                       // Debug.Log("here");
                         MoveToTarget(currentLight);
 
                     }
@@ -198,7 +198,7 @@ public class travellerMovement : MonoBehaviour
     }
 
     private void MoveToTarget(){
-        Debug.Log("move to target normal");
+      //  Debug.Log("move to target normal");
         GameObject[] adjacent;
         List<GameObject> possibleTargets = new List<GameObject>();
         if (currentLight == null){
@@ -216,7 +216,7 @@ public class travellerMovement : MonoBehaviour
         // remove any past nodes from possible move list
         foreach (GameObject g in history) {
             if (possibleTargets.Contains(g)) {
-                Debug.Log("removing " + g);
+               // Debug.Log("removing " + g);
                 possibleTargets.Remove(g);
             }
         }
