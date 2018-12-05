@@ -34,8 +34,8 @@ public class travellerMovement : MonoBehaviour
     // We want to use different states
 
     private bool isScared;
-    
 
+    private bool movingBack;
 
 
     // Use this for initialization
@@ -57,6 +57,7 @@ public class travellerMovement : MonoBehaviour
         startingPointTransform = new Vector3(startingPoint.transform.position.x,
                                             startingPoint.transform.position.y, 
                                             startingPoint.transform.position.z);
+        movingBack = false;
     }
 
     void Update()
@@ -81,6 +82,7 @@ public class travellerMovement : MonoBehaviour
                     {
                         MoveToTarget(startingPointTransform);
                         targetLight = null;
+                        movingBack = true;
                         if (!startingPoint.activeInHierarchy)
                         {
                             startingPoint.SetActive(true);
@@ -88,7 +90,11 @@ public class travellerMovement : MonoBehaviour
 
                     }
                     else
+                    {
+                        Debug.Log("here");
                         MoveToTarget(currentLight);
+
+                    }
                     return;
                 }
 
@@ -132,7 +138,14 @@ public class travellerMovement : MonoBehaviour
       // if (targetLight != null && Vector3.Distance(transform.position, targetLight.transform.position) < lampDistance && anim.GetBool("isMoving"))
         {
             anim.SetBool("isMoving", false);
+            if (movingBack)
+            {
+                movingBack = false;
+                currentLight = null;
+            }
         }
+
+      
      
     }
 
@@ -279,6 +292,10 @@ public class travellerMovement : MonoBehaviour
 
           //  if (startingPoint != null)
           //     Destroy(startingPoint);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
         }
     }
 
