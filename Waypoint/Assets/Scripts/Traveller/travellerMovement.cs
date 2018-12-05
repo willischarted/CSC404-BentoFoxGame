@@ -34,7 +34,7 @@ public class travellerMovement : MonoBehaviour
     // We want to use different states
 
     private bool isScared;
-
+    [SerializeField]
     private bool movingBack;
 
 
@@ -100,7 +100,8 @@ public class travellerMovement : MonoBehaviour
 
                 
             }
-            FindCurrent();
+            if (!movingBack)
+                FindCurrent();
 
             //what if the current light we are at is turned off
             if (currentLight != null) {
