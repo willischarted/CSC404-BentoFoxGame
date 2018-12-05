@@ -81,8 +81,11 @@ public class travellerMovement : MonoBehaviour
                     {
                         MoveToTarget(startingPointTransform);
                         targetLight = null;
+                        if (!startingPoint.activeInHierarchy)
+                        {
+                            startingPoint.SetActive(true);
+                        }
 
-              
                     }
                     else
                         MoveToTarget(currentLight);
@@ -235,6 +238,10 @@ public class travellerMovement : MonoBehaviour
 
             nav.SetDestination(targetLight.transform.position - offset);
             anim.SetBool("isMoving", true);
+            if (startingPoint.activeInHierarchy)
+            {
+                startingPoint.SetActive(false);
+            }
 
         }
     }
