@@ -293,10 +293,7 @@ public class travellerMovement : MonoBehaviour
           //  if (startingPoint != null)
           //     Destroy(startingPoint);
         }
-        else
-        {
-            anim.SetBool("isMoving", false);
-        }
+       
     }
 
     private void FindCurrent(){
