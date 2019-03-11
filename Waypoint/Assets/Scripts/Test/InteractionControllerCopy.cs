@@ -564,7 +564,14 @@ public class InteractionControllerCopy : MonoBehaviour {
             healUnlocked = true;
 			stunUnlocked = true;
         }
-		else if (SceneManager.GetActiveScene().name.CompareTo("StunTutorial") == 0) {
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level7") == 0)
+        {
+            //Debug.Log("Unlock for level4");
+            healUnlocked = true;
+            stunUnlocked = true;
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("StunTutorial") == 0) {
 			//Debug.Log("Unlock for level4");
            
 			stunUnlocked = true;

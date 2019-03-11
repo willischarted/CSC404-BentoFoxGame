@@ -549,6 +549,18 @@ public class playerControllerCopy: MonoBehaviour {
         else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
             toggleUnlocked = true;
         }
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level5") == 0)
+        {
+            toggleUnlocked = true;
+            monLightOnly = true;
+        }
+
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level6") == 0)
+        {
+            toggleUnlocked = true;
+        }
     }
 
     //Are there any lights on?
