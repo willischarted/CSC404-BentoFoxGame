@@ -134,7 +134,7 @@ public class travellerMovement : MonoBehaviour
         Debug.Log(distRemaining);
         
 
-       if (distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete && nav.remainingDistance <= nav.stoppingDistance)//nav.remainingDistance == 0)
+       if ( nav.remainingDistance <= nav.stoppingDistance)//nav.remainingDistance == 0)//distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete &&
        // if (nav.pathStatus == NavMeshPathStatus.PathComplete)
       // if (targetLight != null && Vector3.Distance(transform.position, targetLight.transform.position) < lampDistance && anim.GetBool("isMoving"))
         {
