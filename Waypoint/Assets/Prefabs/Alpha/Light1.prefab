@@ -934,6 +934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0227b7dec52e44453afd71afa245b2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStartingPoint: 0
   currentLightType: 0
   lightDuration: 15
   timeRemaining: 0
@@ -942,6 +943,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   mapPath: {fileID: 1903417718525682, guid: 60a858033eb474f87aa81bd8eeacd8df, type: 2}
+  worldPath: {fileID: 0}
+  yoffset: 0
 --- !u!119 &119172981438171906
 Projector:
   m_ObjectHideFlags: 1
