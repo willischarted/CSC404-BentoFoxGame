@@ -305,12 +305,13 @@ public class EnemyMovement : MonoBehaviour
                 if (!isLit(targetLamp))
                 {
                     float lightDuration = 0f;
+                    int lampPriority = 0;
                     GameObject[] adjLamps = targetLamp.GetComponentInParent<lightSourceController>().getAdjacentSources();
                     foreach (GameObject lamp in adjLamps)
                     {
                         if (isLit(lamp))
                         {
-                            if (lightDuration < getLightDuration(lamp))
+                            if ((lightDuration < getLightDuration(lamp))&&(lampPriority<=getLampPriority(lamp)))
                             {
                                 targetLamp = lamp;
                                 lightDuration = getLightDuration(lamp);
@@ -382,7 +383,7 @@ public class EnemyMovement : MonoBehaviour
             }
         }
        // Debug.Log("MonsterLampLit");
-        if (newCurrentLamp == litLamp)
+        if ((newCurrentLamp == litLamp)&&(getLampPriority(targetLamp)<=getLampPriority(litLamp)))
         {
             monsterAnim.SetTrigger("nearbyLitLamp");
             //Debug.Log("inhere1");
@@ -407,8 +408,9 @@ public class EnemyMovement : MonoBehaviour
             GameObject[] adjacentLamps = lController.getAdjacentSources();
             foreach (GameObject adjacentlamp in adjacentLamps)
             {
-                if (litLamp == adjacentlamp)
+                if ((litLamp == adjacentlamp)&& (getLampPriority(targetLamp) <= getLampPriority(litLamp)))
                 {
+                    Debug.Log("target:"+ getLampPriority(targetLamp)+ " litlamp:"+getLampPriority(litLamp));
                     monsterAnim.SetTrigger("nearbyLitLamp");
                    // Debug.Log("inhere2");
                     targetLamp = litLamp;
@@ -518,9 +520,11 @@ public class EnemyMovement : MonoBehaviour
     void nextLamp(Queue<GameObject> lampQueue)
     {
         float lightDuration = 0f;
+        int lampPriority = 0;
         if (isLit(currentLamp))
         {
             lightDuration = getLightDuration(currentLamp);
+            lampPriority = getLampPriority(currentLamp);
             movingToLamp = false;
         }
         GameObject[] adjLamps = currentLamp.GetComponentInParent<lightSourceController>().getAdjacentSources();
@@ -528,7 +532,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if (isLit(lamp))
             {
-                if (lightDuration < getLightDuration(lamp))
+                if ((lightDuration < getLightDuration(lamp))&&(lampPriority<=getLampPriority(lamp)))
                 {
                     targetLamp = lamp;
                     lightDuration = getLightDuration(lamp);
@@ -561,6 +565,11 @@ public class EnemyMovement : MonoBehaviour
     float getLightDuration(GameObject lamp)
     {
         return lamp.GetComponentInParent<lightSourceController>().lightDuration;
+    }
+
+    int getLampPriority(GameObject lamp)
+    {
+        return lamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
     }
 
     public bool getAttackInterrupt() {
