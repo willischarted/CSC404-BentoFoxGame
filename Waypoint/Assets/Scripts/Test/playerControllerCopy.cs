@@ -276,6 +276,11 @@ public class playerControllerCopy: MonoBehaviour {
                         tMovement.findLatest(lightSource);
                     }
 
+                subtractResource();
+                lightSourceController lController = lightSource.GetComponentInParent<lightSourceController>();
+                if (lController != null)
+                    lController.setCurrentLightType(equippedLight);
+
                 if (equippedLight == 1 || equippedLight == 3) {
 
                     GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
@@ -289,10 +294,7 @@ public class playerControllerCopy: MonoBehaviour {
                     }
                 }
 
-                subtractResource();
-                lightSourceController lController = lightSource.GetComponentInParent<lightSourceController>();
-                if (lController != null)
-                    lController.setCurrentLightType(equippedLight);
+                
 
                 
 
