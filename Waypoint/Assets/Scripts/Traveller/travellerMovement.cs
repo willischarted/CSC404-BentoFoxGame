@@ -37,6 +37,9 @@ public class travellerMovement : MonoBehaviour
     [SerializeField]
     private bool movingBack;
 
+    private bool movingToTravLight;
+    private float defaultSpeed;
+    private float fastSpeed;
 
     // Use this for initialization
     void Awake()
@@ -58,6 +61,8 @@ public class travellerMovement : MonoBehaviour
                                             startingPoint.transform.position.y, 
                                             startingPoint.transform.position.z);
         movingBack = false;
+        defaultSpeed = nav.speed;
+        fastSpeed = defaultSpeed * 1.5f;
     }
 
     void Update()
@@ -139,6 +144,11 @@ public class travellerMovement : MonoBehaviour
       // if (targetLight != null && Vector3.Distance(transform.position, targetLight.transform.position) < lampDistance && anim.GetBool("isMoving"))
         {
             anim.SetBool("isMoving", false);
+            if (nav.speed > defaultSpeed)
+            {
+                movingToTravLight = false;
+                nav.speed = defaultSpeed;
+            }
             if (movingBack)
             {
                 movingBack = false;
@@ -188,6 +198,13 @@ public class travellerMovement : MonoBehaviour
 
     private void MoveToTarget(GameObject g) {
         targetLight = g;
+        Debug.Log(g.GetComponent<lightSourceController>().getCurrentLightType());
+        if (nav.speed != fastSpeed && g.GetComponent<lightSourceController>().getCurrentLightType() == 2)
+        {
+            //Debug.Log("increasing speed");
+            movingToTravLight = true;
+            nav.speed = fastSpeed;
+        }
         nav.SetDestination(targetLight.transform.position - offset);
         anim.SetBool("isMoving", true);
     }
@@ -196,6 +213,7 @@ public class travellerMovement : MonoBehaviour
         
         nav.SetDestination(t - offset);
         anim.SetBool("isMoving", true);
+
     }
 
     private void MoveToTarget(){
@@ -251,6 +269,15 @@ public class travellerMovement : MonoBehaviour
             }
 
             nav.SetDestination(targetLight.transform.position - offset);
+
+
+            if (nav.speed != fastSpeed && targetLight.GetComponent<lightSourceController>().getCurrentLightType() == 2)
+            {
+                //Debug.Log("increasing speed");
+                movingToTravLight = true;
+                nav.speed = fastSpeed;
+            }
+
             anim.SetBool("isMoving", true);
             if (startingPoint.activeInHierarchy)
             {
