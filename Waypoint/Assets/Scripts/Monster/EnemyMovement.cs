@@ -227,9 +227,11 @@ public class EnemyMovement : MonoBehaviour
             attackSound.enabled = false;
 
             timer += Time.deltaTime;
-            popUp2.GetComponent<WorldSpaceObjectController>().setPopUpText((5 - timer).ToString());
+            int countDown = 5 - (int)timer;
+            popUp2.GetComponent<WorldSpaceObjectController>().setPopUpText(countDown.ToString());
             if (timer > 5)
             {
+                popUp2.SetActive(false);
                 monsterAnim.SetTrigger("recovered");
                 //Monster sounds
                 roamingSound.enabled = true;

@@ -397,7 +397,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 					monstersInRange.Add(other.gameObject);
 				}
 				monScript.popUp.SetActive(true);
-                monScript.popUp2.SetActive(false);
+               // monScript.popUp2.SetActive(false);
                 Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
 				monScript.popUp.GetComponent<WorldSpaceObjectController>().updateWorldObjectTransform(popUpLocation);
@@ -419,7 +419,12 @@ public class InteractionControllerCopy : MonoBehaviour {
 			else {
 				monScript.popUp.SetActive(false);
                 monScript.popUp2.SetActive(true);
-				monstersInRange.Remove(other.gameObject);
+
+                Vector3 popUpLocation = other.gameObject.transform.position;
+                popUpLocation.y = popUpLocation.y + textVerticalOffset;
+                monScript.popUp2.GetComponent<WorldSpaceObjectController>().updateWorldObjectTransform(popUpLocation);
+
+                monstersInRange.Remove(other.gameObject);
 			}
 			
 	
@@ -631,8 +636,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 
                 //the countdown timer
                 GameObject mPopup2 = Instantiate(monsterTimer, transform.position, Quaternion.identity);
-                mPopup.transform.parent = worldCanvas.transform;
-                mPopup.SetActive(false);
+                mPopup2.transform.parent = worldCanvas.transform;
+                mPopup2.SetActive(false);
 
                 monScript.popUp2 = mPopup2;
             }
