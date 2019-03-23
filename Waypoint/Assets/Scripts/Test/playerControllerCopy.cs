@@ -559,7 +559,7 @@ public class playerControllerCopy: MonoBehaviour {
         }
 
 
-        else if (SceneManager.GetActiveScene().name.CompareTo("Level6") == 0)
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level5.5") == 0)
         {
             toggleUnlocked = true;
         }

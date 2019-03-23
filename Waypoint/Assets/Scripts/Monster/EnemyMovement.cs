@@ -432,7 +432,9 @@ public class EnemyMovement : MonoBehaviour
     {
         //important -> must stop movement before animation
         // or you will get slide effect                             //optimize -> change  to local var 
-        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned") && !isStunned)
+        int lightType = currentLamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
+        //Debug.Log(lightType);
+        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned") && !isStunned && !isDistracted)
         { //only attack on a cooldown 
             nav.SetDestination(transform.position);
             nav.velocity = Vector3.zero;

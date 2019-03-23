@@ -268,10 +268,18 @@ public class InteractionControllerCopy : MonoBehaviour {
 		
 	}
 
-	
+	/*
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "LampLight") {
-			lScript = other.GetComponent<lightSourceController>();
+            currentTarget = other.gameObject;
+            //interactionText.text = "Press X to interact with Light Source";
+            interactionPopUp.SetActive(true);
+            Vector3 popUpLocation = other.gameObject.transform.position;
+            popUpLocation.y = popUpLocation.y + textVerticalOffset;
+            popUpController.updateWorldObjectTransform(popUpLocation);
+            //controlLureImage();
+
+            lScript = other.GetComponent<lightSourceController>();
 			if (lScript == null) 
 				Debug.Log("Could not get lscript");
 
@@ -279,6 +287,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			lScript.turnOnPaths();
 		}
 	}
+    */
 	void OnTriggerStay(Collider other) {
 
 
@@ -333,7 +342,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			}
 			return;
 		}
-
+        
 		if (other.tag == "LampLight") {
 			currentTarget = other.gameObject;
 			//interactionText.text = "Press X to interact with Light Source";
@@ -341,9 +350,18 @@ public class InteractionControllerCopy : MonoBehaviour {
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y + textVerticalOffset;
 			popUpController.updateWorldObjectTransform(popUpLocation);
-			//controlLureImage();
-			return;
+            //controlLureImage();
+
+
+            lScript = other.GetComponent<lightSourceController>();
+            if (lScript == null)
+                Debug.Log("Could not get lscript");
+
+            lScript.turnOnWorldPaths();
+            lScript.turnOnPaths();
+            return;
 		}
+        
 
 		if (other.tag == "Monster" && stunUnlocked) {
 			
