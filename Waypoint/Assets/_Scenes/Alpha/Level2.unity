@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.011217429, g: 0.054846276, b: 0.0685861, a: 1}
+  m_IndirectSpecularColor: {r: 0.011290968, g: 0.05492409, b: 0.06873648, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5192,6 +5192,7 @@ MonoBehaviour:
   travellerLureIcon: {fileID: 21300000, guid: fa5817997a0554cc7a318287ce785b07, type: 3}
   monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
   lureImage: {fileID: 487055335}
+  popUpText: {fileID: 0}
 --- !u!1001 &532741612
 Prefab:
   m_ObjectHideFlags: 0
@@ -6743,6 +6744,7 @@ MonoBehaviour:
   travellerLureIcon: {fileID: 21300000, guid: be2f3d7d8cd8a428b9fcb3b6a9b5d9ae, type: 3}
   monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
   lureImage: {fileID: 492410418}
+  popUpText: {fileID: 0}
 --- !u!1 &651076407
 GameObject:
   m_ObjectHideFlags: 0
@@ -6946,6 +6948,7 @@ MonoBehaviour:
   travellerLureIcon: {fileID: 0}
   monsterLureIcon: {fileID: 0}
   lureImage: {fileID: 0}
+  popUpText: {fileID: 0}
 --- !u!114 &668057212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12264,6 +12267,7 @@ MonoBehaviour:
   travellerLureIcon: {fileID: 21300000, guid: fa5817997a0554cc7a318287ce785b07, type: 3}
   monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
   lureImage: {fileID: 595105954}
+  popUpText: {fileID: 0}
 --- !u!1 &1415535678
 GameObject:
   m_ObjectHideFlags: 0
@@ -13769,6 +13773,10 @@ Prefab:
         type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755872060526982, guid: f365b67e3f4e94cdea43893a05a42ab8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f365b67e3f4e94cdea43893a05a42ab8, type: 2}

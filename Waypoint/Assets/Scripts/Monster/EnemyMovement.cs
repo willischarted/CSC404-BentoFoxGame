@@ -438,7 +438,7 @@ public class EnemyMovement : MonoBehaviour
         //important -> must stop movement before animation
         // or you will get slide effect                             //optimize -> change  to local var 
         int lightType = currentLamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
-        Debug.Log("is distracted " + isDistracted);
+        //Debug.Log("is distracted " + isDistracted);
         if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned") && !isStunned && lightType!=3)
         { //only attack on a cooldown 
             nav.SetDestination(transform.position);

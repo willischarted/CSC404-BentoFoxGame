@@ -1811,6 +1811,7 @@ MonoBehaviour:
   travellerLureIcon: {fileID: 21300000, guid: be2f3d7d8cd8a428b9fcb3b6a9b5d9ae, type: 3}
   monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
   lureImage: {fileID: 270165112}
+  popUpText: {fileID: 0}
 --- !u!1 &177162373
 GameObject:
   m_ObjectHideFlags: 0
@@ -9371,6 +9372,7 @@ MonoBehaviour:
   travellerLureIcon: {fileID: 21300000, guid: fa5817997a0554cc7a318287ce785b07, type: 3}
   monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
   lureImage: {fileID: 1011353826}
+  popUpText: {fileID: 0}
 --- !u!1 &1430681387
 GameObject:
   m_ObjectHideFlags: 0
@@ -9677,6 +9679,7 @@ MonoBehaviour:
   travellerLureIcon: {fileID: 21300000, guid: fa5817997a0554cc7a318287ce785b07, type: 3}
   monsterLureIcon: {fileID: 21300000, guid: af6d81b921bff4e87bf26eadd1db7123, type: 3}
   lureImage: {fileID: 2076423932}
+  popUpText: {fileID: 0}
 --- !u!1 &1454707468
 GameObject:
   m_ObjectHideFlags: 0
@@ -17648,6 +17651,10 @@ Prefab:
       propertyPath: nextTutorial
       value: 
       objectReference: {fileID: 989246210}
+    - target: {fileID: 1755872060526982, guid: f365b67e3f4e94cdea43893a05a42ab8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f365b67e3f4e94cdea43893a05a42ab8, type: 2}
   m_IsPrefabAsset: 0

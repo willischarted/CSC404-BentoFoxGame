@@ -4460,9 +4460,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2040990170}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 70
+  m_MaxValue: 120
   m_WholeNumbers: 0
-  m_Value: 70
+  m_Value: 120
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9028,7 +9028,7 @@ Prefab:
     - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
       propertyPath: lightResource
-      value: 70
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
@@ -9120,7 +9120,7 @@ Prefab:
     - target: {fileID: 114161309495196386, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
       propertyPath: startingResource
-      value: 70
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 114584232024874280, guid: 7951c7f06bccf4622b7f6c79a4964954,
         type: 2}
@@ -17121,6 +17121,15 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114466277038869274, guid: f365b67e3f4e94cdea43893a05a42ab8,
+        type: 2}
+      propertyPath: tutorialStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755872060526982, guid: f365b67e3f4e94cdea43893a05a42ab8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f365b67e3f4e94cdea43893a05a42ab8, type: 2}
   m_IsPrefabAsset: 0
@@ -21363,7 +21372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1955792550
 RectTransform:
   m_ObjectHideFlags: 0
