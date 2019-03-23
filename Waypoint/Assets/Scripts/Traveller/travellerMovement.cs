@@ -131,7 +131,7 @@ public class travellerMovement : MonoBehaviour
 
 
         float distRemaining = nav.remainingDistance;
-        Debug.Log(distRemaining);
+        //Debug.Log(distRemaining);
         
 
        if ( nav.remainingDistance <= nav.stoppingDistance)//nav.remainingDistance == 0)//distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete &&

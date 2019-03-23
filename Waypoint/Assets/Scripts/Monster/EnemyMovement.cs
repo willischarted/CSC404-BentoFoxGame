@@ -42,6 +42,7 @@ public class EnemyMovement : MonoBehaviour
     private travellerMovement tMovement;
 
     public GameObject popUp;
+    public GameObject popUp2;
 
     public GameObject monsterGeo;
     private Animator bodyAnim;
@@ -127,7 +128,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-
+        
 
         if (bodyAnim.GetCurrentAnimatorStateInfo(0).IsName("Attacking"))
         {   //for now do nothing while animation completes
@@ -226,6 +227,7 @@ public class EnemyMovement : MonoBehaviour
             attackSound.enabled = false;
 
             timer += Time.deltaTime;
+            popUp2.GetComponent<WorldSpaceObjectController>().setPopUpText((5 - timer).ToString());
             if (timer > 5)
             {
                 monsterAnim.SetTrigger("recovered");
@@ -393,6 +395,7 @@ public class EnemyMovement : MonoBehaviour
             nav.isStopped = false;
             movingToLamp = true;
             bodyAnim.SetBool("isMoving", true);
+
             if (!isBaby)
             {
                 isDistracted = true;
@@ -433,8 +436,8 @@ public class EnemyMovement : MonoBehaviour
         //important -> must stop movement before animation
         // or you will get slide effect                             //optimize -> change  to local var 
         int lightType = currentLamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
-        //Debug.Log(lightType);
-        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned") && !isStunned && !isDistracted)
+        Debug.Log("is distracted " + isDistracted);
+        if (currentAttackCooldown == 0 && !monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Stunned") && !isStunned && lightType!=3)
         { //only attack on a cooldown 
             nav.SetDestination(transform.position);
             nav.velocity = Vector3.zero;

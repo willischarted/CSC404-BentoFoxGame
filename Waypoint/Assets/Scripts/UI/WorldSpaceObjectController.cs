@@ -10,10 +10,13 @@ public class WorldSpaceObjectController : MonoBehaviour {
 
 	public Sprite travellerLureIcon;
 	public Sprite monsterLureIcon;
-	public Image lureImage; 
+	public Image lureImage;
 
-	// Use this for initialization
-	void Start () {
+    //subclass later -> only in countdown
+    public Text popUpText;
+
+    // Use this for initialization
+    void Start () {
 
 		player = GameObject.FindGameObjectWithTag("Player");
 		if (player == null) {
@@ -93,5 +96,10 @@ public class WorldSpaceObjectController : MonoBehaviour {
 		}
 		return false;
 	}
+
+    public void setPopUpText(string t)
+    {
+        popUpText.text = t;
+    }
 	
 }

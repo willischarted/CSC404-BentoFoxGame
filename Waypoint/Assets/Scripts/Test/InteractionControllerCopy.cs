@@ -41,10 +41,16 @@ public class InteractionControllerCopy : MonoBehaviour {
 	private WorldSpaceObjectController popUpController3;
 	public Text popUpText3;
 
-	public float textVerticalOffset;
+
+
+    public float textVerticalOffset;
 
 	public GameObject monsterPopup;
-	public Canvas worldCanvas;
+    public GameObject monsterTimer;
+
+    public Text popUpText4;
+
+    public Canvas worldCanvas;
 
 	public List<GameObject> monstersInRange;
 
@@ -97,8 +103,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 		if (popUpController3 == null)
 			Debug.Log("Could not find worldspacecontroller");
 
-		
-		travHealingBarController = travHealingBar.GetComponent<WorldSpaceObjectController>();
+
+
+        travHealingBarController = travHealingBar.GetComponent<WorldSpaceObjectController>();
 		if (travHealingBarController == null)
 			Debug.Log("Could not find travhealingbarcontroller"); 
 
@@ -390,7 +397,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 					monstersInRange.Add(other.gameObject);
 				}
 				monScript.popUp.SetActive(true);
-				Vector3 popUpLocation = other.gameObject.transform.position;
+                monScript.popUp2.SetActive(false);
+                Vector3 popUpLocation = other.gameObject.transform.position;
 				popUpLocation.y = popUpLocation.y +textVerticalOffset;
 				monScript.popUp.GetComponent<WorldSpaceObjectController>().updateWorldObjectTransform(popUpLocation);
 				Text monText = monScript.popUp.GetComponentInChildren<Text>();
@@ -410,6 +418,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			}
 			else {
 				monScript.popUp.SetActive(false);
+                monScript.popUp2.SetActive(true);
 				monstersInRange.Remove(other.gameObject);
 			}
 			
@@ -619,7 +628,14 @@ public class InteractionControllerCopy : MonoBehaviour {
 				mPopup.SetActive(false);
 				
 				monScript.popUp = mPopup;
-			}
+
+                //the countdown timer
+                GameObject mPopup2 = Instantiate(monsterTimer, transform.position, Quaternion.identity);
+                mPopup.transform.parent = worldCanvas.transform;
+                mPopup.SetActive(false);
+
+                monScript.popUp2 = mPopup2;
+            }
 
 
 		}
