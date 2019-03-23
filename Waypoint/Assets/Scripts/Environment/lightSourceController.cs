@@ -174,9 +174,9 @@ public class lightSourceController : MonoBehaviour {
 
 			}
 			currentLightType = type;
-			//turnOffPaths();
+            //turnOffPaths();
 
-		
+            countDown.SetActive(false);
 
 			return;
 		}

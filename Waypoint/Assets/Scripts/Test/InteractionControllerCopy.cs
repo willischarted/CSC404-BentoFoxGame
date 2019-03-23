@@ -251,7 +251,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			
 			if(lScript.getCurrentLightType() !=0) {
 				popUpText.fontSize = 110;
-				popUpText.text =   "Harvest";
+				popUpText.text =   "Recover";
 				// " + (int) lScript.harvestAmount()
 			}
 			else if (pController.getResource() < pController.getCurrentResourceNeeded()) {
