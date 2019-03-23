@@ -48,7 +48,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	public GameObject monsterPopup;
     public GameObject monsterTimer;
 
-    public Text popUpText4;
+    public GameObject lightCountdown;
 
     public Canvas worldCanvas;
 
@@ -115,9 +115,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		createMonsterPopups();
 
-		//travSlider = Instantiate(travHealthPrefab, transform.position, Quaternion.identity);
-		//travSlider.SetActive(false);
-		healingSFX = GetComponent<AudioSource>();
+        createLightCountDowns();
+
+        //travSlider = Instantiate(travHealthPrefab, transform.position, Quaternion.identity);
+        //travSlider.SetActive(false);
+        healingSFX = GetComponent<AudioSource>();
 		if (healingSFX == null)
 			Debug.Log("Could not find the healing sound effect");
 		isHealing = false;
@@ -360,9 +362,13 @@ public class InteractionControllerCopy : MonoBehaviour {
             //controlLureImage();
 
 
+           
+
             lScript = other.GetComponent<lightSourceController>();
             if (lScript == null)
                 Debug.Log("Could not get lscript");
+
+           
 
             lScript.turnOnWorldPaths();
             lScript.turnOnPaths();
@@ -645,6 +651,31 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		}
 	}
+
+    public void createLightCountDowns()
+    {
+        foreach (GameObject m in GameObject.FindGameObjectsWithTag("LampLight"))
+        {
+            lightSourceController lController = m.GetComponent<lightSourceController>();
+            if (lController == null)
+            {
+                Debug.Log("Could not find lController");
+            }
+            else
+            {
+                GameObject countDownPopUp = Instantiate(lightCountdown, transform.position, Quaternion.identity);
+                countDownPopUp.transform.parent = worldCanvas.transform;
+                countDownPopUp.SetActive(false);
+
+                Vector3 popUpLocation = m.transform.position;
+                popUpLocation.y = popUpLocation.y + textVerticalOffset;
+              
+
+                lController.countDown = countDownPopUp;
+                lController.countDown.GetComponent<WorldSpaceObjectController>().updateWorldObjectTransform(popUpLocation);
+            }
+        }
+    }
 
 	
 

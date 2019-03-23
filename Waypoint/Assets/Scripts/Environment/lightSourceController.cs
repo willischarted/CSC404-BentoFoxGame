@@ -39,6 +39,9 @@ public class lightSourceController : MonoBehaviour {
 	public float yoffset;
 
 	travellerMovement tMovement;
+
+    public GameObject countDown;
+
 	void Awake() {
 		setMiniMapPaths();
 		setWorldPaths();
@@ -81,11 +84,16 @@ public class lightSourceController : MonoBehaviour {
 			{
 				setLightOff();
 				timeRemaining = lightDuration;
-			}
+                countDown.SetActive(false);
+            }
 			else 
 			{
 				timeRemaining -= Time.deltaTime;
-
+                int timeText = (int)timeRemaining;
+                //SET THIS AS GLOBAL VARIABLE
+                countDown.GetComponent<WorldSpaceObjectController>().setPopUpText(timeText.ToString());
+                if (!countDown.activeInHierarchy)
+                    countDown.SetActive(true);
 				//reduce the visual visibility (not gameplay visibilty) of light 
 				float lightRatio = timeRemaining / lightDuration;
 				//Debug.Log(lightRatio);
