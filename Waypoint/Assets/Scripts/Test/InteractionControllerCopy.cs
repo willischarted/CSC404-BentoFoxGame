@@ -353,6 +353,21 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
         
 		if (other.tag == "LampLight") {
+            if (currentTarget != other.gameObject) //new lamp entered radius but old hasnt left
+            {
+
+                if (lScript != null)
+                {
+                    if (lScript.getCurrentLightType() == 0)
+                    {
+                        //lScript.setMiniMapPathColor(0);
+
+                        lScript.turnOffPaths();
+                        //Debug.Log("turning off)");
+                    }
+                    lScript.turnOffWorldPaths();
+                }
+            }
 			currentTarget = other.gameObject;
 			//interactionText.text = "Press X to interact with Light Source";
 			interactionPopUp.SetActive(true);
@@ -458,7 +473,9 @@ public class InteractionControllerCopy : MonoBehaviour {
             return;
 		}
 		if (other.tag == "LampLight" && other.gameObject == currentTarget) {
-			if (lScript != null){
+
+
+            if (lScript != null){
 				if ( lScript.getCurrentLightType() == 0) {
 					//lScript.setMiniMapPathColor(0);
 				
@@ -474,6 +491,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			//interactionText.text  = "";
 			return;
 		}
+
 		if (other.tag == "Monster" && monstersInRange.Count >=1) { //maybe use isunlocked?? //&& other.gameObject == targetMonster
 			//interactionPopUp2.SetActive(false);
 			//currentTarget = null;
