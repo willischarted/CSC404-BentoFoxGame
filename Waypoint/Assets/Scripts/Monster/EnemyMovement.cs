@@ -310,12 +310,14 @@ public class EnemyMovement : MonoBehaviour
                 {
                     float lightDuration = 0f;
                     int lampPriority = 0;
-                    GameObject[] adjLamps = targetLamp.GetComponentInParent<lightSourceController>().getAdjacentSources();
+                    lightSourceController lScript = targetLamp.GetComponentInParent<lightSourceController>();
+                    if (lScript != null) { 
+                    GameObject[] adjLamps = lScript.getAdjacentSources();
                     foreach (GameObject lamp in adjLamps)
                     {
                         if (isLit(lamp))
                         {
-                            if ((lightDuration < getLightDuration(lamp))&&(lampPriority<=getLampPriority(lamp)))
+                            if ((lightDuration < getLightDuration(lamp)) && (lampPriority <= getLampPriority(lamp)))
                             {
                                 targetLamp = lamp;
                                 lightDuration = getLightDuration(lamp);
@@ -323,6 +325,7 @@ public class EnemyMovement : MonoBehaviour
                                 bodyAnim.SetBool("isMoving", true);
                             }
                         }
+                    }
                     }
                 }
                 currentTarget = targetLamp.transform.position;
@@ -565,8 +568,16 @@ public class EnemyMovement : MonoBehaviour
 
     bool isLit(GameObject lamp)
     {
-        int lightType = lamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
-        return lightType == 1 || lightType == 3;
+        lightSourceController lScript = lamp.GetComponentInParent<lightSourceController>();
+        if (lScript != null)
+        {
+
+            int lightType = lamp.GetComponentInParent<lightSourceController>().getCurrentLightType();
+
+            return lightType == 1 || lightType == 3;
+        }
+        else
+            return false;
     }
 
     float getLightDuration(GameObject lamp)
