@@ -211,7 +211,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			anim.SetBool("isHealing", false);
 		}
 
-		if (Input.GetMouseButtonDown(1) ||  Input.GetButtonDown("Square") ) {
+		if (Input.GetMouseButtonUp(1) ||  Input.GetButtonUp("Square") ) {
 			
 			if (pController.getResource() >= 20 && monstersInRange.Count >=1) {
 				setStun();
@@ -279,6 +279,8 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 	/*
 	void OnTriggerEnter(Collider other) {
+        Debug.Log("")
+        
 		if (other.tag == "LampLight") {
             currentTarget = other.gameObject;
             //interactionText.text = "Press X to interact with Light Source";
@@ -295,6 +297,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			lScript.turnOnWorldPaths();
 			lScript.turnOnPaths();
 		}
+      
 	}
     */
 	void OnTriggerStay(Collider other) {
@@ -390,20 +393,20 @@ public class InteractionControllerCopy : MonoBehaviour {
             return;
 		}
         
-
+        /*
 		if (other.tag == "Monster" && stunUnlocked) {
 			
-			/* 
+			
 			//currentTarget = other.gameObject;
-			targetMonster = other.gameObject;
+			//targetMonster = other.gameObject;
 			//interactionText.text = "Press X to stun Monster";
-			interactionPopUp2.SetActive(true);
-			Vector3 popUpLocation = other.gameObject.transform.position;
-			popUpLocation.y = popUpLocation.y +textVerticalOffset;
-			popUpController2.updateWorldObjectTransform(popUpLocation);
-			controlLureImage();
-			return;
-			*/
+			//interactionPopUp2.SetActive(true);
+			//Vector3 popUpLocation = other.gameObject.transform.position;
+			//popUpLocation.y = popUpLocation.y +textVerticalOffset;
+			////popUpController2.updateWorldObjectTransform(popUpLocation);
+			//controlLureImage();
+			//return;
+			
 
 			
 
@@ -453,10 +456,12 @@ public class InteractionControllerCopy : MonoBehaviour {
 	
 		}
 
-
+        */
 	
 
 	}
+
+
 
 	void OnTriggerExit(Collider other) {
 
@@ -492,6 +497,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			return;
 		}
 
+        /*
 		if (other.tag == "Monster" && monstersInRange.Count >=1) { //maybe use isunlocked?? //&& other.gameObject == targetMonster
 			//interactionPopUp2.SetActive(false);
 			//currentTarget = null;
@@ -502,7 +508,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			monstersInRange.Remove(other.gameObject);
 			return;
 		}
-
+        */
 		
 	}
 
@@ -610,7 +616,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			stunUnlocked = false;
 			
         }
-		else if (SceneManager.GetActiveScene().name.CompareTo("Level3.5") == 0) {
+		else if (SceneManager.GetActiveScene().name.CompareTo("Level3.5") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level3.5EDIT") == 0) {
             healUnlocked = true;
 			stunUnlocked = true;
 			
@@ -695,7 +701,15 @@ public class InteractionControllerCopy : MonoBehaviour {
         }
     }
 
-	
+    public bool getStunnedUnlocked()
+    {
+        return stunUnlocked;
+    }
+
+	public List<GameObject> getMonsters()
+    {
+        return monstersInRange;
+    }
 
 	
 
