@@ -392,6 +392,21 @@ public class InteractionControllerCopy : MonoBehaviour {
             lScript.turnOnPaths();
             return;
 		}
+
+        if (other.tag == "Monster")
+        {
+            EnemyMovement monScript = other.gameObject.GetComponent<EnemyMovement>();
+            if (monScript == null)
+            {
+                Debug.Log("Could not find monscript");
+            }
+
+            //monScript.popUp2.SetActive(true);
+
+            Vector3 popUpLocation = other.gameObject.transform.position;
+            popUpLocation.y = popUpLocation.y + textVerticalOffset;
+            monScript.popUp2.GetComponent<WorldSpaceObjectController>().updateWorldObjectTransform(popUpLocation);
+        }
         
         /*
 		if (other.tag == "Monster" && stunUnlocked) {
@@ -536,10 +551,11 @@ public class InteractionControllerCopy : MonoBehaviour {
 			if (monScript == null)
 				Debug.Log("Could not find monScript!");
 			monScript.setStunned();
-			
-		
-			// get animator contoller and set stun
-		}
+            monScript.popUp2.SetActive(true);
+
+
+            // get animator contoller and set stun
+        }
 		pController.addResource(-stunCost);
 	}
 
