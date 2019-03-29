@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class playerControllerCopy: MonoBehaviour {
     //enum lightType {Default, Traveller, Monster};
 
+    public GameObject TutorialText;
+
     public Color color1;
     public Color color2;
     public Color color3;
@@ -109,6 +111,11 @@ public class playerControllerCopy: MonoBehaviour {
 	
 	// Update is called once per frame
     void Update() {
+
+        if (TutorialText != null)
+        {
+            TutorialText.transform.position = this.gameObject.transform.position;
+        }
         if (inTutorial)
             return;
 
