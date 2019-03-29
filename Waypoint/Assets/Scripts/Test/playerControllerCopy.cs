@@ -72,7 +72,7 @@ public class playerControllerCopy: MonoBehaviour {
 
     //used to restrict light for lv 2.5
     private bool monLightOnly;
-    private bool inTutorial;
+    [SerializeField]  private bool inTutorial;
 
     public float rotateSpeed = 10f;
     
