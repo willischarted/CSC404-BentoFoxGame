@@ -478,7 +478,7 @@ public class playerControllerCopy: MonoBehaviour {
         //Debug.Log("Adding " + value);
         resourceBar.value = lightResource;
         int resourceValue = (int)lightResource;
-        resourceCount.text = resourceValue.ToString();
+        resourceCount.text = resourceValue.ToString() + "/" + startingResource;
     }
 
     public void subtractResource() {
@@ -498,7 +498,7 @@ public class playerControllerCopy: MonoBehaviour {
         //Debug.Log("Adding " + value);
         resourceBar.value = lightResource;
         int resourceValue = (int)lightResource;
-        resourceCount.text = resourceValue.ToString();
+        resourceCount.text = resourceValue.ToString() + "/" + startingResource;
     }
 
 

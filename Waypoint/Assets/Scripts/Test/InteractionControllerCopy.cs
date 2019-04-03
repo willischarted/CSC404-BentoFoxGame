@@ -621,7 +621,7 @@ public class InteractionControllerCopy : MonoBehaviour {
              healUnlocked = true;
 			 stunUnlocked = false;
         }
-		else if (SceneManager.GetActiveScene().name.CompareTo("Level2.5") == 0) {
+		else if (SceneManager.GetActiveScene().name.CompareTo("Level2.5") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level2.5.5EDIT") == 0) {
              healUnlocked = true;
 			 stunUnlocked = false;
         }

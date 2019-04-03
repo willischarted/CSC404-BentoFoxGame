@@ -20,7 +20,7 @@ public class abilityIconController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        abilityIcon = GetComponent<Image>();
 	}
 	
 	// Update is called once per frame

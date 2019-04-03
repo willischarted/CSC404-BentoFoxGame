@@ -10,9 +10,13 @@ public class lantern_01_matswitcher : MonoBehaviour {
     private MeshRenderer my_renderer;
     private Material default_mat;
 
-
-
+  //  public GameObject litOutline;
+   
+    public Material litOutline;
+    private Material currentDefault;
+    private Material currentLit;
     Material[] materials;
+   
     // Use this for initialization
     void Start () {
         lightObject = this.transform.parent.gameObject;
@@ -23,31 +27,49 @@ public class lantern_01_matswitcher : MonoBehaviour {
             default_mat = my_renderer.material;
         }
 
-
-        materials = gameObject.GetComponent<Renderer>().materials;
+        //currentDefault
+        //      currentLit = 
+        //materials = GetComponent<Renderer>().materials;
+       // materials[1].SetFloat("_FirstOutlineWidth", 0);
+        currentDefault = default_mat;
+        currentLit = lit_mat;
+    /*
+    Debug.Log(materials.Length);
+    if (materials.Length <2)
+    {
+        GetComponent<Renderer>().mat
     }
+    */
+}
 
     // Update is called once per frame
     void Update () {
 		if (lightScript.getCurrentLightType() == 0)
         {
-            my_renderer.material = default_mat;
+            my_renderer.material = currentDefault;
         } else
         {
-            my_renderer.material = lit_mat;
-            my_renderer.material.SetColor("_EmissionColor", lt.color);
+            my_renderer.material = currentLit;
+            if (currentLit != litOutline)
+                my_renderer.material.SetColor("_EmissionColor", lt.color);
         }
 	}
 
     public void sethighlight()
     {
-        materials[1].SetFloat("_FirstOutlineWidth", 0.05f);
+        //materials[1].SetFloat("_FirstOutlineWidth", 0.05f);
+        currentDefault = litOutline;
+         currentLit = litOutline;
+        //litOutline.SetActive(true);
     }
 
     public void setDefault()
     {
 
-        materials[1].SetFloat("_FirstOutlineWidth", 0);
+        // materials[1].SetFloat("_FirstOutlineWidth", 0);
+        currentDefault = default_mat;
+         currentLit = lit_mat;
+      //  litOutline.SetActive(false);
     }
 
 

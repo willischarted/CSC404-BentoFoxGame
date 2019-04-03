@@ -52,6 +52,7 @@ public class lightSourceController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         switcherScript = GetComponentInChildren<lantern_01_matswitcher>();
+
         if (switcherScript == null)
         {
             Debug.Log("SwitcherScript is ull");
