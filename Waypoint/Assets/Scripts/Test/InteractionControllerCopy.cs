@@ -32,8 +32,9 @@ public class InteractionControllerCopy : MonoBehaviour {
 	public GameObject interactionPopUp;
 	private WorldSpaceObjectController popUpController;
 	public Text popUpText;
+    public Text popUpTextCount;
 
-	public GameObject interactionPopUp2;
+    public GameObject interactionPopUp2;
 	private WorldSpaceObjectController popUpController2;
 	public Text popUpText2;
 
@@ -247,23 +248,32 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 		if (currentTarget && (lScript != null)) {
 			//interactionText.text = "Light";
-			popUpText.fontSize = 100;
+			//popUpText.fontSize = 100;
 			
 			if(lScript.getCurrentLightType() !=0) {
-				popUpText.fontSize = 110;
+				//popUpText.fontSize = 110;
 				popUpText.text =   "Recover";
+                popUpTextCount.text = "(+" + (int) lScript.harvestAmount() + ")";
 				// " + (int) lScript.harvestAmount()
 			}
 			else if (pController.getResource() < pController.getCurrentResourceNeeded()) {
-				popUpText.fontSize = 70;
+				//popUpText.fontSize = 70;
 				popUpText.text =   "Not Enough!";
 			}
 			else {
-				popUpText.fontSize = 120;
+				//popUpText.fontSize = 120;
 				popUpText.text =   "Ignite" ;
-				//(int) pController.getCurrentResourceNeeded() + ")"
-				//Debug.Log("Setting to ignite");
-			}
+             
+                if (pController.equippedLight == 1)
+                    popUpTextCount.text = "(-10)";
+                else if (pController.equippedLight == 2)
+                    popUpTextCount.text = "(-15)";
+                else if (pController.equippedLight == 3)
+                    popUpTextCount.text = "(-15)";
+                  
+                //(int) pController.getCurrentResourceNeeded() + ")"
+                //Debug.Log("Setting to ignite");
+            }
 			//popUpText.text = "hello";
 			//Debug.Log("Could not set text");
 			return;
@@ -375,12 +385,13 @@ public class InteractionControllerCopy : MonoBehaviour {
             }
 			currentTarget = other.gameObject;
 			
-            /* old implementation
+            
 			interactionPopUp.SetActive(true);
+            /*
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y + textVerticalOffset;
 			popUpController.updateWorldObjectTransform(popUpLocation);
-            */
+           */
 
 
            
@@ -510,8 +521,7 @@ public class InteractionControllerCopy : MonoBehaviour {
                 lScript.switcherScript.setDefault();
             }
 			
-            //old implementation of popup
-			//interactionPopUp.SetActive(false);
+			interactionPopUp.SetActive(false);
 
             currentTarget = null;
 			lScript = null;
