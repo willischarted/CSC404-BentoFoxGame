@@ -53,6 +53,7 @@ public class cameraFacingBillboard : MonoBehaviour
         {
             Invoke("setTextActive", 0.2f);
             setLightTutorial();
+            StartCoroutine("lightTutorial");
 
         }
         if (isIntermmediate)
@@ -202,6 +203,21 @@ public class cameraFacingBillboard : MonoBehaviour
         setNextTutorial();
 
     
+    }
+
+    public IEnumerator lightTutorial()
+    {
+        float timer = 0f;
+
+        while (timer < 5.5f)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(textObject);
+        setNextTutorial();
+
+
     }
     /*
     void OnDrawGizmosSelected()
