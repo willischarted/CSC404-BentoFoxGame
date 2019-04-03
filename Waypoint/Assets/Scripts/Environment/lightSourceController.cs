@@ -42,15 +42,21 @@ public class lightSourceController : MonoBehaviour {
 
     public GameObject countDown;
 
-	void Awake() {
+    public lantern_01_matswitcher switcherScript;
+
+    void Awake() {
 		setMiniMapPaths();
 		setWorldPaths();
 	}
 
 	// Use this for initialization
 	void Start () {
-
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
+        switcherScript = GetComponentInChildren<lantern_01_matswitcher>();
+        if (switcherScript == null)
+        {
+            Debug.Log("SwitcherScript is ull");
+        }
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
 		pScript = player.GetComponent<playerControllerCopy>();
 
 		GameObject traveller = GameObject.FindGameObjectWithTag("Traveller");
