@@ -369,15 +369,18 @@ public class InteractionControllerCopy : MonoBehaviour {
                         //Debug.Log("turning off)");
                     }
                     lScript.turnOffWorldPaths();
+                    lScript.switcherScript.setDefault();
                 }
+
             }
 			currentTarget = other.gameObject;
-			//interactionText.text = "Press X to interact with Light Source";
+			
+            /* old implementation
 			interactionPopUp.SetActive(true);
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y + textVerticalOffset;
 			popUpController.updateWorldObjectTransform(popUpLocation);
-            //controlLureImage();
+            */
 
 
            
@@ -390,6 +393,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 
             lScript.turnOnWorldPaths();
             lScript.turnOnPaths();
+            lScript.switcherScript.sethighlight();
             return;
 		}
 
@@ -503,27 +507,19 @@ public class InteractionControllerCopy : MonoBehaviour {
 					//Debug.Log("turning off)");
 				}
 				lScript.turnOffWorldPaths();
-			}
+                lScript.switcherScript.setDefault();
+            }
 			
-			interactionPopUp.SetActive(false);
-			currentTarget = null;
+            //old implementation of popup
+			//interactionPopUp.SetActive(false);
+
+            currentTarget = null;
 			lScript = null;
-			//interactionText.text  = "";
+			
 			return;
 		}
 
-        /*
-		if (other.tag == "Monster" && monstersInRange.Count >=1) { //maybe use isunlocked?? //&& other.gameObject == targetMonster
-			//interactionPopUp2.SetActive(false);
-			//currentTarget = null;
-			//targetMonster = null;
-			//interactionText.text  = "";
-			EnemyMovement monScript = other.gameObject.GetComponent<EnemyMovement>();
-			monScript.popUp.SetActive(false);
-			monstersInRange.Remove(other.gameObject);
-			return;
-		}
-        */
+   
 		
 	}
 
@@ -533,13 +529,6 @@ public class InteractionControllerCopy : MonoBehaviour {
 		foreach (GameObject m in monstersInRange) {
 			//for each monster in array
 
-			/* 
-			Animator anim = m.GetComponent<Animator>();
-			if (anim == null) {
-				Debug.Log("Could not find anim");
-			}
-			anim.SetTrigger("isStunned");
-			*/
 			stunEffectController sScript = m.GetComponentInChildren<stunEffectController>();
 			if (sScript == null) {
 				Debug.Log("Could not find the stun effect");

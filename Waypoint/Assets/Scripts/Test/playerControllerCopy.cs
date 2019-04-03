@@ -112,10 +112,12 @@ public class playerControllerCopy: MonoBehaviour {
 	// Update is called once per frame
     void Update() {
 
+        /*
         if (TutorialText != null)
         {
             TutorialText.transform.position = this.gameObject.transform.position;
         }
+        */
         if (inTutorial)
             return;
 

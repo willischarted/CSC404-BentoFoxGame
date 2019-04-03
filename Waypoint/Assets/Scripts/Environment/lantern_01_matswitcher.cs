@@ -10,6 +10,9 @@ public class lantern_01_matswitcher : MonoBehaviour {
     private MeshRenderer my_renderer;
     private Material default_mat;
 
+
+
+    Material[] materials;
     // Use this for initialization
     void Start () {
         lightObject = this.transform.parent.gameObject;
@@ -19,6 +22,9 @@ public class lantern_01_matswitcher : MonoBehaviour {
         {
             default_mat = my_renderer.material;
         }
+
+
+        materials = gameObject.GetComponent<Renderer>().materials;
     }
 
     // Update is called once per frame
@@ -32,4 +38,17 @@ public class lantern_01_matswitcher : MonoBehaviour {
             my_renderer.material.SetColor("_EmissionColor", lt.color);
         }
 	}
+
+    public void sethighlight()
+    {
+        materials[1].SetFloat("_FirstOutlineWidth", 0.05f);
+    }
+
+    public void setDefault()
+    {
+
+        materials[1].SetFloat("_FirstOutlineWidth", 0);
+    }
+
+
 }

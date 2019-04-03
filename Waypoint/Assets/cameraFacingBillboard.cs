@@ -17,6 +17,9 @@ public class cameraFacingBillboard : MonoBehaviour
     public bool isMoveTutorial;
     public bool isLightTutorial;
 
+    public bool isIntermmediate;
+    public bool isIntermmediateUnLock;
+
     public LayerMask myMask;
 
     public GameObject targetObject;
@@ -50,11 +53,26 @@ public class cameraFacingBillboard : MonoBehaviour
         {
             Invoke("setTextActive", 0.2f);
             setLightTutorial();
+            StartCoroutine("lightTutorial");
+
+        }
+        if (isIntermmediate)
+        {
+            Invoke("setTextActive", 0.2f);
+            setIntermediatePhase();
+            StartCoroutine("intermeddiatePhase");
+            
+        }
+        if (isIntermmediateUnLock)
+        {
+            Invoke("setTextActive", 0.2f);
+            setIntermediatePhaseUnlock();
+            StartCoroutine("intermeddiatePhase");
 
         }
 
-        
-        
+
+
     }
 
     public void Update()
@@ -66,8 +84,8 @@ public class cameraFacingBillboard : MonoBehaviour
     void LateUpdate()
     {
        
-        transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.forward,
-            m_Camera.transform.rotation * Vector3.up);
+        //transform.LookAt(transform.position + m_Camera.transform.rotation * Vector3.forward,
+         //   m_Camera.transform.rotation * Vector3.up);
     }
 
     public void setNextTutorial()
@@ -100,6 +118,15 @@ public class cameraFacingBillboard : MonoBehaviour
     {
         textObject.SetActive(true);
        
+    }
+
+    void setIntermediatePhase()
+    {
+        pScript.setInTutorial(true);
+    }
+    void setIntermediatePhaseUnlock()
+    {
+        pScript.setInTutorial(false);
     }
     void setLookTutorial()
     {
@@ -148,7 +175,7 @@ public class cameraFacingBillboard : MonoBehaviour
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
 
-            if (moveHorizontal > 0 || moveVertical > 0)
+            if (moveHorizontal != 0 || moveVertical != 0)
             {
                 pScript.setRestrictMovement(false);
 
@@ -163,6 +190,36 @@ public class cameraFacingBillboard : MonoBehaviour
         
     }
 
+    public IEnumerator intermeddiatePhase()
+    {
+        float timer = 0f;
+       
+        while (timer < 1.5f)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(textObject);
+        setNextTutorial();
+
+    
+    }
+
+    public IEnumerator lightTutorial()
+    {
+        float timer = 0f;
+
+        while (timer < 5.5f)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(textObject);
+        setNextTutorial();
+
+
+    }
+    /*
     void OnDrawGizmosSelected()
     {
         // Draws a 5 unit long red line in front of the object
@@ -170,4 +227,5 @@ public class cameraFacingBillboard : MonoBehaviour
         Vector3 direction = transform.TransformDirection(Vector3.forward) * 5;
         Gizmos.DrawRay(transform.position, direction);
     }
+    */
 }
