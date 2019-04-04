@@ -126,9 +126,10 @@ public class travellerMovement : MonoBehaviour
             MoveToTarget();
             //Animating();
         }
-        if (Vector3.Distance(exitPoint.position, transform.position) < 0.3)
+        if (Vector3.Distance(exitPoint.position, transform.position) < 0.35)
         {
             beatLevel = true;
+            Debug.Log("load next");
             loadNextLevel();
         }
 
@@ -165,6 +166,7 @@ public class travellerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Exit"))
         {
             closeToExit = true;
+            Debug.Log(closeToExit);
             nav.SetDestination(exitPoint.position);
             anim.SetTrigger("isExit");
 
