@@ -366,6 +366,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
         
 		if (other.tag == "LampLight") {
+            Debug.Log("at lamp light");
             if (currentTarget != other.gameObject) //new lamp entered radius but old hasnt left
             {
 
@@ -626,7 +627,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			 stunUnlocked = false;
         }
 
-        else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0) {
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0 ||  SceneManager.GetActiveScene().name.CompareTo("Level3EDIT") == 0) {
             healUnlocked = true;
 			stunUnlocked = false;
 			
@@ -636,7 +637,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			stunUnlocked = true;
 			
         }
-        else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0 ||  SceneManager.GetActiveScene().name.CompareTo("Level4EDIT") == 0) {
 			//Debug.Log("Unlock for level4");
             healUnlocked = true;
 			stunUnlocked = true;

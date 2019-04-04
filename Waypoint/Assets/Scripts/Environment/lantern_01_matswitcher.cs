@@ -10,12 +10,14 @@ public class lantern_01_matswitcher : MonoBehaviour {
     private MeshRenderer my_renderer;
     private Material default_mat;
 
-  //  public GameObject litOutline;
+    public GameObject litOutline;
    
-    public Material litOutline;
+    //public Material litOutline;
     private Material currentDefault;
     private Material currentLit;
     Material[] materials;
+
+    private MeshRenderer meshRenderer;
    
     // Use this for initialization
     void Start () {
@@ -30,13 +32,18 @@ public class lantern_01_matswitcher : MonoBehaviour {
         //currentDefault
         //      currentLit = 
         materials = GetComponent<Renderer>().materials;
-       
+        meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer == null)
+        {
+            Debug.Log("Could nto find msh renderer");
+        }
         // materials[1].SetFloat("_FirstOutlineWidth", 0);
         currentDefault = default_mat;
         currentLit = lit_mat;
         //my_renderer.ma
     
         Debug.Log(materials.Length);
+        /*
         if (materials.Length <2)
         {
             Material[] newMaterials = new Material[2];
@@ -46,6 +53,7 @@ public class lantern_01_matswitcher : MonoBehaviour {
             materials = GetComponent<Renderer>().materials;
             setDefault();
         }
+        */
     
 }
 
@@ -54,8 +62,11 @@ public class lantern_01_matswitcher : MonoBehaviour {
 		if (lightScript.getCurrentLightType() == 0)
         {
             my_renderer.material = default_mat;
+            //meshRenderer.enabled = false;
         } else
         {
+            meshRenderer.enabled = true;
+
             my_renderer.material = lit_mat;
             
             my_renderer.material.SetColor("_EmissionColor", lt.color);
@@ -65,19 +76,21 @@ public class lantern_01_matswitcher : MonoBehaviour {
 
     public void sethighlight()
     {
-        materials[1].SetFloat("_FirstOutlineWidth", 0.05f);
+        //materials[1].SetFloat("_FirstOutlineWidth", 0.05f);
         //currentDefault = litOutline;
         // currentLit = litOutline;
-        //litOutline.SetActive(true);
+        litOutline.SetActive(true);
+        meshRenderer.enabled = false;
     }
 
     public void setDefault()
     {
 
-        materials[1].SetFloat("_FirstOutlineWidth", 0);
+        //materials[1].SetFloat("_FirstOutlineWidth", 0);
         //currentDefault = default_mat;
         // currentLit = lit_mat;
-      //  litOutline.SetActive(false);
+        litOutline.SetActive(false);
+        meshRenderer.enabled = true;
     }
 
 

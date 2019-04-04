@@ -544,20 +544,20 @@ public class playerControllerCopy: MonoBehaviour {
             toggleUnlocked = false;
         }
 
-        else if (SceneManager.GetActiveScene().name.CompareTo("Level2.5") == 0) {
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level2.5") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level2.5EDIT") == 0) {
             toggleUnlocked = true;
             monLightOnly = true;
         }
 
-        else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0) {
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level3EDIT") == 0) {
             toggleUnlocked = true;
         }
 
-        else if (SceneManager.GetActiveScene().name.CompareTo("Level3.5") == 0) {
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level3.5") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level3.5EDIT") == 0) {
             toggleUnlocked = true;
         }
 
-        else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0) {
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0 ||   SceneManager.GetActiveScene().name.CompareTo("Level4EDIT") == 0) {
             toggleUnlocked = true;
         }
 
@@ -569,6 +569,11 @@ public class playerControllerCopy: MonoBehaviour {
 
 
         else if (SceneManager.GetActiveScene().name.CompareTo("Level5.5") == 0)
+        {
+            toggleUnlocked = true;
+        }
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level7") == 0)
         {
             toggleUnlocked = true;
         }
