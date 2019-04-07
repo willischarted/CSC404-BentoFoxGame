@@ -232,9 +232,9 @@ public class EnemyMovement : MonoBehaviour
             attackSound.enabled = false;
 
             timer += Time.deltaTime;
-            int countDown = 5 - (int)timer;
+            int countDown = 9 - (int)timer;
             popUp2.GetComponent<WorldSpaceObjectController>().setPopUpText(countDown.ToString());
-            if (timer > 5)
+            if (timer > 9)
             {
                 popUp2.SetActive(false);
                 monsterAnim.SetTrigger("recovered");
