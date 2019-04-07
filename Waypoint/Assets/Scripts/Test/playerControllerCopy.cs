@@ -142,6 +142,23 @@ public class playerControllerCopy: MonoBehaviour {
 
             audioSource.clip = changeLightSoundEffect;
             audioSource.Play();
+
+            if (equippedLight == 1)
+            {
+                equippedLight = 3;
+            }
+            else if(equippedLight == 2)
+            {
+                equippedLight = 1;
+            }
+            else if (equippedLight == 3) //monster light
+            {
+                if (monLightOnly)
+                    equippedLight = 1;
+                else
+                    equippedLight = 2;
+            }
+            /*
             if (equippedLight == 3) {
                 equippedLight = 1;
             }
@@ -153,18 +170,26 @@ public class playerControllerCopy: MonoBehaviour {
                     equippedLight++;
 
             }
-            
-            
-           // setFireFlyMaterial();
-           // updateAbilityUI(); 
 
-            abilityUIScript.updateAbilityIcon(equippedLight);
-           // Invoke ("setBackgroundWhite", .5f);
+            */
+            // setFireFlyMaterial();
+            // updateAbilityUI(); 
+
+            if (equippedLight == 3) //old monster light 
+                abilityUIScript.updateAbilityIcon(equippedLight - 1);
+            else if (equippedLight == 2) //old trav
+
+                abilityUIScript.updateAbilityIcon(equippedLight + 1);
+            else
+                abilityUIScript.updateAbilityIcon(equippedLight);
+                
+           // abilityUIScript.updateAbilityIcon(equippedLight);
+            // Invoke ("setBackgroundWhite", .5f);
         }
 
-     //   if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) {
-       //   
-       // }
+        //   if (Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) {
+        //   
+        // }
 
         /* 
         if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Circle")){
