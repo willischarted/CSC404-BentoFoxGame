@@ -704,7 +704,8 @@ public class InteractionControllerCopy : MonoBehaviour {
             else
             {
                 GameObject countDownPopUp = Instantiate(lightCountdown, transform.position, Quaternion.identity);
-                countDownPopUp.transform.parent = worldCanvas.transform;
+               // countDownPopUp.transform.parent = worldCanvas.transform;
+                countDownPopUp.transform.SetParent(worldCanvas.transform);
                 countDownPopUp.SetActive(false);
 
                 Vector3 popUpLocation = m.transform.position;
