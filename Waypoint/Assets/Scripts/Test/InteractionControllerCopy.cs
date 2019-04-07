@@ -675,14 +675,16 @@ public class InteractionControllerCopy : MonoBehaviour {
 			}
 			else {
 				GameObject mPopup = Instantiate(monsterPopup, transform.position, Quaternion.identity);
-				mPopup.transform.parent = worldCanvas.transform;
-				mPopup.SetActive(false);
+                //mPopup.transform.parent = worldCanvas.transform;
+                mPopup.transform.SetParent(worldCanvas.transform);
+                mPopup.SetActive(false);
 				
 				monScript.popUp = mPopup;
 
                 //the countdown timer
                 GameObject mPopup2 = Instantiate(monsterTimer, transform.position, Quaternion.identity);
-                mPopup2.transform.parent = worldCanvas.transform;
+               // mPopup2.transform.parent = worldCanvas.transform;
+                mPopup2.transform.SetParent(worldCanvas.transform);
                 mPopup2.SetActive(false);
 
                 monScript.popUp2 = mPopup2;

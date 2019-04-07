@@ -68,6 +68,7 @@ public class stunRadiusController : MonoBehaviour {
 
                     if (!iController.monstersInRange.Contains(other.gameObject))
                     {
+                        other.GetComponent<EnemyMovement>().setLitOutline();
                         iController.monstersInRange.Add(other.gameObject);
                     }
                 }
@@ -85,6 +86,7 @@ public class stunRadiusController : MonoBehaviour {
         if (other.tag == "Monster" && other is CapsuleCollider)
         {
             Debug.Log("exit");
+            other.GetComponent<EnemyMovement>().resetLitOutline();
             iController.getMonsters().Remove(other.gameObject);
         }
     }

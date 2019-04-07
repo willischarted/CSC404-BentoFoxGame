@@ -58,8 +58,13 @@ public class EnemyMovement : MonoBehaviour
     private bool isChaseTrav;
 
 
+    public GameObject model;
+
+
     private void Awake()
     {
+
+
         roamingSound = transform.Find("Audio Source").transform.GetComponent<AudioSource>();
         attackSound = transform.Find("Audio Source (1)").transform.GetComponent<AudioSource>();
         attackSound.enabled = false;
@@ -592,5 +597,20 @@ public class EnemyMovement : MonoBehaviour
 
     public bool getAttackInterrupt() {
         return attackInterrupt;
+    }
+
+    public void setLitOutline()
+    {
+        foreach (monsterLitMatSwitcher s in model.GetComponentsInChildren<monsterLitMatSwitcher>())
+        {
+            s.setLitMat();
+        }
+    }
+    public void resetLitOutline()
+    {
+        foreach (monsterLitMatSwitcher s in model.GetComponentsInChildren<monsterLitMatSwitcher>())
+        {
+            s.resetMat();
+        }
     }
 }
