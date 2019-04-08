@@ -259,7 +259,13 @@ public class InteractionControllerCopy : MonoBehaviour {
 			else if (pController.getResource() < pController.getCurrentResourceNeeded()) {
 				//popUpText.fontSize = 70;
 				popUpText.text =   "Not Enough!";
-			}
+                if (pController.equippedLight == 1)
+                    popUpTextCount.text = "(-10)";
+                else if (pController.equippedLight == 2)
+                    popUpTextCount.text = "(-15)";
+                else if (pController.equippedLight == 3)
+                    popUpTextCount.text = "(-15)";
+            }
 			else {
 				//popUpText.fontSize = 120;
 				popUpText.text =   "Ignite" ;
