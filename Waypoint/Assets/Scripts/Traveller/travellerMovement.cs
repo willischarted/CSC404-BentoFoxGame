@@ -138,11 +138,11 @@ public class travellerMovement : MonoBehaviour
 
         float distRemaining = nav.remainingDistance;
         //Debug.Log(distRemaining);
-        
 
-       if ( nav.remainingDistance <= nav.stoppingDistance)//nav.remainingDistance == 0)//distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete &&
-       // if (nav.pathStatus == NavMeshPathStatus.PathComplete)
-      // if (targetLight != null && Vector3.Distance(transform.position, targetLight.transform.position) < lampDistance && anim.GetBool("isMoving"))
+
+        if (nav.remainingDistance <= nav.stoppingDistance)//nav.remainingDistance == 0)//distRemaining!= Mathf.Infinity && nav.pathStatus == NavMeshPathStatus.PathComplete &&
+                                                          // if (nav.pathStatus == NavMeshPathStatus.PathComplete)
+                                                          // if (targetLight != null && Vector3.Distance(transform.position, targetLight.transform.position) < lampDistance && anim.GetBool("isMoving"))
         {
             anim.SetBool("isMoving", false);
             if (nav.speed > defaultSpeed)
@@ -155,13 +155,7 @@ public class travellerMovement : MonoBehaviour
                 movingBack = false;
                 currentLight = null;
             }
-        }
-
-      if (closeToExit)
-        {
-            Debug.Log(Vector3.Distance(exitPoint.position, transform.position));
-        }
-     
+        }     
     }
 
     private void OnTriggerEnter(Collider other)
