@@ -75,9 +75,14 @@ public class playerControllerCopy: MonoBehaviour {
     [SerializeField]  private bool inTutorial;
 
     public float rotateSpeed = 10f;
-    
+
+    private InteractionControllerCopy iScript;
+
 
     void Awake(){
+
+        iScript = GetComponentInChildren<InteractionControllerCopy>();
+
         equippedLight = 1;
         restrictMovement = false;
         tMovement = traveller.GetComponent<travellerMovement>();
@@ -134,7 +139,7 @@ public class playerControllerCopy: MonoBehaviour {
             //setFireFlyMaterial();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
        // }
-        if ((Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) && toggleUnlocked){
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) && toggleUnlocked && iScript.currentTarget !=null){
             //equippedLight = 2;
             //setFireFlyMaterial();
            // abilityBackground.color = Color.yellow;

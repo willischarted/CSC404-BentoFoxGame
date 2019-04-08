@@ -60,6 +60,12 @@ public class stunRadiusController : MonoBehaviour {
 
             sRenderer.enabled = false;
             cCollider.enabled = false;
+            foreach (GameObject g in iController.getMonsters())
+            {
+                EnemyMovement eScript = g.GetComponent<EnemyMovement>();
+                eScript.resetLitOutline();
+            }
+            iController.getMonsters().Clear();
 
         }
     }
