@@ -11,16 +11,23 @@ public class stunRadiusController : MonoBehaviour {
     public float waitTime;
 
     SpriteRenderer sRenderer;
+    CapsuleCollider cCollider;
     InteractionControllerCopy iController;
     // Use this for initialization
     void Start () {
 
         iController = GetComponentInParent<InteractionControllerCopy>();
-
+        cCollider = GetComponent<CapsuleCollider>();
         if (iController == null)
         {
             Debug.Log("Could not find the iController script in parent");
         }
+
+        if (cCollider == null)
+        {
+            Debug.Log("Could not find the cCollider ");
+        }
+
         sRenderer = gameObject.GetComponent<SpriteRenderer>();
 
     }
@@ -52,6 +59,7 @@ public class stunRadiusController : MonoBehaviour {
             transform.localScale = new Vector3(minBound, minBound, minBound);
 
             sRenderer.enabled = false;
+            cCollider.enabled = false;
 
         }
     }
@@ -96,6 +104,7 @@ public class stunRadiusController : MonoBehaviour {
     {
 
         sRenderer.enabled = true;
+        cCollider.enabled = true;
         float timer = 0;
 
         while (true) // this could also be a condition indicating "alive or dead"
