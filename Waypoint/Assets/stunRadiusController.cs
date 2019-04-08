@@ -10,7 +10,7 @@ public class stunRadiusController : MonoBehaviour {
     public float growthFactor;
     public float waitTime;
 
-    MeshRenderer mRenderer;
+    SpriteRenderer sRenderer;
     InteractionControllerCopy iController;
     // Use this for initialization
     void Start () {
@@ -21,7 +21,7 @@ public class stunRadiusController : MonoBehaviour {
         {
             Debug.Log("Could not find the iController script in parent");
         }
-        mRenderer = gameObject.GetComponent<MeshRenderer>();
+        sRenderer = gameObject.GetComponent<SpriteRenderer>();
 
     }
 	
@@ -49,9 +49,9 @@ public class stunRadiusController : MonoBehaviour {
 
             StopAllCoroutines();
 
-            transform.localScale = new Vector3(minBound, transform.localScale.y, minBound);
+            transform.localScale = new Vector3(minBound, minBound, minBound);
 
-            mRenderer.enabled = false;
+            sRenderer.enabled = false;
 
         }
     }
@@ -95,7 +95,7 @@ public class stunRadiusController : MonoBehaviour {
     IEnumerator scaleStunRadius()
     {
 
-        mRenderer.enabled = true;
+        sRenderer.enabled = true;
         float timer = 0;
 
         while (true) // this could also be a condition indicating "alive or dead"
@@ -105,7 +105,7 @@ public class stunRadiusController : MonoBehaviour {
             while (maxBound > transform.localScale.x)
             {
                 timer += Time.deltaTime;
-                transform.localScale += new Vector3(1, 0, 1) * Time.deltaTime * growthFactor;
+                transform.localScale += new Vector3(1, 1, 1) * Time.deltaTime * growthFactor;
                 yield return null;
             }
             // reset the timer
