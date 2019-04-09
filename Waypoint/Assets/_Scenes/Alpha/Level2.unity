@@ -918,7 +918,7 @@ Prefab:
       objectReference: {fileID: 106434510}
     - target: {fileID: 1097514529892106, guid: e201524255b3d3641bc6928a1be5b1b2, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114787456317045356, guid: e201524255b3d3641bc6928a1be5b1b2,
         type: 2}
@@ -1888,7 +1888,7 @@ Prefab:
       objectReference: {fileID: 129186316}
     - target: {fileID: 1465802554669840, guid: 463ec4441f575de4e910171bfcc78008, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114106499950572080, guid: 463ec4441f575de4e910171bfcc78008,
         type: 2}
@@ -17690,7 +17690,7 @@ GameObject:
   - component: {fileID: 1498510740}
   - component: {fileID: 1498510741}
   m_Layer: 5
-  m_Name: TutorialText
+  m_Name: T1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17738,10 +17738,12 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 0
-  targetObject: {fileID: 0}
+  targetObjects: []
+  iScript: {fileID: 0}
 --- !u!1001 &1501238848
 Prefab:
   m_ObjectHideFlags: 0
@@ -18095,7 +18097,7 @@ Prefab:
       objectReference: {fileID: 1526696693}
     - target: {fileID: 1159778520130178, guid: f053d365198a5c5419e79fdcf985bb86, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114797997258692474, guid: f053d365198a5c5419e79fdcf985bb86,
         type: 2}
@@ -21485,7 +21487,7 @@ GameObject:
   - component: {fileID: 1842969368}
   - component: {fileID: 1842969369}
   m_Layer: 5
-  m_Name: TutorialText (1)
+  m_Name: T2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21534,10 +21536,13 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 0
-  targetObject: {fileID: 357503863}
+  targetObjects:
+  - {fileID: 357503863}
+  iScript: {fileID: 0}
 --- !u!114 &1845589936
 MonoBehaviour:
   m_ObjectHideFlags: 0

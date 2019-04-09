@@ -21,10 +21,14 @@ public class cameraFacingBillboard : MonoBehaviour
     public bool isLookTargetTutorial; //force the camera at position
     public bool isIntermmediate;
     public bool isIntermmediateUnLock;
+    public bool isMonsterTut;
+
 
     public LayerMask myMask;
 
     public GameObject[] targetObjects;
+
+    public InteractionController iScript;
     
     public void Start()
     {
@@ -40,6 +44,7 @@ public class cameraFacingBillboard : MonoBehaviour
         if (isLookTutorial)
         {
             Invoke("setTextActive", 0.2f);
+            Invoke("setTargetActive", 0.2f);
             setLookTutorial();
             StartCoroutine("lookTutorial");
            
@@ -89,6 +94,13 @@ public class cameraFacingBillboard : MonoBehaviour
             Invoke("lookAtTarget", 0.2f);
             StartCoroutine("lookTargetPhase");
         }
+        if (isMonsterTut)
+        {
+            Invoke("setTextActive", 0.2f);
+            setInfoTutorial();
+            StartCoroutine("monsterTutPhase");
+        }
+
 
 
 
@@ -315,6 +327,39 @@ public class cameraFacingBillboard : MonoBehaviour
             yield return null;
         }
         
+
+
+    }
+
+    public IEnumerator monsterTutPhase()
+    {
+        float timer = 0f;
+
+        while (timer < 0.2f)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        while (true)
+        {
+            if ((Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")))
+            {
+                restrictionReset(0);
+
+                Destroy(textObject);
+                if (targetObjects.Length != 0)
+                {
+                    foreach (GameObject g in targetObjects)
+                        g.SetActive(false);
+                }
+
+                setNextTutorial();
+            }
+
+            yield return null;
+        }
+
 
 
     }

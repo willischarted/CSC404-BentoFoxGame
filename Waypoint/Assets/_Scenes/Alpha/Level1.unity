@@ -14540,7 +14540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &227648100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14583,12 +14583,14 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 0
   targetObjects:
   - {fileID: 1289952147}
   - {fileID: 650830208}
+  iScript: {fileID: 0}
 --- !u!1001 &236906710
 Prefab:
   m_ObjectHideFlags: 0
@@ -15424,7 +15426,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -996.7}
+  m_AnchoredPosition: {x: 0, y: -781.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &292080328
@@ -15736,7 +15738,7 @@ Prefab:
       objectReference: {fileID: 636560175}
     - target: {fileID: 1159778520130178, guid: f053d365198a5c5419e79fdcf985bb86, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f053d365198a5c5419e79fdcf985bb86, type: 2}
@@ -17492,7 +17494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &373597841
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19503,7 +19505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &456671534
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21469,13 +21471,14 @@ GameObject:
   - component: {fileID: 542553825}
   - component: {fileID: 542553824}
   - component: {fileID: 542553823}
+  - component: {fileID: 542553826}
   m_Layer: 5
   m_Name: A1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &542553822
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21491,7 +21494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.07, y: 3.45}
+  m_AnchoredPosition: {x: 0.07, y: 2.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &542553823
@@ -21505,8 +21508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1b8b13d9b7aa54b8e794e47c40a937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetY: 4
-  speed: 0.35
+  targetY: 3.2
+  speed: 0.6
   movingToTarget: 0
 --- !u!114 &542553824
 MonoBehaviour:
@@ -21542,6 +21545,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 542553821}
   m_CullTransparentMesh: 0
+--- !u!114 &542553826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 542553821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664877d5cd61bf74cb1bf5ff68ea6273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 0
+  m_Camera: {fileID: 636560175}
 --- !u!1 &542691547
 GameObject:
   m_ObjectHideFlags: 0
@@ -23553,11 +23569,13 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 0
   targetObjects:
   - {fileID: 542553821}
+  iScript: {fileID: 0}
 --- !u!1 &624275472
 GameObject:
   m_ObjectHideFlags: 0
@@ -24073,6 +24091,7 @@ GameObject:
   - component: {fileID: 650830212}
   - component: {fileID: 650830211}
   - component: {fileID: 650830210}
+  - component: {fileID: 650830213}
   m_Layer: 5
   m_Name: A1 (1)
   m_TagString: Untagged
@@ -24146,6 +24165,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 650830208}
   m_CullTransparentMesh: 0
+--- !u!114 &650830213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650830208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664877d5cd61bf74cb1bf5ff68ea6273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 0
+  m_Camera: {fileID: 636560175}
 --- !u!1 &651932205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1381214199821770, guid: b616a727c44734e0aab5eec1e264b7f9,
@@ -26818,7 +26850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &741247896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44474,10 +44506,12 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 1
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 65536
   targetObjects: []
+  iScript: {fileID: 0}
 --- !u!1 &1171727741
 GameObject:
   m_ObjectHideFlags: 0
@@ -44690,10 +44724,12 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 0
   targetObjects: []
+  iScript: {fileID: 0}
 --- !u!1 &1177043067
 GameObject:
   m_ObjectHideFlags: 0
@@ -45968,7 +46004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1234877559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47734,6 +47770,7 @@ GameObject:
   - component: {fileID: 1289952151}
   - component: {fileID: 1289952150}
   - component: {fileID: 1289952149}
+  - component: {fileID: 1289952152}
   m_Layer: 5
   m_Name: A1
   m_TagString: Untagged
@@ -47807,6 +47844,19 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1289952147}
   m_CullTransparentMesh: 0
+--- !u!114 &1289952152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1289952147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664877d5cd61bf74cb1bf5ff68ea6273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 0
+  m_Camera: {fileID: 636560175}
 --- !u!1 &1293012076
 GameObject:
   m_ObjectHideFlags: 0
@@ -48152,7 +48202,7 @@ Prefab:
       objectReference: {fileID: 636560175}
     - target: {fileID: 1465802554669840, guid: 463ec4441f575de4e910171bfcc78008, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 463ec4441f575de4e910171bfcc78008, type: 2}
@@ -60705,7 +60755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1501168989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -67350,10 +67400,12 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 0
   targetObjects: []
+  iScript: {fileID: 0}
 --- !u!1 &1723069686
 GameObject:
   m_ObjectHideFlags: 0
@@ -67566,10 +67618,13 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 0
-  targetObjects: []
+  targetObjects:
+  - {fileID: 1234877558}
+  iScript: {fileID: 0}
 --- !u!1 &1730976342
 GameObject:
   m_ObjectHideFlags: 0
@@ -68099,11 +68154,13 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 65536
   targetObjects:
   - {fileID: 456671533}
+  iScript: {fileID: 0}
 --- !u!1 &1757904912
 GameObject:
   m_ObjectHideFlags: 0
@@ -68536,10 +68593,12 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 65536
   targetObjects: []
+  iScript: {fileID: 0}
 --- !u!1 &1783607052
 GameObject:
   m_ObjectHideFlags: 0
@@ -69514,10 +69573,12 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 1
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 65536
   targetObjects: []
+  iScript: {fileID: 0}
 --- !u!1 &1828312932
 GameObject:
   m_ObjectHideFlags: 0
@@ -73083,7 +73144,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1097514529892106, guid: e201524255b3d3641bc6928a1be5b1b2, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e201524255b3d3641bc6928a1be5b1b2, type: 2}
@@ -76943,10 +77004,12 @@ MonoBehaviour:
   isLookTargetTutorial: 0
   isIntermmediate: 0
   isIntermmediateUnLock: 0
+  isMonsterTut: 0
   myMask:
     serializedVersion: 2
     m_Bits: 0
   targetObjects: []
+  iScript: {fileID: 0}
 --- !u!224 &2026501286
 RectTransform:
   m_ObjectHideFlags: 0
