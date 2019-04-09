@@ -60,11 +60,14 @@ public class RotateCamera : MonoBehaviour {
     private Vector3 defaultDestination;
     Quaternion tacticleRotation;
     private Quaternion defaultRotation;
-   // public GameObject ground;
+    // public GameObject ground;
     ///////////////////////////////////////////////////////////////////////////////////////////////
-    
+
+    public bool inTutorial;
+
     void Start () {
-       
+         //inTutorial = false;
+
          tacticalView = false;
          cameraMoving = false;
          cameraMovingBack = false;
@@ -79,7 +82,10 @@ public class RotateCamera : MonoBehaviour {
     
 
     void Update() {
-      
+        if (inTutorial)
+            return;
+
+     
         if (!tacticalView && !cameraMoving && !cameraMovingBack) {
             currentX += Input.GetAxis("Mouse X") * turnSpeedX;
         
@@ -90,6 +96,8 @@ public class RotateCamera : MonoBehaviour {
 
         }
         
+      
+
 
        // if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("L2")) {
        /* 

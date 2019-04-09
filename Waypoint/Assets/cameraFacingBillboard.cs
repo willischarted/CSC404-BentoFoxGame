@@ -5,7 +5,7 @@ using System.Collections;
 public class cameraFacingBillboard : MonoBehaviour
 {
     public Camera m_Camera;
-
+    private RotateCamera camScript;
     public GameObject textObject; 
 
     public GameObject nextTutorialText;
@@ -14,10 +14,11 @@ public class cameraFacingBillboard : MonoBehaviour
     playerControllerCopy pScript;
 
     public bool isWorldSpace;
-    public bool isLookTutorial;
+    public bool isLookTutorial; //make them look at position
     public bool isMoveTutorial;
     public bool isLightTutorial;
-
+    public bool isInfoTutorial;
+    public bool isLookTargetTutorial; //force the camera at position
     public bool isIntermmediate;
     public bool isIntermmediateUnLock;
 
@@ -26,6 +27,7 @@ public class cameraFacingBillboard : MonoBehaviour
     public GameObject targetObject;
     public void Start()
     {
+        camScript = m_Camera.GetComponent<RotateCamera>();
         pScript = player.gameObject.GetComponent<playerControllerCopy>();
 
         if (pScript == null)
@@ -72,6 +74,23 @@ public class cameraFacingBillboard : MonoBehaviour
 
         }
 
+       
+        if (isInfoTutorial)
+        {
+            Invoke("setTextActive", 0.2f);
+            Invoke("setTargetActive", 0.2f);
+            setInfoTutorial();
+            StartCoroutine("infoPhase");
+        }
+        if (isLookTargetTutorial)
+        {
+            setLookTargetTutorial();
+            Invoke("lookAtTarget", 0.2f);
+            StartCoroutine("lookTargetPhase");
+        }
+
+
+
 
 
     }
@@ -95,6 +114,14 @@ public class cameraFacingBillboard : MonoBehaviour
 
     public void setNextTutorial()
     {
+        pScript.TutorialText = nextTutorialText;
+        if (nextTutorialText != null)
+        {
+            nextTutorialText.SetActive(true);// = true;
+        }
+        Destroy(this.gameObject);
+
+        /*
         if (nextTutorialText == null)
         {
             pScript.setInTutorial(false);
@@ -110,7 +137,8 @@ public class cameraFacingBillboard : MonoBehaviour
 
            
         }
-    } 
+        */
+    }
 
     public void setLightTutorial()
     {
@@ -118,11 +146,49 @@ public class cameraFacingBillboard : MonoBehaviour
         pScript.setInTutorial(false);
 
     }
+    public void setLookTargetTutorial()
+    {
+        camScript.inTutorial = true;
+        Debug.Log("Setting camera to tutorial");
+        pScript.setInTutorial(true);
+    }
 
+    public void setInfoTutorial()
+    {
+        //pScript.setRestrictMovement(false);
+        pScript.setInTutorial(true);
+
+    }
+
+    public void restrictionReset(int degree)
+    {
+        Debug.Log("reseting all restrictions");
+        if (degree == 0)
+        {
+            pScript.setInTutorial(false);
+        }
+        else if (degree == 1)
+        {
+            camScript.inTutorial = false;
+            pScript.setInTutorial(false);
+        }
+    }
     void setTextActive()
     {
         textObject.SetActive(true);
        
+    }
+
+    void setTargetActive()
+    {
+        if (targetObject != null)
+            targetObject.SetActive(true);
+
+    }
+
+    void lookAtTarget()
+    {
+        m_Camera.transform.LookAt(targetObject.transform);
     }
 
     void setIntermediatePhase()
@@ -208,6 +274,57 @@ public class cameraFacingBillboard : MonoBehaviour
         setNextTutorial();
 
     
+    }
+
+    public IEnumerator infoPhase()
+    {
+        float timer = 0f;
+
+        while (timer < 0.2f)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        while (true)
+        {
+            if ((Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)))
+            {
+                restrictionReset(0);
+
+                Destroy(textObject);
+                if (targetObject != null)
+                    Destroy(targetObject);
+                
+                setNextTutorial();
+            }
+           
+            yield return null;
+        }
+        
+
+
+    }
+
+    public IEnumerator lookTargetPhase()
+    {
+        
+
+        while (true)
+        {
+            if ((Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)))
+            {
+                Destroy(textObject);
+                Destroy(targetObject);
+                restrictionReset(1);
+                setNextTutorial();
+            }
+            lookAtTarget();
+            yield return null;
+        }
+
+
+
     }
 
     public IEnumerator lightTutorial()
