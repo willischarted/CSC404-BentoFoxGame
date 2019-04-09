@@ -9,6 +9,9 @@ public class simpleVerticleMovement : MonoBehaviour {
     public float targetY;
 
     public float speed;
+
+ 
+
     [SerializeField]
     private bool movingToTarget;
 	// Use this for initialization
@@ -20,23 +23,26 @@ public class simpleVerticleMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (transform.localPosition.y >= targetY)
-        {
-            //Debug.Log(transform.localPosition.y);
-            movingToTarget = false;
-        }
-        else if (transform.localPosition.y <= defaultY)
-        {
-            movingToTarget = true;
-        }
 
-        if (movingToTarget)
-        {
-            transform.localPosition += new Vector3(0, 1, 0) * Time.deltaTime * speed;
-        }
-        else
-        {
-            transform.localPosition -= new Vector3(0, 1, 0) * Time.deltaTime * speed;
-        }
+            if (transform.localPosition.y >= targetY)
+            {
+                //Debug.Log(transform.localPosition.y);
+                movingToTarget = false;
+            }
+            else if (transform.localPosition.y <= defaultY)
+            {
+                movingToTarget = true;
+            }
+
+            if (movingToTarget)
+            {
+                transform.localPosition += new Vector3(0, 1, 0) * Time.deltaTime * speed;
+            }
+            else
+            {
+                transform.localPosition -= new Vector3(0, 1, 0) * Time.deltaTime * speed;
+            }
+        
+       
 	}
 }

@@ -24,7 +24,8 @@ public class cameraFacingBillboard : MonoBehaviour
 
     public LayerMask myMask;
 
-    public GameObject targetObject;
+    public GameObject[] targetObjects;
+    
     public void Start()
     {
         camScript = m_Camera.GetComponent<RotateCamera>();
@@ -181,16 +182,19 @@ public class cameraFacingBillboard : MonoBehaviour
 
     void setTargetActive()
     {
-        if (targetObject != null)
-            targetObject.SetActive(true);
+        if (targetObjects.Length != 0)
+        {
+            foreach (GameObject g in targetObjects)
+                g.SetActive(true);
+        }
 
     }
-
+    /*
     void lookAtTarget()
     {
         m_Camera.transform.LookAt(targetObject.transform);
     }
-
+    */
     void setIntermediatePhase()
     {
         pScript.setInTutorial(true);
@@ -223,8 +227,11 @@ public class cameraFacingBillboard : MonoBehaviour
                         //Debug.Log(hit.collider.gameObject);
 
                         Destroy(textObject);
-                        if (targetObject != null)
-                            Destroy(targetObject);
+                        if (targetObjects.Length != 0)
+                        {
+                            foreach (GameObject g in targetObjects)
+                              Destroy(g);
+                        }
                         //yield return new WaitForSeconds(1f);
                         setNextTutorial();
                     }
@@ -251,8 +258,11 @@ public class cameraFacingBillboard : MonoBehaviour
                 pScript.setRestrictMovement(false);
 
                 Destroy(textObject);
-                if (targetObject != null)
-                    Destroy(targetObject);
+                if (targetObjects.Length != 0)
+                {
+                    foreach (GameObject g in targetObjects)
+                        Destroy(g);
+                }
                 //yield return new WaitForSeconds(1f);
                 setNextTutorial();
             }
@@ -293,9 +303,12 @@ public class cameraFacingBillboard : MonoBehaviour
                 restrictionReset(0);
 
                 Destroy(textObject);
-                if (targetObject != null)
-                    Destroy(targetObject);
-                
+                if (targetObjects.Length != 0)
+                {
+                    foreach (GameObject g in targetObjects)
+                        Destroy(g);
+                }
+
                 setNextTutorial();
             }
            
@@ -315,11 +328,15 @@ public class cameraFacingBillboard : MonoBehaviour
             if ((Input.GetButtonDown("X") || Input.GetMouseButtonDown(0)))
             {
                 Destroy(textObject);
-                Destroy(targetObject);
+                if (targetObjects.Length != 0)
+                {
+                    foreach (GameObject g in targetObjects)
+                        Destroy(g);
+                }
                 restrictionReset(1);
                 setNextTutorial();
             }
-            lookAtTarget();
+            //lookAtTarget();
             yield return null;
         }
 
