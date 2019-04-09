@@ -384,6 +384,14 @@ public class EnemyMovement : MonoBehaviour
 
         if (isStunned)
             return;
+        if (monsterAnim.GetCurrentAnimatorStateInfo(0).IsName("Chase") && !((getLampPriority(litLamp) == 3)))
+        {
+            currentTarget = traveller.position;
+            nav.SetDestination(currentTarget);
+            nav.isStopped = false;
+            isChaseTrav = true;
+            return;
+        }
         float distance = Mathf.Infinity;
         GameObject newCurrentLamp = null;
         foreach (GameObject newlamp in lamps) //this part is also not quite working
