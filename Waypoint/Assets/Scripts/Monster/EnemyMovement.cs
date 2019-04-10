@@ -609,9 +609,12 @@ public class EnemyMovement : MonoBehaviour
 
     public void setLitOutline()
     {
-        foreach (monsterLitMatSwitcher s in model.GetComponentsInChildren<monsterLitMatSwitcher>())
+        if (model != null)
         {
-            s.setLitMat();
+            foreach (monsterLitMatSwitcher s in model.GetComponentsInChildren<monsterLitMatSwitcher>())
+            {
+                s.setLitMat();
+            }
         }
     }
     public void resetLitOutline()
