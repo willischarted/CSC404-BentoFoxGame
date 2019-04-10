@@ -44,6 +44,8 @@ public class lightSourceController : MonoBehaviour {
 
     public lantern_01_matswitcher switcherScript;
 
+    public bool isLightDisabled;
+
     void Awake() {
 		setMiniMapPaths();
 		setWorldPaths();
@@ -261,7 +263,10 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void setWorldPaths() {
-		foreach(GameObject g in adjacentSources) {
+        if (isLightDisabled)
+            return;
+
+        foreach (GameObject g in adjacentSources) {
 			
 			GameObject m = Instantiate(worldPath, transform.position, Quaternion.identity);
 			m.transform.parent = transform;
@@ -335,6 +340,8 @@ public class lightSourceController : MonoBehaviour {
 	}
 
 	public void setMiniMapPathColor(int col) {
+        if (isLightDisabled)
+            return;
 		foreach (miniMapPathController m in  GetComponentsInChildren<miniMapPathController>()) {
 			m.setPathColor(col);
 		}

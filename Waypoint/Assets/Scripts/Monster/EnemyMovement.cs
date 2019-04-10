@@ -495,7 +495,7 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log("Could not find the traveller animator");
         if (!attackInterrupt && !isStunned) { //may have been stunned a few frames before, not interrupted but code raced past, still stunned
             travAnim.SetTrigger("isAttacked");
-            travHealth.TakeBasicDamage(20);
+            travHealth.TakeBasicDamage(25);
             attackSound.enabled = false;
         }
         if (nav.isStopped)
