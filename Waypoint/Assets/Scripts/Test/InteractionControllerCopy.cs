@@ -372,7 +372,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 		}
         
 		if (other.tag == "LampLight") {
-            Debug.Log("at lamp light");
+            //Debug.Log("at lamp light");
             if (currentTarget != other.gameObject) //new lamp entered radius but old hasnt left
             {
 

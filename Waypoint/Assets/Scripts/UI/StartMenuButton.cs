@@ -26,6 +26,10 @@ public class StartMenuButton : MonoBehaviour
 
     private void Start()
     {
+
+        resetPlayerPrefs();
+
+
         options = new int[2];
         optionNum = 0;
         newGameBtn = canvas.transform.GetChild(1).GetComponent<Button>();
@@ -154,5 +158,23 @@ public class StartMenuButton : MonoBehaviour
         SceneManager.LoadScene("Level1");
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().checkPlay();
 
+    }
+
+    public void resetPlayerPrefs()
+    {
+
+        PlayerPrefs.SetInt("Level1", 0);
+        PlayerPrefs.SetInt("Level2", 0);
+        PlayerPrefs.SetInt("Level2.5", 0);
+        PlayerPrefs.SetInt("Level2.5EDIT", 0);
+        PlayerPrefs.SetInt("Level3", 0);
+        PlayerPrefs.SetInt("Level3EDIT", 0);
+        PlayerPrefs.SetInt("Level3.5", 0);
+        PlayerPrefs.SetInt("Level3.5EDIT", 0);
+        PlayerPrefs.SetInt("Level4", 0);
+        PlayerPrefs.SetInt("Level4EDIT", 0);
+        PlayerPrefs.SetInt("Level5", 0);
+        PlayerPrefs.SetInt("Level5.5", 0);
+        PlayerPrefs.SetInt("Level7", 0);
     }
 }

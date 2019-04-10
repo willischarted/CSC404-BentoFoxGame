@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class cameraFacingBillboard : MonoBehaviour
@@ -29,9 +29,17 @@ public class cameraFacingBillboard : MonoBehaviour
     public GameObject[] targetObjects;
 
     public InteractionController iScript;
+
+    public bool isStart;// the first of the tutorial frame
     
     public void Start()
     {
+
+        if (isStart && playTutorial())
+        {
+            Destroy(gameObject);
+            return;
+        }
         camScript = m_Camera.GetComponent<RotateCamera>();
         pScript = player.gameObject.GetComponent<playerControllerCopy>();
 
@@ -412,4 +420,114 @@ public class cameraFacingBillboard : MonoBehaviour
         Gizmos.DrawRay(transform.position, direction);
     }
     */
+
+//TODO
+    //move to seperate class later
+    public bool playTutorial()
+    {
+        if (SceneManager.GetActiveScene().name.CompareTo("Level1") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level1") == 0)
+            {
+                PlayerPrefs.SetInt("Level1", 1);
+                return false;
+            }
+            else
+                return true;
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level2") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level2") == 0)
+            {
+                PlayerPrefs.SetInt("Level2", 1);
+                return false;
+            }
+            else
+                return true;
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level2.5") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level2.5.5EDIT") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level2.5") == 0 || PlayerPrefs.GetInt("Level2.5EDIT") == 0)
+            {
+                PlayerPrefs.SetInt("Level2.5", 1);
+                PlayerPrefs.SetInt("Level2.5EDIT", 1);
+                return false;
+            }
+            else
+                return true;
+        }
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level3") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level3EDIT") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level3") == 0 || PlayerPrefs.GetInt("Level3EDIT") == 0)
+            {
+                PlayerPrefs.SetInt("Level3", 1);
+                PlayerPrefs.SetInt("Level3EDIT", 1);
+                return false;
+            }
+            else
+                return true;
+
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level3.5") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level3.5EDIT") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level3.5") == 0 || PlayerPrefs.GetInt("Level3.5EDIT") == 0)
+            {
+                PlayerPrefs.SetInt("Level3.5", 1);
+                PlayerPrefs.SetInt("Level3.5EDIT", 1);
+                return false;
+            }
+            else
+                return true;
+
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level4EDIT") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level4") == 0 || PlayerPrefs.GetInt("Level4.5EDIT") == 0)
+            {
+                PlayerPrefs.SetInt("Level4", 1);
+                PlayerPrefs.SetInt("Level4EDIT", 1);
+                return false;
+            }
+            else
+                return true;
+        }
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level5") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level5") == 0)
+            {
+                PlayerPrefs.SetInt("Level5", 1);
+
+                return false;
+            }
+            else
+                return true;
+        }
+
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level5.5") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level5.5") == 0)
+            {
+                PlayerPrefs.SetInt("Level5.5", 1);
+
+                return false;
+            }
+            else
+                return true;
+        }
+        else if (SceneManager.GetActiveScene().name.CompareTo("Level7") == 0)
+        {
+            if (PlayerPrefs.GetInt("Level7") == 0)
+            {
+                PlayerPrefs.SetInt("Level7", 1);
+
+                return false;
+            }
+            else
+                return true;
+        }
+        else
+            return false;
+    }
 }

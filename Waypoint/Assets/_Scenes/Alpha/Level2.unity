@@ -802,6 +802,7 @@ MonoBehaviour:
   targetObjects:
   - {fileID: 354170936}
   iScript: {fileID: 0}
+  isStart: 0
 --- !u!1 &81054090
 GameObject:
   m_ObjectHideFlags: 0
@@ -11753,6 +11754,10 @@ Prefab:
       propertyPath: m_Volume
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4340267139681656, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.005
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
   m_IsPrefabAsset: 0
@@ -12252,6 +12257,10 @@ Prefab:
     - target: {fileID: 1423703110356508, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
       propertyPath: m_Name
       value: BabyMonster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4340267139681656, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8167b98a47821f47bbd83f19ee4801a, type: 2}
@@ -16842,9 +16851,9 @@ MonoBehaviour:
   myMask:
     serializedVersion: 2
     m_Bits: 0
-  targetObjects:
-  - {fileID: 0}
+  targetObjects: []
   iScript: {fileID: 0}
+  isStart: 0
 --- !u!1 &1415535678
 GameObject:
   m_ObjectHideFlags: 0
@@ -18583,6 +18592,7 @@ MonoBehaviour:
     m_Bits: 0
   targetObjects: []
   iScript: {fileID: 0}
+  isStart: 1
 --- !u!1001 &1501238848
 Prefab:
   m_ObjectHideFlags: 0
@@ -18778,6 +18788,7 @@ MonoBehaviour:
   targetObjects:
   - {fileID: 470863083}
   iScript: {fileID: 0}
+  isStart: 0
 --- !u!1 &1504940325
 GameObject:
   m_ObjectHideFlags: 0
@@ -22526,6 +22537,7 @@ MonoBehaviour:
   targetObjects:
   - {fileID: 357503863}
   iScript: {fileID: 0}
+  isStart: 0
 --- !u!114 &1845589936
 MonoBehaviour:
   m_ObjectHideFlags: 0
