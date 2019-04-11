@@ -212,7 +212,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			anim.SetBool("isHealing", false);
 		}
 
-		if (Input.GetMouseButtonUp(1) ||  Input.GetButtonUp("Square") ) {
+		if ((Input.GetMouseButtonUp(1) ||  Input.GetButtonUp("Square")) && stunUnlocked ) {
 			
 			if (pController.getResource() >= 20 && monstersInRange.Count >=1) {
 				setStun();
@@ -641,7 +641,7 @@ public class InteractionControllerCopy : MonoBehaviour {
         }
 		else if (SceneManager.GetActiveScene().name.CompareTo("Level3.5") == 0 || SceneManager.GetActiveScene().name.CompareTo("Level3.5EDIT") == 0) {
             healUnlocked = true;
-			stunUnlocked = true;
+			stunUnlocked = false;
 			
         }
         else if (SceneManager.GetActiveScene().name.CompareTo("Level4") == 0 ||  SceneManager.GetActiveScene().name.CompareTo("Level4EDIT") == 0) {
