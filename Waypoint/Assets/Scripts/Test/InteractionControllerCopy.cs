@@ -563,6 +563,7 @@ public class InteractionControllerCopy : MonoBehaviour {
             // get animator contoller and set stun
         }
 		pController.addResource(-stunCost);
+        monstersInRange.Clear();
 	}
 
 	void controlLureImage() {

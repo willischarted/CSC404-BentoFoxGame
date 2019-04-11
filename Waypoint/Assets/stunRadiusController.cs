@@ -16,6 +16,7 @@ public class stunRadiusController : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        //NGUIDebug.Log("Text");
         iController = GetComponentInParent<InteractionControllerCopy>();
         cCollider = GetComponent<CapsuleCollider>();
         if (iController == null)
@@ -53,7 +54,7 @@ public class stunRadiusController : MonoBehaviour {
 
         if (Input.GetMouseButtonUp(1) || Input.GetButtonUp("Square"))
         {
-
+            
             StopAllCoroutines();
 
             transform.localScale = new Vector3(minBound, minBound, minBound);
@@ -65,7 +66,7 @@ public class stunRadiusController : MonoBehaviour {
                 EnemyMovement eScript = g.GetComponent<EnemyMovement>();
                 eScript.resetLitOutline();
             }
-            iController.getMonsters().Clear();
+            //iController.getMonsters().Clear();
 
         }
     }
@@ -76,6 +77,7 @@ public class stunRadiusController : MonoBehaviour {
         {
             if (other.tag == "Monster")
             {
+                //Debug.Log("COLLIDING WITH MONSTER");
                 EnemyMovement monScript = other.gameObject.GetComponent<EnemyMovement>();
                 if (!monScript.getIsStunned())
                 {
@@ -86,11 +88,12 @@ public class stunRadiusController : MonoBehaviour {
                         iController.monstersInRange.Add(other.gameObject);
                     }
                 }
+                else
+                {
+                    iController.getMonsters().Remove(other.gameObject);
+                }
             }
-            else
-            {
-                iController.getMonsters().Remove(other.gameObject);
-            }
+     
         }
     }
 
@@ -99,7 +102,7 @@ public class stunRadiusController : MonoBehaviour {
         
         if (other.tag == "Monster" && other is CapsuleCollider)
         {
-            Debug.Log("exit");
+            //Debug.Log("exit");
             other.GetComponent<EnemyMovement>().resetLitOutline();
             iController.getMonsters().Remove(other.gameObject);
         }

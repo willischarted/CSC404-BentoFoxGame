@@ -205,8 +205,8 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            if (!roamingSound.isPlaying)
-            {
+            if (!roamingSound.isPlaying && roamingSound.enabled)
+            {   
                 roamingSound.Play();
             }
             roamingSound.volume = 0;
