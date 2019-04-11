@@ -139,6 +139,11 @@ public class playerControllerCopy: MonoBehaviour {
             //setFireFlyMaterial();
             //SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
        // }
+       if ((Input.GetKeyDown(KeyCode.T)))
+        {
+            resetPlayerPrefs();
+
+        }
         if ((Input.GetKeyDown(KeyCode.E) || Input.GetButtonDown("Triangle")) && toggleUnlocked && iScript.currentTarget !=null){
             //equippedLight = 2;
             //setFireFlyMaterial();
@@ -652,4 +657,21 @@ public class playerControllerCopy: MonoBehaviour {
 		}
 	}
 
+    public void resetPlayerPrefs()
+    {
+
+        PlayerPrefs.SetInt("Level1", 0);
+        PlayerPrefs.SetInt("Level2", 0);
+        PlayerPrefs.SetInt("Level2.5", 0);
+        PlayerPrefs.SetInt("Level2.5EDIT", 0);
+        PlayerPrefs.SetInt("Level3", 0);
+        PlayerPrefs.SetInt("Level3EDIT", 0);
+        PlayerPrefs.SetInt("Level3.5", 0);
+        PlayerPrefs.SetInt("Level3.5EDIT", 0);
+        PlayerPrefs.SetInt("Level4", 0);
+        PlayerPrefs.SetInt("Level4EDIT", 0);
+        PlayerPrefs.SetInt("Level5", 0);
+        PlayerPrefs.SetInt("Level5.5", 0);
+        PlayerPrefs.SetInt("Level7", 0);
+    }
 }

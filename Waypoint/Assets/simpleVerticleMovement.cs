@@ -10,7 +10,7 @@ public class simpleVerticleMovement : MonoBehaviour {
 
     public float speed;
 
- 
+
 
     [SerializeField]
     private bool movingToTarget;
@@ -36,11 +36,13 @@ public class simpleVerticleMovement : MonoBehaviour {
 
             if (movingToTarget)
             {
-                transform.localPosition += new Vector3(0, 1, 0) * Time.deltaTime * speed;
+
+                    transform.localPosition += new Vector3(0, 1, 0) * Time.deltaTime * speed;
             }
             else
             {
-                transform.localPosition -= new Vector3(0, 1, 0) * Time.deltaTime * speed;
+
+                    transform.localPosition -= new Vector3(0, 1, 0) * Time.deltaTime * speed;
             }
         
        
