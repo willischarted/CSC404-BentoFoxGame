@@ -10,6 +10,9 @@ public class PauseMenu : MonoBehaviour
     //Button Array
     //place array
     public GameObject pauseMenu;
+    public GameObject pMResume;
+    public GameObject pMRestart;
+    public GameObject pMSM;
     private int[] options;
     private int optionNum;
     private bool xAxisInUse = false;
@@ -32,7 +35,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
         Debug.Log(optionNum);
         float yValue = Input.GetAxis("DPadY");
           if (yValue != 0f)
@@ -97,18 +100,42 @@ public class PauseMenu : MonoBehaviour
         if(optionNum  == 0)
         {
             resumeBtn.Select();
+            if(SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                pMResume.SetActive(true);
+                pMRestart.SetActive(false);
+                pMSM.SetActive(false);
+            }
         }
         if (optionNum == 1)
         {
             restartBtn.Select();
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                pMResume.SetActive(false);
+                pMRestart.SetActive(true);
+                pMSM.SetActive(false);
+            }
         }
         if (optionNum == 2)
         {
             startMenuBtn.Select();
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                pMResume.SetActive(false);
+                pMRestart.SetActive(false);
+                pMSM.SetActive(true);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("X"))
         {
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                pMResume.SetActive(false);
+                pMRestart.SetActive(false);
+                pMSM.SetActive(false);
+            }
             if (optionNum == 1)
             {
                 Debug.Log("restart");
@@ -126,6 +153,12 @@ public class PauseMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Circle")
             || Input.GetButtonUp("Start"))
         {
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                pMResume.SetActive(false);
+                pMRestart.SetActive(false);
+                pMSM.SetActive(false);
+            }
             resume();
         }
         
@@ -165,6 +198,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().lowpassOn();
         Time.timeScale = 0f;
+        optionNum = 0;
+        resumeBtn.Select();
     }
 
 }

@@ -10,6 +10,8 @@ public class GameOver : MonoBehaviour
     //Button Array
     //place array
     public GameObject gameOver;
+    public GameObject gORestart;
+    public GameObject gOSM;
     private int[] options;
     private int optionNum;
     private bool xAxisInUse = false;
@@ -94,14 +96,29 @@ public class GameOver : MonoBehaviour
         if (optionNum == 0)
         {
             restartBtn.Select();
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                gORestart.SetActive(true);
+                gOSM.SetActive(false);
+            }
         }
         if (optionNum == 1)
         {
             startMenuBtn.Select();
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                gORestart.SetActive(false);
+                gOSM.SetActive(true);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("X"))
         {
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                gORestart.SetActive(false);
+                gOSM.SetActive(false);
+            }
             if (optionNum == 0)
             {
                 restartLevel();
@@ -115,12 +132,14 @@ public class GameOver : MonoBehaviour
 
     public void gameOverr()
     {
+        
         Time.timeScale = 0f;
         gameOver.SetActive(true);
     }
 
     public void restartLevel()
     {
+        optionNum = 4;
         Time.timeScale = 1f;
         gameOver.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -129,6 +148,7 @@ public class GameOver : MonoBehaviour
 
     public void startMenu()
     {
+        optionNum = 4;
         Time.timeScale = 1f;
         gameOver.SetActive(false);
         SceneManager.LoadScene("Start Menu");

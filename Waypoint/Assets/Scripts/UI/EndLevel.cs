@@ -10,6 +10,9 @@ public class EndLevel : MonoBehaviour
     //Button Array
     //place array
     public GameObject levelUp;
+    public GameObject lUNext;
+    public GameObject lURestart;
+    public GameObject lUSM;
     private int optionNum;
     private bool xAxisInUse = false;
     private bool yAxisInUse = false;
@@ -113,17 +116,41 @@ public class EndLevel : MonoBehaviour
         if (optionNum == 0)
         {
             nextLevelBtn.Select();
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                lUNext.SetActive(true);
+                lURestart.SetActive(false);
+                lUSM.SetActive(false);
+            }
         }
         if (optionNum == 1)
         {
             restartBtn.Select();
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                lUNext.SetActive(false);
+                lURestart.SetActive(true);
+                lUSM.SetActive(false);
+            }
         }
         if (optionNum == 2)
         {
             startMenuBtn.Select();
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                lUNext.SetActive(false);
+                lURestart.SetActive(false);
+                lUSM.SetActive(true);
+            }
         }
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("X"))
         {
+            if (SceneManager.GetActiveScene().name.Equals("Level1"))
+            {
+                lUNext.SetActive(false);
+                lURestart.SetActive(false);
+                lUSM.SetActive(false);
+            }
             if (optionNum == 1)
             {
                 restartLevel();
@@ -153,6 +180,7 @@ public class EndLevel : MonoBehaviour
 
     public void restartLevel()
     {
+        optionNum = 4;
         buttonSound.enabled = true;
         buttonSound.PlayOneShot(buttonSound.clip);
         /*  Time.timeScale = 1f;
@@ -164,6 +192,7 @@ public class EndLevel : MonoBehaviour
 
     public void startMenu()
     {
+        optionNum = 4;
         buttonSound.enabled = true;
         buttonSound.PlayOneShot(buttonSound.clip);
         Time.timeScale = 1f;
@@ -177,6 +206,7 @@ public class EndLevel : MonoBehaviour
 
     public void nextLevel()
     {
+        optionNum = 4;
         buttonSound.enabled = true;
         buttonSound.PlayOneShot(buttonSound.clip);
         canvas.SetActive(false);
