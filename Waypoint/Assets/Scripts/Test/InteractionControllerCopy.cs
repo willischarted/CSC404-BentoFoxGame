@@ -135,7 +135,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (inTutorial)
+		if (Time.timeScale == 0f || inTutorial)
 			return;
 	
 		if (Input.GetButtonDown("Circle") || Input.GetKeyDown(KeyCode.Space)) {
