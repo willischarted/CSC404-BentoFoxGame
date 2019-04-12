@@ -23,7 +23,7 @@ public class cameraFacingBillboard : MonoBehaviour
     public bool isIntermmediateUnLock;
     public bool isMonsterTut;
 
-
+    public bool lockCamera;
     public LayerMask myMask;
 
     public GameObject[] targetObjects;
@@ -41,6 +41,10 @@ public class cameraFacingBillboard : MonoBehaviour
             return;
         }
         camScript = m_Camera.GetComponent<RotateCamera>();
+        if (lockCamera)
+            camScript.inTutorial = true;
+        else
+            camScript.inTutorial = false;
         pScript = player.gameObject.GetComponent<playerControllerCopy>();
 
         if (pScript == null)
@@ -225,6 +229,7 @@ public class cameraFacingBillboard : MonoBehaviour
     }
     void setLookTutorial()
     {
+        
         pScript.setInTutorial(true);
         //pScript.setRestrictMovement(true);
     }
