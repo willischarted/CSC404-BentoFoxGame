@@ -982,6 +982,10 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 1597300106}
+    - target: {fileID: 1097514529892106, guid: e201524255b3d3641bc6928a1be5b1b2, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e201524255b3d3641bc6928a1be5b1b2, type: 2}
   m_IsPrefabAsset: 0
@@ -1805,11 +1809,6 @@ Prefab:
     m_Modifications:
     - target: {fileID: 224255389160924482, guid: 463ec4441f575de4e910171bfcc78008,
         type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 224255389160924482, guid: 463ec4441f575de4e910171bfcc78008,
-        type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1898,45 +1897,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114641560525675436, guid: 463ec4441f575de4e910171bfcc78008,
-        type: 2}
-      propertyPath: gameOver
-      value: 
-      objectReference: {fileID: 129186316}
-    - target: {fileID: 1465802554669840, guid: 463ec4441f575de4e910171bfcc78008, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114106499950572080, guid: 463ec4441f575de4e910171bfcc78008,
-        type: 2}
-      propertyPath: travellerTheme
-      value: 
-      objectReference: {fileID: 1692657332}
     - target: {fileID: 114106499950572080, guid: 463ec4441f575de4e910171bfcc78008,
         type: 2}
       propertyPath: darkTheme
       value: 
       objectReference: {fileID: 333194209}
-    - target: {fileID: 224197306993914098, guid: 463ec4441f575de4e910171bfcc78008,
+    - target: {fileID: 114106499950572080, guid: 463ec4441f575de4e910171bfcc78008,
         type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224962833820449648, guid: 463ec4441f575de4e910171bfcc78008,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -60
-      objectReference: {fileID: 0}
-    - target: {fileID: 224197306993914098, guid: 463ec4441f575de4e910171bfcc78008,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224962833820449648, guid: 463ec4441f575de4e910171bfcc78008,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: travellerTheme
+      value: 
+      objectReference: {fileID: 1692657332}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 463ec4441f575de4e910171bfcc78008, type: 2}
   m_IsPrefabAsset: 0
