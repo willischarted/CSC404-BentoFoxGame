@@ -35,10 +35,11 @@ public class PauseMenu : MonoBehaviour
     }
 
     private void Update()
-    {        
+    {
         Debug.Log(optionNum);
         float yValue = Input.GetAxis("DPadY");
-          if (yValue != 0f)
+        resumeBtn.Select();
+        if (yValue != 0f)
         {
             if (!yAxisInUse)
             {
@@ -142,17 +143,19 @@ public class PauseMenu : MonoBehaviour
                 restartLevel();
             }
             else if (optionNum == 2)
-            {
+            {               
                 startMenu();
             }
             else if (optionNum == 0)
             {
+                restartBtn.Select();
                 resume();
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Circle")
             || Input.GetButtonUp("Start"))
         {
+            restartBtn.Select();
             if (SceneManager.GetActiveScene().name.Equals("Level1"))
             {
                 pMResume.SetActive(false);
@@ -168,6 +171,7 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("resume");
         Time.timeScale = 1f;
+        optionNum = 0;
         pauseMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().lowpassOff();
     }
@@ -178,7 +182,6 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().lowpassOff();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
 
     }
 
@@ -198,8 +201,5 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().lowpassOn();
         Time.timeScale = 0f;
-        optionNum = 0;
-        resumeBtn.Select();
     }
-
 }
