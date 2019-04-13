@@ -313,7 +313,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (!isLit(targetLamp))
                 {
-                    float lightDuration = 0f;
+                    float timeRemaining = 0f;
                     int lampPriority = 0;
                     lightSourceController lScript = targetLamp.GetComponentInParent<lightSourceController>();
                     if (lScript != null) { 
@@ -322,10 +322,10 @@ public class EnemyMovement : MonoBehaviour
                     {
                         if (isLit(lamp))
                         {
-                            if ((lightDuration < getLightDuration(lamp)) && (lampPriority <= getLampPriority(lamp)))
+                            if ((timeRemaining < getTimeRemaining(lamp)) && (lampPriority <= getLampPriority(lamp)))
                             {
                                 targetLamp = lamp;
-                                lightDuration = getLightDuration(lamp);
+                                timeRemaining = getTimeRemaining(lamp);
                                 movingToLamp = true;
                                 bodyAnim.SetBool("isMoving", true);
                             }
@@ -542,11 +542,11 @@ public class EnemyMovement : MonoBehaviour
 
     void nextLamp(Queue<GameObject> lampQueue)
     {
-        float lightDuration = 0f;
+        float timeRemaining = 0f;
         int lampPriority = 0;
         if (isLit(currentLamp))
         {
-            lightDuration = getLightDuration(currentLamp);
+            timeRemaining = getTimeRemaining(currentLamp);
             lampPriority = getLampPriority(currentLamp);
             movingToLamp = false;
         }
@@ -555,10 +555,10 @@ public class EnemyMovement : MonoBehaviour
         {
             if (isLit(lamp))
             {
-                if ((lightDuration < getLightDuration(lamp))&&(lampPriority<=getLampPriority(lamp)))
+                if ((timeRemaining < getTimeRemaining(lamp)) && (lampPriority <= getLampPriority(lamp)))
                 {
                     targetLamp = lamp;
-                    lightDuration = getLightDuration(lamp);
+                    timeRemaining = getTimeRemaining(lamp);
                     movingToLamp = true;
                     bodyAnim.SetBool("isMoving", true);
                 }
@@ -593,9 +593,9 @@ public class EnemyMovement : MonoBehaviour
             return false;
     }
 
-    float getLightDuration(GameObject lamp)
+    float getTimeRemaining(GameObject lamp)
     {
-        return lamp.GetComponentInParent<lightSourceController>().lightDuration;
+        return lamp.GetComponentInParent<lightSourceController>().getTimeRemaining();
     }
 
     int getLampPriority(GameObject lamp)

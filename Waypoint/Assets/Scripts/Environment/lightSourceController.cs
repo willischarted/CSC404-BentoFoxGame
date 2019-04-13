@@ -346,4 +346,9 @@ public class lightSourceController : MonoBehaviour {
 			m.setPathColor(col);
 		}
 	}
+
+    public float getTimeRemaining()
+    {
+        return timeRemaining;
+    }
 }
