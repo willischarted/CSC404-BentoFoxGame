@@ -42,7 +42,7 @@ public class lantern_01_matswitcher : MonoBehaviour {
         currentLit = lit_mat;
         //my_renderer.ma
     
-        Debug.Log(materials.Length);
+        //Debug.Log(materials.Length);
         /*
         if (materials.Length <2)
         {

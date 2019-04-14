@@ -483,7 +483,7 @@ public class EnemyMovement : MonoBehaviour
         //wait until the apex of the animation's swing
         yield return new WaitForSeconds(1.0672f);
        
-        Debug.Log("done");
+        //Debug.Log("done");
         GameObject trav = GameObject.FindGameObjectWithTag("Traveller");
         if (trav == null)
             Debug.Log("Could not find trav");

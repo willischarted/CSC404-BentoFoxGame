@@ -217,7 +217,7 @@ public class lightSourceController : MonoBehaviour {
 		}
 		else if (currentLightType == 2) {
             //	float percentageReturn = timeRemaining / lightDuration;
-            Debug.Log(pScript.light2Value);
+            //Debug.Log(pScript.light2Value);
 			return pScript.light2Value * percentageReturn;
 		}
 		else if (currentLightType == 3) {
