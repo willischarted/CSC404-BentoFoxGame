@@ -68,13 +68,14 @@ public class travellerMovement : MonoBehaviour
     void Update()
 
     {
-        /* 
-        if (Input.GetKeyDown(KeyCode.C)) {
-            Debug.Log(targetLight);
-            Debug.Log(currentLight);
-        }
-        */
-        if (!closeToExit){
+
+            /* 
+            if (Input.GetKeyDown(KeyCode.C)) {
+                Debug.Log(targetLight);
+                Debug.Log(currentLight);
+            }
+            */
+            if (!closeToExit){
 
             if (targetLight != null && targetLight != currentLight) {
                 //Debug.Log("running first");
@@ -136,7 +137,7 @@ public class travellerMovement : MonoBehaviour
 
 
 
-        float distRemaining = nav.remainingDistance;
+       // float distRemaining = nav.remainingDistance;
         //Debug.Log(distRemaining);
 
 
@@ -144,7 +145,9 @@ public class travellerMovement : MonoBehaviour
                                                           // if (nav.pathStatus == NavMeshPathStatus.PathComplete)
                                                           // if (targetLight != null && Vector3.Distance(transform.position, targetLight.transform.position) < lampDistance && anim.GetBool("isMoving"))
         {
+          
             anim.SetBool("isMoving", false);
+            targetLight = null;
             if (nav.speed > defaultSpeed)
             {
                 movingToTravLight = false;
@@ -216,7 +219,7 @@ public class travellerMovement : MonoBehaviour
     }
 
     private void MoveToTarget(){
-      //  Debug.Log("move to target normal");
+        //Debug.Log("move to target normal");
         GameObject[] adjacent;
         List<GameObject> possibleTargets = new List<GameObject>();
         if (currentLight == null){
@@ -262,9 +265,21 @@ public class travellerMovement : MonoBehaviour
             //else go to the default one
             else{
                 // after pruning if we still have a light it can go to
-               // if (possibleTargets.Count > 0) {
-                    targetLight = possibleTargets[0];
-               // }
+                // if (possibleTargets.Count > 0) {
+                //targetLight = possibleTargets[0];
+                float l = 0;
+                GameObject tg = null;
+                foreach (GameObject g in possibleTargets)
+                {
+                    lightSourceController ls = g.GetComponent<lightSourceController>();
+                    if (ls.getTimeRemaining() > l)
+                    {
+                        l = ls.getTimeRemaining();
+                        tg = g;
+                    }
+                }
+                targetLight = tg;
+                // }
             }
 
             nav.SetDestination(targetLight.transform.position - offset);
@@ -284,6 +299,12 @@ public class travellerMovement : MonoBehaviour
             }
 
         }
+        /*
+        else
+        {
+            anim.SetBool("isMoving", false);
+        }
+        */
     }
 
      private void MoveBack(){
@@ -310,8 +331,19 @@ public class travellerMovement : MonoBehaviour
  
             else{
 
-                targetLight = possibleTargets[0];
-
+                //targetLight = possibleTargets[0];
+                float l = 0;
+                GameObject tg = null;
+                foreach (GameObject g in possibleTargets)
+                {
+                    lightSourceController ls = g.GetComponent<lightSourceController>();
+                    if (ls.getTimeRemaining() > l)
+                    {
+                        l = ls.getTimeRemaining();
+                        tg = g;
+                    }
+                }
+                targetLight = tg;
             }
 
             nav.SetDestination(targetLight.transform.position - offset);
