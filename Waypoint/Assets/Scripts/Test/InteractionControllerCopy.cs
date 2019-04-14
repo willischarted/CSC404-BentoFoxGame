@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class InteractionControllerCopy : MonoBehaviour {
 
+    private bool restrictRecover;
 	
 	public Text interactionText;
 	float heldDuration = 0f;
@@ -237,10 +238,13 @@ public class InteractionControllerCopy : MonoBehaviour {
 						return;
 					}
 					else if (lScript.getCurrentLightType() > 0 ) {
-						//Debug.Log("turning off light");
-						pController.setTargetLight(currentTarget);
-						lScript.setMiniMapPathColor(0);
-						lScript.turnOffPaths();
+                    //Debug.Log("turning off light");
+                    if (!restrictRecover)
+                    {
+                        pController.setTargetLight(currentTarget);
+                        lScript.setMiniMapPathColor(0);
+                        lScript.turnOffPaths();
+                    }
 					}
 				}
 		}
@@ -393,7 +397,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			currentTarget = other.gameObject;
 			
             
-			interactionPopUp.SetActive(true);
+			//interactionPopUp.SetActive(true);
             /*
 			Vector3 popUpLocation = other.gameObject.transform.position;
 			popUpLocation.y = popUpLocation.y + textVerticalOffset;
@@ -402,8 +406,14 @@ public class InteractionControllerCopy : MonoBehaviour {
 
 
            
-
+            
             lScript = other.GetComponent<lightSourceController>();
+            if (lScript.getCurrentLightType() != 0 && restrictRecover) {
+                interactionPopUp.SetActive(false);
+                return;
+            }
+
+            interactionPopUp.SetActive(true);
             if (lScript == null)
                 Debug.Log("Could not get lscript");
 
@@ -621,6 +631,7 @@ public class InteractionControllerCopy : MonoBehaviour {
         //if ()
         //Debug.Log(SceneManager.GetActiveScene().name);
         if (SceneManager.GetActiveScene().name.CompareTo("Level1") == 0) {
+            restrictRecover = true;
             healUnlocked = false;
 			stunUnlocked = false;
 
