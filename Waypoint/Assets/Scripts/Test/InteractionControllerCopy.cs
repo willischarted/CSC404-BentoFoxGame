@@ -567,6 +567,7 @@ public class InteractionControllerCopy : MonoBehaviour {
 			if (monScript == null)
 				Debug.Log("Could not find monScript!");
 			monScript.setStunned();
+            monScript.resetLitOutline();
             monScript.popUp2.SetActive(true);
 
 
