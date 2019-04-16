@@ -136,8 +136,30 @@ public class InteractionControllerCopy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Time.timeScale == 0f || inTutorial)
-			return;
+        if (Time.timeScale == 0f || inTutorial)
+        {
+            if (isHealing)
+            {
+                heldDuration = 0f;
+                isHealing = false;
+                if (targetTraveller != null)
+                {
+                    travellerHealth tScript = targetTraveller.GetComponent<travellerHealth>();
+                    if (tScript.isHealingEffectOn())
+                    {
+                        tScript.stopHealingEffect();
+                        healingSFX.Stop();
+
+                    }
+                }
+                if (travHealingBar.activeInHierarchy)
+                    travHealingBar.SetActive(false);
+                // moved outside of off claue above (if you move away from trav it'll loop infintely)
+                anim.SetBool("isHealing", false);
+            }
+            return;
+
+        }
 	
 		if (Input.GetButtonDown("Circle") || Input.GetKeyDown(KeyCode.Space)) {
 			isHealing = true;
