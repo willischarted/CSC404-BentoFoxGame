@@ -56,6 +56,14 @@ public class AudioController : MonoBehaviour {
                 PlayMusic(ThemeMusic[3]);
         }
 
+        //final level loop back to intro
+        if (index == 6)
+        {
+            //if (music.isPlaying) //return;
+            StopMusic();
+            return;
+        }
+
        
 
         /*LEVEL ORDER 
@@ -108,7 +116,8 @@ public class AudioController : MonoBehaviour {
             PlayMusic(ThemeMusic[3]);
         }
     }
-        public void PlayMusic(AudioSource music)
+
+    public void PlayMusic(AudioSource music)
     {
         if (music.isPlaying) return;
         StopMusic();
