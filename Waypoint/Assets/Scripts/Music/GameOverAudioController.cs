@@ -25,8 +25,7 @@ public class GameOverAudioController : MonoBehaviour {
             // travellerTheme.Stop();
 
 
-            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
-            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopMusic();
             gameOverZinger.PlayOneShot(gameOverZinger.clip);
             gameOverDroneLoop.PlayDelayed(0.5f);
             gameOverTopLoop.PlayDelayed(0.5f);

@@ -32,6 +32,7 @@ public class fadeTiming : MonoBehaviour {
             levelUp.SetActive(false);
             Time.timeScale = 1f;
             SceneManager.LoadScene(nextLevelName);
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().checkPlay();
         }
     }
 
@@ -52,8 +53,7 @@ public class fadeTiming : MonoBehaviour {
             levelUp.SetActive(false);
             Time.timeScale = 1f;
             SceneManager.LoadScene("Start Menu");
-            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
-            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
+            GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopMusic();
         }
     }
 }

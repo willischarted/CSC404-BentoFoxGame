@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AudioController : MonoBehaviour {
-    private AudioSource lightTheme;
-    private AudioSource darkTheme;
+    private AudioSource [] ThemeMusic;
     private static AudioController instance = null;
     public static AudioController Instance{
         get { return instance; }
@@ -13,54 +12,95 @@ public class AudioController : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake() {
-        lightTheme = transform.Find("lightTheme").gameObject.GetComponent<AudioSource>();
-        darkTheme = transform.Find("darkTheme").gameObject.GetComponent<AudioSource>();
-        DontDestroyOnLoad(transform.gameObject);
-        StopDark();
-        StopLight();
-        //checkPlay();
+        ThemeMusic = new AudioSource[4];
+        ThemeMusic[0] = transform.Find("Theme0").gameObject.GetComponent<AudioSource>();
+        ThemeMusic[1] = transform.Find("Theme1").gameObject.GetComponent<AudioSource>();
+        ThemeMusic[2] = transform.Find("Theme2").gameObject.GetComponent<AudioSource>();
+        ThemeMusic[3] = transform.Find("Theme3").gameObject.GetComponent<AudioSource>();
+        DontDestroyOnLoad(transform.gameObject);    
+        StopMusic();
+ 
     }
     public void checkPlay()
     {
-        //int index = SceneManager.GetActiveScene().buildIndex;
-        //if (index == 1)
-        //{
-            if(!lightTheme.isPlaying){
-                PlayLight();
-                PlayDark();
-                lowpassOff(); 
-            }
-        //}
-    }
-    public void PlayLight(){
-        if (lightTheme.isPlaying) return;
-        lightTheme.Play();
-    }
+        int index = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("get acive scene " + index);
 
-    public void PlayDark()
+        // BECAUSE THIS IS CALLED BEFORE THE NEXT SCENE LOADS WE HAVE
+        // LOOK AT THE CURRENT SCENE TO DECIDE WHAT TO PLAY FOR THE NEXT ONE
+        // We also have to note see level index key below (index unlike level are not
+        // subsequent
+
+        //the first two levels
+        if (index <= 2)
+        {
+                PlayMusic(ThemeMusic[0]); 
+        }
+
+        // mon tut and lv 2.5 -> LV 2 COMES BEFORE LV '5' SO WE MUST USE INDEX 2 TO PREP FOR IT
+        if (index ==  2 ||  index == 7)
+        {
+                PlayMusic(ThemeMusic[1]);
+        }
+
+        // trav tut and lv 3
+        if (index == 3 || index == 8)
+        {
+                PlayMusic(ThemeMusic[2]);
+        }
+
+
+        //final three levels
+        if (index == 4 || index ==9 || index == 5)
+        {
+                PlayMusic(ThemeMusic[3]);
+        }
+       
+
+        /*LEVEL ORDER 
+         * Level - INDEX
+         * START - 0
+         * 1 - 1
+         * 2 - 2
+         * 5 - 7
+         * 2.5 - - 3 
+         * 5.5 - 8
+         * 3 - 4
+         * 7 - 9
+         * 3.5 - 5
+         * 4 - 6
+         * /
+         */
+    }
+    public void PlayMusic(AudioSource music)
     {
-        if (darkTheme.isPlaying) return;
-        darkTheme.Play();
+        if (music.isPlaying) return;
+        StopMusic();
+        music.Play();
     }
 
-    public void StopLight(){
-        lightTheme.Stop();
-    }
-
-    public void StopDark()
+    public void StopMusic()
     {
-        darkTheme.Stop();
+        for (int i = 0; i < 4; i++){
+            ThemeMusic[i].Stop();
+        }
+        
     }
+
 
     public void lowpassOn(){
-        lightTheme.GetComponentInParent<AudioLowPassFilter>().enabled = true;
-        darkTheme.GetComponentInParent<AudioLowPassFilter>().enabled = true;
+        for (int i = 0; i < 4; i++)
+        {
+            ThemeMusic[i].GetComponentInParent<AudioLowPassFilter>().enabled = true;
+        }
     }
 
     public void lowpassOff()
     {
-        lightTheme.GetComponentInParent<AudioLowPassFilter>().enabled = false;
-        darkTheme.GetComponentInParent<AudioLowPassFilter>().enabled = false;
+        for (int i = 0; i < 4; i++)
+        {
+            ThemeMusic[i].GetComponentInParent<AudioLowPassFilter>().enabled = false;
+        }
     }
 }
 
