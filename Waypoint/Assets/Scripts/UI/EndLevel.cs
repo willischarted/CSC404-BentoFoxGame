@@ -198,8 +198,7 @@ public class EndLevel : MonoBehaviour
         Time.timeScale = 1f;
         levelUp.SetActive(false);
         SceneManager.LoadScene("Start Menu");
-        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopDark();
-        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopLight();
+        GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>().StopMusic();
         /*canvas.SetActive(false);
         fade.SetTrigger("fadeOutStartMenu");*/
     }
